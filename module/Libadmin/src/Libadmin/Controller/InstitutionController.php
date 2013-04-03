@@ -45,9 +45,21 @@ class InstitutionController extends AbstractActionController {
 			}
 		}
 
-		return $this->getAjaxView(array(
-			'form'	=> $form
+		$form->setAttribute('action', $this->url()->fromRoute(
+		    'institution',
+		    array(
+				'action' => 'add'
+		    )
 		));
+
+		$view = $this->getAjaxView(array(
+			'form'	=> $form,
+			'title'	=> 'Add Institution'
+		));
+
+		$view->setTemplate('libadmin/institution/edit');
+
+		return $view;
 	}
 
 
@@ -103,7 +115,7 @@ class InstitutionController extends AbstractActionController {
 
 
 	protected function getAjaxView($variables = array()) {
-		$viewModel = new ViewModel();
+		$viewModel = new ViewModel($variables);
 		$viewModel->setTerminal(true);
 
 		return $viewModel;

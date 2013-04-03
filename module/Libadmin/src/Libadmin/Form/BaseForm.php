@@ -35,9 +35,10 @@ class BaseForm extends Form {
 			'name' => $name,
 			'attributes' => array(
 				'type'  => 'submit',
-				'value' => $label,
-				'id' => $id,
-			),
+				'value'	=> $label,
+				'id'	=> $id,
+				'class'	=> 'submitButton btn btn-primary btn-medium'
+			)
 		));
 	}
 

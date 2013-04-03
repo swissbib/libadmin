@@ -1,1 +1,58 @@
-Edit Institution - Form only
+<?php
+
+$this->headTitle($title);
+
+$form = $this->form;
+$form->prepare();
+
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?=$this->form()->openTag($form)?>
+
+	<p>On top of the tabs</p>
+
+	<div class="tabbable">
+		<ul class="nav nav-tabs formTabs">
+			<li class="active">
+				<a href="#display">Anzeige</a>
+			</li>
+			<li><a href="#address">Adresse</a></li>
+			<li><a href="#linking">Gruppen &amp; Views</a></li>
+		</ul>
+
+		<div class="tab-content">
+
+				<div class="tab-pane active" id="display">
+
+					<fieldset>
+						<legend>Test</legend>
+						<?php
+							echo $this->formHidden($form->get('id'));
+							echo $this->formRow($form->get('bib_code'));
+							echo $this->formRow($form->get('label_de'));
+						?>
+					</fieldset>
+
+					<fieldset>
+						<legend>Test 2</legend>
+						sdfasdf
+					</fieldset>
+
+				</div>
+
+				<div class="tab-pane" id="address">
+					Address
+				</div>
+
+				<div class="tab-pane" id="linking">
+					linking
+				</div>
+
+		</div>
+
+		<?=$this->formSubmit($form->get('submit'));?>
+
+	</div>
+
+<?=$this->form()->closeTag();?>

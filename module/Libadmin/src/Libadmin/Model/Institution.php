@@ -32,15 +32,24 @@ class Institution extends BaseModel {
 	 */
 	public function getInputFilter() {
 		if( !$this->inputFilter ) {
-			$inputFilter = new InputFilter();
-			$factory     = new InputFactory();
+			$this->inputFilter	= new InputFilter();
+			$factory     		= new InputFactory();
 
-			$inputFilter->add($factory->createInput(array(
+			$this->inputFilter->add($factory->createInput(array(
 				'name'     => 'id',
 				'required' => true,
 				'filters'  => array(
 					array('name' => 'Int'),
 				),
+			)));
+
+			$this->inputFilter->add($factory->createInput(array(
+				'name'		=> 'bib_code',
+				'required'	=> true,
+				'filters'	=> array(
+					array('name' => 'StripTags'),
+					array('name' => 'StringTrim')
+				)
 			)));
 		}
 

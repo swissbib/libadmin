@@ -48,21 +48,30 @@ class InstitutionTable {
 
 
 	public function saveInstitution(Institution $institution) {
-//        $data = array(
-//            'libraryid' => $institution->libraryid,
-//            'contentXML'  => $institution->contentXML,
-//        );
-//
-//        $tablekey = (int)$institution->tablekey;
-//        if ($tablekey == 0) {
-//            $this->tableGateway->insert($data);
-//        } else {
-//            if ($this->getLibrary($tablekey)) {
-//                $this->tableGateway->update($data, array('tablekey' => $tablekey));
-//            } else {
-//                throw new \Exception('Form id does not exist');
-//            }
-//        }
+		$idInstitution = (int)$institution->id;
+
+		$data = array(
+			'bib_code'	=> $institution->bib_code,
+			'label_de'  => $institution->label_de
+		);
+
+		if( $idInstitution == 0 ) {
+			$numRows	= $this->tableGateway->insert($data);
+
+			if( $numRows == 1 ) {
+				$idInstitution = $this->tableGateway->getLastInsertValue();
+			}
+		}
+		else {
+			if( $this->getInstitution($idInstitution) ) {
+				$this->tableGateway->update($data, array('id' => $idInstitution));
+			}
+			else {
+				throw new \Exception('Institution does not exist');
+			}
+		}
+
+		return $idInstitution;
 	}
 
 }

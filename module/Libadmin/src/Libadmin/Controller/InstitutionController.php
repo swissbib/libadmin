@@ -1,17 +1,20 @@
 <?php
 namespace Libadmin\Controller;
 
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+
 use Libadmin\Form\InstitutionForm;
 use Libadmin\Model\Institution;
 use Libadmin\Model\InstitutionTable;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Libadmin\Controller\BaseController;
+
 
 /**
  * [Description]
  *
  */
-class InstitutionController extends AbstractActionController {
+class InstitutionController extends BaseController {
 
 	/**
 	 * @var InstitutionTable
@@ -23,6 +26,11 @@ class InstitutionController extends AbstractActionController {
 		return array(
 			'searchResults' => $this->getInstitutionTable()->getAll(30)
 		);
+	}
+
+
+	public function homeAction() {
+		return array();
 	}
 
 
@@ -38,10 +46,13 @@ class InstitutionController extends AbstractActionController {
 
 			if( $form->isValid() ) {
 				$institution->exchangeArray($form->getData());
-				$this->getInstitutionTable()->saveInstitution($institution);
+				$idInstitution	= $this->getInstitutionTable()->saveInstitution($institution);
 
-				// Redirect to list of albums
-				return $this->redirect()->toRoute('institution');
+				$this->flashMessenger()->addMessage('New institution added');
+
+				return $this->forwardTo('edit', array(
+					'id' => $idInstitution
+				));
 			}
 		}
 
@@ -65,44 +76,51 @@ class InstitutionController extends AbstractActionController {
 
 
 	public function editAction() {
-//		$id = (int)$this->params()->fromRoute('id', 0);
-//		if( !$id ) {
-//			return $this->redirect()->toRoute('album', array(
-//				'action' => 'add'
-//			));
-//		}
-//
-//		// Get the Album with the specified id.  An exception is thrown
-//		// if it cannot be found, in which case go to the index page.
-//		try {
-//			$album = $this->getAlbumTable()->getAlbum($id);
-//		} catch( \Exception $ex ) {
-//			return $this->redirect()->toRoute('album', array(
+		$idInstitution = (int)$this->params()->fromRoute('id', 0);
+		if( !$idInstitution ) {
+			return $this->forwardTo('home');
+		}
+
+
+		try {
+			$institution = $this->getInstitutionTable()->getInstitution($idInstitution);
+		} catch( \Exception $ex ) {
+			$this->flashMessenger()->addMessage('Institution not found');
+
+			return $this->forwardTo('home');
+//			return $this->redirect()->toRoute('institution', array(
 //				'action' => 'index'
 //			));
-//		}
-//
-//		$form = new AlbumForm();
-//		$form->bind($album);
-//		$form->get('submit')->setAttribute('value', 'Edit');
-//
-//		$request = $this->getRequest();
-//		if( $request->isPost() ) {
-//			$form->setInputFilter($album->getInputFilter());
-//			$form->setData($request->getPost());
-//
-//			if( $form->isValid() ) {
-//				$this->getAlbumTable()->saveAlbum($form->getData());
-//
-//				// Redirect to list of albums
+		}
+
+		$form = new InstitutionForm();
+		$form->bind($institution);
+		$form->get('submit')->setAttribute('value', 'Update');
+
+		$request = $this->getRequest();
+		if( $request->isPost() ) {
+			$form->setInputFilter($institution->getInputFilter());
+			$form->setData($request->getPost());
+
+			if( $form->isValid() ) {
+				$this->getInstitutionTable()->saveInstitution($form->getData());
+
+				// Redirect to list of albums
 //				return $this->redirect()->toRoute('album');
-//			}
-//		}
-//
-//		return $this->getAjaxView(array(
-//			'id' => $id,
-//			'form' => $form,
-//		));
+			}
+		}
+
+		$form->setAttribute('action', $this->url()->fromRoute(
+			'institution',
+			array(
+				'action' => 'add'
+			)
+		));
+
+		return $this->getAjaxView(array(
+			'form'	=> $form,
+			'title'	=> 'Edit Institution'
+		));
 	}
 
 

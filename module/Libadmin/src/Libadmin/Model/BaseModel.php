@@ -58,7 +58,7 @@ class BaseModel implements InputFilterAwareInterface {
 
 	protected function initLocalVariables(array $data) {
 		foreach($data as $key => $value) {
-			if( isset($this->$key) ) {
+			if( property_exists($this, $key) ) {
 				$this->$key = $value;
 			}
 		}

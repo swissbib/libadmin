@@ -5,12 +5,23 @@ $this->headTitle($title);
 $form = $this->form;
 $form->prepare();
 
+$saveButtonLabel	= $form->get('id')->getValue() ? 'Update' : 'Add';
+
 ?>
-<h1><?php echo $this->escapeHtml($title); ?></h1>
 
 <?=$this->form()->openTag($form)?>
 
+	<div class="topButtons">
+		<input type="submit" value="<?=$this->escapeHtml($saveButtonLabel)?>" class="submitButton btn btn-primary btn-medium" id="submitbutton" name="submit">
+		<input type="button" value="Close" class="closeButton btn btn-medium" id="closebutton" name="close">
+		<input type="button" value="Delete" class="closeButton btn btn-danger btn-medium" id="deletebutton" name="delete">
+	</div>
+
+	<h1><?php echo $this->escapeHtml($title); ?></h1>
+
 	<p>On top of the tabs</p>
+
+	<p>ID: <?=$form->get('id')->getValue()?></p>
 
 	<div class="tabbable">
 		<ul class="nav nav-tabs formTabs">
@@ -36,7 +47,7 @@ $form->prepare();
 
 					<fieldset>
 						<legend>Test 2</legend>
-						sdfasdf
+						<p>sdfasdf sadf asdfa sdfa sdf</p>
 					</fieldset>
 
 				</div>
@@ -50,8 +61,6 @@ $form->prepare();
 				</div>
 
 		</div>
-
-		<?=$this->formSubmit($form->get('submit'));?>
 
 	</div>
 

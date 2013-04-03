@@ -1,12 +1,11 @@
 <a href="<?=$this->url('institution', array('action'=>'add'));?>" class="addButton btn btn-primary btn-medium" id="add-institution">
-	Add new element
+	Add new Institution
 </a>
 <form class="navbar-search pull-left">
 	<input name="query" type="text" class="search-query" placeholder="Search">
 </form>
-<ul class="results" id="search-results-list" style="clear:both">
-	<li><a href="<?=$this->url('institution', array('action'=>'edit', 'id' => 1));?>">Item 1</a></li>
-	<li>Item 2</li>
-	<li>Item 31</li>
-	<li>Item 4</li>
+<ul class="searchResults nav nav-tabs nav-stacked" id="search-results-list" style="clear:both">
+	<?php foreach($searchResults as $institution): ?>
+		<li><a href="<?=$this->url('institution', array('action'=>'edit', 'id' => $institution->id));?>"><?=$this->escapeHtml($institution->label_de)?></a></li>
+	<?php endforeach; ?>
 </ul>

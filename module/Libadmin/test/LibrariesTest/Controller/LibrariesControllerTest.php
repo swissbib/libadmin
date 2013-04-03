@@ -11,7 +11,7 @@ namespace LibrariesTest\Controller;
 
 
 use LibrariesTest\Bootstrap;
-use Libraries\Controller\LibrariesController;
+use Libadmin\Controller\LibraryController;
 use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\Mvc\MvcEvent;

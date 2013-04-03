@@ -6,10 +6,11 @@
  * Time: 9:21 PM
  * To change this template use File | Settings | File Templates.
  */
-namespace Libraries;
+namespace Libadmin;
 
-use Libraries\Model\Library;
-use Libraries\Model\LibraryTable;
+use Libadmin\Model\Institution;
+use Libadmin\Model\InstitutionTable;
+
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 
@@ -39,16 +40,16 @@ class Module
     {
         return array(
             'factories' => array(
-                'Libraries\Model\LibrariesTable' =>  function($sm) {
-                    $tableGateway = $sm->get('LibrariesTableGateway');
-                    $table = new LibraryTable($tableGateway);
+                'Libadmin\Model\InstitutionTable' =>  function($sm) {
+                    $tableGateway = $sm->get('InstitutionTableGateway');
+                    $table = new InstitutionTable($tableGateway);
                     return $table;
                 },
-                'LibrariesTableGateway' => function ($sm) {
+                'InstitutionTableGateway' => function ($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Library());
-                    return new TableGateway('library', $dbAdapter, null, $resultSetPrototype);
+                    $resultSetPrototype->setArrayObjectPrototype(new Institution());
+                    return new TableGateway('institution', $dbAdapter, null, $resultSetPrototype);
                 },
             ),
         );

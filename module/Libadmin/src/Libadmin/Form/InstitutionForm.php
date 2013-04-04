@@ -35,7 +35,7 @@ class InstitutionForm extends BaseForm {
 			'type'  => 'checkbox',
 			'options' => array(
 				'label' => 'Ist Aktiv'
-			),
+			)
 		));
 		$this->addText('label_de', 'deutsch', true);
 		$this->addText('label_fr', 'französisch');
@@ -52,9 +52,98 @@ class InstitutionForm extends BaseForm {
 		$this->addText('url_it', 'italienisch');
 		$this->addText('url_en', 'englisch');
 
+		$this->add(array(
+			'name' => 'notes',
+			'type'  => 'textarea',
+			'options' => array(
+				'label' => 'Interne Notizen'
+			),
+			'attributes' => array(
+				'rows'	=> 10
+			)
+		));
 
+		$this->add(array(
+			'name' => 'address',
+			'type'  => 'textarea',
+			'options' => array(
+				'label' => 'Adresse'
+			),
+			'attributes' => array(
+				'rows'	=> 6
+			)
+		));
+
+		$this->addText('zip', 'PLZ');
+		$this->addText('city', 'Ort');
+
+		$this->add(array(
+			'name' => 'country',
+			'type'  => 'select',
+			'options' => array(
+				'label' => 'Land',
+				'value_options' => array(
+					 'ch' => 'Schweiz',
+					 'li' => 'Lichtenstein',
+					 'de' => 'Deutschland',
+					 'it' => 'Italien',
+					 'fr' => 'Frankreich'
+				 )
+			)
+		));
+
+		$this->add(array(
+			'name' => 'canton',
+			'type'  => 'select',
+			'options' => array(
+				'label' => 'Kanton',
+				'value_options' => array(
+					'0'		=> '- Kein Kanton -',
+					'ag'	=> 'Aargau',
+					'ai'	=> 'Appenzell Innerrhoden',
+					'ar'	=> 'Appenzell Ausserrhoden',
+					'be'	=> 'Bern',
+					'bl'	=> 'Basel-Land',
+					'bs'	=> 'Basel-Stadt',
+					'fr'	=> 'Fribourg',
+					'ge'	=> 'Genève',
+					'gl'	=> 'Glarus',
+					'gr'	=> 'Graubünden ',
+					'ju'	=> 'Jura',
+					'lu'	=> 'Luzern',
+					'ne'	=> 'Neuchâtel',
+					'nw'	=> 'Nidwalden',
+					'ow'	=> 'Obwalden',
+					'sg'	=> 'Sankt Gallen',
+					'sh'	=> 'Schaffhausen',
+					'so'	=> 'Solothurn',
+					'sz'	=> 'Schwyz',
+					'tg'	=> 'Thurgau',
+					'ti'	=> 'Ticino',
+					'ur'	=> 'Uri',
+					'vs'	=> 'Valais',
+					'vd'	=> 'Vaud',
+					'zg'	=> 'Zug',
+					'zh'	=> 'Zürich'
+				 )
+			)
+		));
+
+		$this->addText('website', 'Webseite');
+		$this->addText('email', 'Email');
+		$this->addText('phone', 'Telefon');
+		$this->addText('skype', 'Skype');
+		$this->addText('facebook', 'Facebook');
+		$this->addText('coordinates', 'Koordinaten');
+		$this->addText('isil', 'ISIL');
 	}
 
 }
 
 ?>
+
+
+
+
+
+

@@ -6,7 +6,7 @@ use Zend\View\Model\ViewModel;
 
 use Libadmin\Form\InstitutionForm;
 use Libadmin\Model\Institution;
-use Libadmin\Model\InstitutionTable;
+use Libadmin\Table\InstitutionTable;
 use Libadmin\Controller\BaseController;
 
 
@@ -17,28 +17,27 @@ use Libadmin\Controller\BaseController;
 class InstitutionController extends BaseController {
 
 	/**
-	 * @var InstitutionTable
+	 * Initial institution view
+	 *
+	 * @return array
 	 */
-	protected $institutionTable;
-
-
 	public function indexAction() {
 		return array(
-			'searchResults' => $this->getInstitutionTable()->getAll(30)
+			'searchResults' => $this->getTable()->getAll(30)
 		);
 	}
 
 
 	public function homeAction() {
-		return array();
+		return $this->getAjaxView();
 	}
 
 
 	public function addAction() {
-		$form = new InstitutionForm();
-		$form->get('submit')->setValue('Add');
+		$form			= new InstitutionForm();
+		$request		= $this->getRequest();
+		$flashMessenger	= $this->flashMessenger();
 
-		$request = $this->getRequest();
 		if( $request->isPost() ) {
 			$institution = new Institution();
 			$form->setInputFilter($institution->getInputFilter());
@@ -46,56 +45,48 @@ class InstitutionController extends BaseController {
 
 			if( $form->isValid() ) {
 				$institution->exchangeArray($form->getData());
-				$idInstitution	= $this->getInstitutionTable()->saveInstitution($institution);
+				$idInstitution	= $this->getTable()->saveInstitution($institution);
 
-				$this->flashMessenger()->addMessage('New institution added');
+				$flashMessenger->addSuccessMessage('New institution added');
 
-				return $this->forwardTo('edit', array(
-					'id' => $idInstitution
+				return $this->redirect()->toRoute('institution', array(
+					'action'	=> 'edit',
+					'id'		=> $idInstitution
 				));
+			} else {
+				$flashMessenger->addErrorMessage('Form not valid');
 			}
 		}
 
-		$form->setAttribute('action', $this->url()->fromRoute(
-		    'institution',
-		    array(
-				'action' => 'add'
-		    )
-		));
+		$form->setAttribute('action', $this->makeUrl('institution', 'add'));
 
-		$view = $this->getAjaxView(array(
+		return $this->getAjaxView(array(
 			'form'	=> $form,
 			'title'	=> 'Add Institution'
-		));
-
-		$view->setTemplate('libadmin/institution/edit');
-
-		return $view;
+		), 'libadmin/institution/edit');
 	}
 
 
 
 	public function editAction() {
-		$idInstitution = (int)$this->params()->fromRoute('id', 0);
+		$idInstitution	= (int)$this->params()->fromRoute('id', 0);
+		$flashMessenger	= $this->flashMessenger();
+
 		if( !$idInstitution ) {
 			return $this->forwardTo('home');
 		}
 
-
 		try {
-			$institution = $this->getInstitutionTable()->getInstitution($idInstitution);
-		} catch( \Exception $ex ) {
-			$this->flashMessenger()->addMessage('Institution not found');
+			/** @var Institution $institution  */
+			$institution = $this->getTable()->getInstitution($idInstitution);
+		} catch(\Exception $ex ) {
+			$flashMessenger->addErrorMessage('Institution not found');
 
 			return $this->forwardTo('home');
-//			return $this->redirect()->toRoute('institution', array(
-//				'action' => 'index'
-//			));
 		}
 
 		$form = new InstitutionForm();
 		$form->bind($institution);
-		$form->get('submit')->setAttribute('value', 'Update');
 
 		$request = $this->getRequest();
 		if( $request->isPost() ) {
@@ -103,49 +94,28 @@ class InstitutionController extends BaseController {
 			$form->setData($request->getPost());
 
 			if( $form->isValid() ) {
-				$this->getInstitutionTable()->saveInstitution($form->getData());
-
-				// Redirect to list of albums
-//				return $this->redirect()->toRoute('album');
+				$this->getTable()->saveInstitution($form->getData());
+				$flashMessenger->addSuccessMessage('Institution saved');
+			} else {
+				$flashMessenger->addErrorMessage('Form not valid');
 			}
 		}
 
-		$form->setAttribute('action', $this->url()->fromRoute(
-			'institution',
-			array(
-				'action' => 'add'
-			)
-		));
+		$form->setAttribute('action', $this->makeUrl('institution', 'edit', $idInstitution));
 
 		return $this->getAjaxView(array(
-			'form'	=> $form,
-			'title'	=> 'Edit Institution'
+			'form'		=> $form,
+			'title'		=> 'Edit Institution'
 		));
 	}
 
 
 
-	public function searchAction() {
-		return $this->getAjaxView();
-
-	}
-
-
-
-	protected function getAjaxView($variables = array()) {
-		$viewModel = new ViewModel($variables);
-		$viewModel->setTerminal(true);
-
-		return $viewModel;
-	}
-
-
-
-	protected function getInstitutionTable() {
-		if( !$this->institutionTable ) {
-			$this->institutionTable = $this->getServiceLocator()->get('Libadmin\Model\InstitutionTable');
+	protected function getTable() {
+		if( !$this->table ) {
+			$this->table = $this->getServiceLocator()->get('Libadmin\Table\InstitutionTable');
 		}
-		return $this->institutionTable;
+		return $this->table;
 	}
 
 }

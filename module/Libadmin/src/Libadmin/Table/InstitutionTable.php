@@ -7,26 +7,53 @@
  * To change this template use File | Settings | File Templates.
  */
 
-namespace Libadmin\Model;
+namespace Libadmin\Table;
 
-use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Predicate\PredicateSet;
 
-class InstitutionTable {
+use Libadmin\Table\BaseTable;
+use Libadmin\Model\BaseModel;
+use Libadmin\Model\Institution;
 
-	protected $tableGateway;
+
+class InstitutionTable extends BaseTable {
+
+	protected $searchFields = array(
+		'bib_code',
+		'sys_code',
+		'label_de',
+		'label_fr'
+	);
 
 
+	/**
+	 * Find institutions
+	 *
+	 * @param	String			$searchString
+	 * @param	Integer			$limit
+	 * @return	BaseModel[]
+	 */
+	public function find($searchString, $limit = 30) {
+		$select 		= new Select();
+		$likeCondition	= $this->getSearchFieldsLikeCondition($searchString);
 
-	public function __construct(TableGateway $tableGateway) {
-		$this->tableGateway = $tableGateway;
+		$select->from($this->getTable())
+				->order('label_de')
+				->limit($limit)
+				->where($likeCondition);
+
+//		$sql = new Sql($this->tableGateway->getAdapter(), $this->getTable());
+//		var_dump($sql->getSqlStringForSqlObject($select));
+
+		return $this->tableGateway->selectWith($select);
 	}
 
 
 
 	public function getAll($limit = 30) {
 		$select = new Select();
-		$select->from($this->tableGateway->getTable())
+		$select->from($this->getTable())
 				->order('label_de')
 				->limit($limit);
 
@@ -48,12 +75,8 @@ class InstitutionTable {
 
 
 	public function saveInstitution(Institution $institution) {
-		$idInstitution = (int)$institution->id;
-
-		$data = array(
-			'bib_code'	=> $institution->bib_code,
-			'label_de'  => $institution->label_de
-		);
+		$idInstitution	= $institution->getID();
+		$data			= $institution->getData();
 
 		if( $idInstitution == 0 ) {
 			$numRows	= $this->tableGateway->insert($data);

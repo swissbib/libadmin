@@ -19,11 +19,41 @@ use Libadmin\Model\BaseModel;
 
 class Institution extends BaseModel {
 
-	public $id;
-
 	public $bib_code;
+	public $sys_code;
+
+	public $is_active;
 
 	public $label_de;
+	public $label_fr;
+	public $label_it;
+	public $label_en;
+
+	public $name_de;
+	public $name_fr;
+	public $name_it;
+	public $name_en;
+
+	public $url_de;
+	public $url_fr;
+	public $url_it;
+	public $url_en;
+
+	public $address;
+	public $zip;
+	public $city;
+	public $country;
+	public $canton;
+
+	public $website;
+	public $email;
+	public $phone;
+	public $skype;
+	public $facebook;
+	public $coordinates;
+	public $isil;
+	public $notes;
+
 
 
 
@@ -54,6 +84,10 @@ class Institution extends BaseModel {
 		}
 
 		return $this->inputFilter;
+	}
+
+	public function getListLabel() {
+		return $this->bib_code . ': ' . $this->label_de;
 	}
 
 

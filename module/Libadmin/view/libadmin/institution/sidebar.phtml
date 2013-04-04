@@ -1,11 +1,11 @@
-<a href="<?=$this->url('institution', array('action'=>'add'));?>" class="addButton btn btn-primary btn-medium" id="add-institution">
-	Add new Institution
-</a>
-<form class="navbar-search pull-left">
-	<input name="query" type="text" class="search-query" placeholder="Search">
+
+<form id="search-form" class="searchForm form-search" action="<?=$this->url('institution', array('action'=>'search'));?>">
+	<input id="search-query" name="query" type="text" class="search-query" placeholder="Search">
 </form>
-<ul class="searchResults nav nav-tabs nav-stacked" id="search-results-list" style="clear:both">
-	<?php foreach($searchResults as $institution): ?>
-		<li><a href="<?=$this->url('institution', array('action'=>'edit', 'id' => $institution->id));?>"><?=$this->escapeHtml($institution->label_de)?></a></li>
-	<?php endforeach; ?>
+<ul id="search-results-list" class="searchResultList nav nav-tabs nav-stacked">
+	<?=$this->render('libadmin/global/search', array(
+		'listItems'	=> $searchResults,
+		'route'		=> 'institution'
+	));?>
 </ul>
+

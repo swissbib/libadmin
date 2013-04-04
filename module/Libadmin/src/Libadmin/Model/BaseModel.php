@@ -11,6 +11,8 @@ use Zend\InputFilter\InputFilter;
  */
 class BaseModel implements InputFilterAwareInterface {
 
+	public $id;
+
 	/**
 	 * @var InputFilter
 	 */
@@ -51,9 +53,30 @@ class BaseModel implements InputFilterAwareInterface {
 	}
 
 
+	public function getData() {
+		$data	= $this->getArrayCopy();
+
+		unset($data['id']);
+		unset($data['inputFilter']);
+
+		return $data;
+	}
+
+
 
 	public function exchangeArray($data) {
 		$this->initLocalVariables($data);
+	}
+
+
+
+	/**
+	 * Get record ID
+	 *
+	 * @return	Integer
+	 */
+	public function getID() {
+		return (int)$this->id;
 	}
 
 	protected function initLocalVariables(array $data) {

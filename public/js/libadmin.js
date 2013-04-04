@@ -10,23 +10,38 @@ var LibAdmin = {
 	},
 
 	initGeneral: function() {
-		this.Sidebar.init();
 
 	},
+
+
+	loadInContent: function(url, handler) {
+		$('#content').load(url, handler);
+	},
+
 
 
 
 	Institution: {
 
 		init: function() {
-			LibAdmin.Sidebar.initList(this.onFormLoaded);
-			LibAdmin.Sidebar.initAddButton(this.onFormLoaded);
-
+			this.initSidebar();
+			this.initEditor();
 		},
 
-		onFormLoaded: function() {
-			console.log('handler loaded Institution');
-			LibAdmin.Editor.init('institution', LibAdmin.Institution.onFormLoaded);
+		initSidebar: function() {
+			LibAdmin.Sidebar.init($.proxy(this.onSearchListUpdated, this), $.proxy(this.onContentUpdated, this));
+		},
+
+		initEditor: function() {
+			LibAdmin.Editor.init('institution', $.proxy(this.initEditor, this));
+		},
+
+		onContentUpdated: function() {
+			this.initEditor();
+		},
+
+		onSearchListUpdated: function() {
+
 		}
 
 	},
@@ -40,44 +55,88 @@ var LibAdmin = {
 	},
 
 	Editor: {
-		init: function(name, handler) {
+		init: function(name, contentLoadedHandler) {
+			this.initForm(name, contentLoadedHandler);
+			this.initTabs();
+			this.initButtons(contentLoadedHandler);
+		},
 
+		initForm: function(name, handler) {
 			$('form#' + name).ajaxForm({
-	            target: '#content',
+				target: '#content',
 				success: handler
-	        });
+			});
+		},
 
+		initTabs: function() {
 			$('.formTabs a').click(function(e) {
 				e.preventDefault();
 				$(this).tab('show');
-			})
+			});
+		},
+
+		initButtons: function(handler) {
+			$('a.ajaxButton').click(function(e){
+				e.preventDefault();
+				LibAdmin.loadInContent($(this).attr('href'), handler);
+			});
 		}
 	},
 
 	Sidebar: {
-		init: function() {
 
+		searchDelay: null,
+
+		listUpdate: null,
+		contentUpdate: null,
+
+
+		init: function(listUpdatedHandler, contentLoadedHandler) {
+			this.listUpdate		= listUpdatedHandler;
+			this.contentUpdate	= contentLoadedHandler;
+
+			this.initSearchBox();
+			this.initList();
 		},
 
-		initAddButton: function(handler) {
-			var addButton	= $('.addButton');
 
-			if( addButton ) {
-				addButton.click(function(event) {
-					event.preventDefault();
-					$('#content').load($(this).attr('href'), handler);
-				});
+		initList: function() {
+			var that = this;
+
+			$('#search-results-list a').click(function(event) {
+				console.log('item clicked');
+				event.preventDefault();
+				$('#content').load($(this).attr('href'), that.contentUpdate);
+			});
+		},
+
+		onListUpdated: function() {
+			this.initList();
+
+			if( this.listUpdate ) {
+				this.listUpdate();
 			}
 		},
 
 
 
+		initSearchBox: function() {
+			var that = this,
+				form;
 
-		initList: function(handler) {
-			$('#search-results-list a').click(function(event) {
-				event.preventDefault();
+			$('#search-form').ajaxForm({
+				target: '#search-results-list',
+				success: $.proxy(this.onListUpdated, this)
+			});
 
-				$('#content').load($(this).attr('href'), {}, handler);
+			$('#search-query').keyup(function(event){
+				form = $(this).parent('form');
+
+				clearTimeout(that.searchDelay);
+
+				that.searchDelay = setTimeout(function(){
+					form.submit();
+				}, 500);
 			});
 		}
 	}

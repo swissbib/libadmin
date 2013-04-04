@@ -40,3 +40,15 @@ div.container a.brand {
 	float: right;
 	clear: both;
 }
+
+.searchForm,
+.searchResultList {
+	clear: both;
+}
+
+.form-horizontal .institutionGeneral .control-label {
+	width: 100px;
+}
+.form-horizontal .institutionGeneral .controls {
+	margin-left: 120px;
+}

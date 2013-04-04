@@ -9,7 +9,7 @@
 namespace Libadmin;
 
 use Libadmin\Model\Institution;
-use Libadmin\Model\InstitutionTable;
+use Libadmin\Table\InstitutionTable;
 
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
@@ -40,7 +40,7 @@ class Module
     {
         return array(
             'factories' => array(
-                'Libadmin\Model\InstitutionTable' =>  function($sm) {
+                'Libadmin\Table\InstitutionTable' =>  function($sm) {
                     $tableGateway = $sm->get('InstitutionTableGateway');
                     $table = new InstitutionTable($tableGateway);
                     return $table;

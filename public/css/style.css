@@ -52,3 +52,7 @@ div.container a.brand {
 .form-horizontal .institutionGeneral .controls {
 	margin-left: 120px;
 }
+
+fieldset.notes textarea {
+	width: 95%;
+}

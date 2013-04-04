@@ -5,13 +5,10 @@ $this->headTitle($title);
 $form = $this->form;
 $form->prepare();
 
-$isNew			= $form->get('id')->getValue() === null;
+$idInstitution	= (int)$form->get('id')->getValue();
+$isNew			= !$idInstitution;
 $saveButtonLabel= $isNew ? 'Create' : 'Update';
 $formType		= 'horizontal';
-
-//if( isset($messages) ) {
-//	var_dump($messages);
-//}
 
 ?>
 
@@ -22,13 +19,11 @@ $formType		= 'horizontal';
 		<input type="submit" value="<?=$this->escapeHtml($saveButtonLabel)?>" class="submitButton btn btn-primary btn-medium" id="submitbutton" name="submit">
 		<a href="<?=$this->url('institution', array('action'=>'home'));?>" class="ajaxButton closeButton btn btn-medium" id="closebutton">Close</a>
 		<?php if(!$isNew): ?>
-			<a href="<?=$this->url('institution', array('action'=>'delete'));?>" class="ajaxButton deleteButton btn btn-danger btn-medium" id="deletebutton">Delete</a>
+			<a href="<?=$this->url('institution', array('action'=>'delete', 'id' => $idInstitution));?>" class="ajaxButton deleteButton btn btn-danger btn-medium" id="deletebutton">Delete</a>
 		<?php endif; ?>
 	</div>
 
 	<h1><?php echo $this->escapeHtml($title); ?></h1>
-
-	<p>ID: <?=$form->get('id')->getValue()?></p>
 
 	<?=$this->ztbFlashMessenger()->render()?>
 
@@ -120,10 +115,47 @@ $formType		= 'horizontal';
 						</div>
 					</fieldset>
 
+					<fieldset class="notes">
+						<legend>Notizen</legend>
+						<?=$this->formRowTwb($form->get('notes'))?>
+					</fieldset>
+
 				</div>
 
 				<div class="tab-pane" id="address">
-					Address
+
+					<fieldset class="address">
+						<legend>Adresse</legend>
+						<div class="row-fluid">
+							<div class="span6">
+								<?=$this->formRowTwb($form->get('address'))?>
+							</div>
+							<div class="span6">
+								<?=$this->formRowTwb($form->get('zip'))?>
+								<?=$this->formRowTwb($form->get('city'))?>
+								<?=$this->formRowTwb($form->get('country'))?>
+								<?=$this->formRowTwb($form->get('canton'))?>
+							</div>
+						</div>
+					</fieldset>
+
+					<fieldset class="contact">
+						<legend>Kontaktdaten</legend>
+						<div class="row-fluid">
+							<div class="span6">
+								<?=$this->formRowTwb($form->get('website'))?>
+								<?=$this->formRowTwb($form->get('email'))?>
+								<?=$this->formRowTwb($form->get('phone'))?>
+							</div>
+							<div class="span6">
+								<?=$this->formRowTwb($form->get('skype'))?>
+								<?=$this->formRowTwb($form->get('facebook'))?>
+								<?=$this->formRowTwb($form->get('coordinates'))?>
+								<?=$this->formRowTwb($form->get('isil'))?>
+							</div>
+						</div>
+					</fieldset>
+
 				</div>
 
 				<div class="tab-pane" id="linking">

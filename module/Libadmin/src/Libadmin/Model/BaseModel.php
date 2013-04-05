@@ -9,7 +9,7 @@ use Zend\InputFilter\InputFilter;
  * [Description]
  *
  */
-class BaseModel implements InputFilterAwareInterface {
+abstract class BaseModel implements InputFilterAwareInterface {
 
 	public $id;
 
@@ -86,6 +86,11 @@ class BaseModel implements InputFilterAwareInterface {
 			}
 		}
 	}
+
+
+	abstract public function getListLabel();
+
+	abstract public function getTypeLabel();
 
 }
 

@@ -90,6 +90,10 @@ class Institution extends BaseModel {
 		return $this->bib_code . ': ' . $this->label_de;
 	}
 
+	public function getTypeLabel() {
+		return 'Institution';
+	}
+
 
 //	public function getInputFilter() {
 //		if( !$this->inputFilter ) {
@@ -190,24 +194,3 @@ class Institution extends BaseModel {
 //	}
 
 }
-
-//
-//class LibraryAdress {
-//
-//	public $road;
-//
-//	public $town;
-//
-//	public $zipcode;
-//}
-//
-//class Translations {
-//
-//	public $name_de;
-//
-//	public $name_fr;
-//
-//	public $name_it;
-//
-//	public $name_rr;
-//}

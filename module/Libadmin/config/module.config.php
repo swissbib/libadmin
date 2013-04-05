@@ -1,4 +1,5 @@
 <?php
+
 return array(
     'controllers' => array(
         'invokables' => array(
@@ -79,8 +80,8 @@ return array(
 
 	'service_manager' => array(
 	    'factories' => array(
-	        'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
-	    ),
+	        'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory'
+	    )
 	),
 
 	'navigation' => array(

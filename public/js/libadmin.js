@@ -1,17 +1,23 @@
 var LibAdmin = {
 
 	onLoaded: function() {
-		this.initGeneral();
-
-		if( document.location.pathname.indexOf('institution') ) {
+		if( this.hasUrlPart('/institution') ) {
 			this.Institution.init();
 		}
-
+		if( this.hasUrlPart('/group') ) {
+			this.Group.init();
+		}
+		if( this.hasUrlPart('/view') ) {
+//			this.View.init();
+		}
 	},
 
-	initGeneral: function() {
-
+	hasUrlPart: function(part) {
+		return document.location.pathname.indexOf(part) !== -1;
 	},
+
+
+
 
 
 	loadInContent: function(url, handler) {
@@ -22,7 +28,6 @@ var LibAdmin = {
 
 
 	Institution: {
-
 		init: function() {
 			this.initSidebar();
 			this.initEditor();
@@ -33,7 +38,7 @@ var LibAdmin = {
 		},
 
 		initEditor: function() {
-			LibAdmin.Editor.init('institution', $.proxy(this.initEditor, this));
+			LibAdmin.Editor.init($.proxy(this.onContentUpdated, this));
 		},
 
 		onContentUpdated: function() {
@@ -47,7 +52,26 @@ var LibAdmin = {
 	},
 
 	Group: {
+		init: function() {
+			this.initSidebar();
+			this.initEditor();
+		},
 
+		initSidebar: function() {
+			LibAdmin.Sidebar.init($.proxy(this.onSearchListUpdated, this), $.proxy(this.onContentUpdated, this));
+		},
+
+		initEditor: function() {
+			LibAdmin.Editor.init($.proxy(this.onContentUpdated, this));
+		},
+
+		onContentUpdated: function() {
+			this.initEditor();
+		},
+
+		onSearchListUpdated: function() {
+
+		}
 	},
 
 	View: {
@@ -55,14 +79,14 @@ var LibAdmin = {
 	},
 
 	Editor: {
-		init: function(name, contentLoadedHandler) {
-			this.initForm(name, contentLoadedHandler);
+		init: function(contentLoadedHandler) {
+			this.initForm(contentLoadedHandler);
 			this.initTabs();
 			this.initButtons(contentLoadedHandler);
 		},
 
-		initForm: function(name, handler) {
-			$('form#' + name).ajaxForm({
+		initForm: function(handler) {
+			$('#content > form').ajaxForm({
 				target: '#content',
 				success: handler
 			});
@@ -130,7 +154,7 @@ var LibAdmin = {
 			});
 
 			$('#search-query').keyup(function(event){
-				form = $(this).parent('form');
+				form = $(this).parents('form');
 
 				clearTimeout(that.searchDelay);
 

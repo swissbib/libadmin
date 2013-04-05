@@ -1,1 +1,11 @@
-group
+<div class="row">
+	<div class="span3" id="sidebar">
+		<?=$this->render('libadmin/global/sidebar', array(
+			'route'		=> 'group',
+			'listItems'	=> $searchResults
+		));?>
+	</div>
+	<div class="span9" id="content">
+		<?=$this->render('libadmin/group/home');?>
+	</div>
+</div>

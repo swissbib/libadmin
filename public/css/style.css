@@ -3,6 +3,44 @@ body {
     padding-bottom: 40px;
 }
 
+div.container a.brand {
+    background: url("../images/swissbib-logo.png") no-repeat scroll 0 8px transparent;
+    margin-left: 0;
+    padding: 8px 20px 12px 40px;
+}
+
+.topButtons {
+	float: right;
+	clear: both;
+}
+
+.searchForm,
+.searchResultList {
+	clear: both;
+}
+
+.form-horizontal .general .control-label {
+	width: 100px;
+}
+.form-horizontal .general .controls {
+	margin-left: 120px;
+}
+
+fieldset.notes textarea {
+	width: 95%;
+}
+
+#search-query {
+	width: 170px;
+}
+
+
+
+
+
+
+
+
 .zf-green {
     color: #68b604;
 }
@@ -28,31 +66,4 @@ body {
 
 .btn-success:active, .btn-success.active {
   background-color: #57a900;
-}
-
-div.container a.brand {
-    background: url("../images/swissbib-logo.png") no-repeat scroll 0 8px transparent;
-    margin-left: 0;
-    padding: 8px 20px 12px 40px;
-}
-
-.topButtons {
-	float: right;
-	clear: both;
-}
-
-.searchForm,
-.searchResultList {
-	clear: both;
-}
-
-.form-horizontal .institutionGeneral .control-label {
-	width: 100px;
-}
-.form-horizontal .institutionGeneral .controls {
-	margin-left: 120px;
-}
-
-fieldset.notes textarea {
-	width: 95%;
 }

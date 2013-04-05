@@ -7,6 +7,9 @@ use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
 
 use Libadmin\Table\BaseTable;
+use Libadmin\Table\GroupTable;
+use Libadmin\Table\InstitutionTable;
+use Libadmin\Table\ViewTable;
 
 
 /**
@@ -19,6 +22,30 @@ abstract class BaseController extends AbstractActionController {
 	 * @var BaseTable
 	 */
 	protected $table;
+
+
+
+	/**
+	 * Initial view
+	 *
+	 * @return array
+	 */
+	public function indexAction() {
+		return array(
+			'listItems' => $this->getTable()->getAll(30)
+		);
+	}
+
+
+
+	/**
+	 * Home view
+	 *
+	 * @return	ViewModel
+	 */
+	public function homeAction() {
+		return $this->getAjaxView();
+	}
 
 
 
@@ -188,9 +215,15 @@ abstract class BaseController extends AbstractActionController {
 
 	/**
 	 * Get table
-	 * @return	BaseTable
+	 * @return	InstitutionTable|GroupTable|ViewTable
 	 */
-	protected abstract function getTable();
+	protected function getTable() {
+		if( !$this->table ) {
+			$type	= $this->getTypeName();
+			$this->table = $this->getServiceLocator()->get('Libadmin\Table\\' . $type . 'Table');
+		}
+		return $this->table;
+	}
 
 }
 

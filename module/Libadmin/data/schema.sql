@@ -61,6 +61,51 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `view`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `view` ;
+
+CREATE  TABLE IF NOT EXISTS `view` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `code` VARCHAR(45) NULL ,
+  `label` VARCHAR(45) NULL ,
+  `is_active` TINYINT(1)  NULL ,
+  `notes` TEXT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mm_institution_group_view`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mm_institution_group_view` ;
+
+CREATE  TABLE IF NOT EXISTS `mm_institution_group_view` (
+  `id_view` INT NOT NULL ,
+  `id_group` INT NOT NULL ,
+  `id_institution` INT NOT NULL ,
+  `is_favorite` TINYINT(1)  NULL ,
+  `position` INT NULL ,
+  PRIMARY KEY (`id_group`, `id_institution`, `id_view`) ,
+  CONSTRAINT `fk_link_institution1`
+    FOREIGN KEY (`id_institution` )
+    REFERENCES `institution` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_link_view1`
+    FOREIGN KEY (`id_view` )
+    REFERENCES `view` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_link_network1`
+    FOREIGN KEY (`id_group` )
+    REFERENCES `group` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `mm_group_view`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `mm_group_view` ;
@@ -76,55 +121,10 @@ CREATE  TABLE IF NOT EXISTS `mm_group_view` (
     FOREIGN KEY (`id_group` )
     REFERENCES `group` (`id` )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `view`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `view` ;
-
-CREATE  TABLE IF NOT EXISTS `view` (
-  `id` INT NOT NULL ,
-  `code` VARCHAR(45) NULL ,
-  `label` VARCHAR(45) NULL ,
-  `is_active` TINYINT(1)  NULL ,
-  `notes` TEXT NULL ,
-  PRIMARY KEY (`id`) ,
-  CONSTRAINT `fk_view_mm_network_views1`
-    FOREIGN KEY (`id` )
-    REFERENCES `mm_group_view` (`id_view` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mm_institution_group_view`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `mm_institution_group_view` ;
-
-CREATE  TABLE IF NOT EXISTS `mm_institution_group_view` (
-  `id_view` INT NOT NULL ,
-  `id_group` INT NOT NULL ,
-  `id_institution` INT NOT NULL ,
-  `is_favorite` TINYINT(1)  NULL ,
-  `position` INT NULL ,
-  PRIMARY KEY (`id_view`, `id_group`, `id_institution`) ,
-  CONSTRAINT `fk_link_institution1`
-    FOREIGN KEY (`id_institution` )
-    REFERENCES `institution` (`id` )
-    ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_link_view1`
+  CONSTRAINT `fk_mm_group_view_view1`
     FOREIGN KEY (`id_view` )
     REFERENCES `view` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_link_network1`
-    FOREIGN KEY (`id_group` )
-    REFERENCES `group` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

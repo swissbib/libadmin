@@ -16,23 +16,6 @@ use Libadmin\Controller\BaseController;
  */
 class InstitutionController extends BaseController {
 
-	/**
-	 * Initial institution view
-	 *
-	 * @return array
-	 */
-	public function indexAction() {
-		return array(
-			'searchResults' => $this->getTable()->getAll(30)
-		);
-	}
-
-
-	public function homeAction() {
-		return $this->getAjaxView();
-	}
-
-
 	public function addAction() {
 		$form			= new InstitutionForm();
 		$request		= $this->getRequest();
@@ -45,7 +28,7 @@ class InstitutionController extends BaseController {
 
 			if( $form->isValid() ) {
 				$institution->exchangeArray($form->getData());
-				$idInstitution	= $this->getTable()->saveInstitution($institution);
+				$idInstitution	= $this->getTable()->save($institution);
 
 				$flashMessenger->addSuccessMessage('New institution added');
 
@@ -104,22 +87,6 @@ class InstitutionController extends BaseController {
 			'form'		=> $form,
 			'title'		=> 'Edit Institution'
 		));
-	}
-
-
-
-
-
-	/**
-	 * Get institution table
-	 *
-	 * @return	InstitutionTable
-	 */
-	protected function getTable() {
-		if( !$this->table ) {
-			$this->table = $this->getServiceLocator()->get('Libadmin\Table\InstitutionTable');
-		}
-		return $this->table;
 	}
 
 }

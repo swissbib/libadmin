@@ -65,14 +65,14 @@ class Module {
 					return new TableGateway('group', $dbAdapter, null, $resultSetPrototype);
 				},
 				'Libadmin\Table\ViewTable' => function ($sm) {
-					$tableGateway = $sm->get('GroupTableGateway');
+					$tableGateway = $sm->get('ViewTableGateway');
 					return new ViewTable($tableGateway);
 				},
 				'ViewTableGateway' => function ($sm) {
 					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
 					$resultSetPrototype = new ResultSet();
 					$resultSetPrototype->setArrayObjectPrototype(new View());
-					return new TableGateway('group', $dbAdapter, null, $resultSetPrototype);
+					return new TableGateway('view', $dbAdapter, null, $resultSetPrototype);
 				}
 			)
 		);

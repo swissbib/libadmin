@@ -17,15 +17,22 @@ use Libadmin\Table\BaseTable;
 use Libadmin\Model\BaseModel;
 use Libadmin\Model\Institution;
 
-
+/**
+ * Class InstitutionTable
+ * @package Libadmin\Table
+ */
 class InstitutionTable extends BaseTable {
 
+	/**
+	 * @var	String[]	Fulltext search fields
+	 */
 	protected $searchFields = array(
 		'bib_code',
 		'sys_code',
 		'label_de',
 		'label_fr'
 	);
+
 
 
 	/**
@@ -36,24 +43,13 @@ class InstitutionTable extends BaseTable {
 	 * @return	BaseModel[]
 	 */
 	public function find($searchString, $limit = 30) {
-		$select 		= new Select();
-		$likeCondition	= $this->getSearchFieldsLikeCondition($searchString);
-
-		$select->from($this->getTable())
-				->order('label_de')
-				->limit($limit)
-				->where($likeCondition);
-
-//		$sql = new Sql($this->tableGateway->getAdapter(), $this->getTable());
-//		var_dump($sql->getSqlStringForSqlObject($select));
-
-		return $this->tableGateway->selectWith($select);
+		return $this->findFulltext($searchString, 'label_de', $limit);
 	}
 
 
 
 	/**
-	 *
+	 * Get all institutions
 	 *
 	 * @param	Integer		$limit
 	 * @return	ResultSetInterface
@@ -65,48 +61,13 @@ class InstitutionTable extends BaseTable {
 
 
 	/**
+	 * Get institution
+	 *
 	 * @param	Integer		$idInstitution
 	 * @return	Institution
 	 */
 	public function getRecord($idInstitution) {
 		return parent::getRecord($idInstitution);
-	}
-
-
-
-	public function getInstitution($idInstitution) {
-		$institution = $this->tableGateway->select(array('id' => $idInstitution))->current();
-
-		if( !$institution ) {
-			throw new \Exception("Could not find institution $idInstitution");
-		}
-
-		return $institution;
-	}
-
-
-
-	public function saveInstitution(Institution $institution) {
-		$idInstitution	= $institution->getID();
-		$data			= $institution->getData();
-
-		if( $idInstitution == 0 ) {
-			$numRows	= $this->tableGateway->insert($data);
-
-			if( $numRows == 1 ) {
-				$idInstitution = $this->tableGateway->getLastInsertValue();
-			}
-		}
-		else {
-			if( $this->getInstitution($idInstitution) ) {
-				$this->tableGateway->update($data, array('id' => $idInstitution));
-			}
-			else {
-				throw new \Exception('Institution does not exist');
-			}
-		}
-
-		return $idInstitution;
 	}
 
 }

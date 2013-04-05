@@ -17,14 +17,28 @@ class View extends BaseModel {
 
 
 	/**
-	 * @return string
+	 * Get list label
+	 *
+	 * @return	String
 	 */
 	public function getListLabel() {
 		return $this->code . ': ' . $this->label;
 	}
 
+
+
+	/**
+	 * Get type label
+	 *
+	 * @return	String
+	 */
 	public function getTypeLabel() {
 		return 'View';
+	}
+
+
+	public function getLabel() {
+		return $this->label;
 	}
 
 }

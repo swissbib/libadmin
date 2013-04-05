@@ -65,6 +65,10 @@ abstract class BaseModel implements InputFilterAwareInterface {
 
 
 	public function exchangeArray($data) {
+		if( is_object($data) ) {
+			$data = $data->getArrayCopy();
+		}
+
 		$this->initLocalVariables($data);
 	}
 

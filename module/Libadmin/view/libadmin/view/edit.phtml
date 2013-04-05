@@ -1,0 +1,85 @@
+<?php
+
+$this->headTitle($title);
+
+$form = $this->form;
+$form->prepare();
+
+$idView			= (int)$form->get('id')->getValue();
+$isNew			= !$idView;
+$saveButtonLabel= $isNew ? 'Create' : 'Update';
+$formType		= 'horizontal';
+
+?>
+
+
+<?=$this->formTwb()->openTag($form, $formType)?>
+
+	<div class="topButtons">
+		<input type="submit" value="<?=$this->escapeHtml($saveButtonLabel)?>" class="submitButton btn btn-primary btn-medium" id="submitbutton" name="submit">
+		<a href="<?=$this->url('view', array('action'=>'home'));?>" class="ajaxButton closeButton btn btn-medium" id="closebutton">Close</a>
+		<?php if(!$isNew): ?>
+			<a href="<?=$this->url('view', array('action'=>'delete', 'id' => $idView));?>" class="ajaxButton deleteButton btn btn-danger btn-medium" id="deletebutton">Delete</a>
+		<?php endif; ?>
+	</div>
+
+	<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+	<?=$this->ztbFlashMessenger()->render()?>
+
+	<fieldset class="general">
+		<legend>Allgemein</legend>
+		<div class="row-fluid">
+			<div class="span5">
+				<?=$this->formRowTwb($form->get('code'))?>
+			</div>
+			<div class="span5">
+				<?=$this->formRowTwb($form->get('label'))?>
+			</div>
+			<div class="span2">
+				<?=$this->formRowTwb($form->get('is_active'))?>
+			</div>
+		</div>
+	</fieldset>
+
+	<div class="tabbable">
+		<ul class="nav nav-tabs formTabs">
+			<li class="active"><a href="#display">Anzeige</a></li>
+			<li><a href="#groups">Gruppen sortieren</a></li>
+			<li><a href="#groupsort">Gruppen sortieren</a></li>
+			<li><a href="#institutionsort">Institutionen sortieren</a></li>
+			<li><a href="#linking">Verknüpfungen</a></li>
+		</ul>
+
+		<div class="tab-content">
+
+				<div class="tab-pane active" id="display">
+
+					<fieldset class="notes">
+						<legend>Notizen</legend>
+						<?=$this->formRowTwb($form->get('notes'))?>
+					</fieldset>
+
+				</div>
+
+				<div class="tab-pane" id="groups">
+					<p>groups</p>
+				</div>
+
+				<div class="tab-pane" id="groupsort">
+					<p>groupsort</p>
+				</div>
+
+				<div class="tab-pane" id="institutionsort">
+					<p>institutionsort</p>
+				</div>
+
+				<div class="tab-pane" id="linking">
+					<p>linking</p>
+				</div>
+
+		</div>
+
+	</div>
+
+<?=$this->form()->closeTag();?>

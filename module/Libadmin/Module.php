@@ -10,49 +10,72 @@ namespace Libadmin;
 
 use Libadmin\Model\Institution;
 use Libadmin\Table\InstitutionTable;
+use Libadmin\Model\Group;
+use Libadmin\Table\GroupTable;
+use Libadmin\Model\View;
+use Libadmin\Table\ViewTable;
 
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 
+class Module {
 
-class Module
-{
-    public function getAutoloaderConfig()
-    {
-        return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
-                __DIR__ . '/autoload_classmap.php',
-            ),
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ),
-            ),
-        );
-    }
+	public function getAutoloaderConfig() {
+		return array(
+			'Zend\Loader\ClassMapAutoloader' => array(
+				__DIR__ . '/autoload_classmap.php',
+			),
+			'Zend\Loader\StandardAutoloader' => array(
+				'namespaces' => array(
+					__NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
+				),
+			),
+		);
+	}
 
-    public function getConfig()
-    {
-        return include __DIR__ . '/config/module.config.php';
-    }
 
-    public function getServiceConfig()
-    {
-        return array(
-            'factories' => array(
-                'Libadmin\Table\InstitutionTable' =>  function($sm) {
-                    $tableGateway = $sm->get('InstitutionTableGateway');
-                    $table = new InstitutionTable($tableGateway);
-                    return $table;
-                },
-                'InstitutionTableGateway' => function ($sm) {
-                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Institution());
-                    return new TableGateway('institution', $dbAdapter, null, $resultSetPrototype);
-                },
-            ),
-        );
-    }
+
+	public function getConfig() {
+		return include __DIR__ . '/config/module.config.php';
+	}
+
+
+
+	public function getServiceConfig() {
+		return array(
+			'factories' => array(
+				'Libadmin\Table\InstitutionTable' => function ($sm) {
+					$tableGateway = $sm->get('InstitutionTableGateway');
+					return new InstitutionTable($tableGateway);
+				},
+				'InstitutionTableGateway' => function ($sm) {
+					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+					$resultSetPrototype = new ResultSet();
+					$resultSetPrototype->setArrayObjectPrototype(new Institution());
+					return new TableGateway('institution', $dbAdapter, null, $resultSetPrototype);
+				},
+				'Libadmin\Table\GroupTable' => function ($sm) {
+					$tableGateway = $sm->get('GroupTableGateway');
+					return new GroupTable($tableGateway);
+				},
+				'GroupTableGateway' => function ($sm) {
+					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+					$resultSetPrototype = new ResultSet();
+					$resultSetPrototype->setArrayObjectPrototype(new Group());
+					return new TableGateway('group', $dbAdapter, null, $resultSetPrototype);
+				},
+				'Libadmin\Table\ViewTable' => function ($sm) {
+					$tableGateway = $sm->get('GroupTableGateway');
+					return new ViewTable($tableGateway);
+				},
+				'ViewTableGateway' => function ($sm) {
+					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+					$resultSetPrototype = new ResultSet();
+					$resultSetPrototype->setArrayObjectPrototype(new View());
+					return new TableGateway('group', $dbAdapter, null, $resultSetPrototype);
+				}
+			)
+		);
+	}
 
 }

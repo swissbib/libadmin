@@ -1,8 +1,11 @@
 <?php
 namespace Libadmin\Controller;
 
+use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Http\Response;
+
 use Libadmin\Table\BaseTable;
 
 
@@ -18,6 +21,12 @@ abstract class BaseController extends AbstractActionController {
 	protected $table;
 
 
+
+	/**
+	 * Search matching records
+	 *
+	 * @return	ViewModel
+	 */
 	public function searchAction() {
 		$query = $this->params()->fromQuery('query', '');
 		$data = array(
@@ -30,12 +39,75 @@ abstract class BaseController extends AbstractActionController {
 
 
 
+	/**
+	 * Delete record or show delete confirmation form
+	 *
+	 * @return	Response|ViewModel
+	 */
+	public function deleteAction() {
+		$idRecord = (int)$this->params()->fromRoute('id', 0);
+
+		if( !$idRecord ) {
+			$this->flashMessenger()->addErrorMessage('No record defined for deletion. Something went wrong');
+
+			return $this->redirectTo('home');
+		}
+
+		/** @var Request $request  */
+		$request = $this->getRequest();
+		if( $request->isPost() ) {
+			$isDeleteRequest = $request->getPost('del') !== null;
+
+			if( $isDeleteRequest ) {
+				$idRecord = (int)$request->getPost('id');
+				$this->getTable()->delete($idRecord);
+				// @todo message is shown to late, solve this problem and re-enable message
+				//	$this->flashMessenger()->addSuccessMessage('Record deleted');
+			}
+
+			return $this->redirectTo('home');
+		}
+
+		return $this->getAjaxView(array(
+			'id'	=> $idRecord,
+			'route'	=> $this->getRouteName(),
+			'record'=> $this->getTable()->getRecord($idRecord)
+		), 'libadmin/global/delete');
+	}
+
+
+
+	/**
+	 * Get type name of class from the class name
+	 *
+	 * @return	String
+	 */
 	protected function getTypeName() {
 		$nameParts	= explode('\\', get_class($this));
 
 		return str_replace('Controller', '', array_pop($nameParts));
 	}
 
+
+
+	/**
+	 * Get route name (same as class type in lowercase)
+	 *
+	 * @return	String
+	 */
+	protected function getRouteName() {
+		return strtolower($this->getTypeName());
+	}
+
+
+
+	/**
+	 * Forward to other controller action
+	 *
+	 * @param	String		$action
+	 * @param	Array		$params
+	 * @return	ViewModel
+	 */
 	protected function forwardTo($action, array $params = array()) {
 		$name		= $this->getTypeName();
 		$params		= array_merge_recursive(array(
@@ -45,26 +117,46 @@ abstract class BaseController extends AbstractActionController {
 		return $this->forward()->dispatch('Libadmin\Controller\\' . $name, $params);
 	}
 
-	protected function getAjaxView($variables = array(), $template = '', $noMessages = false) {
-		if( !$noMessages ) {
-			$flashMessenger	= $this->flashMessenger();
-			$variables		= array_merge(array(
-				'messages'	=> array(
-					'error'		=> $flashMessenger->getErrorMessages(),
-					'info'		=> $flashMessenger->getInfoMessages(),
-					'success'	=> $flashMessenger->getSuccessMessages()
-				)
-			), $variables);
+
+
+	/**
+	 * Redirect to other controller action
+	 *
+	 * @param	String		$action
+	 * @param	Integer		$idRecord
+	 * @return	Response
+	 */
+	protected function redirectTo($action = '', $idRecord = 0) {
+		$route	= strtolower($this->getTypeName());
+		$params	= array();
+
+		if( $action ) {
+			$params['action'] = $action;
 		}
 
+		if( $idRecord ) {
+			$params['id'] = $idRecord;
+		}
+
+		return $this->redirect()->toRoute($route, $params);
+	}
+
+
+
+	/**
+	 * Get terminal view model for ajax
+	 *
+	 * @param	Array	$variables
+	 * @param	String	$template
+	 * @return	ViewModel
+	 */
+	protected function getAjaxView($variables = array(), $template = '') {
 		$viewModel = new ViewModel($variables);
 		$viewModel->setTerminal(true);
 
 		if( $template ) {
 			$viewModel->setTemplate($template);
 		}
-
-
 
 		return $viewModel;
 	}
@@ -95,6 +187,7 @@ abstract class BaseController extends AbstractActionController {
 
 
 	/**
+	 * Get table
 	 * @return	BaseTable
 	 */
 	protected abstract function getTable();

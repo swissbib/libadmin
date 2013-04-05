@@ -15,17 +15,23 @@ use Zend\Db\Sql\Predicate\PredicateSet;
 
 use Libadmin\Table\BaseTable;
 use Libadmin\Model\BaseModel;
-use Libadmin\Model\Institution;
+use Libadmin\Model\Group;
 
 
-class InstitutionTable extends BaseTable {
+class GroupTable extends BaseTable {
 
+	/**
+	 * @var	String[]	Fulltext search fields
+	 */
 	protected $searchFields = array(
-		'bib_code',
-		'sys_code',
+		'code',
 		'label_de',
-		'label_fr'
+		'label_fr',
+		'label_it',
+		'label_en',
+		'notes'
 	);
+
 
 
 	/**
@@ -53,7 +59,7 @@ class InstitutionTable extends BaseTable {
 
 
 	/**
-	 *
+	 * Get all records from table
 	 *
 	 * @param	Integer		$limit
 	 * @return	ResultSetInterface
@@ -65,48 +71,36 @@ class InstitutionTable extends BaseTable {
 
 
 	/**
-	 * @param	Integer		$idInstitution
-	 * @return	Institution
+	 * @param	Integer		$idGroup
+	 * @return	Group
 	 */
-	public function getRecord($idInstitution) {
-		return parent::getRecord($idInstitution);
+	public function getRecord($idGroup) {
+		return parent::getRecord($idGroup);
 	}
 
 
 
-	public function getInstitution($idInstitution) {
-		$institution = $this->tableGateway->select(array('id' => $idInstitution))->current();
-
-		if( !$institution ) {
-			throw new \Exception("Could not find institution $idInstitution");
-		}
-
-		return $institution;
-	}
-
-
-
-	public function saveInstitution(Institution $institution) {
-		$idInstitution	= $institution->getID();
-		$data			= $institution->getData();
-
-		if( $idInstitution == 0 ) {
-			$numRows	= $this->tableGateway->insert($data);
-
-			if( $numRows == 1 ) {
-				$idInstitution = $this->tableGateway->getLastInsertValue();
-			}
-		}
-		else {
-			if( $this->getInstitution($idInstitution) ) {
-				$this->tableGateway->update($data, array('id' => $idInstitution));
-			}
-			else {
-				throw new \Exception('Institution does not exist');
-			}
-		}
-
-		return $idInstitution;
-	}
+//	public function save(Group $record) {
+//		$idGroup	= $record->getID();
+//		$data			= $record->getData();
+//
+//		if( $idGroup == 0 ) {
+//			$numRows	= $this->tableGateway->insert($data);
+//
+//			if( $numRows == 1 ) {
+//				$idGroup = $this->tableGateway->getLastInsertValue();
+//			}
+//		}
+//		else {
+//			if( $this->getRecord($idGroup) ) {
+//				$this->tableGateway->update($data, array('id' => $idGroup));
+//			}
+//			else {
+//				throw new \Exception('Institution does not exist');
+//			}
+//		}
+//
+//		return $idGroup;
+//	}
 
 }

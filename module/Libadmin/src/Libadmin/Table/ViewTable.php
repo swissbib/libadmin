@@ -9,16 +9,15 @@
 
 namespace Libadmin\Table;
 
-use Zend\Db\ResultSet\ResultSetInterface;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Predicate\PredicateSet;
 
 use Libadmin\Table\BaseTable;
 use Libadmin\Model\BaseModel;
-use Libadmin\Model\Institution;
+use Libadmin\Model\View;
 
 
-class InstitutionTable extends BaseTable {
+class ViewTable extends BaseTable {
 
 	protected $searchFields = array(
 		'bib_code',
@@ -52,24 +51,13 @@ class InstitutionTable extends BaseTable {
 
 
 
-	/**
-	 *
-	 *
-	 * @param	Integer		$limit
-	 * @return	ResultSetInterface
-	 */
 	public function getAll($limit = 30) {
-		return parent::getAll('label_de', $limit);
-	}
+		$select = new Select();
+		$select->from($this->getTable())
+				->order('label_de')
+				->limit($limit);
 
-
-
-	/**
-	 * @param	Integer		$idInstitution
-	 * @return	Institution
-	 */
-	public function getRecord($idInstitution) {
-		return parent::getRecord($idInstitution);
+		return $this->tableGateway->selectWith($select);
 	}
 
 

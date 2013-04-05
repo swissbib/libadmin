@@ -6,6 +6,8 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 -- -----------------------------------------------------
 -- Table `institution`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `institution` ;
+
 CREATE  TABLE IF NOT EXISTS `institution` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `bib_code` VARCHAR(10) NULL ,
@@ -41,33 +43,38 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mm_group_view`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mm_group_view` (
-  `id_group` INT NOT NULL ,
-  `id_view` INT NOT NULL ,
-  `position` INT NULL ,
-  PRIMARY KEY (`id_group`, `id_view`) ,
-  INDEX `group` (`id_group` ASC) ,
-  INDEX `view` (`id_view` ASC) )
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `group`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `group` ;
+
 CREATE  TABLE IF NOT EXISTS `group` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
+  `id` INT NULL AUTO_INCREMENT ,
   `code` VARCHAR(45) NULL ,
   `label_de` VARCHAR(100) NULL ,
   `label_fr` VARCHAR(100) NULL ,
   `label_it` VARCHAR(100) NULL ,
   `label_en` VARCHAR(100) NULL ,
   `notes` TEXT NULL ,
-  PRIMARY KEY (`id`) ,
-  CONSTRAINT `fk_network_mm_network_views1`
-    FOREIGN KEY (`id` )
-    REFERENCES `mm_group_view` (`id_group` )
+  `is_active` TINYINT(1)  NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mm_group_view`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mm_group_view` ;
+
+CREATE  TABLE IF NOT EXISTS `mm_group_view` (
+  `id_group` INT NOT NULL ,
+  `id_view` INT NOT NULL ,
+  `position` INT NULL ,
+  PRIMARY KEY (`id_view`, `id_group`) ,
+  INDEX `group` (`id_group` ASC) ,
+  INDEX `view` (`id_view` ASC) ,
+  CONSTRAINT `fk_mm_group_view_group1`
+    FOREIGN KEY (`id_group` )
+    REFERENCES `group` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -76,9 +83,13 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `view`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `view` ;
+
 CREATE  TABLE IF NOT EXISTS `view` (
   `id` INT NOT NULL ,
   `code` VARCHAR(45) NULL ,
+  `label` VARCHAR(45) NULL ,
+  `is_active` TINYINT(1)  NULL ,
   `notes` TEXT NULL ,
   PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_view_mm_network_views1`
@@ -92,6 +103,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mm_institution_group_view`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `mm_institution_group_view` ;
+
 CREATE  TABLE IF NOT EXISTS `mm_institution_group_view` (
   `id_view` INT NOT NULL ,
   `id_group` INT NOT NULL ,
@@ -120,6 +133,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `user`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `user` ;
+
 CREATE  TABLE IF NOT EXISTS `user` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `username` VARCHAR(45) NULL ,
@@ -133,6 +148,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `log`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `log` ;
+
 CREATE  TABLE IF NOT EXISTS `log` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `date` DATETIME NULL ,

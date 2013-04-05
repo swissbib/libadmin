@@ -49,10 +49,7 @@ class InstitutionController extends BaseController {
 
 				$flashMessenger->addSuccessMessage('New institution added');
 
-				return $this->redirect()->toRoute('institution', array(
-					'action'	=> 'edit',
-					'id'		=> $idInstitution
-				));
+				return $this->redirectTo('edit', $idInstitution);
 			} else {
 				$flashMessenger->addErrorMessage('Form not valid');
 			}
@@ -78,7 +75,7 @@ class InstitutionController extends BaseController {
 
 		try {
 			/** @var Institution $institution  */
-			$institution = $this->getTable()->getInstitution($idInstitution);
+			$institution = $this->getTable()->getRecord($idInstitution);
 		} catch(\Exception $ex ) {
 			$flashMessenger->addErrorMessage('Institution not found');
 
@@ -94,7 +91,7 @@ class InstitutionController extends BaseController {
 			$form->setData($request->getPost());
 
 			if( $form->isValid() ) {
-				$this->getTable()->saveInstitution($form->getData());
+				$this->getTable()->save($form->getData());
 				$flashMessenger->addSuccessMessage('Institution saved');
 			} else {
 				$flashMessenger->addErrorMessage('Form not valid');
@@ -111,6 +108,13 @@ class InstitutionController extends BaseController {
 
 
 
+
+
+	/**
+	 * Get institution table
+	 *
+	 * @return	InstitutionTable
+	 */
 	protected function getTable() {
 		if( !$this->table ) {
 			$this->table = $this->getServiceLocator()->get('Libadmin\Table\InstitutionTable');

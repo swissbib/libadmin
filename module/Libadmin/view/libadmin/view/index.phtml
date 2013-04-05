@@ -1,1 +1,11 @@
-views
+<div class="row">
+	<div class="span3" id="sidebar">
+		<?=$this->render('libadmin/global/sidebar', array(
+			'route'		=> 'view',
+			'listItems'	=> $listItems
+		));?>
+	</div>
+	<div class="span9" id="content">
+		<?=$this->render('libadmin/view/home');?>
+	</div>
+</div>

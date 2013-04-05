@@ -2,6 +2,7 @@
 namespace Libadmin\Controller;
 
 
+use Libadmin\Table\ViewTable;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
 
@@ -18,42 +19,20 @@ use Libadmin\Model\Group;
 class GroupController extends BaseController {
 
 	/**
-	 * Initial group view
-	 *
-	 * @return array
-	 */
-	public function indexAction() {
-		return array(
-			'searchResults' => $this->getTable()->getAll(30)
-		);
-	}
-
-
-
-	/**
-	 * Home view
-	 *
-	 * @return	ViewModel
-	 */
-	public function homeAction() {
-		return $this->getAjaxView();
-	}
-
-
-
-	/**
 	 * Show edit form and add data
 	 *
 	 * @return	ViewModel|Response
 	 */
 	public function addAction() {
 		$form			= new GroupForm();
+		$group			= new Group();
 		$request		= $this->getRequest();
 		$flashMessenger	= $this->flashMessenger();
 
+		$form->bind($group);
+
 		if( $request->isPost() ) {
-			$group = new Group();
-			$form->setInputFilter($group->getInputFilter());
+//			$form->setInputFilter($group->getInputFilter());
 			$form->setData($request->getPost());
 
 			if( $form->isValid() ) {
@@ -67,6 +46,11 @@ class GroupController extends BaseController {
 				$flashMessenger->addErrorMessage('Form not valid');
 			}
 		}
+
+		/** @var ViewTable $viewTable  */
+		$viewTable	= $this->getServiceLocator()->get('Libadmin\Table\ViewTable');
+		$views	= $viewTable->getAll();
+		$group->setViews($views->getDataSource());
 
 		$form->setAttribute('action', $this->makeUrl('group', 'add'));
 
@@ -122,18 +106,6 @@ class GroupController extends BaseController {
 			'form'		=> $form,
 			'title'		=> 'Edit Group'
 		));
-	}
-
-
-
-	/**
-	 * @return    GroupTable
-	 */
-	protected function getTable() {
-		if( !$this->table ) {
-			$this->table = $this->getServiceLocator()->get('Libadmin\Table\GroupTable');
-		}
-		return $this->table;
 	}
 
 }

@@ -9,21 +9,24 @@
 
 namespace Libadmin\Table;
 
-use Zend\Db\Sql\Select;
-use Zend\Db\Sql\Predicate\PredicateSet;
+
+use Zend\Db\ResultSet\ResultSet;
 
 use Libadmin\Table\BaseTable;
-use Libadmin\Model\BaseModel;
 use Libadmin\Model\View;
+//use Libadmin\Model\BaseModel;
+//use Libadmin\Model\View;
 
 
 class ViewTable extends BaseTable {
 
+	/**
+	 * @var	String[]	Fulltext search fields
+	 */
 	protected $searchFields = array(
-		'bib_code',
-		'sys_code',
-		'label_de',
-		'label_fr'
+		'code',
+		'label',
+		'notes'
 	);
 
 
@@ -32,69 +35,30 @@ class ViewTable extends BaseTable {
 	 *
 	 * @param	String			$searchString
 	 * @param	Integer			$limit
-	 * @return	BaseModel[]
+	 * @return	ResultSet
 	 */
 	public function find($searchString, $limit = 30) {
-		$select 		= new Select();
-		$likeCondition	= $this->getSearchFieldsLikeCondition($searchString);
-
-		$select->from($this->getTable())
-				->order('label_de')
-				->limit($limit)
-				->where($likeCondition);
-
-//		$sql = new Sql($this->tableGateway->getAdapter(), $this->getTable());
-//		var_dump($sql->getSqlStringForSqlObject($select));
-
-		return $this->tableGateway->selectWith($select);
+		return $this->findFulltext($searchString, 'label', $limit);
 	}
 
 
 
+	/**
+	 * @param int $limit
+	 * @return	ResultSet
+	 */
 	public function getAll($limit = 30) {
-		$select = new Select();
-		$select->from($this->getTable())
-				->order('label_de')
-				->limit($limit);
-
-		return $this->tableGateway->selectWith($select);
+		return parent::getAll('label', $limit);
 	}
 
 
 
-	public function getInstitution($idInstitution) {
-		$institution = $this->tableGateway->select(array('id' => $idInstitution))->current();
-
-		if( !$institution ) {
-			throw new \Exception("Could not find institution $idInstitution");
-		}
-
-		return $institution;
-	}
-
-
-
-	public function saveInstitution(Institution $institution) {
-		$idInstitution	= $institution->getID();
-		$data			= $institution->getData();
-
-		if( $idInstitution == 0 ) {
-			$numRows	= $this->tableGateway->insert($data);
-
-			if( $numRows == 1 ) {
-				$idInstitution = $this->tableGateway->getLastInsertValue();
-			}
-		}
-		else {
-			if( $this->getInstitution($idInstitution) ) {
-				$this->tableGateway->update($data, array('id' => $idInstitution));
-			}
-			else {
-				throw new \Exception('Institution does not exist');
-			}
-		}
-
-		return $idInstitution;
+	/**
+	 * @param	Integer		$idGroup
+	 * @return	View
+	 */
+	public function getRecord($idGroup) {
+		return parent::getRecord($idGroup);
 	}
 
 }

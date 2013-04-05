@@ -56,6 +56,27 @@ class Institution extends BaseModel {
 
 
 
+	/**
+	 * Get list label
+	 *
+	 * @return	String
+	 */
+	public function getListLabel() {
+		return $this->bib_code . ': ' . $this->label_de;
+	}
+
+
+
+	/**
+	 * Get type label
+	 *
+	 * @return	String
+	 */
+	public function getTypeLabel() {
+		return 'Institution';
+	}
+
+
 
 	/**
 	 * @return InputFilter|InputFilterInterface
@@ -86,13 +107,7 @@ class Institution extends BaseModel {
 		return $this->inputFilter;
 	}
 
-	public function getListLabel() {
-		return $this->bib_code . ': ' . $this->label_de;
-	}
 
-	public function getTypeLabel() {
-		return 'Institution';
-	}
 
 
 //	public function getInputFilter() {

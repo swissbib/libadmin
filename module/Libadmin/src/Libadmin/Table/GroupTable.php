@@ -17,7 +17,10 @@ use Libadmin\Table\BaseTable;
 use Libadmin\Model\BaseModel;
 use Libadmin\Model\Group;
 
-
+/**
+ * Class GroupTable
+ * @package Libadmin\Table
+ */
 class GroupTable extends BaseTable {
 
 	/**
@@ -42,24 +45,13 @@ class GroupTable extends BaseTable {
 	 * @return	BaseModel[]
 	 */
 	public function find($searchString, $limit = 30) {
-		$select 		= new Select();
-		$likeCondition	= $this->getSearchFieldsLikeCondition($searchString);
-
-		$select->from($this->getTable())
-				->order('label_de')
-				->limit($limit)
-				->where($likeCondition);
-
-//		$sql = new Sql($this->tableGateway->getAdapter(), $this->getTable());
-//		var_dump($sql->getSqlStringForSqlObject($select));
-
-		return $this->tableGateway->selectWith($select);
+		return $this->findFulltext($searchString, 'label_de', $limit);
 	}
 
 
 
 	/**
-	 * Get all records from table
+	 * Get all groups
 	 *
 	 * @param	Integer		$limit
 	 * @return	ResultSetInterface
@@ -71,36 +63,13 @@ class GroupTable extends BaseTable {
 
 
 	/**
+	 * Get group
+	 *
 	 * @param	Integer		$idGroup
 	 * @return	Group
 	 */
 	public function getRecord($idGroup) {
 		return parent::getRecord($idGroup);
 	}
-
-
-
-//	public function save(Group $record) {
-//		$idGroup	= $record->getID();
-//		$data			= $record->getData();
-//
-//		if( $idGroup == 0 ) {
-//			$numRows	= $this->tableGateway->insert($data);
-//
-//			if( $numRows == 1 ) {
-//				$idGroup = $this->tableGateway->getLastInsertValue();
-//			}
-//		}
-//		else {
-//			if( $this->getRecord($idGroup) ) {
-//				$this->tableGateway->update($data, array('id' => $idGroup));
-//			}
-//			else {
-//				throw new \Exception('Institution does not exist');
-//			}
-//		}
-//
-//		return $idGroup;
-//	}
 
 }

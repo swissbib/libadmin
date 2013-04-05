@@ -8,7 +8,7 @@ var LibAdmin = {
 			this.Group.init();
 		}
 		if( this.hasUrlPart('/view') ) {
-//			this.View.init();
+			this.View.init();
 		}
 	},
 
@@ -75,7 +75,26 @@ var LibAdmin = {
 	},
 
 	View: {
+		init: function() {
+			this.initSidebar();
+			this.initEditor();
+		},
 
+		initSidebar: function() {
+			LibAdmin.Sidebar.init($.proxy(this.onSearchListUpdated, this), $.proxy(this.onContentUpdated, this));
+		},
+
+		initEditor: function() {
+			LibAdmin.Editor.init($.proxy(this.onContentUpdated, this));
+		},
+
+		onContentUpdated: function() {
+			this.initEditor();
+		},
+
+		onSearchListUpdated: function() {
+
+		}
 	},
 
 	Editor: {

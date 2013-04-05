@@ -1,6 +1,7 @@
 <?php
 namespace Libadmin\Table;
 
+use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Sql\Predicate\PredicateSet;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Where;
@@ -16,6 +17,9 @@ use Libadmin\Model\BaseModel;
  */
 abstract class BaseTable {
 
+	/**
+	 * @var	String[]	Fulltext search fields
+	 */
 	protected $searchFields = array();
 
 	protected $tableGateway;
@@ -52,7 +56,36 @@ abstract class BaseTable {
 	}
 
 
+	/**
+	 * Find records
+	 *
+	 * @param	String			$searchString
+	 * @param	String			$order
+	 * @param	Integer			$limit
+	 * @return	ResultSet
+	 */
+	protected function findFulltext($searchString, $order, $limit = 30) {
+		$select 		= new Select();
+		$likeCondition	= $this->getSearchFieldsLikeCondition($searchString);
 
+		$select->from($this->getTable())
+				->order($order)
+				->limit($limit)
+				->where($likeCondition);
+
+//		$sql = new Sql($this->tableGateway->getAdapter(), $this->getTable());
+//		var_dump($sql->getSqlStringForSqlObject($select));
+
+		return $this->tableGateway->selectWith($select);
+	}
+
+
+
+	/**
+	 * Get table name (shortcut)
+	 *
+	 * @return	String
+	 */
 	protected function getTable() {
 		return $this->tableGateway->getTable();
 	}

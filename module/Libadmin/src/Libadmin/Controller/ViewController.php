@@ -17,13 +17,24 @@ use Libadmin\Model\View;
  */
 class ViewController extends BaseController {
 
+
+	/**
+	 *
+	 * @return	ViewForm
+	 */
+	protected function getViewForm() {
+		return $this->serviceLocator->get('ViewForm');
+	}
+
+
+
 	/**
 	 * Add view
 	 *
 	 * @return	Response|ViewModel
 	 */
 	public function addAction() {
-		$form			= new ViewForm();
+		$form			= $this->getViewForm();
 		$request		= $this->getRequest();
 		$flashMessenger	= $this->flashMessenger();
 
@@ -70,13 +81,14 @@ class ViewController extends BaseController {
 		try {
 			/** @var View $view  */
 			$view = $this->getTable()->getRecord($idView);
+			$view->setGroups($this->getTable()->getGroupIDs($idView));
 		} catch(\Exception $ex ) {
 			$flashMessenger->addErrorMessage('Group not found');
 
 			return $this->forwardTo('home');
 		}
 
-		$form = new ViewForm();
+		$form = $this->getViewForm();
 		$form->bind($view);
 
 		$request = $this->getRequest();

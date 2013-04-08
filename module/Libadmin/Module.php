@@ -8,16 +8,19 @@
  */
 namespace Libadmin;
 
-use Libadmin\Form\GroupForm;
 use Libadmin\Model\Institution;
 use Libadmin\Table\InstitutionTable;
+use Libadmin\Table\InstitutionForm;
 use Libadmin\Model\Group;
 use Libadmin\Table\GroupTable;
+use Libadmin\Form\GroupForm;
 use Libadmin\Model\View;
 use Libadmin\Table\ViewTable;
+use Libadmin\Form\ViewForm;
 
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
+
 
 class Module {
 
@@ -79,6 +82,11 @@ class Module {
 					$viewTable = $sm->get('Libadmin\Table\ViewTable');
 
 					return new GroupForm($viewTable);
+				},
+				'ViewForm' => function($sm) {
+					$groupTable = $sm->get('Libadmin\Table\GroupTable');
+
+					return new ViewForm($groupTable);
 				}
 			)
 		);

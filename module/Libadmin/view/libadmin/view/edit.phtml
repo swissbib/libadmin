@@ -45,7 +45,7 @@ $formType		= 'horizontal';
 	<div class="tabbable">
 		<ul class="nav nav-tabs formTabs">
 			<li class="active"><a href="#display">Anzeige</a></li>
-			<li><a href="#groups">Gruppen sortieren</a></li>
+			<li><a href="#groups">Gruppen aktivieren</a></li>
 			<li><a href="#groupsort">Gruppen sortieren</a></li>
 			<li><a href="#institutionsort">Institutionen sortieren</a></li>
 			<li><a href="#linking">Verknüpfungen</a></li>
@@ -64,6 +64,7 @@ $formType		= 'horizontal';
 
 				<div class="tab-pane" id="groups">
 					<p>Gruppen mit Checkboxen aktivieren</p>
+					<?=$this->formRowTwb($form->get('groups'))?>
 				</div>
 
 				<div class="tab-pane" id="groupsort">

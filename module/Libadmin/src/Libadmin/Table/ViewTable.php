@@ -61,4 +61,44 @@ class ViewTable extends BaseTable {
 		return parent::getRecord($idGroup);
 	}
 
+	/**
+	 *
+	 *
+	 * @param	Integer		$idView
+	 * @return	Integer[]
+	 */
+	public function getGroupIDs($idView) {
+		return $this->getRelatedGroupViewIDs('id_group', 'id_view', $idView);
+	}
+
+
+	public function save(View $view) {
+		$idView	= parent::save($view);
+
+		$this->saveGroups($idView, $view->getGroups());
+
+		return $idView;
+	}
+
+
+	/**
+	 * Save groups relation
+	 *
+	 * @param	Integer		$idView
+	 * @param	Integer[]	$newGroupIDs
+	 */
+	protected function saveGroups($idView, array $newGroupIDs) {
+		$oldGroupIDs	= $this->getGroupIDs($idView);
+
+		foreach($newGroupIDs as $newGroupID) {
+			if( !in_array($newGroupID, $oldGroupIDs) ) {
+				$this->addGroupViewRelation($newGroupID, $idView);
+			}
+		}
+		foreach($oldGroupIDs as $oldGroupID) {
+			if( !in_array($oldGroupID, $newGroupIDs) ) {
+				$this->deleteGroupViewRelation($oldGroupID, $idView);
+			}
+		}
+	}
 }

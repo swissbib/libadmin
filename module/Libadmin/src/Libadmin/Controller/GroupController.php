@@ -19,12 +19,19 @@ use Libadmin\Model\Group;
 class GroupController extends BaseController {
 
 	/**
+	 * @return	GroupForm
+	 */
+	protected function getGroupForm() {
+		return $this->serviceLocator->get('GroupForm');
+	}
+
+	/**
 	 * Show edit form and add data
 	 *
 	 * @return	ViewModel|Response
 	 */
 	public function addAction() {
-		$form			= new GroupForm();
+		$form			= $this->getGroupForm(); // new GroupForm();
 		$group			= new Group();
 		$request		= $this->getRequest();
 		$flashMessenger	= $this->flashMessenger();
@@ -37,20 +44,27 @@ class GroupController extends BaseController {
 
 			if( $form->isValid() ) {
 				$group->exchangeArray($form->getData());
-				$idGroup	= $this->getTable()->save($group);
 
-				$flashMessenger->addSuccessMessage('New group added');
+				try {
+					$idGroup	= $this->getTable()->save($group);
 
-				return $this->redirectTo('edit', $idGroup);
+					$flashMessenger->addSuccessMessage('New group added');
+
+					return $this->redirectTo('edit', $idGroup);
+				} catch(\Exception $e) {
+					$flashMessenger->addErrorMessage($e->getMessage());
+				}
 			} else {
 				$flashMessenger->addErrorMessage('Form not valid');
 			}
 		}
 
 		/** @var ViewTable $viewTable  */
-		$viewTable	= $this->getServiceLocator()->get('Libadmin\Table\ViewTable');
-		$views	= $viewTable->getAll();
-		$group->setViews($views->getDataSource());
+//		$viewTable	= $this->getServiceLocator()->get('Libadmin\Table\ViewTable');
+//		$views	= $viewTable->getAll();
+//		$group->setViews($views->getDataSource());
+
+//		$group->loadViews();
 
 		$form->setAttribute('action', $this->makeUrl('group', 'add'));
 
@@ -78,13 +92,15 @@ class GroupController extends BaseController {
 		try {
 			/** @var Group $group  */
 			$group = $this->getTable()->getRecord($idGroup);
+			$group->setViews($this->getTable()->getViewIDs($idGroup));
 		} catch(\Exception $ex ) {
 			$flashMessenger->addErrorMessage('Group not found');
+//			$flashMessenger->addErrorMessage($ex->getMessage());
 
 			return $this->forwardTo('home');
 		}
 
-		$form = new GroupForm();
+		$form = $this->getGroupForm(); // new GroupForm();
 		$form->bind($group);
 
 		$request = $this->getRequest();

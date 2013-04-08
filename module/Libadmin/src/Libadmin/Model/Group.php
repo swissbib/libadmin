@@ -32,6 +32,17 @@ class Group extends BaseModel {
 
 	public $notes;
 
+	public $views = array();
+
+
+	public function extractBaseData() {
+		$data	= parent::extractBaseData();
+
+		unset($data['views']);
+
+		return $data;
+	}
+
 
 
 	/**
@@ -43,9 +54,121 @@ class Group extends BaseModel {
 		return $this->code . ': ' . $this->label_de;
 	}
 
+
+
+	public function getIsActive() {
+		return $this->is_active;
+	}
+
+
+
+	public function getLabel_de() {
+		return $this->label_de;
+	}
+
+
+
+	public function getLabel_en() {
+		return $this->label_en;
+	}
+
+
+
+	public function getLabel_fr() {
+		return $this->label_fr;
+	}
+
+
+
+	public function getLabel_it() {
+		return $this->label_it;
+	}
+
+
+
+	public function getNotes() {
+		return $this->notes;
+	}
+
+
+
+	/**
+	 * Get type label
+	 *
+	 * @return	String
+	 */
 	public function getTypeLabel() {
 		return 'Group';
 	}
 
+	public function getCode() {
+		return $this->code;
+	}
+
+	public function getIs_Active() {
+		return $this->is_active;
+	}
+
+
+	public function setCode($code) {
+		$this->code = $code;
+	}
+
+
+
+	public function setIsActive($is_active) {
+		$this->is_active = $is_active;
+	}
+
+
+
+	public function setLabel_De($label_de) {
+		$this->label_de = $label_de;
+	}
+
+
+
+	public function setLabel_En($label_en) {
+		$this->label_en = $label_en;
+	}
+
+
+
+	public function setLabel_Fr($label_fr) {
+		$this->label_fr = $label_fr;
+	}
+
+
+
+	public function setLabel_It($label_it) {
+		$this->label_it = $label_it;
+	}
+
+
+
+	public function setNotes($notes) {
+		$this->notes = $notes;
+	}
+
+
+
+
+
+
+
+
+	/**
+	 * @return	Integer[]
+	 */
+	public function getViews() {
+		return $this->views;
+	}
+
+
+	public function setViews($views) {
+		$this->views = $views;
+
+		return $this;
+	}
 
 }

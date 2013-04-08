@@ -5,7 +5,7 @@
 </div>
 <h1>Manage <?=$entityNamePlural?></h1>
 
-<?php if( !isset($listItems) || $listItems->count() < 1): ?>
+<?php if( is_null($listItems) || $listItems->count() == 0 ): ?>
 	<p>There are no <?=strtolower($entityNamePlural)?> stored yet.</p>
 <?php else: ?>
 	<p>Please select a <?=strtolower($entityName)?> on the left</p>

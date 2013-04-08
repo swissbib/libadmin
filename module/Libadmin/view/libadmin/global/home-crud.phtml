@@ -1,0 +1,12 @@
+<div class="topButtons">
+	<a href="<?=$this->url('group', array('action'=>'add'));?>" class="ajaxButton addButton btn btn-primary btn-medium" id="add-group">
+		Add new <?=$entityName?>
+	</a>
+</div>
+<h1>Manage <?=$entityNamePlural?></h1>
+
+<?php if( !isset($listItems) || $listItems->count() < 1): ?>
+	<p>There are no <?=strtolower($entityNamePlural)?> stored yet.</p>
+<?php else: ?>
+	<p>Please select a <?=strtolower($entityName)?> on the left</p>
+<?php endif ?>

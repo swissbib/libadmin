@@ -11,7 +11,6 @@
  * file.
  */
 
-
 return array(
     'db' => array(
         'driver'         => 'Pdo',

@@ -28,7 +28,7 @@ class ViewForm extends BaseForm {
 	 * @param	Array			$options
 	 */
 	public function __construct(GroupTable $groupTable, $name = null, $options = array()) {
-		parent::__construct('group', $options);
+		parent::__construct('view', $options);
 
 		$this->groupTable	= $groupTable;
 

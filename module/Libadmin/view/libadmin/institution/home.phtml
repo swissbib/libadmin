@@ -1,12 +1,4 @@
-<div class="topButtons">
-	<a href="<?=$this->url('institution', array('action'=>'add'));?>" class="ajaxButton addButton btn btn-primary btn-medium" id="add-institution">
-		Add new Institution
-	</a>
-</div>
-<h1>Manage Institutions</h1>
-
-<?php if( !isset($listItems) || $listItems->count() < 1): ?>
-	<p>There are no institutions stored yet.</p>
-<?php else: ?>
-	<p>Please select institution on the left</p>
-<?php endif ?>
+<?=$this->render('libadmin/global/home-crud', array(
+	'entityName'		=> 'Institution',
+	'entityNamePlural'	=> 'Institutions',
+));?>

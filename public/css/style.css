@@ -1,8 +1,3 @@
-body {
-    padding-top: 60px;
-    padding-bottom: 40px;
-}
-
 div.container a.brand {
     background: url("../images/swissbib-logo.png") no-repeat scroll 0 8px transparent;
     margin-left: 0;
@@ -35,10 +30,29 @@ fieldset.notes textarea {
 }
 
 
+form#group #views .controls,
+form#view #groups .controls {
+	margin-left: 50px;
+}
+form#group #views .controls label.checkbox,
+form#view #groups .controls label.checkbox {
+	display: inline-block;
+	width: 30%;
+	margin-bottom: 15px;
+}
 
 
 
 
+
+
+
+
+
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
 
 
 .zf-green {

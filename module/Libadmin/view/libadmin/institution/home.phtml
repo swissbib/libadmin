@@ -4,4 +4,9 @@
 	</a>
 </div>
 <h1>Manage Institutions</h1>
-<p>Please select institution on the left</p>
+
+<?php if( !isset($listItems) || $listItems->count() < 1): ?>
+	<p>There are no institutions stored yet.</p>
+<?php else: ?>
+	<p>Please select institution on the left</p>
+<?php endif ?>

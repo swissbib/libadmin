@@ -25,6 +25,8 @@ class GroupController extends BaseController {
 		return $this->serviceLocator->get('GroupForm');
 	}
 
+
+
 	/**
 	 * Show edit form and add data
 	 *
@@ -58,13 +60,6 @@ class GroupController extends BaseController {
 				$flashMessenger->addErrorMessage('Form not valid');
 			}
 		}
-
-		/** @var ViewTable $viewTable  */
-//		$viewTable	= $this->getServiceLocator()->get('Libadmin\Table\ViewTable');
-//		$views	= $viewTable->getAll();
-//		$group->setViews($views->getDataSource());
-
-//		$group->loadViews();
 
 		$form->setAttribute('action', $this->makeUrl('group', 'add'));
 

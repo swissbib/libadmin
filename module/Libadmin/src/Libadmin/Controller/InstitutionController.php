@@ -3,6 +3,7 @@ namespace Libadmin\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Http\Response;
 
 use Libadmin\Form\InstitutionForm;
 use Libadmin\Model\Institution;
@@ -16,6 +17,11 @@ use Libadmin\Controller\BaseController;
  */
 class InstitutionController extends BaseController {
 
+	/**
+	 * Add institution
+	 *
+	 * @return Response|ViewModel
+	 */
 	public function addAction() {
 		$form			= new InstitutionForm();
 		$request		= $this->getRequest();
@@ -48,6 +54,11 @@ class InstitutionController extends BaseController {
 
 
 
+	/**
+	 * Edit institution
+	 *
+	 * @return ViewModel
+	 */
 	public function editAction() {
 		$idInstitution	= (int)$this->params()->fromRoute('id', 0);
 		$flashMessenger	= $this->flashMessenger();

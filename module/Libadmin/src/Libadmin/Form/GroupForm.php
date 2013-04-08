@@ -16,8 +16,21 @@ use Libadmin\Model\Group;
  */
 class GroupForm extends BaseForm {
 
+	/**
+	 * @var	ViewTable
+	 */
 	protected $viewTable;
 
+
+
+	/**
+	 * Initialize
+	 * Inject view table
+	 *
+	 * @param	ViewTable		$viewTable
+	 * @param	String|Null		$name
+	 * @param	Array			$options
+	 */
 	public function __construct(ViewTable $viewTable, $name = null, $options = array()) {
 		parent::__construct('group', $options);
 

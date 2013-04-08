@@ -12,6 +12,9 @@ namespace Libadmin\Table;
 use Zend\Db\ResultSet\ResultSetInterface;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Predicate\PredicateSet;
+use Zend\Db\Sql\Sql;
+use Zend\Db\Sql\Where;
+use Zend\Db\Adapter\Adapter;
 
 use Libadmin\Table\BaseTable;
 use Libadmin\Model\BaseModel;
@@ -70,6 +73,97 @@ class GroupTable extends BaseTable {
 	 */
 	public function getRecord($idGroup) {
 		return parent::getRecord($idGroup);
+	}
+
+
+
+	/**
+	 * @param $idGroup
+	 * @return	Integer[]
+	 */
+	public function getViewIDs($idGroup) {
+		/** @var Adapter $adapter  */
+		$adapter	= $this->tableGateway->getAdapter();
+		$sql		= new Sql($adapter);
+		$select		= $sql->select();
+
+		$select->columns(array('id_view'))
+				->from('mm_group_view')
+				->where(array(
+					'id_group'	=> $idGroup
+				));
+
+		$selectString = $sql->getSqlStringForSqlObject($select);
+
+//		var_dump($sql->getSqlStringForSqlObject($select));
+
+		$results	= $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE)->toArray();
+		$viewIds	= array();
+
+		foreach($results as $result) {
+			$viewIds[] = $result['id_view'];
+		}
+
+		return $viewIds;
+	}
+
+
+	public function save(Group $group) {
+		$idGroup	= parent::save($group);
+
+		$this->saveViews($idGroup, $group->getViews());
+
+		return $idGroup;
+	}
+
+
+	protected function saveViews($idGroup, array $newViewIDs) {
+		$oldViewIDs	= $this->getViewIDs($idGroup);
+
+		foreach($newViewIDs as $newViewID) {
+			if( !in_array($newViewID, $oldViewIDs) ) {
+				$this->addViewRelation($idGroup, $newViewID);
+			}
+		}
+		foreach($oldViewIDs as $oldViewID) {
+			if( !in_array($oldViewID, $newViewIDs) ) {
+				$this->deleteViewRelation($idGroup, $oldViewID);
+			}
+		}
+	}
+
+
+	protected function deleteViewRelation($idGroup, $idView) {
+		/** @var Adapter $adapter  */
+		$adapter	= $this->tableGateway->getAdapter();
+		$sql		= new Sql($adapter);
+		$delete		= $sql->delete('mm_group_view');
+
+		$delete->where(array(
+					'id_group'	=> $idGroup,
+					'id_view'	=> $idView
+				));
+
+		$query = $sql->getSqlStringForSqlObject($delete);
+
+	//		var_dump($sql->getSqlStringForSqlObject($select));
+
+		$adapter->query($query, $adapter::QUERY_MODE_EXECUTE);
+	}
+
+	protected function addViewRelation($idGroup, $idView) {
+		/** @var Adapter $adapter  */
+		$adapter	= $this->tableGateway->getAdapter();
+		$sql		= new Sql($adapter);
+		$insert		= $sql->insert('mm_group_view');
+
+		$insert->values(array(
+			'id_group'	=> $idGroup,
+			'id_view'	=> $idView
+		));
+
+		$query = $sql->getSqlStringForSqlObject($insert);
+		$adapter->query($query, $adapter::QUERY_MODE_EXECUTE);
 	}
 
 }

@@ -2,9 +2,13 @@
 namespace Libadmin\Form;
 
 use Libadmin\Form\BaseForm;
+use Libadmin\Table\ViewTable;
 use Zend\Form\Element;
 use Zend\Form\Fieldset;
 
+use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
+use Libadmin\Model\Group;
+//use Zend\Stdlib\Hydrator\ObjectProperty as ObjectPropertyHydrator;
 
 /**
  * [Description]
@@ -12,11 +16,17 @@ use Zend\Form\Fieldset;
  */
 class GroupForm extends BaseForm {
 
-	public function __construct($name = null, $options = array()) {
+	protected $viewTable;
+
+	public function __construct(ViewTable $viewTable, $name = null, $options = array()) {
 		parent::__construct('group', $options);
 
-		$this->addHidden('id');
+		$this->viewTable = $viewTable;
 
+		$this->setHydrator(new ClassMethodsHydrator(false));
+		$this->setObject(new Group);
+
+		$this->addHidden('id');
 		$this->addText('code', 'Code', true);
 		$this->add(array(
 			'name' => 'is_active',
@@ -40,6 +50,21 @@ class GroupForm extends BaseForm {
 				'rows'	=> 10
 			)
 		));
+
+
+		$allViews	= $viewTable->getAll();
+		$viewCheckboxes	= array(
+			'type' => 'multiCheckbox',
+			'name' => 'views',
+			'required' => false,
+			'options' => array(
+				'value_options' => array()
+			)
+		);
+		foreach($allViews as $view) {
+			$viewCheckboxes['options']['value_options'][$view->getID()] = $view->getLabel();
+		}
+		$this->add($viewCheckboxes);
 	}
 
 }

@@ -10,6 +10,8 @@ $isNew			= !$idGroup;
 $saveButtonLabel= $isNew ? 'Create' : 'Update';
 $formType		= 'horizontal';
 
+$group	= $form->get('group');
+
 ?>
 
 
@@ -80,7 +82,7 @@ $formType		= 'horizontal';
 				</div>
 
 				<div class="tab-pane" id="views">
-					<p>Views</p>
+					<?=$this->formRowTwb($form->get('views'))?>
 				</div>
 
 				<div class="tab-pane" id="institutions">

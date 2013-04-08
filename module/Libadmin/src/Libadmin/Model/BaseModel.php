@@ -53,7 +53,7 @@ abstract class BaseModel implements InputFilterAwareInterface {
 	}
 
 
-	public function getData() {
+	public function extractBaseData() {
 		$data	= $this->getArrayCopy();
 
 		unset($data['id']);
@@ -79,8 +79,13 @@ abstract class BaseModel implements InputFilterAwareInterface {
 	 *
 	 * @return	Integer
 	 */
-	public function getID() {
+	public function getId() {
 		return (int)$this->id;
+	}
+
+
+	public function setId($id) {
+		$this->id = $id;
 	}
 
 	protected function initLocalVariables(array $data) {

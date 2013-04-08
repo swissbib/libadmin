@@ -12,7 +12,8 @@
         "zendframework/zendframework": "2.2.*",
 		"dlu/dlutwbootstrap": "dev-master",
 		"dlu/dlutwbootstrapdemo": "dev-master",
-		"mwillbanks/zfc-twitter-bootstrap": "@dev"
+		"mwillbanks/zfc-twitter-bootstrap": "@dev",
+		"zendframework/zend-developer-tools": "dev-master"
     },
 	"minimum-stability": "dev"
 }

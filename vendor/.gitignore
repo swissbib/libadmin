@@ -1,4 +1,5 @@
 !.gitignore
+*
 .composer
 composer
 zendframework

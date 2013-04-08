@@ -8,6 +8,7 @@
  */
 namespace Libadmin;
 
+use Libadmin\Form\GroupForm;
 use Libadmin\Model\Institution;
 use Libadmin\Table\InstitutionTable;
 use Libadmin\Model\Group;
@@ -73,6 +74,11 @@ class Module {
 					$resultSetPrototype = new ResultSet();
 					$resultSetPrototype->setArrayObjectPrototype(new View());
 					return new TableGateway('view', $dbAdapter, null, $resultSetPrototype);
+				},
+				'GroupForm' => function($sm) {
+					$viewTable = $sm->get('Libadmin\Table\ViewTable');
+
+					return new GroupForm($viewTable);
 				}
 			)
 		);

@@ -109,103 +109,338 @@ class Institution extends BaseModel {
 
 
 
-
-//	public function getInputFilter() {
-//		if( !$this->inputFilter ) {
-//			$inputFilter = new InputFilter();
-//			$factory = new InputFactory();
-//
-//			$inputFilter->add($factory->createInput(array(
-//				'name' => 'tablekey',
-//				'required' => true,
-//				'filters' => array(
-//					array('name' => 'Int'),
-//				),
-//			)));
-//
-//			$inputFilter->add($factory->createInput(array(
-//				'name' => 'libraryid',
-//				'required' => true,
-//				'filters' => array(
-//					array('name' => 'StripTags'),
-//					array('name' => 'StringTrim'),
-//				),
-//				'validators' => array(
-//					array(
-//						'name' => 'StringLength',
-//						'options' => array(
-//							'encoding' => 'UTF-8',
-//							'min' => 1,
-//							'max' => 25,
-//						),
-//					),
-//				),
-//			)));
-//
-//			$inputFilter->add($factory->createInput(array(
-//				'name' => 'contentXML',
-//				'required' => true,
-//				'filters' => array(
-//					array('name' => 'StringTrim'),
-//				),
-//			)));
-//
-//			$this->inputFilter = $inputFilter;
-//		}
-//
-//		return $this->inputFilter;
-//	}
+	public function setAddress($address) {
+		$this->address = $address;
+	}
 
 
 
-
-//	public function parseContentXML() {
-//
-//		try {
-//			$sxml = new \SimpleXMLElement($this->contentXML);
-//		} catch( \Exception $e ) {
-//			echo $e->getMessage();
-//		}
-//
-//		$libraryItem = array();
-//		foreach($sxml->children() as $attr => $val) {
-//
-//			//echo $val;
-//			switch( $attr ) {
-//				case "adress":
-//					$adress = array();
-//					foreach($val->children() as $adressPart => $val) {
-//						$adress[$adressPart] = (string)$val;
-//					}
-//
-//					$libraryItem["adress"] = $adress;
-//
-//					break;
-//				case "translations":
-//					$translations = array();
-//					foreach($val->children() as $langName => $val) {
-//						$t = (array)$val->attributes();
-//						$lang_code = $t["@attributes"]["lang"];
-//						$translations[$lang_code] = (string)$val;
-//					}
-//
-//					$libraryItem["translations"] = $translations;
-//
-//					break;
-//				default:
-//					$libraryItem[$attr] = (string)$val;
-//			}
-//
-//		}
-//
-//		$this->libraryElements = $libraryItem;
-//
-//	}
+	public function getAddress() {
+		return $this->address;
+	}
 
 
-//
-//	public function getLibraryElements() {
-//		return $this->libraryElements;
-//	}
+
+	public function setBibCode($bib_code) {
+		$this->bib_code = $bib_code;
+	}
+
+
+
+	public function getBibCode() {
+		return $this->bib_code;
+	}
+
+
+
+	public function setCanton($canton) {
+		$this->canton = $canton;
+	}
+
+
+
+	public function getCanton() {
+		return $this->canton;
+	}
+
+
+
+	public function setCity($city) {
+		$this->city = $city;
+	}
+
+
+
+	public function getCity() {
+		return $this->city;
+	}
+
+
+
+	public function setCoordinates($coordinates) {
+		$this->coordinates = $coordinates;
+	}
+
+
+
+	public function getCoordinates() {
+		return $this->coordinates;
+	}
+
+
+
+	public function setCountry($country) {
+		$this->country = $country;
+	}
+
+
+
+	public function getCountry() {
+		return $this->country;
+	}
+
+
+
+	public function setEmail($email) {
+		$this->email = $email;
+	}
+
+
+
+	public function getEmail() {
+		return $this->email;
+	}
+
+
+
+	public function setFacebook($facebook) {
+		$this->facebook = $facebook;
+	}
+
+
+
+	public function getFacebook() {
+		return $this->facebook;
+	}
+
+
+
+	public function setIsActive($is_active) {
+		$this->is_active = $is_active;
+	}
+
+
+
+	public function getIsActive() {
+		return $this->is_active;
+	}
+
+
+
+	public function setIsil($isil) {
+		$this->isil = $isil;
+	}
+
+
+
+	public function getIsil() {
+		return $this->isil;
+	}
+
+
+
+	public function setLabelDe($label_de) {
+		$this->label_de = $label_de;
+	}
+
+
+
+	public function getLabelDe() {
+		return $this->label_de;
+	}
+
+
+
+	public function setLabelEn($label_en) {
+		$this->label_en = $label_en;
+	}
+
+
+
+	public function getLabelEn() {
+		return $this->label_en;
+	}
+
+
+
+	public function setLabelFr($label_fr) {
+		$this->label_fr = $label_fr;
+	}
+
+
+
+	public function getLabelFr() {
+		return $this->label_fr;
+	}
+
+
+
+	public function setLabelIt($label_it) {
+		$this->label_it = $label_it;
+	}
+
+
+
+	public function getLabelIt() {
+		return $this->label_it;
+	}
+
+
+
+	public function setNameDe($name_de) {
+		$this->name_de = $name_de;
+	}
+
+
+
+	public function getNameDe() {
+		return $this->name_de;
+	}
+
+
+
+	public function setNameEn($name_en) {
+		$this->name_en = $name_en;
+	}
+
+
+
+	public function getNameEn() {
+		return $this->name_en;
+	}
+
+
+
+	public function setNameFr($name_fr) {
+		$this->name_fr = $name_fr;
+	}
+
+
+
+	public function getNameFr() {
+		return $this->name_fr;
+	}
+
+
+
+	public function setNameIt($name_it) {
+		$this->name_it = $name_it;
+	}
+
+
+
+	public function getNameIt() {
+		return $this->name_it;
+	}
+
+
+
+	public function setNotes($notes) {
+		$this->notes = $notes;
+	}
+
+
+
+	public function getNotes() {
+		return $this->notes;
+	}
+
+
+
+	public function setPhone($phone) {
+		$this->phone = $phone;
+	}
+
+
+
+	public function getPhone() {
+		return $this->phone;
+	}
+
+
+
+	public function setSkype($skype) {
+		$this->skype = $skype;
+	}
+
+
+
+	public function getSkype() {
+		return $this->skype;
+	}
+
+
+
+	public function setSysCode($sys_code) {
+		$this->sys_code = $sys_code;
+	}
+
+
+
+	public function getSysCode() {
+		return $this->sys_code;
+	}
+
+
+
+	public function setUrlDe($url_de) {
+		$this->url_de = $url_de;
+	}
+
+
+
+	public function getUrlDe() {
+		return $this->url_de;
+	}
+
+
+
+	public function setUrlEn($url_en) {
+		$this->url_en = $url_en;
+	}
+
+
+
+	public function getUrlEn() {
+		return $this->url_en;
+	}
+
+
+
+	public function setUrlFr($url_fr) {
+		$this->url_fr = $url_fr;
+	}
+
+
+
+	public function getUrlFr() {
+		return $this->url_fr;
+	}
+
+
+
+	public function setUrlIt($url_it) {
+		$this->url_it = $url_it;
+	}
+
+
+
+	public function getUrlIt() {
+		return $this->url_it;
+	}
+
+
+
+	public function setWebsite($website) {
+		$this->website = $website;
+	}
+
+
+
+	public function getWebsite() {
+		return $this->website;
+	}
+
+
+
+	public function setZip($zip) {
+		$this->zip = $zip;
+	}
+
+
+
+	public function getZip() {
+		return $this->zip;
+	}
 
 }

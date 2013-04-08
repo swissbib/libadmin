@@ -8,7 +8,6 @@ use Zend\Form\Fieldset;
 
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
 use Libadmin\Model\Group;
-//use Zend\Stdlib\Hydrator\ObjectProperty as ObjectPropertyHydrator;
 
 /**
  * [Description]
@@ -65,18 +64,18 @@ class GroupForm extends BaseForm {
 		));
 
 
+			// @todo wrap in a method or a field type
+			// Make not required
 		$allViews	= $viewTable->getAll();
-		$viewCheckboxes	= array(
-			'type' => 'multiCheckbox',
-			'name' => 'views',
-			'required' => false,
-			'options' => array(
-				'value_options' => array()
-			)
-		);
+		$viewOptions= array();
 		foreach($allViews as $view) {
-			$viewCheckboxes['options']['value_options'][$view->getID()] = $view->getLabel();
+			$viewOptions[$view->getID()] = $view->getLabel();
 		}
+		$viewCheckboxes	= new Element\MultiCheckbox('views');
+		$viewCheckboxes->setValueOptions($viewOptions);
+		$viewCheckboxes->setOptions(array(
+			'required'	=> false
+		));
 		$this->add($viewCheckboxes);
 	}
 

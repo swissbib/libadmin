@@ -22,6 +22,7 @@ var LibAdmin = {
 
 	loadInContent: function(url, handler) {
 		$('#content').load(url, handler);
+		this.Sidebar.updateList();
 	},
 
 
@@ -105,9 +106,15 @@ var LibAdmin = {
 		},
 
 		initForm: function(handler) {
+				// Enable ajax form
 			$('#content > form').ajaxForm({
 				target: '#content',
-				success: handler
+				success: function() {
+					if( handler ) {
+						handler();
+					}
+					LibAdmin.Sidebar.updateList();
+				}
 			});
 		},
 
@@ -147,7 +154,6 @@ var LibAdmin = {
 			var that = this;
 
 			$('#search-results-list a').click(function(event) {
-				console.log('item clicked');
 				event.preventDefault();
 				$('#content').load($(this).attr('href'), that.contentUpdate);
 			});
@@ -159,6 +165,11 @@ var LibAdmin = {
 			if( this.listUpdate ) {
 				this.listUpdate();
 			}
+		},
+
+
+		updateList: function() {
+			$('#search-form').submit();
 		},
 
 
@@ -178,7 +189,8 @@ var LibAdmin = {
 				clearTimeout(that.searchDelay);
 
 				that.searchDelay = setTimeout(function(){
-					form.submit();
+					that.updateList();
+//					form.submit();
 				}, 500);
 			});
 		}

@@ -1,5 +1,5 @@
 <div class="topButtons">
-	<a href="<?=$this->url('group', array('action'=>'add'));?>" class="ajaxButton addButton btn btn-primary btn-medium" id="add-group">
+	<a href="<?=$this->url(strtolower($entityName), array('action'=>'add'));?>" class="ajaxButton addButton btn btn-primary btn-medium" id="add-<?=strtolower($entityName)?>">
 		Add new <?=$entityName?>
 	</a>
 </div>

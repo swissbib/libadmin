@@ -4,35 +4,30 @@
     <head>
         <meta charset="utf-8">
         <?php echo $this->headTitle('Swissbib Libadmin')->setSeparator(' - ')->setAutoEscape(false) ?>
-
         <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
 
-        <!-- Le styles -->
-        <?php
+        <?php	// Styles
 			echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/images/favicon.ico'))
-						->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.css')
-//						->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.min.css')
-						->prependStylesheet($this->basePath() . '/css/style.css')
-						->prependStylesheet($this->basePath() . '/css/dlu-tw-bootstrap.css')
-						->prependStylesheet($this->basePath() . '/css/bootstrap.css')
-//						->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
-
+				->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.css')
+//				->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.min.css')
+				->prependStylesheet($this->basePath() . '/css/style.css')
+				->prependStylesheet($this->basePath() . '/css/dlu-tw-bootstrap.css')
+				->prependStylesheet($this->basePath() . '/css/bootstrap.css')
+//				->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
 		?>
 
-        <!-- Scripts -->
-        <?php
+        <?php	// Scripts
 			$this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
-								->prependFile($this->basePath() . '/js/bootstrap.js')
-//								->prependFile($this->basePath() . '/js/bootstrap.min.js')
-								->prependFile($this->basePath() . '/js/jquery.js');
+				->prependFile($this->basePath() . '/js/bootstrap.js')
+//				->prependFile($this->basePath() . '/js/bootstrap.min.js')
+				->prependFile($this->basePath() . '/js/jquery.js');
+//				->prependFile($this->basePath() . '/js/jquery.min.js');
 
-//								->prependFile($this->basePath() . '/js/jquery.min.js');
 			$this->headScript()->appendFile($this->basePath() . '/js/libadmin.js')
-								->appendFile($this->basePath() . '/js/jquery.form.js');
+				->appendFile($this->basePath() . '/js/jquery.form.js');
 
 			echo $this->headScript();
 		?>
-
     </head>
     <body>
         <div class="navbar navbar-inverse navbar-fixed-top">
@@ -43,9 +38,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="<?php echo $this->url('home') ?>">Library Admin</a>
+                    <a class="brand" href="<?= $this->url('home') ?>">Library Admin</a>
                     <div class="nav-collapse collapse">
-						<?php echo $this->navigation('Navigation')->menu()->setUlClass('nav'); ?>
+						<?= $this->navigation('Navigation')->menu()->setUlClass('nav') ?>
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
@@ -54,9 +49,9 @@
             <?php echo $this->content; ?>
             <hr>
             <footer>
-                <p>&copy; 2005 - 2012 by Swissbib. <?php echo $this->translate('All rights reserved.') ?></p>
+                <p>&copy; 2005 - <?= date('Y') ?> by Swissbib. <?= $this->translate('All rights reserved.') ?></p>
             </footer>
         </div> <!-- /container -->
-        <?php echo $this->inlineScript() ?>
+        <?= $this->inlineScript() ?>
     </body>
 </html>

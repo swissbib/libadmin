@@ -12,6 +12,12 @@ use Zend\Form\Fieldset;
  */
 class ViewForm extends BaseForm {
 
+	/**
+	 * Initialize
+	 *
+	 * @param	String|Null		$name
+	 * @param	Array			$options
+	 */
 	public function __construct($name = null, $options = array()) {
 		parent::__construct('group', $options);
 

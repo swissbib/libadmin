@@ -4,6 +4,7 @@ namespace Libadmin\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Http\Response;
 
 //use Libadmin\Table\ViewTable;
 use Libadmin\Form\ViewForm;
@@ -16,6 +17,11 @@ use Libadmin\Model\View;
  */
 class ViewController extends BaseController {
 
+	/**
+	 * Add view
+	 *
+	 * @return	Response|ViewModel
+	 */
 	public function addAction() {
 		$form			= new ViewForm();
 		$request		= $this->getRequest();
@@ -49,7 +55,7 @@ class ViewController extends BaseController {
 
 
 	/**
-	 * Show edit form and update data
+	 * Edit view
 	 *
 	 * @return	ViewModel
 	 */

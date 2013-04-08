@@ -11,6 +11,9 @@ use Zend\InputFilter\InputFilter;
  */
 abstract class BaseModel implements InputFilterAwareInterface {
 
+	/**
+	 * @var	Integer	General ID field
+	 */
 	public $id;
 
 	/**
@@ -53,7 +56,12 @@ abstract class BaseModel implements InputFilterAwareInterface {
 	}
 
 
-	public function extractBaseData() {
+
+	/**
+	 * Get
+	 * @return array
+	 */
+	public function getBaseData() {
 		$data	= $this->getArrayCopy();
 
 		unset($data['id']);
@@ -88,6 +96,13 @@ abstract class BaseModel implements InputFilterAwareInterface {
 		$this->id = $id;
 	}
 
+
+
+	/**
+	 * Initialize local variables if present
+	 *
+	 * @param	Array	$data
+	 */
 	protected function initLocalVariables(array $data) {
 		foreach($data as $key => $value) {
 			if( property_exists($this, $key) ) {

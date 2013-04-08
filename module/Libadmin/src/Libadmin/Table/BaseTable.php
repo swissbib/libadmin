@@ -129,7 +129,7 @@ abstract class BaseTable {
 	 */
 	public function save(BaseModel $record) {
 		$idRecord	= $record->getID();
-		$data		= $record->extractBaseData();
+		$data		= $record->getBaseData();
 
 		if( $idRecord == 0 ) {
 			$numRows	= $this->tableGateway->insert($data);

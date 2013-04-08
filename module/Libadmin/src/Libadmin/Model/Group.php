@@ -35,8 +35,8 @@ class Group extends BaseModel {
 	public $views = array();
 
 
-	public function extractBaseData() {
-		$data	= parent::extractBaseData();
+	public function getBaseData() {
+		$data	= parent::getBaseData();
 
 		unset($data['views']);
 

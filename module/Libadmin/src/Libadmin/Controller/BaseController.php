@@ -191,6 +191,8 @@ abstract class BaseController extends AbstractActionController {
 
 
 	/**
+	 * Make url based on route
+	 * Add action and element id to route if specified
 	 *
 	 * @param	String		$route
 	 * @param	String		$action
@@ -215,6 +217,7 @@ abstract class BaseController extends AbstractActionController {
 
 	/**
 	 * Get table
+	 *
 	 * @return	InstitutionTable|GroupTable|ViewTable
 	 */
 	protected function getTable() {

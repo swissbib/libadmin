@@ -9,6 +9,13 @@ use Zend\Form\Form;
  */
 class BaseForm extends Form {
 
+	/**
+	 * Initialize form
+	 * Force post method attribute
+	 *
+	 * @param	String|Null		$name
+	 * @param	Array			$options
+	 */
 	public function __construct($name = null, $options = array()) {
 		parent::__construct($name, $options);
 
@@ -38,6 +45,7 @@ class BaseForm extends Form {
 	 *
 	 * @param	String		$name
 	 * @param	String		$label
+	 * @param	Boolean		$required
 	 */
 	protected function addText($name, $label, $required = false) {
 		$this->add(array(

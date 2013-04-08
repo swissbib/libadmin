@@ -12,21 +12,16 @@ use Zend\Form\Fieldset;
  */
 class InstitutionForm extends BaseForm {
 
+	/**
+	 * Initialize
+	 *
+	 * @param	String|Null		$name
+	 * @param	Array			$options
+	 */
 	public function __construct($name = null, $options = array()) {
 		parent::__construct('institution', $options);
 
 		$this->addHidden('id');
-
-//		$display	= new Fieldset('display');
-//
-//		$bibCode	= new Element\Text('bib_code', array(
-//			'label' => 'Bib-Code'
-//		));
-//
-//		$display->add($bibCode);
-
-
-
 
 		$this->addText('bib_code', 'Bib-Code', true);
 		$this->addText('sys_code', 'Sys-Code', true);

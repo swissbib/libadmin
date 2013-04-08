@@ -67,16 +67,18 @@ class GroupForm extends BaseForm {
 			// @todo wrap in a method or a field type
 			// Make not required
 		$allViews	= $viewTable->getAll();
-		$viewOptions= array();
-		foreach($allViews as $view) {
-			$viewOptions[$view->getID()] = $view->getLabel();
+		if( sizeof($allViews) ) {
+			$viewOptions= array();
+			foreach($allViews as $view) {
+				$viewOptions[$view->getID()] = $view->getLabel();
+			}
+			$viewCheckboxes	= new Element\MultiCheckbox('views');
+			$viewCheckboxes->setValueOptions($viewOptions);
+			$viewCheckboxes->setOptions(array(
+				'required'	=> false
+			));
+			$this->add($viewCheckboxes);
 		}
-		$viewCheckboxes	= new Element\MultiCheckbox('views');
-		$viewCheckboxes->setValueOptions($viewOptions);
-		$viewCheckboxes->setOptions(array(
-			'required'	=> false
-		));
-		$this->add($viewCheckboxes);
 	}
 
 }

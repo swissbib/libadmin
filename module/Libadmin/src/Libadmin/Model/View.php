@@ -14,6 +14,24 @@ class View extends BaseModel {
 	public $label;
 	public $notes;
 
+	public $groups = array();
+
+
+
+	/**
+	 * Get base data
+	 * Remove groups relation
+	 *
+	 * @return	Array
+	 */
+	public function getBaseData() {
+		$data	= parent::getBaseData();
+
+		unset($data['groups']);
+
+		return $data;
+	}
+
 
 
 	/**
@@ -39,6 +57,54 @@ class View extends BaseModel {
 
 	public function getLabel() {
 		return $this->label;
+	}
+
+
+
+	public function setCode($code) {
+		$this->code = $code;
+	}
+
+
+
+	public function getCode() {
+		return $this->code;
+	}
+
+
+
+	public function setGroups($groups) {
+		$this->groups = $groups;
+	}
+
+
+
+	public function getGroups() {
+		return $this->groups;
+	}
+
+
+
+	public function setIsActive($is_active) {
+		$this->is_active = $is_active;
+	}
+
+
+
+	public function getIsActive() {
+		return $this->is_active;
+	}
+
+
+
+	public function setNotes($notes) {
+		$this->notes = $notes;
+	}
+
+
+
+	public function getNotes() {
+		return $this->notes;
 	}
 
 }

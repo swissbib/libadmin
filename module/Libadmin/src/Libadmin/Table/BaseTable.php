@@ -8,6 +8,7 @@ use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Where;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\ResultSet\ResultSetInterface;
+use Zend\Db\Adapter\Adapter;
 
 use Libadmin\Model\BaseModel;
 
@@ -178,6 +179,85 @@ abstract class BaseTable {
 		return $this->tableGateway->selectWith($select);
 	}
 
+
+
+	/**
+	 * Delete group view relation
+	 *
+	 * @param	Integer		$idGroup
+	 * @param	Integer		$idView
+	 */
+	protected function deleteGroupViewRelation($idGroup, $idView) {
+		/** @var Adapter $adapter  */
+		$adapter	= $this->tableGateway->getAdapter();
+		$sql		= new Sql($adapter);
+		$delete		= $sql->delete('mm_group_view');
+
+		$delete->where(array(
+					'id_group'	=> $idGroup,
+					'id_view'	=> $idView
+				));
+
+		$query = $sql->getSqlStringForSqlObject($delete);
+
+	//		var_dump($sql->getSqlStringForSqlObject($select));
+
+		$adapter->query($query, $adapter::QUERY_MODE_EXECUTE);
+	}
+
+
+
+	/**
+	 * Add a group-view relation
+	 *
+	 * @param	Integer		$idGroup
+	 * @param	Integer		$idView
+	 */
+	protected function addGroupViewRelation($idGroup, $idView) {
+		/** @var Adapter $adapter  */
+		$adapter	= $this->tableGateway->getAdapter();
+		$sql		= new Sql($adapter);
+		$insert		= $sql->insert('mm_group_view');
+
+		$insert->values(array(
+			'id_group'	=> $idGroup,
+			'id_view'	=> $idView
+		));
+
+		$query = $sql->getSqlStringForSqlObject($insert);
+		$adapter->query($query, $adapter::QUERY_MODE_EXECUTE);
+	}
+
+
+	/**
+	 * @param $idGroup
+	 * @return	Integer[]
+	 */
+	protected function getRelatedGroupViewIDs($column, $matchColumn, $idRecord) {
+		/** @var Adapter $adapter  */
+		$adapter	= $this->tableGateway->getAdapter();
+		$sql		= new Sql($adapter);
+		$select		= $sql->select();
+
+		$select->columns(array($column))
+				->from('mm_group_view')
+				->where(array(
+					$matchColumn	=> $idRecord
+				));
+
+		$selectString = $sql->getSqlStringForSqlObject($select);
+
+//		var_dump($sql->getSqlStringForSqlObject($select));
+
+		$results	= $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE)->toArray();
+		$viewIds	= array();
+
+		foreach($results as $result) {
+			$viewIds[] = (int)$result[$column];
+		}
+
+		return $viewIds;
+	}
 
 }
 

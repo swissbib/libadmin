@@ -2,6 +2,7 @@
 namespace Libadmin\Form;
 
 use Libadmin\Form\BaseForm;
+use Libadmin\Table\GroupTable;
 use Zend\Form\Element;
 use Zend\Form\Fieldset;
 
@@ -13,13 +14,23 @@ use Zend\Form\Fieldset;
 class ViewForm extends BaseForm {
 
 	/**
+	 * @var	GroupTable
+	 */
+	protected $groupTable;
+
+
+
+	/**
 	 * Initialize
 	 *
+	 * @param	GroupTable		$groupTable
 	 * @param	String|Null		$name
 	 * @param	Array			$options
 	 */
-	public function __construct($name = null, $options = array()) {
+	public function __construct(GroupTable $groupTable, $name = null, $options = array()) {
 		parent::__construct('group', $options);
+
+		$this->groupTable	= $groupTable;
 
 		$this->addHidden('id');
 
@@ -44,6 +55,23 @@ class ViewForm extends BaseForm {
 				'rows'	=> 10
 			)
 		));
+
+			// @todo wrap in a method or a field type
+			// Make not required
+		$allGroups	= $this->groupTable->getAll();
+		if( $allGroups ) {
+			$groupOptions= array();
+			foreach($allGroups as $group) {
+				$groupOptions[$group->getID()] = $group->getCode();
+			}
+			$groupCheckboxes = new Element\MultiCheckbox('groups');
+			$groupCheckboxes->setValueOptions($groupOptions);
+	//		$groupCheckboxes->setOptions(array(
+	//			'required'	=> false
+	//		));
+			$this->add($groupCheckboxes);
+		}
+
 	}
 
 }

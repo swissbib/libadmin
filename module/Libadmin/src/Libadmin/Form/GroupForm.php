@@ -74,9 +74,9 @@ class GroupForm extends BaseForm {
 			}
 			$viewCheckboxes	= new Element\MultiCheckbox('views');
 			$viewCheckboxes->setValueOptions($viewOptions);
-			$viewCheckboxes->setOptions(array(
-				'required'	=> false
-			));
+//			$viewCheckboxes->setOptions(array(
+//				'required'	=> false
+//			));
 			$this->add($viewCheckboxes);
 		}
 	}

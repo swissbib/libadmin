@@ -7,7 +7,11 @@ $form->prepare();
 
 $idInstitution	= (int)$form->get('id')->getValue();
 $isNew			= !$idInstitution;
-$saveButtonLabel= $isNew ? 'Create' : 'Update';
+
+$LabelNew		= $this->translate('buttonlabelcreate',	'Libadmin');
+$LabelUpdate	= $this->translate('buttonlabelupdate',	'Libadmin');
+$saveButtonLabel= $isNew ? $LabelNew : $labelUpdate;
+
 $formType		= 'horizontal';
 
 ?>

@@ -1,4 +1,5 @@
 <?php
+namespace Libadmin;	// Set module namespace
 
 return array(
     'controllers' => array(
@@ -82,6 +83,25 @@ return array(
 	    'factories' => array(
 	        'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory'
 	    )
+	),
+
+	/**
+	 * Configure locale translator
+	 * Note: Each translation file that is loaded needs to have a text_domain added,
+	 * 		 If no text_domain is added, 'default' will be assumed.
+	 * 		 To use translations with namespaces the respective view-helper needs to pass
+	 *		 the "text_domain", e.g: $this->translate('example', 'Libadmin');
+	 */
+	'translator' => array(
+		'locale' => 'de_DE',
+		'translation_file_patterns' => array(
+			array(
+				'type'			=> 'gettext',
+				'base_dir'		=> __DIR__ . '/../language',	// Directory to load gettext files from
+				'pattern'		=> '%s.mo',						// Gettext files naming pattern
+				'text_domain'	=> 'Libadmin',					// Text-domain of the translation
+			)
+		)
 	),
 
 	'navigation' => array(

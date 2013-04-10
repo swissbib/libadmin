@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Libadmin\n"
-"POT-Creation-Date: 2013-04-10 11:31+0100\n"
-"PO-Revision-Date: 2013-04-10 12:59+0100\n"
+"POT-Creation-Date: 2013-04-10 13:11+0100\n"
+"PO-Revision-Date: 2013-04-10 13:12+0100\n"
 "Last-Translator: Kay Stenschke <kstenschke@snowflake.ch>\n"
 "Language-Team: Swissbib <admin@swissbib.ch>\n"
 "Language: de_DE\n"
@@ -23,7 +23,7 @@ msgid "pagedescription_administration"
 msgstr "Administration von Benutzern und Log-Dateien"
 
 #: ../view/libadmin/admin/navi.phtml:2
-msgid "entity_user"
+msgid "user"
 msgstr "Benutzer"
 
 #: ../view/libadmin/admin/navi.phtml:3
@@ -75,7 +75,7 @@ msgid "views "
 msgstr "Views"
 
 #: ../view/libadmin/group/edit.phtml:52 ../view/libadmin/group/edit.phtml:88
-msgid "entity_institutions"
+msgid "institutions"
 msgstr "Institutionen"
 
 #: ../view/libadmin/group/edit.phtml:58
@@ -137,22 +137,43 @@ msgstr "Verknüpfung"
 msgid "header_active_networkgroups"
 msgstr "Folgende Gruppen sind in diesem Netzwerk aktiv:"
 
-#: ../view/libadmin/view/edit.phtml:68
+#: ../view/libadmin/view/edit.phtml:67
 msgid "action_groups_sort_for_view"
 msgstr "Gruppen für View sortieren"
 
-#: ../view/libadmin/view/edit.phtml:76
+#: ../view/libadmin/view/edit.phtml:75
 msgid "display_links_for_control"
 msgstr "Anzeige der vorhandenen Verknüpfungen (zur Kontrolle)"
 
-#~ msgid "action_close "
-#~ msgstr "Schliessen"
+#: ../src/Libadmin/Form/GroupForm.php:47 ../src/Libadmin/Form/ViewForm.php:44
+msgid "is_active"
+msgstr "Ist Aktiv"
 
-#~ msgid "user"
+#: ../src/Libadmin/Form/GroupForm.php:50
+msgid "language_german"
+msgstr "Deutsch"
+
+#: ../src/Libadmin/Form/GroupForm.php:51
+msgid "language_french"
+msgstr "Französisch"
+
+#: ../src/Libadmin/Form/GroupForm.php:52
+msgid "language_italian"
+msgstr "Italienisch"
+
+#: ../src/Libadmin/Form/GroupForm.php:53
+msgid "language_english"
+msgstr "Englisch"
+
+#: ../src/Libadmin/Form/GroupForm.php:59 ../src/Libadmin/Form/ViewForm.php:52
+msgid "internal_notes"
+msgstr "Interne Notizen"
+
+#~ msgid "entity_user"
 #~ msgstr "Benutzer"
 
-#~ msgid "legend_notes"
-#~ msgstr "Notizen"
+#~ msgid "action_close "
+#~ msgstr "Schliessen"
 
 #~ msgid "modulesubtitle"
 #~ msgstr "Administration von Bibliotheken"

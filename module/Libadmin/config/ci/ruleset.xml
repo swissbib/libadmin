@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ruleset name="sbvf2">
-	<description>Coding standard for swissbib vufind 2</description>
+<ruleset name="libadmin">
+	<description>Coding standard for swissbib libadmin (zend module)</description>
 
 	<exclude-pattern>*/config/*</exclude-pattern>
 	<exclude-pattern>*/test/*</exclude-pattern>
+	<exclude-pattern>*/data/*</exclude-pattern>
 
 	<!--Extend Zend standard-->
 	<rule ref="Zend">

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="libadmin">
+	<description>Coding standard for swissbib libadmin (zend module)</description>
+
+	<exclude-pattern>*/config/*</exclude-pattern>
+	<exclude-pattern>*\config\*</exclude-pattern>
+	<exclude-pattern>*/test/*</exclude-pattern>
+	<exclude-pattern>*\test\*</exclude-pattern>
+	<exclude-pattern>*/data/*</exclude-pattern>
+	<exclude-pattern>*\data\*</exclude-pattern>
+	<exclude-pattern>*.phtml</exclude-pattern>
+
+	<!--Allow tabs -->
+	<rule ref="PSR2">
+		<exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
+		<exclude name="Generic.WhiteSpace.ScopeIndent"/>
+		<exclude name="PEAR.Functions.FunctionCallSignature"/>
+	</rule>
+
+	<!-- Exclude group and institution, because they require non standard method names for hydration -->
+	<rule ref="Generic.NamingConventions.CamelCapsFunctionName">
+		<exclude-pattern>*Model\\Group.php</exclude-pattern>
+		<exclude-pattern>*Model/Group.php</exclude-pattern>
+		<exclude-pattern>*Model\\Institution.php</exclude-pattern>
+		<exclude-pattern>*Model/Institution.php</exclude-pattern>
+	</rule>
+
+</ruleset>

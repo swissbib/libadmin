@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Libadmin\n"
-"POT-Creation-Date: 2013-04-09 18:52+0100\n"
-"PO-Revision-Date: 2013-04-09 18:53+0100\n"
+"POT-Creation-Date: 2013-04-10 11:31+0100\n"
+"PO-Revision-Date: 2013-04-10 12:59+0100\n"
 "Last-Translator: Kay Stenschke <kstenschke@snowflake.ch>\n"
 "Language-Team: Swissbib <admin@swissbib.ch>\n"
 "Language: de_DE\n"
@@ -15,38 +15,165 @@ msgstr ""
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../view/libadmin/admin/home.phtml:1
-#, fuzzy
-msgid "administrationtitle"
+msgid "pagetitle_administration"
 msgstr "Administration"
 
 #: ../view/libadmin/admin/home.phtml:2
-msgid "administrationsubtitle"
-msgstr "Administration von Benutzern und Log Dateien"
+msgid "pagedescription_administration"
+msgstr "Administration von Benutzern und Log-Dateien"
 
 #: ../view/libadmin/admin/navi.phtml:2
-msgid "user"
+msgid "entity_user"
 msgstr "Benutzer"
 
 #: ../view/libadmin/admin/navi.phtml:3
 msgid "logfiles"
 msgstr "Log Dateien"
 
+#: ../view/libadmin/global/sidebar.phtml:4
+msgid "action_search "
+msgstr "Suchen"
+
+#: ../view/libadmin/group/edit.phtml:10
+#: ../view/libadmin/institution/edit.phtml:10
+#: ../view/libadmin/view/edit.phtml:10
+msgid "action_create"
+msgstr "Anlegen"
+
 #: ../view/libadmin/group/edit.phtml:11
 #: ../view/libadmin/institution/edit.phtml:11
 #: ../view/libadmin/view/edit.phtml:11
-msgid "buttonlabelcreate"
-msgstr "Anlegen"
-
-#: ../view/libadmin/group/edit.phtml:12
-#: ../view/libadmin/institution/edit.phtml:12
-#: ../view/libadmin/view/edit.phtml:12
-msgid "buttonlabelupdate"
+msgid "action_update"
 msgstr "Aktualisieren"
 
+#: ../view/libadmin/group/edit.phtml:22
+#: ../view/libadmin/institution/edit.phtml:21
+#: ../view/libadmin/view/edit.phtml:22
+msgid "action_close"
+msgstr "Schliessen"
+
+#: ../view/libadmin/group/edit.phtml:25
+#: ../view/libadmin/institution/edit.phtml:25
+#: ../view/libadmin/view/edit.phtml:26
+msgid "action_delete"
+msgstr "Löschen"
+
+#: ../view/libadmin/group/edit.phtml:35
+#: ../view/libadmin/institution/edit.phtml:35
+#: ../view/libadmin/view/edit.phtml:36
+msgid "general"
+msgstr "Allgemein"
+
+#: ../view/libadmin/group/edit.phtml:49
+#: ../view/libadmin/institution/edit.phtml:45
+#: ../view/libadmin/view/edit.phtml:46
+msgid "display"
+msgstr "Anzeige"
+
+#: ../view/libadmin/group/edit.phtml:51
+msgid "views "
+msgstr "Views"
+
+#: ../view/libadmin/group/edit.phtml:52 ../view/libadmin/group/edit.phtml:88
+msgid "entity_institutions"
+msgstr "Institutionen"
+
+#: ../view/libadmin/group/edit.phtml:58
+#: ../view/libadmin/institution/edit.phtml:53
+msgid "displaynames"
+msgstr "Display Namen"
+
+#: ../view/libadmin/group/edit.phtml:78
+#: ../view/libadmin/institution/edit.phtml:97
+#: ../view/libadmin/view/edit.phtml:56
+msgid "notes"
+msgstr "Notizen"
+
 #: ../view/libadmin/home/index.phtml:3
-msgid "moduletitle"
+msgid "title_module"
 msgstr "Library Administration"
 
 #: ../view/libadmin/home/index.phtml:4
-msgid "modulesubtitle"
+msgid "subtitle_module"
 msgstr "Administration von Bibliotheken"
+
+#: ../view/libadmin/institution/edit.phtml:46
+msgid "address"
+msgstr "Addresse"
+
+#: ../view/libadmin/institution/edit.phtml:47
+msgid "groups_and_views"
+msgstr "Gruppen & Views"
+
+#: ../view/libadmin/institution/edit.phtml:65
+msgid "title_library_names_official"
+msgstr "Bibliotheksnamen (offiziell)"
+
+#: ../view/libadmin/institution/edit.phtml:119
+msgid "contactdata"
+msgstr "Kontaktdaten"
+
+#: ../view/libadmin/institution/edit.phtml:137
+msgid "assign_institutions_to_groups_and_views"
+msgstr "Institutionen zu Gruppen und Views zuweisen"
+
+#: ../view/libadmin/view/edit.phtml:47
+msgid "action_groups_activate"
+msgstr "Gruppen aktivieren"
+
+#: ../view/libadmin/view/edit.phtml:48
+msgid "action_groups_sort"
+msgstr "Gruppen sortieren"
+
+#: ../view/libadmin/view/edit.phtml:49
+msgid "action_institutions_sort"
+msgstr "Institutionen sortieren"
+
+#: ../view/libadmin/view/edit.phtml:50
+msgid "linking"
+msgstr "Verknüpfung"
+
+#: ../view/libadmin/view/edit.phtml:62
+msgid "header_active_networkgroups"
+msgstr "Folgende Gruppen sind in diesem Netzwerk aktiv:"
+
+#: ../view/libadmin/view/edit.phtml:68
+msgid "action_groups_sort_for_view"
+msgstr "Gruppen für View sortieren"
+
+#: ../view/libadmin/view/edit.phtml:76
+msgid "display_links_for_control"
+msgstr "Anzeige der vorhandenen Verknüpfungen (zur Kontrolle)"
+
+#~ msgid "action_close "
+#~ msgstr "Schliessen"
+
+#~ msgid "user"
+#~ msgstr "Benutzer"
+
+#~ msgid "legend_notes"
+#~ msgstr "Notizen"
+
+#~ msgid "modulesubtitle"
+#~ msgstr "Administration von Bibliotheken"
+
+#~ msgid "moduletitle"
+#~ msgstr "Library Administration"
+
+#~ msgid "administrationsubtitle"
+#~ msgstr "Administration von Benutzern und Log Dateien"
+
+#~ msgid "search "
+#~ msgstr "Suchen"
+
+#~ msgid "buttonlabelupdate"
+#~ msgstr "Aktualisieren"
+
+#~ msgid "delete"
+#~ msgstr "Löschen"
+
+#~ msgid "delete "
+#~ msgstr "Löschen"
+
+#~ msgid "buttonlabelcreate"
+#~ msgstr "Anlegen"

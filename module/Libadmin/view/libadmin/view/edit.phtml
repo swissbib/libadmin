@@ -1,5 +1,4 @@
 <?php
-
 $this->headTitle($title);
 
 $form = $this->form;
@@ -13,17 +12,19 @@ $LabelUpdate	= $this->translate('action_update',	'Libadmin');
 $saveButtonLabel= $isNew ? $LabelNew : $labelUpdate;
 
 $formType		= 'horizontal';
-
 ?>
 
 
 <?=$this->formTwb()->openTag($form, $formType)?>
-
 	<div class="topButtons">
 		<input type="submit" value="<?=$this->escapeHtml($saveButtonLabel)?>" class="submitButton btn btn-primary btn-medium" id="submitbutton" name="submit">
-		<a href="<?=$this->url('view', array('action'=>'home'));?>" class="ajaxButton closeButton btn btn-medium" id="closebutton">Close</a>
+		<a href="<?=$this->url('view', array('action'=>'home'));?>" class="ajaxButton closeButton btn btn-medium" id="closebutton">
+			<?= $this->translate('action_close', 'Libadmin') ?>
+		</a>
 		<?php if(!$isNew): ?>
-			<a href="<?=$this->url('view', array('action'=>'delete', 'id' => $idView));?>" class="ajaxButton deleteButton btn btn-danger btn-medium" id="deletebutton">Delete</a>
+			<a href="<?=$this->url('view', array('action'=>'delete', 'id' => $idView));?>" class="ajaxButton deleteButton btn btn-danger btn-medium" id="deletebutton">
+				<?= $this->translate('action_delete', 'Libadmin') ?>
+			</a>
 		<?php endif; ?>
 	</div>
 
@@ -32,59 +33,48 @@ $formType		= 'horizontal';
 	<?=$this->ztbFlashMessenger()->render()?>
 
 	<fieldset class="general">
-		<legend>Allgemein</legend>
+		<legend><?= $this->translate('general', 'Libadmin') ?></legend>
 		<div class="row-fluid">
-			<div class="span5">
-				<?=$this->formRowTwb($form->get('code'))?>
-			</div>
-			<div class="span5">
-				<?=$this->formRowTwb($form->get('label'))?>
-			</div>
-			<div class="span2">
-				<?=$this->formRowTwb($form->get('is_active'))?>
-			</div>
+			<div class="span5"><?=$this->formRowTwb($form->get('code'))?></div>
+			<div class="span5"><?=$this->formRowTwb($form->get('label'))?></div>
+			<div class="span2"><?=$this->formRowTwb($form->get('is_active'))?></div>
 		</div>
 	</fieldset>
 
 	<div class="tabbable">
 		<ul class="nav nav-tabs formTabs">
-			<li class="active"><a href="#display">Anzeige</a></li>
-			<li><a href="#groups">Gruppen aktivieren</a></li>
-			<li><a href="#groupsort">Gruppen sortieren</a></li>
-			<li><a href="#institutionsort">Institutionen sortieren</a></li>
-			<li><a href="#linking">Verknüpfungen</a></li>
+			<li class="active"><a href="#display"><?= $this->translate('display', 'Libadmin') ?></a></li>
+			<li><a href="#groups"><?= $this->translate('action_groups_activate', 'Libadmin') ?></a></li>
+			<li><a href="#groupsort"><?= $this->translate('action_groups_sort', 'Libadmin') ?></a></li>
+			<li><a href="#institutionsort"><?= $this->translate('action_institutions_sort', 'Libadmin') ?></a></li>
+			<li><a href="#linking"><?= $this->translate('linking', 'Libadmin') ?></a></li>
 		</ul>
 
 		<div class="tab-content">
-
 				<div class="tab-pane active" id="display">
-
 					<fieldset class="notes">
-						<legend>Notizen</legend>
+						<legend><?= $this->translate('notes', 'Libadmin') ?></legend>
 						<?=$this->formRowTwb($form->get('notes'))?>
 					</fieldset>
-
 				</div>
 
 				<div class="tab-pane" id="groups">
-					<p>Folgende Gruppen sind in diesem Netzwerk aktiv:</p>
+					<p><?= $this->translate('header_active_networkgroups', 'Libadmin') ?></p>
 					<?=$this->formRowTwb($form->get('groups'))?>
 				</div>
 
 				<div class="tab-pane" id="groupsort">
-					<p>Gruppen für View sortieren</p>
+					<p><?= $this->translate('action_groups_sort_for_view', 'Libadmin') ?></p>
 				</div>
 
 				<div class="tab-pane" id="institutionsort">
-					<p>Institutionen sortieren</p>
+					<p>$this->translate('action_institutions_sort', 'Libadmin')</p>
 				</div>
 
 				<div class="tab-pane" id="linking">
-					<p>Anzeige der vorhandenen Verknüpfungen (zur Kontrolle)</p>
+					<p><?= $this->translate('display_links_for_control', 'Libadmin') ?></p>
 				</div>
-
 		</div>
-
 	</div>
 
 <?=$this->form()->closeTag();?>

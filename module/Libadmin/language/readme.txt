@@ -1,8 +1,13 @@
 How to administrate translations
 ================================
+1. Location and file format
+2. Use Poedit http://www.poedit.net/
+3. How to create language files with Poedit
 
-Location and file format
-------------------------
+
+
+1. Location and file format
+---------------------------
 Translations are handled by the use of gettext catalog (.po) files.
 All translation files are stored inside the module's \language\ folder.
 For each language there has to be created one language file, named by the code
@@ -10,15 +15,15 @@ of that respective language.
 Examples: "language\de_DE.po" for german german, "language\en_US" for american english.
 
 
-Use Poedit http://www.poedit.net/
----------------------------------
+2. Use Poedit http://www.poedit.net/
+------------------------------------
 Poedit is a cross-plattform editor for gettext catalogs.
 That allows to conveniently edit translations by automatically collecting
 translatable labels from a module.
 
 
-Create new language file with Poedit
-------------------------------------
+3. How to create language files with Poedit
+-------------------------------------------
  1.	For Poedit to be able to find our templates, you have to add the pattern
  	for "*.phtml" files to the configuration of Poedit's Parser:
  		* From the menu go to: File > Properties

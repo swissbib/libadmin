@@ -1,0 +1,52 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Libadmin\n"
+"POT-Creation-Date: 2013-04-09 18:52+0100\n"
+"PO-Revision-Date: 2013-04-09 18:53+0100\n"
+"Last-Translator: Kay Stenschke <kstenschke@snowflake.ch>\n"
+"Language-Team: Swissbib <admin@swissbib.ch>\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../view/libadmin/admin/home.phtml:1
+#, fuzzy
+msgid "administrationtitle"
+msgstr "Administration"
+
+#: ../view/libadmin/admin/home.phtml:2
+msgid "administrationsubtitle"
+msgstr "Administration von Benutzern und Log Dateien"
+
+#: ../view/libadmin/admin/navi.phtml:2
+msgid "user"
+msgstr "Benutzer"
+
+#: ../view/libadmin/admin/navi.phtml:3
+msgid "logfiles"
+msgstr "Log Dateien"
+
+#: ../view/libadmin/group/edit.phtml:11
+#: ../view/libadmin/institution/edit.phtml:11
+#: ../view/libadmin/view/edit.phtml:11
+msgid "buttonlabelcreate"
+msgstr "Anlegen"
+
+#: ../view/libadmin/group/edit.phtml:12
+#: ../view/libadmin/institution/edit.phtml:12
+#: ../view/libadmin/view/edit.phtml:12
+msgid "buttonlabelupdate"
+msgstr "Aktualisieren"
+
+#: ../view/libadmin/home/index.phtml:3
+msgid "moduletitle"
+msgstr "Library Administration"
+
+#: ../view/libadmin/home/index.phtml:4
+msgid "modulesubtitle"
+msgstr "Administration von Bibliotheken"

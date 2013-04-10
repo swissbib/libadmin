@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="libadmin" default="build">
+
+	<property name="build" location="${basedir}/../../../../build" />
+	<property name="logs" location="${build}/logs" />
+	<property name="source" location="${basedir}/../.." /> <!--this module-->
+	<property name="memorylimit" value="512M" />
+
+
+	<target name="build" depends="preparefolders,lint,phploc,phpcs"/>
+
+	<target name="preparefolders" description="Prepare all folders (remove and recreate)">
+		<delete dir="${build}"/>
+		<mkdir dir="${build}"/>
+		<mkdir dir="${logs}"/>
+	</target>
+
+	<target name="lint" description="Lint all PHP Files">
+		<apply executable="php" failonerror="true">
+			<arg value="-l"/>
+			<fileset dir="${source}">
+				<include name="**/*.php"/>
+				<exclude name="**/vendor/*" />
+				<exclude name="**/public/*" />
+				<exclude name="**/data/*" />
+				<exclude name="**/test/*" />
+				<modified />
+			</fileset>
+		</apply>
+	</target>
+
+	<target name="phploc" description="Measure project size using PHPLOC">
+		<exec executable="php">
+			<arg value="-d"/>
+			<arg value="memory_limit=${memorylimit}"/>
+			<arg path="/usr/bin/phploc"/>
+			<arg value="--log-csv"/>
+			<arg value="${logs}/phploc.csv"/>
+			<arg path="${source}"/>
+		</exec>
+	</target>
+
+	<target name="phpcs" description="Find coding standard violations using PHP_CodeSniffer">
+		<exec executable="php" output="/dev/null" failonerror="false">
+			<arg value="-d"/>
+			<arg value="memory_limit=${memorylimit}"/>
+			<arg path="/usr/bin/phpcs"/>
+			<arg value="--report=checkstyle"/>
+			<arg value="--report-file=${logs}/checkstyle.xml"/>
+			<arg value="--standard=${basedir}/codestyle.xml"/>
+			<arg value="--extensions=php" />
+			<arg path="${source}"/>
+		</exec>
+	</target>
+
+</project>

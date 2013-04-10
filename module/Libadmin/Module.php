@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: swissbib
- * Date: 12/11/12
- * Time: 9:21 PM
- * To change this template use File | Settings | File Templates.
- */
 namespace Libadmin;
 
 use Libadmin\Model\Institution;
@@ -20,9 +13,22 @@ use Libadmin\Form\ViewForm;
 
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Mvc\MvcEvent;
+
 
 
 class Module {
+
+	/**
+	 * @param	MvcEvent	$e
+	 */
+	public function onBootStrap(MvcEvent $e)
+	{
+		$translator	= $e->getApplication()->getServiceManager()->get('translator');
+		$translator->setLocale('de_DE')/*->setFallbackLocale('en_US')*/;
+	}
+
+
 
 	public function getAutoloaderConfig() {
 		return array(

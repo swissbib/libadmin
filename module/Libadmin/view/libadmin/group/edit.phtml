@@ -1,5 +1,4 @@
 <?php
-
 $this->headTitle($title);
 
 $form = $this->form;
@@ -8,8 +7,8 @@ $form->prepare();
 $idGroup		= (int)$form->get('id')->getValue();
 $isNew			= !$idGroup;
 
-$LabelNew		= $this->translate('buttonlabelcreate',	'Libadmin');
-$LabelUpdate	= $this->translate('buttonlabelupdate',	'Libadmin');
+$LabelNew		= $this->translate('action_create',	'Libadmin');
+$LabelUpdate	= $this->translate('action_update',	'Libadmin');
 $saveButtonLabel= $isNew ? $LabelNew : $labelUpdate;
 
 $formType	= 'horizontal';
@@ -17,14 +16,14 @@ $group		= $form->get('group');
 
 ?>
 
-
 <?=$this->formTwb()->openTag($form, $formType)?>
-
 	<div class="topButtons">
 		<input type="submit" value="<?=$this->escapeHtml($saveButtonLabel)?>" class="submitButton btn btn-primary btn-medium" id="submitbutton" name="submit">
-		<a href="<?=$this->url('group', array('action'=>'home'));?>" class="ajaxButton closeButton btn btn-medium" id="closebutton">Close</a>
+		<a href="<?=$this->url('group', array('action'=>'home'));?>" class="ajaxButton closeButton btn btn-medium" id="closebutton"><?= $this->translate('action_close ', 'Libadmin') ?></a>
 		<?php if(!$isNew): ?>
-			<a href="<?=$this->url('group', array('action'=>'delete', 'id' => $idGroup));?>" class="ajaxButton deleteButton btn btn-danger btn-medium" id="deletebutton">Delete</a>
+			<a href="<?=$this->url('group', array('action'=>'delete', 'id' => $idGroup));?>" class="ajaxButton deleteButton btn btn-danger btn-medium" id="deletebutton">
+				<?= $this->translate('action_delete', 'Libadmin') ?>
+			</a>
 		<?php endif; ?>
 	</div>
 
@@ -33,7 +32,7 @@ $group		= $form->get('group');
 	<?=$this->ztbFlashMessenger()->render()?>
 
 	<fieldset class="general">
-		<legend>Allgemein</legend>
+		<legend><?= $this->translate('general', 'Libadmin') ?></legend>
 		<div class="row-fluid">
 			<div class="span10">
 				<?=$this->formRowTwb($form->get('code'))?>
@@ -47,18 +46,16 @@ $group		= $form->get('group');
 	<div class="tabbable">
 		<ul class="nav nav-tabs formTabs">
 			<li class="active">
-				<a href="#display">Anzeige</a>
+				<a href="#display"><?= $this->translate('display', 'Libadmin') ?></a>
 			</li>
-			<li><a href="#views">Views</a></li>
-			<li><a href="#institutions">Institutionen</a></li>
+			<li><a href="#views"><?= $this->translate('views ', 'Libadmin') ?></a></li>
+			<li><a href="#institutions"><?= $this->translate('entity_institutions', 'Libadmin') ?></a></li>
 		</ul>
 
 		<div class="tab-content">
-
 				<div class="tab-pane active" id="display">
-
 					<fieldset>
-						<legend>Display Namen</legend>
+						<legend><?= $this->translate('displaynames', 'Libadmin') ?></legend>
 						<div class="row-fluid">
 							<div class="span6">
 								<?=$this->formRowTwb($form->get('label_de'))?>
@@ -78,10 +75,9 @@ $group		= $form->get('group');
 					</fieldset>
 
 					<fieldset class="notes">
-						<legend>Notizen</legend>
+						<legend><?= $this->translate('notes', 'Libadmin') ?></legend>
 						<?=$this->formRowTwb($form->get('notes'))?>
 					</fieldset>
-
 				</div>
 
 				<div class="tab-pane" id="views">
@@ -89,11 +85,9 @@ $group		= $form->get('group');
 				</div>
 
 				<div class="tab-pane" id="institutions">
-					<p>Institutions</p>
+					<p><?= $this->translate('entity_institutions', 'Libadmin') ?></p>
 				</div>
-
 		</div>
-
 	</div>
 
 <?=$this->form()->closeTag();?>

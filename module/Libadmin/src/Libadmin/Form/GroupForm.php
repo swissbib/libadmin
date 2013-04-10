@@ -44,19 +44,19 @@ class GroupForm extends BaseForm {
 			'name' => 'is_active',
 			'type'  => 'checkbox',
 			'options' => array(
-				'label' => 'Ist Aktiv'
+				'label' => $this->translate('is_active', 'Libadmin')
 			)
 		));
-		$this->addText('label_de', 'deutsch', true);
-		$this->addText('label_fr', 'französisch');
-		$this->addText('label_it', 'italienisch');
-		$this->addText('label_en', 'englisch');
+		$this->addText('label_de', $this->translate('language_german'), true);
+		$this->addText('label_fr', $this->translate('language_french'), true);
+		$this->addText('label_it', $this->translate('language_italian'), true);
+		$this->addText('label_en', $this->translate('language_english'), true);
 
 		$this->add(array(
 			'name' => 'notes',
 			'type'  => 'textarea',
 			'options' => array(
-				'label' => 'Interne Notizen'
+				'label' => $this->translate('internal_notes', 'Libadmin')
 			),
 			'attributes' => array(
 				'rows'	=> 10

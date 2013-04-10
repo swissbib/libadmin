@@ -8,8 +8,8 @@ $form->prepare();
 $idView			= (int)$form->get('id')->getValue();
 $isNew			= !$idView;
 
-$LabelNew		= $this->translate('buttonlabelcreate',	'Libadmin');
-$LabelUpdate	= $this->translate('buttonlabelupdate',	'Libadmin');
+$LabelNew		= $this->translate('action_create',	'Libadmin');
+$LabelUpdate	= $this->translate('action_update',	'Libadmin');
 $saveButtonLabel= $isNew ? $LabelNew : $labelUpdate;
 
 $formType		= 'horizontal';

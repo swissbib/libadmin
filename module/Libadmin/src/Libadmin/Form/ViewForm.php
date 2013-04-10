@@ -38,18 +38,18 @@ class ViewForm extends BaseForm {
 		$this->addText('label', 'Name', true);
 
 		$this->add(array(
-			'name' => 'is_active',
-			'type'  => 'checkbox',
-			'options' => array(
-				'label' => 'Ist Aktiv'
+			'name'		=> 'is_active',
+			'type' 		=> 'checkbox',
+			'options'	=> array(
+					'label' => $this->translate('is_active', 'Libadmin')
 			)
 		));
 
 		$this->add(array(
-			'name' => 'notes',
+			'name'	=> 'notes',
 			'type'  => 'textarea',
 			'options' => array(
-				'label' => 'Interne Notizen'
+				'label' => $this->translate('internal_notes', 'Libadmin')
 			),
 			'attributes' => array(
 				'rows'	=> 10

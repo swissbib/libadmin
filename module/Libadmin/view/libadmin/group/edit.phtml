@@ -19,7 +19,7 @@ $group		= $form->get('group');
 <?=$this->formTwb()->openTag($form, $formType)?>
 	<div class="topButtons">
 		<input type="submit" value="<?=$this->escapeHtml($saveButtonLabel)?>" class="submitButton btn btn-primary btn-medium" id="submitbutton" name="submit">
-		<a href="<?=$this->url('group', array('action'=>'home'));?>" class="ajaxButton closeButton btn btn-medium" id="closebutton"><?= $this->translate('action_close ', 'Libadmin') ?></a>
+		<a href="<?=$this->url('group', array('action'=>'home'));?>" class="ajaxButton closeButton btn btn-medium" id="closebutton"><?= $this->translate('action_close', 'Libadmin') ?></a>
 		<?php if(!$isNew): ?>
 			<a href="<?=$this->url('group', array('action'=>'delete', 'id' => $idGroup));?>" class="ajaxButton deleteButton btn btn-danger btn-medium" id="deletebutton">
 				<?= $this->translate('action_delete', 'Libadmin') ?>

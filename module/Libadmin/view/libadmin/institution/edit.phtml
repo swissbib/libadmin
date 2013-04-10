@@ -18,7 +18,7 @@ $formType		= 'horizontal';
 	<div class="topButtons">
 		<input type="submit" value="<?=$this->escapeHtml($saveButtonLabel)?>" class="submitButton btn btn-primary btn-medium" id="submitbutton" name="submit">
 		<a href="<?=$this->url('institution', array('action'=>'home'));?>" class="ajaxButton closeButton btn btn-medium" id="closebutton">
-			<?= $this->translate('action_close ', 'Libadmin') ?>
+			<?= $this->translate('action_close', 'Libadmin') ?>
 		</a>
 		<?php if(!$isNew): ?>
 			<a href="<?=$this->url('institution', array('action'=>'delete', 'id' => $idInstitution));?>" class="ajaxButton deleteButton btn btn-danger btn-medium" id="deletebutton">

@@ -44,7 +44,9 @@ abstract class BaseController extends AbstractActionController {
 	 * @return	ViewModel
 	 */
 	public function homeAction() {
-		return $this->getAjaxView();
+		return $this->getAjaxView(array(
+            'listItems' => $this->getTable()->getAll(30)
+        ));
 	}
 
 
@@ -218,9 +220,14 @@ abstract class BaseController extends AbstractActionController {
 	/**
 	 * Get table
 	 *
+	 * @param	String|Null		$type
 	 * @return	InstitutionTable|GroupTable|ViewTable
 	 */
-	protected function getTable() {
+	protected function getTable($type = null) {
+		if( !is_null($type) ) {
+			return $this->getServiceLocator()->get('Libadmin\Table\\' . ucfirst($type) . 'Table');
+		}
+
 		if( !$this->table ) {
 			$type	= $this->getTypeName();
 			$this->table = $this->getServiceLocator()->get('Libadmin\Table\\' . $type . 'Table');

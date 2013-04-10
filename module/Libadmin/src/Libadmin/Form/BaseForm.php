@@ -10,21 +10,6 @@ use Zend\Form\Form;
 class BaseForm extends Form {
 
 	/**
-	 * Initialize form
-	 * Force post method attribute
-	 *
-	 * @param	String|Null		$name
-	 * @param	Array			$options
-	 */
-	public function __construct($name = null, $options = array()) {
-		parent::__construct($name, $options);
-
-		$this->setAttribute('method', 'post');
-	}
-
-
-
-	/**
 	 * Add hidden field
 	 *
 	 * @param	String		$name
@@ -57,27 +42,6 @@ class BaseForm extends Form {
 			'options' => array(
 				'label' => $label
 			),
-		));
-	}
-
-
-
-	/**
-	 * Add submit button
-	 *
-	 * @param $label
-	 * @param string $name
-	 * @param string $id
-	 */
-	protected function addSubmit($label, $name = 'submit', $id = 'submitbutton') {
-		$this->add(array(
-			'name' => $name,
-			'attributes' => array(
-				'type'  => 'submit',
-				'value'	=> $label,
-				'id'	=> $id,
-				'class'	=> 'submitButton btn btn-primary btn-medium'
-			)
 		));
 	}
 

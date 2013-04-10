@@ -9,6 +9,7 @@ use Libadmin\Model\BaseModel;
  */
 class View extends BaseModel {
 
+	public $id;
 	public $code;
 	public $is_active;
 	public $label;

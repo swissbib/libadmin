@@ -1,6 +1,7 @@
 <?php
 namespace Libadmin\Controller;
 
+use Libadmin\Model\InstitutionRelation;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
@@ -23,16 +24,18 @@ class InstitutionController extends BaseController {
 	 * @return Response|ViewModel
 	 */
 	public function addAction() {
-		$form			= new InstitutionForm();
-		$request		= $this->getRequest();
+		$views			= $this->getTable('View')->getAll();
+		$form			= new InstitutionForm($views);
 		$flashMessenger	= $this->flashMessenger();
+        $institution    = new Institution();
 
-		if( $request->isPost() ) {
-			$institution = new Institution();
-			$form->setInputFilter($institution->getInputFilter());
-			$form->setData($request->getPost());
+		$form->bind($institution);
 
-			if( $form->isValid() ) {
+		if( $this->request->isPost() ) {
+//			$form->setInputFilter($institution->getInputFilter());
+			$form->setData($this->request->getPost());
+
+			if( $form->isValid()) {
 				$institution->exchangeArray($form->getData());
 				$idInstitution	= $this->getTable()->save($institution);
 
@@ -41,6 +44,10 @@ class InstitutionController extends BaseController {
 				return $this->redirectTo('edit', $idInstitution);
 			} else {
 				$flashMessenger->addErrorMessage('Form not valid');
+//				$messages = $form->getMessages();
+//				foreach($form->getMessages() as $message) {
+//					$flashMessenger->addErrorMessage($message);
+//				}
 			}
 		}
 
@@ -68,15 +75,16 @@ class InstitutionController extends BaseController {
 		}
 
 		try {
-			/** @var Institution $institution  */
-			$institution = $this->getTable()->getRecord($idInstitution);
+			/** @var InstitutionForm $institution  */
+			$institution = $this->getInstitution($idInstitution);
 		} catch(\Exception $ex ) {
-			$flashMessenger->addErrorMessage('Institution not found');
+			$flashMessenger->addErrorMessage('InstitutionForm not found');
 
 			return $this->forwardTo('home');
 		}
 
-		$form = new InstitutionForm();
+		$views= $this->getTable('View')->getAll();
+		$form = new InstitutionForm($views);
 		$form->bind($institution);
 
 		$request = $this->getRequest();
@@ -86,7 +94,7 @@ class InstitutionController extends BaseController {
 
 			if( $form->isValid() ) {
 				$this->getTable()->save($form->getData());
-				$flashMessenger->addSuccessMessage('Institution saved');
+				$flashMessenger->addSuccessMessage('InstitutionForm saved');
 			} else {
 				$flashMessenger->addErrorMessage('Form not valid');
 			}
@@ -96,8 +104,17 @@ class InstitutionController extends BaseController {
 
 		return $this->getAjaxView(array(
 			'form'		=> $form,
-			'title'		=> 'Edit Institution'
+			'title'		=> 'Edit InstitutionForm'
 		));
+	}
+
+
+	protected function getInstitution($idInstitution) {
+		$institution = $this->getTable()->getRecord($idInstitution);
+
+		$institution->setRelations($this->getTable('InstitutionRelation')->getRelations($idInstitution));
+
+		return $institution;
 	}
 
 }

@@ -2,6 +2,8 @@
 namespace Libadmin;
 
 use Libadmin\Model\Institution;
+use Libadmin\Model\InstitutionRelation;
+use Libadmin\Table\InstitutionRelationTable;
 use Libadmin\Table\InstitutionTable;
 use Libadmin\Table\InstitutionForm;
 use Libadmin\Model\Group;
@@ -55,8 +57,9 @@ class Module {
 		return array(
 			'factories' => array(
 				'Libadmin\Table\InstitutionTable' => function ($sm) {
-					$tableGateway = $sm->get('InstitutionTableGateway');
-					return new InstitutionTable($tableGateway);
+					$institutionTableGateway = $sm->get('InstitutionTableGateway');
+					$institutionRelationTable =  $sm->get('Libadmin\Table\InstitutionRelationTable');
+					return new InstitutionTable($institutionTableGateway, $institutionRelationTable);
 				},
 				'InstitutionTableGateway' => function ($sm) {
 					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
@@ -83,6 +86,16 @@ class Module {
 					$resultSetPrototype = new ResultSet();
 					$resultSetPrototype->setArrayObjectPrototype(new View());
 					return new TableGateway('view', $dbAdapter, null, $resultSetPrototype);
+				},
+				'Libadmin\Table\InstitutionRelationTable' => function ($sm) {
+					$tableGateway = $sm->get('InstitutionRelationTableGateway');
+					return new InstitutionRelationTable($tableGateway);
+				},
+				'InstitutionRelationTableGateway' => function ($sm) {
+					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+					$resultSetPrototype = new ResultSet();
+					$resultSetPrototype->setArrayObjectPrototype(new InstitutionRelation());
+					return new TableGateway('mm_institution_group_view', $dbAdapter, null, $resultSetPrototype);
 				},
 				'GroupForm' => function($sm) {
 					$viewTable = $sm->get('Libadmin\Table\ViewTable');

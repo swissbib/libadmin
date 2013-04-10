@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Libadmin\n"
 "POT-Creation-Date: 2013-04-10 13:11+0100\n"
-"PO-Revision-Date: 2013-04-10 13:12+0100\n"
-"Last-Translator: Kay Stenschke <kstenschke@snowflake.ch>\n"
+"PO-Revision-Date: 2013-04-10 19:43+0100\n"
+"Last-Translator: Fabian Erni <ferni@snowflake.ch>\n"
 "Language-Team: Swissbib <admin@swissbib.ch>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-KeywordsList: translate\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
@@ -99,7 +99,7 @@ msgstr "Administration von Bibliotheken"
 
 #: ../view/libadmin/institution/edit.phtml:46
 msgid "address"
-msgstr "Addresse"
+msgstr "Adresse"
 
 #: ../view/libadmin/institution/edit.phtml:47
 msgid "groups_and_views"
@@ -169,32 +169,56 @@ msgstr "Englisch"
 msgid "internal_notes"
 msgstr "Interne Notizen"
 
-#~ msgid "entity_user"
-#~ msgstr "Benutzer"
+msgid "bibcode"
+msgstr "Bib-Code"
 
-#~ msgid "action_close "
-#~ msgstr "Schliessen"
+msgid "syscode"
+msgstr "System-Code"
 
-#~ msgid "modulesubtitle"
-#~ msgstr "Administration von Bibliotheken"
+msgid "zip"
+msgstr "PLZ"
 
-#~ msgid "moduletitle"
-#~ msgstr "Library Administration"
+msgid "city"
+msgstr "Ort"
 
-#~ msgid "administrationsubtitle"
-#~ msgstr "Administration von Benutzern und Log Dateien"
+msgid "country"
+msgstr "Land"
 
-#~ msgid "search "
-#~ msgstr "Suchen"
+msgid "country_ch"
+msgstr "Schweiz"
 
-#~ msgid "buttonlabelupdate"
-#~ msgstr "Aktualisieren"
+msgid "country_li"
+msgstr "Lichtenstein"
 
-#~ msgid "delete"
-#~ msgstr "Löschen"
+msgid "country_de"
+msgstr "Deutschland"
 
-#~ msgid "delete "
-#~ msgstr "Löschen"
+msgid "country_it"
+msgstr "Italien"
 
-#~ msgid "buttonlabelcreate"
-#~ msgstr "Anlegen"
+msgid "country_fr"
+msgstr "Frankreich"
+
+msgid "canton"
+msgstr "Kanton"
+
+msgid "webseite"
+msgstr "Webseite"
+
+msgid "email"
+msgstr "Email"
+
+msgid "telefon"
+msgstr "Telefon"
+
+msgid "skype"
+msgstr "Skype"
+
+msgid "facebook"
+msgstr "Facebook"
+
+msgid "coordinates"
+msgstr "Koordinaten"
+
+msgid "isil"
+msgstr "ISIL"

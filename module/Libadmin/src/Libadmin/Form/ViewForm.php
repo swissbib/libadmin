@@ -41,7 +41,7 @@ class ViewForm extends BaseForm {
 			'name'		=> 'is_active',
 			'type' 		=> 'checkbox',
 			'options'	=> array(
-					'label' => $this->translate('is_active', 'Libadmin')
+				'label' => 'is_active'
 			)
 		));
 
@@ -49,7 +49,7 @@ class ViewForm extends BaseForm {
 			'name'	=> 'notes',
 			'type'  => 'textarea',
 			'options' => array(
-				'label' => $this->translate('internal_notes', 'Libadmin')
+				'label' => 'internal_notes'
 			),
 			'attributes' => array(
 				'rows'	=> 10

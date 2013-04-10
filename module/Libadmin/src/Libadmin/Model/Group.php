@@ -22,6 +22,7 @@ use Libadmin\Model\BaseModel;
  */
 class Group extends BaseModel {
 
+	public $id;
 	public $code;
 	public $is_active;
 

@@ -12,11 +12,6 @@ use Zend\InputFilter\InputFilter;
 abstract class BaseModel implements InputFilterAwareInterface {
 
 	/**
-	 * @var	Integer	General ID field
-	 */
-	public $id;
-
-	/**
 	 * @var InputFilter
 	 */
 	protected $inputFilter;

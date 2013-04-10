@@ -7,11 +7,14 @@ $form->prepare();
 $idView			= (int)$form->get('id')->getValue();
 $isNew			= !$idView;
 
-$LabelNew		= $this->translate('action_create',	'Libadmin');
-$LabelUpdate	= $this->translate('action_update',	'Libadmin');
-$saveButtonLabel= $isNew ? $LabelNew : $labelUpdate;
+$labelNew		= $this->translate('action_create',	'Libadmin');
+$labelUpdate	= $this->translate('action_update',	'Libadmin');
+$saveButtonLabel= $isNew ? $labelNew : $labelUpdate;
 
 $formType		= 'horizontal';
+
+$this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
+
 ?>
 
 

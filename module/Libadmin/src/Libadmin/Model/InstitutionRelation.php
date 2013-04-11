@@ -35,8 +35,6 @@ class InstitutionRelation extends BaseModel {
 	 */
 	public $position;
 
-
-
     public function getListLabel() {
         return 'Link info here';
     }

@@ -1,12 +1,15 @@
 <?php
 namespace Libadmin\Form;
 
-use Libadmin\Model\InstitutionRelation;
-use Libadmin\Model\View;
+use Libadmin\Model\Group;
 use Zend\Form\Element\Checkbox;
+use Zend\Form\Element\Select;
 use Zend\Form\Fieldset;
 use Zend\Form\FormInterface;
 use Zend\Stdlib\Hydrator\ObjectProperty as ObjectPropertyHydrator;
+
+use Libadmin\Model\InstitutionRelation;
+use Libadmin\Model\View;
 
 
 /**
@@ -20,41 +23,39 @@ class InstitutionRelationFieldset extends Fieldset {
 	 *
 	 */
 	public function __construct() {
-		parent::__construct('link');
+		parent::__construct('relations');
 
 		$this->setHydrator(new ObjectPropertyHydrator());
 		$this->setObject(new InstitutionRelation());
 
 		$this->add(array(
 			'name'	=> 'id_view',
-            'type'  => 'checkbox',
-            'options'   => array(
-                'label' => 'Name Test'
-            ),
+			'type'  => 'Libadmin\Form\Element\NoValidationCheckbox',
+			'options'   => array(
+				'label' => 'This label will be changed (by the app)',
+				'unchecked_value' => '0'
+			),
 			'required'	=> false
 		));
 
 		$this->add(array(
 			'name' => 'id_group',
-			'type' => 'select',
+			'type' => 'Libadmin\Form\Element\NoValidationSelect',
 			'options' => array(
-				'label' => 'Gruppe',
-				'value_options' => array(
-					'1'	=> 'Test 1',
-					'2'	=> 'Test 2',
-					'3'	=> 'Test 3'
-				)
+				'label' => 'Gruppe'
 			)
 		));
 
-        $this->add(array(
-            'name'	=> 'is_favorite',
-            'type'  => 'checkbox',
-            'options'   => array(
-                'label' => 'Ist Favorit'
-            ),
+		$this->add(array(
+			'name'	=> 'is_favorite',
+			'type'  => 'Libadmin\Form\Element\NoValidationCheckbox',
+			'options'   => array(
+				'label' => 'Ist Favorit',
+				'checked_value' => '1',
+				'unchecked_value' => '0'
+			),
 			'required'	=> false
-        ));
+		));
 	}
 
 
@@ -72,25 +73,27 @@ class InstitutionRelationFieldset extends Fieldset {
 		/** @var Checkbox $viewCheckbox */
 		$viewCheckbox	= $this->byName['id_view'];
 
+
 		/** @var View $view  */
-		$view	= $form->views->current();
+		$view	= current($form->views);
+		next($form->views);
+
+		if( !$view ) {
+			return;
+		}
 
 		$viewCheckbox->setCheckedValue($view->getId());
 		$viewCheckbox->setLabel($view->getLabel());
-	}
 
+		/** @var Select $groupSelect  */
+		$groupSelect	= $this->byName['id_group'];
 
-
-	/**
-	 * Set unchecked values to pass the validation
-	 *
-	 * @param	Array|\Traversable	$data
-	 */
-	public function populateValues($data) {
-		$this->elements['id_view']->setUncheckedValue($data['id_view']);
-		$this->elements['is_favorite']->setUncheckedValue($data['is_favorite']);
-
-		parent::populateValues($data);
+		/** @var Group $group  */
+		$options = array();
+		foreach($form->groups as $group) {
+			$options[$group->getId()] = $group->getListLabel();
+		}
+		$groupSelect->setValueOptions($options);
 	}
 
 }

@@ -45,8 +45,8 @@ class ViewTable extends BaseTable {
 	 * @param int $limit
 	 * @return	ResultSet
 	 */
-	public function getAll($limit = 30) {
-		return parent::getAll('label', $limit);
+	public function getAll($limit = 30, $order = 'label') {
+		return parent::getAll($order, $limit);
 	}
 
 

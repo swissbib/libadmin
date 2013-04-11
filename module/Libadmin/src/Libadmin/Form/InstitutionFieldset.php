@@ -7,12 +7,17 @@ use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
 use Libadmin\Model\Institution;
 
 /**
- * [Description]
+ * Base fieldset for institution
+ * All fields are in here instead in the institution form to support relations
  *
  */
 class InstitutionFieldset extends Fieldset {
 
-    public function __construct() {
+	/**
+	 * Initialize
+	 *
+	 */
+	public function __construct() {
         parent::__construct('institution');
 
         $this->setHydrator(new ClassMethodsHydrator(false))
@@ -129,7 +134,7 @@ class InstitutionFieldset extends Fieldset {
         $this->addText('coordinates', 'coordinates');
         $this->addText('isil', 'isil');
 
-			// Dummy for saving
+			// Relation fieldset (this may be replaced for new records in prepareElement() method)
 		$this->add(array(
 			'type' => 'Zend\Form\Element\Collection',
 			'name' => 'relations',
@@ -145,8 +150,11 @@ class InstitutionFieldset extends Fieldset {
 
 
 	/**
-	 * @param FormInterface $form
-	 * @return mixed|void
+	 * Prepare elements
+	 * Replace relations with the correct amount of items
+	 *
+	 * @param	FormInterface	$form
+	 * @return	void
 	 */
 	public function prepareElement(FormInterface $form) {
 		$viewCount	= $form->getViewsCount();

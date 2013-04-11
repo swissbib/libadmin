@@ -53,8 +53,9 @@ abstract class BaseModel implements InputFilterAwareInterface {
 
 
 	/**
-	 * Get
-	 * @return array
+	 * Get data for record without relations
+	 *
+	 * @return	Array
 	 */
 	public function getBaseData() {
 		$data	= $this->getArrayCopy();

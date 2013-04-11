@@ -18,8 +18,8 @@ class BaseForm extends Form {
 		$this->add(array(
 			'name' => $name,
 			'attributes' => array(
-				'type'  => 'hidden',
-			),
+				'type'  => 'hidden'
+			)
 		));
 	}
 
@@ -41,7 +41,7 @@ class BaseForm extends Form {
 			),
 			'options' => array(
 				'label' => $label
-			),
+			)
 		));
 	}
 

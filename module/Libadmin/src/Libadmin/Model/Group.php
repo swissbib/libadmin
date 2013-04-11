@@ -36,6 +36,12 @@ class Group extends BaseModel {
 	public $views = array();
 
 
+
+	/**
+	 * Get data for the record (without relation data)
+	 *
+	 * @return	Array
+	 */
 	public function getBaseData() {
 		$data	= parent::getBaseData();
 
@@ -53,6 +59,16 @@ class Group extends BaseModel {
 	 */
 	public function getListLabel() {
 		return $this->code . ': ' . $this->label_de;
+	}
+
+
+	/**
+	 * Get type label
+	 *
+	 * @return	String
+	 */
+	public function getTypeLabel() {
+		return 'Group';
 	}
 
 
@@ -92,15 +108,6 @@ class Group extends BaseModel {
 	}
 
 
-
-	/**
-	 * Get type label
-	 *
-	 * @return	String
-	 */
-	public function getTypeLabel() {
-		return 'Group';
-	}
 
 	public function getCode() {
 		return $this->code;

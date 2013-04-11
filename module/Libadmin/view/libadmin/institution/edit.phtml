@@ -9,12 +9,11 @@ $institution    = $form->get('institution');
 $idInstitution	= (int)$institution->get('id')->getValue();
 $isNew			= !$idInstitution;
 
-$labelNew		= $this->translate('action_create',	'Libadmin');
-$labelUpdate	= $this->translate('action_update',	'Libadmin');
-$saveButtonLabel= $isNew ? $labelNew : $labelUpdate;
+$saveButtonLabel= $this->translate($isNew ? 'action_create' : 'action_update',	'Libadmin');
 
 $formType		= 'horizontal';
 
+	// Force Libadmin text domain (@todo cleaner way?)
 $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
 $this->formSelectTwb()->setTranslatorTextDomain('Libadmin');
 
@@ -49,7 +48,7 @@ $this->formSelectTwb()->setTranslatorTextDomain('Libadmin');
 		<ul class="nav nav-tabs formTabs">
 			<li class="active"><a href="#display"><?= $this->translate('display', 'Libadmin') ?></a></li>
 			<li><a href="#address"><?= $this->translate('address', 'Libadmin') ?></a></li>
-			<li><a href="#linking"><?= $this->translate('groups_and_views', 'Libadmin') ?></a></li>
+			<li><a href="#relations"><?= $this->translate('groups_and_views', 'Libadmin') ?></a></li>
 		</ul>
 
 		<div class="tab-content">
@@ -138,8 +137,20 @@ $this->formSelectTwb()->setTranslatorTextDomain('Libadmin');
 					</fieldset>
 				</div>
 
-				<div class="tab-pane" id="linking">
-                    <?=$this->formCollection($institution->get('relations'))?>
+				<div class="tab-pane" id="relations">
+					<?php foreach($institution->get('relations') as $relationFieldset): ?>
+						<div class="row">
+							<div class="span3 view">
+								<?=$this->formRowTwb($relationFieldset->get('id_view'))?>
+							</div>
+							<div class="span4 group">
+								<?=$this->formRowTwb($relationFieldset->get('id_group'))?>
+							</div>
+							<div class="span2 favorite">
+								<?=$this->formRowTwb($relationFieldset->get('is_favorite'))?>
+							</div>
+						</div>
+					<?php endforeach; ?>
 				</div>
 		</div>
 	</div>

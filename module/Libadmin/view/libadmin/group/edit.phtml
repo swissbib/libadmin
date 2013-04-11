@@ -7,12 +7,14 @@ $form->prepare();
 $idGroup		= (int)$form->get('id')->getValue();
 $isNew			= !$idGroup;
 
-$LabelNew		= $this->translate('action_create',	'Libadmin');
-$LabelUpdate	= $this->translate('action_update',	'Libadmin');
-$saveButtonLabel= $isNew ? $LabelNew : $labelUpdate;
+$saveButtonLabel= $this->translate($isNew ? 'action_create' : 'action_update',	'Libadmin');
 
 $formType	= 'horizontal';
 $group		= $form->get('group');
+
+	// Force Libadmin text domain (@todo cleaner way?)
+$this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
+$this->formSelectTwb()->setTranslatorTextDomain('Libadmin');
 
 ?>
 

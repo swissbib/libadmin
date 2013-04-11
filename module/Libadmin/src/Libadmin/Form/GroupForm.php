@@ -1,22 +1,21 @@
 <?php
 namespace Libadmin\Form;
 
+use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
+use Zend\Form\Element;
+
 use Libadmin\Form\BaseForm;
 use Libadmin\Table\ViewTable;
-use Zend\Form\Element;
-use Zend\Form\Fieldset;
-
-use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
 use Libadmin\Model\Group;
 
 /**
- * [Description]
+ * Group form
  *
  */
 class GroupForm extends BaseForm {
 
 	/**
-	 * @var	ViewTable
+	 * @var	ViewTable	To access views
 	 */
 	protected $viewTable;
 
@@ -44,19 +43,19 @@ class GroupForm extends BaseForm {
 			'name' => 'is_active',
 			'type'  => 'checkbox',
 			'options' => array(
-				'label' => $this->translate('is_active', 'Libadmin')
+				'label' => 'is_active'
 			)
 		));
-		$this->addText('label_de', $this->translate('language_german'), true);
-		$this->addText('label_fr', $this->translate('language_french'), true);
-		$this->addText('label_it', $this->translate('language_italian'), true);
-		$this->addText('label_en', $this->translate('language_english'), true);
+		$this->addText('label_de', 'language_german', true);
+		$this->addText('label_fr', 'language_french', true);
+		$this->addText('label_it', 'language_italian', true);
+		$this->addText('label_en', 'language_english', true);
 
 		$this->add(array(
 			'name' => 'notes',
 			'type'  => 'textarea',
 			'options' => array(
-				'label' => $this->translate('internal_notes', 'Libadmin')
+				'label' => 'internal_notes'
 			),
 			'attributes' => array(
 				'rows'	=> 10

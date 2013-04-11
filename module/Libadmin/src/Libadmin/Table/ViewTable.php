@@ -14,8 +14,6 @@ use Zend\Db\ResultSet\ResultSet;
 
 use Libadmin\Table\BaseTable;
 use Libadmin\Model\View;
-//use Libadmin\Model\BaseModel;
-//use Libadmin\Model\View;
 
 
 class ViewTable extends BaseTable {
@@ -72,6 +70,13 @@ class ViewTable extends BaseTable {
 	}
 
 
+
+	/**
+	 * Save with with group relations
+	 *
+	 * @param	View	$view
+	 * @return	Integer
+	 */
 	public function save(View $view) {
 		$idView	= parent::save($view);
 
@@ -82,7 +87,7 @@ class ViewTable extends BaseTable {
 
 
 	/**
-	 * Save groups relation
+	 * Save group relations
 	 *
 	 * @param	Integer		$idView
 	 * @param	Integer[]	$newGroupIDs

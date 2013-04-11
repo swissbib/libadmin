@@ -4,19 +4,35 @@ namespace Libadmin\Model;
 use Libadmin\Model\BaseModel;
 
 /**
- * [Description]
+ * Relation between institution, group and view
+ * Persisted in mm_institution_group_view
  *
  */
 class InstitutionRelation extends BaseModel {
 
-    public $id_view;
+	/**
+	 * @var	Integer
+	 */
+	public $id_view;
 
+	/**
+	 * @var	Integer
+	 */
 	public $id_group;
 
+	/**
+	 * @var	Integer
+	 */
 	public $id_institution;
 
+	/**
+	 * @var	Integer|Boolean
+	 */
 	public $is_favorite;
 
+	/**
+	 * @var	Integer
+	 */
 	public $position;
 
 

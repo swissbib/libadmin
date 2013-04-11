@@ -45,6 +45,26 @@ ul.adminNavi {
 	margin-top: 50px;
 }
 
+#relations .group label {
+	display: none;
+}
+
+#relations .group .controls {
+	margin-left: 0;
+}
+
+#relations .group .controls select {
+	width: 90%;
+}
+
+#relations .favorite .control-group > label {
+	width: 100px;
+}
+
+#relations .favorite .controls {
+	margin-left: 120px;
+}
+
 
 
 

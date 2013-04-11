@@ -1,11 +1,15 @@
 <?php
 namespace Libadmin\Table;
 
-use Libadmin\Model\InstitutionRelation;
+
 use Zend\Db\Sql\Delete;
+use Zend\Db\ResultSet\ResultSet;
+
+use Libadmin\Model\InstitutionRelation;
+
 
 /**
- * [Description]
+ * Relation table for institution-group-view
  *
  */
 class InstitutionRelationTable extends BaseTable {
@@ -39,27 +43,28 @@ class InstitutionRelationTable extends BaseTable {
 	}
 
 
+
+	/**
+	 * Remove all relations for an institution
+	 *
+	 * @param	Integer		$idInstitution
+	 * @return	Boolean
+	 */
 	public function clear($idInstitution) {
 		return $this->tableGateway->delete(array(
 			'id_institution'	=> (int)$idInstitution
-		));
+		)) > 0;
 	}
 
 
 
 	/**
-	 * @param $idInstitution
-	 * @return \Zend\Db\ResultSet\ResultSet
+	 * Get relations for an institution
+	 *
+	 * @param	Integer		$idInstitution
+	 * @return	ResultSet
 	 */
 	public function getRelations($idInstitution) {
-//		$select 		= new Select();
-//		$likeCondition	= $this->getSearchFieldsLikeCondition($searchString);
-//
-//		$select->from($this->getTable())
-//				->order($order)
-//				->limit($limit)
-//				->where($likeCondition);
-
 		$results = $this->tableGateway->select(array(
 			'id_institution'	=> (int)$idInstitution
 		));
@@ -71,11 +76,6 @@ class InstitutionRelationTable extends BaseTable {
 		}
 
 		return $relations;
-
-//		$sql = new Sql($this->tableGateway->getAdapter(), $this->getTable());
-//		var_dump($sql->getSqlStringForSqlObject($select));
-
-//		return $this->tableGateway->selectWith($select);
 	}
 
 }

@@ -6,20 +6,19 @@ use Libadmin\Model\View;
 use Zend\Form\Element\Checkbox;
 use Zend\Form\Fieldset;
 use Zend\Form\FormInterface;
-use Zend\Stdlib\Hydrator\ArraySerializable as ArrayHydrator;
-use Zend\Stdlib\Hydrator\ClassMethods  as ClassMethodsHydrator;
 use Zend\Stdlib\Hydrator\ObjectProperty as ObjectPropertyHydrator;
 
 
 /**
- * [Description]
+ * Institution relation fieldset
  *
  */
 class InstitutionRelationFieldset extends Fieldset {
 
-
-
-
+	/**
+	 * Initialize
+	 *
+	 */
 	public function __construct() {
 		parent::__construct('link');
 
@@ -60,6 +59,13 @@ class InstitutionRelationFieldset extends Fieldset {
 
 
 
+	/**
+	 * Modify view checkbox for relation.
+	 * Set checked value to view id to pass the validation (only initial values are allowed)
+	 *
+	 * @param	FormInterface|InstitutionForm	$form
+	 * @return mixed|void
+	 */
 	public function prepareElement(FormInterface $form) {
 		parent::prepareElement($form);
 
@@ -73,13 +79,19 @@ class InstitutionRelationFieldset extends Fieldset {
 		$viewCheckbox->setLabel($view->getLabel());
 	}
 
+
+
+	/**
+	 * Set unchecked values to pass the validation
+	 *
+	 * @param	Array|\Traversable	$data
+	 */
 	public function populateValues($data) {
 		$this->elements['id_view']->setUncheckedValue($data['id_view']);
 		$this->elements['is_favorite']->setUncheckedValue($data['is_favorite']);
 
 		parent::populateValues($data);
 	}
-
 
 }
 

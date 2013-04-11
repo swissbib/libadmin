@@ -2,14 +2,15 @@
 namespace Libadmin\Controller;
 
 use Libadmin\Model\InstitutionRelation;
-use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Db\ResultSet\ResultSetInterface;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
+use Zend\Db\ResultSet\ResultSet;
 
 use Libadmin\Form\InstitutionForm;
 use Libadmin\Model\Institution;
-use Libadmin\Table\InstitutionTable;
 use Libadmin\Controller\BaseController;
+use Libadmin\Model\View;
 
 
 /**
@@ -24,8 +25,7 @@ class InstitutionController extends BaseController {
 	 * @return Response|ViewModel
 	 */
 	public function addAction() {
-		$views			= $this->getTable('View')->getAll();
-		$form			= new InstitutionForm($views);
+		$form			= $this->getInstitutionForm();
 		$flashMessenger	= $this->flashMessenger();
         $institution    = new Institution();
 
@@ -76,15 +76,14 @@ class InstitutionController extends BaseController {
 
 		try {
 			/** @var InstitutionForm $institution  */
-			$institution = $this->getInstitution($idInstitution);
+			$institution = $this->getInstitutionForEdit($idInstitution);
 		} catch(\Exception $ex ) {
 			$flashMessenger->addErrorMessage('InstitutionForm not found');
 
 			return $this->forwardTo('home');
 		}
 
-		$views= $this->getTable('View')->getAll();
-		$form = new InstitutionForm($views);
+		$form = $this->getInstitutionForm();
 		$form->bind($institution);
 
 		$request = $this->getRequest();
@@ -96,6 +95,7 @@ class InstitutionController extends BaseController {
 				$this->getTable()->save($form->getData());
 				$flashMessenger->addSuccessMessage('InstitutionForm saved');
 			} else {
+				//$messages = $form->getMessages();
 				$flashMessenger->addErrorMessage('Form not valid');
 			}
 		}
@@ -109,12 +109,68 @@ class InstitutionController extends BaseController {
 	}
 
 
-	protected function getInstitution($idInstitution) {
-		$institution = $this->getTable()->getRecord($idInstitution);
+	protected function getInstitutionForEdit($idInstitution) {
+		$institution		= $this->getTable()->getRecord($idInstitution);
+		/** @var View[]	$views  */
+		$views				= $this->getViews();
+		/** @var InstitutionRelation[] $existingRelations  */
+		$existingRelations	= $this->getTable('InstitutionRelation')->getRelations($idInstitution);
+		$relations			= array();
 
-		$institution->setRelations($this->getTable('InstitutionRelation')->getRelations($idInstitution));
+
+
+		foreach($views as $view) {
+			foreach($existingRelations as $index => $existingRelation) {
+				if( $view->getId() == $existingRelation->getIdView() ) {
+					$relations[] = $existingRelation;
+					unset($existingRelations[$index]);
+					continue 2;
+				}
+			}
+			$relations[] = new InstitutionRelation();
+		}
+
+		$institution->setRelations($relations);
 
 		return $institution;
+	}
+
+	protected function getViews() {
+		$results= $this->getTable('View')->getAll(30, 'id');
+
+		return $this->toList($results);
+	}
+
+
+	protected function getGroups() {
+		$results	= $this->getTable('Group')->getAll();
+
+		return $this->toList($results);
+	}
+
+	protected function toList(ResultSetInterface $set) {
+		$list	= array();
+
+		foreach($set as $item) {
+			$list[] = $item;
+		}
+
+		return $list;
+	}
+
+
+
+	/**
+	 *
+	 *
+	 * @return	InstitutionForm
+	 */
+	protected function getInstitutionForm() {
+		$views	= $this->getViews();
+		$groups	= $this->getGroups();
+
+		/** @var InstitutionForm $form  */
+		return new InstitutionForm($views, $groups);
 	}
 
 }

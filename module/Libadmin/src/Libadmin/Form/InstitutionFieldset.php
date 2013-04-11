@@ -1,10 +1,11 @@
 <?php
 namespace Libadmin\Form;
 
+use Libadmin\Form\Element\NoValidationCheckbox;
 use Zend\Form\Fieldset;
-use Zend\Form\FormInterface;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
 use Libadmin\Model\Institution;
+use Libadmin\Model\View;
 
 /**
  * Base fieldset for institution
@@ -17,8 +18,8 @@ class InstitutionFieldset extends Fieldset {
 	 * Initialize
 	 *
 	 */
-	public function __construct() {
-        parent::__construct('institution');
+	public function __construct($views, $options = array()) {
+        parent::__construct('institution', $options);
 
         $this->setHydrator(new ClassMethodsHydrator(false))
                ->setObject(new Institution());
@@ -135,48 +136,38 @@ class InstitutionFieldset extends Fieldset {
         $this->addText('isil', 'isil');
 
 			// Relation fieldset (this may be replaced for new records in prepareElement() method)
+		$this->addRelations($views);
+    }
+
+
+
+	/**
+	 * Add relations based on views
+	 *
+	 * @param	View[]	$views
+	 */
+	protected function addRelations($views) {
 		$this->add(array(
 			'type' => 'Zend\Form\Element\Collection',
 			'name' => 'relations',
 			'options' => array(
+				'count' => sizeof($views),
 				'target_element' => array(
 					'type' => 'Libadmin\Form\InstitutionRelationFieldset'
 				)
 			)
 		));
 
-    }
+		/** @var Fieldset[]	$relations  */
+		$relations	= $this->get('relations')->fieldsets;
 
+		foreach($relations as $index => $relation) {
+			/** @var NoValidationCheckbox $viewCheckbox  */
+			$viewCheckbox = $relation->get('id_view');
 
-
-	/**
-	 * Prepare elements
-	 * Replace relations with the correct amount of items
-	 *
-	 * @param	FormInterface	$form
-	 * @return	void
-	 */
-	public function prepareElement(FormInterface $form) {
-		$viewCount	= $form->getViewsCount();
-		$relations	= $this->get('relations');
-
-		if( $viewCount !== $relations->getCount() ) {
-			/** @var InstitutionForm $form */
-			$this->remove('relations');
-
-			$this->add(array(
-				'type' => 'Zend\Form\Element\Collection',
-				'name' => 'relations',
-				'options' => array(
-					'count' => $form->getViewsCount(),
-					'target_element' => array(
-						'type' => 'Libadmin\Form\InstitutionRelationFieldset'
-					)
-				)
-			));
+			$viewCheckbox->setCheckedValue((string)$views[$index]->getid());
+			$viewCheckbox->setLabel($views[$index]->getLabel());
 		}
-
-		parent::prepareElement($form);
 	}
 
 

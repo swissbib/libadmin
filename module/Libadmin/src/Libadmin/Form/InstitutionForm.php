@@ -6,7 +6,7 @@ use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
 use Zend\Db\ResultSet\ResultSet;
 
 use Libadmin\Form\BaseForm;
-use Libadmin\Model\View;
+use Libadmin\Form\InstitutionFieldset;
 
 
 /**
@@ -18,42 +18,30 @@ use Libadmin\Model\View;
 class InstitutionForm extends BaseForm {
 
 	/**
-	 * @var	ResultSet	Contains views
+	 * @var	Array	Contains views
 	 */
-	public $views;
+	public $views = array();
 
+	public $groups = array();
 
 
 	/**
 	 * Initialize
 	 *
-	 * @param	ResultSet		$views
-	 * @param	Array			$options
-	 */
-	public function __construct(ResultSet $views = null, $options = array()) {
-		parent::__construct('institution', $options);
 
-		$this->views	= $views;
+	 */
+	public function __construct(array $views, array $groups) {
+		parent::__construct('institution');
 
         $this->setHydrator(new ClassMethodsHydrator(false));
 
-        $this->add(array(
-            'type'  => 'Libadmin\Form\InstitutionFieldset',
-            'options'   => array(
-                'use_as_base_fieldset' => true
-            )
-        ));
-	}
+		$this->views = $views;
+		$this->groups = $groups;
 
+		$fieldset	= new InstitutionFieldset($views);
+		$fieldset->setUseAsBaseFieldset(true);
 
-
-	/**
-	 * Get amount of views
-	 *
-	 * @return	Integer
-	 */
-	public function getViewsCount() {
-		return $this->views instanceof ResultSet ? $this->views->count() : 0;
+		$this->add($fieldset);
 	}
 
 }

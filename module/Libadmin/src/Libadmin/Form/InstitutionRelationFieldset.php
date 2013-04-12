@@ -42,7 +42,7 @@ class InstitutionRelationFieldset extends Fieldset {
 			'name' => 'id_group',
 			'type' => 'Libadmin\Form\Element\NoValidationSelect',
 			'options' => array(
-				'label' => 'Gruppe'
+//				'label' => 'Gruppe'
 			)
 		));
 
@@ -50,7 +50,7 @@ class InstitutionRelationFieldset extends Fieldset {
 			'name'	=> 'is_favorite',
 			'type'  => 'Libadmin\Form\Element\NoValidationCheckbox',
 			'options'   => array(
-				'label' => 'Ist Favorit',
+				'label' => 'is_favorite',
 				'checked_value' => '1',
 				'unchecked_value' => '0'
 			),

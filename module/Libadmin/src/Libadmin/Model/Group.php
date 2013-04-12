@@ -73,12 +73,6 @@ class Group extends BaseModel {
 
 
 
-	public function getIsActive() {
-		return $this->is_active;
-	}
-
-
-
 	public function getLabel_de() {
 		return $this->label_de;
 	}
@@ -113,21 +107,18 @@ class Group extends BaseModel {
 		return $this->code;
 	}
 
-	public function getIs_Active() {
-		return $this->is_active;
-	}
-
-
 	public function setCode($code) {
 		$this->code = $code;
 	}
 
 
-
-	public function setIsActive($is_active) {
-		$this->is_active = $is_active;
+	public function getIs_active() {
+		return $this->is_active;
 	}
 
+	public function setIs_active($is_active) {
+		$this->is_active = $is_active;
+	}
 
 
 	public function setLabel_De($label_de) {

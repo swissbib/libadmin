@@ -78,7 +78,9 @@ class GroupTable extends BaseTable {
 
 
 	/**
-	 * @param $idGroup
+	 * Get IDs of views which are related to the group
+	 *
+	 * @param	Integer		$idGroup
 	 * @return	Integer[]
 	 */
 	public function getViewIDs($idGroup) {
@@ -86,6 +88,47 @@ class GroupTable extends BaseTable {
 	}
 
 
+
+	/**
+	 * Get all groups which are related to a view over an institution
+	 *
+	 * @param	Integer		$idView
+	 * @param	Boolean		$activeOnly
+	 * @return	null|ResultSetInterface
+	 */
+	public function getAllViewGroups($idView, $activeOnly = true) {
+		$select	= new Select($this->getTable());
+
+		$select->columns(array('*'))
+				->join(array('mm' => 'mm_institution_group_view'), 'group.id = mm.id_group', array(), $select::JOIN_RIGHT)
+				->where(array(
+					'mm.id_view'	=> (int)$idView
+				))
+				->order('group.code')
+				->group('group.id');
+
+		if( $activeOnly ) {
+			$select->join(array('i' => 'institution'), 'mm.id_institution = i.id', array());
+			$select->where(array(
+				'group.is_active'	=> 1,
+				'i.is_active'		=> 1
+			));
+		}
+
+//		$sql = new Sql($this->tableGateway->getAdapter(), $this->getTable());
+//		var_dump($sql->getSqlStringForSqlObject($select));
+
+		return $this->tableGateway->selectWith($select);
+	}
+
+
+
+	/**
+	 * Save group
+	 *
+	 * @param	Group	$group
+	 * @return	Integer
+	 */
 	public function save(Group $group) {
 		$idGroup	= parent::save($group);
 

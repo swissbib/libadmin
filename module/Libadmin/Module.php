@@ -15,6 +15,7 @@ use Libadmin\Form\GroupForm;
 use Libadmin\Model\View;
 use Libadmin\Table\ViewTable;
 use Libadmin\Form\ViewForm;
+use Libadmin\Helper\RelationOverview;
 
 
 class Module {
@@ -104,6 +105,12 @@ class Module {
 					$groupTable = $sm->get('Libadmin\Table\GroupTable');
 
 					return new ViewForm($groupTable);
+				},
+				'RelationOverviewHelper' => function($sm) {
+					$groupTable			= $sm->get('Libadmin\Table\GroupTable');
+					$institutionTable	= $sm->get('Libadmin\Table\InstitutionTable');
+
+					return new RelationOverview($groupTable, $institutionTable);
 				}
 			)
 		);

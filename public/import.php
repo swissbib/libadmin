@@ -18,11 +18,8 @@ try {
 
 
 
-// ==============================================================================
-
 /**
- * Libadmin Importer
- * Imports data from XML file into Database
+ * Import data from XML file into Database
  */
 class Importer {
 
@@ -38,11 +35,8 @@ class Importer {
 
 	/**
 	 * @var	Array	Keys of languages to be imported
-	 * @todo		What about nl? not in DB structure (institution table) but contained in library xml nodes
 	 */
 	private $languageKeys	= array('de', 'fr', 'it', 'en');
-
-
 
 	/**
 	 * Constructor
@@ -98,20 +92,20 @@ class Importer {
 			$fieldsValues	= array(
 //				'id'			=> (string) $library->id,
 				'bib_code'		=> (string) $library->libraryIdentifier,
-				'sys_code'		=> (string) $library->name,					// @todo	correct mapping?
+				'sys_code'		=> (string) $library->name,
 				'is_active'		=> 1,
 				'address'		=> (string) $library->road,
 				'zip'			=> (string) $library->zipCode,
 				'city'			=> (string) $library->town,
-				'country'		=> 'CH',									// @todo	or which ISO / language?
-				'canton'		=> $this->getCantonFromZip( (string) $library->zipCode ),
+				'country'		=> 'ch',
+				'canton'		=> dataHelper::getCantonFromZip( (string) $library->zipCode ),
 				'website'		=> (string) $library->addressURL,
 				'email'			=> '',
 				'phone'			=> '',
 				'skype'			=> '',
 				'facebook'		=> '',
 				'coordinates'	=> '',
-				'isil'			=> $this->getISIL( (string) $library->libraryIdentifier ),	// @todo check
+				'isil'			=> dataHelper::getISIL( (string) $library->libraryIdentifier, 'ch' ),
 				'notes'			=> '',
 			);
 				// Add label translations
@@ -135,34 +129,6 @@ class Importer {
 				throw new Exception( $e->getMessage() );
 			}
 		}
-	}
-
-	/**
-	 * Get ISIL from institution code
-	 *
-	 * @param	String	$institutionCode	Institution code
-	 * @return	String
-	 */
-	private function getISIL($institutionCode = '') {
-		/**
-		 * ISIL = International Standard Identifier for Libraries and Related Organizations, ISO 15511
-		 *
-		 * Rules for valid institution code
-		 *		* Containing A-Z, a-z, 0-9, special chars: -, /, :
-		 * 		* Maximum length:	11 chars
-		 *
-		 * @see	http://de.wikipedia.org/wiki/ISO_15511#ISIL
-		 */
-		return 'CH-' . $institutionCode;
-	}
-
-	/**
-	 * @param	String	$zipCode
-	 * @return	String
-	 */
-	private function getCantonFromZip($zipCode) {
-		//@todo		implement maybe later...
-		return '';
 	}
 
 	/**
@@ -230,7 +196,7 @@ class Importer {
 // ==============================================================================
 
 /**
- * Database query helper class
+ * Database utility class
  */
 class DB {
 	/**
@@ -369,7 +335,44 @@ class DB {
 	 * (Over)write query log file
 	 */
 	public function storeQueryLog() {
-		// @todo	implement
+		// @todo	implement?
 	}
 
+}
+
+// ==============================================================================
+
+/**
+ * Static utility class for data conversion / generation methods
+ */
+class dataHelper {
+
+	/**
+	 * Get ISIL from institution code
+	 *
+	 * @param	String	$institutionCode	Institution code
+	 * @param	String	$countryCode
+	 * @return	String
+	 */
+	public static function getISIL($institutionCode = '', $countryCode = 'ch') {
+		/**
+		 * ISIL = International Standard Identifier for Libraries and Related Organizations, ISO 15511
+		 *
+		 * Rules for valid institution code
+		 *		* Containing A-Z, a-z, 0-9, special chars: -, /, :
+		 * 		* Maximum length:	11 chars
+		 *
+		 * @see	http://de.wikipedia.org/wiki/ISO_15511#ISIL
+		 */
+		return strtoupper($countryCode) . '-' . $institutionCode;
+	}
+
+	/**
+	 * @param	String	$zipCode
+	 * @return	String
+	 */
+	public static function getCantonFromZip($zipCode) {
+		//@todo		implement maybe later...
+		return '';
+	}
 }

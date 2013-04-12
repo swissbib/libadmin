@@ -7,10 +7,10 @@ chdir(dirname(__DIR__));
 	// Take database credentials from ZF2 local config
 $zf2LocalConf	= include('config/autoload/local.php');
 try {
-	$importer	= new LibadminXmlImporter($zf2LocalConf['db']);
+	$importer	= new Importer($zf2LocalConf['db']);
 	$xmlFile	= 'module/Libadmin/data/tpgreen-libraries.xml';
 
-	echo $importer->import('module/Libadmin/data/tpgreen-libraries.xml', true);
+	echo $importer->import('module/Libadmin/data/tpgreen-libraries.xml');
 
 } catch(Exception $e) {
 	die('IMPORT FAILED - ' . $e->getMessage() );
@@ -18,18 +18,25 @@ try {
 
 
 
-// ==============================================================================
-
 /**
- * Libadmin Importer
- * Imports data from XML file into Database
+ * Import data from XML file into Database
  */
-class LibadminXmlImporter {
+class Importer {
 
 	/**
 	 * @var	Array
 	 */
-	private $__dbConfig;
+	private $dbConfig;
+
+	/**
+	 * @var	DB
+	 */
+	private $DB;
+
+	/**
+	 * @var	Array	Keys of languages to be imported
+	 */
+	private $languageKeys	= array('de', 'fr', 'it', 'en');
 
 	/**
 	 * Constructor
@@ -50,57 +57,103 @@ class LibadminXmlImporter {
 			throw new Exception('Invalid database configuration.');
 		}
 
-		$this->__dbConfig	= $dbConfig;
+		$this->dbConfig	= $dbConfig;
 	}
 
 	/**
 	 * @throws	Exception
 	 * @param	String		$file			XML file to be imported
-	 * @param	Boolean		$validateDTD	Validate XML from DTD? (DTD must be in same folder as XML)
 	 * @return	String
 	 */
-	public function import($file, $validateDTD = false) {
+	public function import($file) {
 		try {
 			$this->connectToDatabase();
 
 			/** @var $xml SimpleXMLElement */
-			$xml	= $this->initSimpleXmlFromFromFile($file, $validateDTD);
-
-//@todo parse XML and insert the data into DB...
-
+			$xml	= $this->initSimpleXmlFromFromFile($file);
+			$this->importLibraries( $xml->libraries );
+//			$queryLogfile	= $this->DB->storeQueryLog();
 		} catch(Exception $e) {
 			throw new Exception( $e->getMessage() );
 		}
 
-		return 'Data from "' . basename($file) . '" has been successfully imported.';
+		return	'Data from "' . basename($file) . '" has been successfully imported.';
 	}
 
 	/**
+	 * Import nodes from given SimpleXMLElement into given table
+	 *
+	 * @throws	Exception
+	 * @param	SimpleXMLElement[]	$xmlNodes
+	 * @param	String				$table
+	 */
+	private function importLibraries($xmlNodes, $table	= 'institution') {
+		foreach($xmlNodes->children() as $library) {
+			$fieldsValues	= array(
+//				'id'			=> (string) $library->id,
+				'bib_code'		=> (string) $library->libraryIdentifier,
+				'sys_code'		=> (string) $library->name,
+				'is_active'		=> 1,
+				'address'		=> (string) $library->road,
+				'zip'			=> (string) $library->zipCode,
+				'city'			=> (string) $library->town,
+				'country'		=> 'ch',
+				'canton'		=> dataHelper::getCantonFromZip( (string) $library->zipCode ),
+				'website'		=> (string) $library->addressURL,
+				'email'			=> '',
+				'phone'			=> '',
+				'skype'			=> '',
+				'facebook'		=> '',
+				'coordinates'	=> '',
+				'isil'			=> dataHelper::getISIL( (string) $library->libraryIdentifier, 'ch' ),
+				'notes'			=> '',
+			);
+				// Add label translations
+			$translations	= $library->translation->translations;
+			foreach($translations->children() as $translation) {
+				$languageKey= strtolower((string) $translation->key);
+				if( in_array($languageKey, $this->languageKeys) ) {
+					$fieldsValues['label_' . $languageKey]	= (string) $translation->value;
+				}
+			}
+
+				// Add URLs
+			$url	= (string) $library->url;
+			foreach($this->languageKeys as $key) {
+				$fieldsValues['url_' . $key]	= $url;
+			}
+
+			try {
+				$this->DB->execInsert($fieldsValues, $table);
+			} catch(Exception $e) {
+				throw new Exception( $e->getMessage() );
+			}
+		}
+	}
+
+	/**
+	 * Validate XML file via DTD, create SimpleXMLElement from it
+	 * Precondition: "markup.dtd" must exist in the same folder as the XML file
+	 *
 	 * @throws	Exception
 	 * @param	String				$file
-	 * @param	Boolean				$validate	Use libadmin.dtd from same location as XML to validate?
-	 * @return	SimpleXMLElement				SimpleXMLElement Object from contents of given XML file
+	 * @return	SimpleXMLElement	SimpleXMLElement Object from contents of given XML file
 	 */
-	private function initSimpleXmlFromFromFile($file, $validate = false) {
-			// Load XML file contents
+	private function initSimpleXmlFromFromFile($file) {
 		try {
 			$xmlString	= $this->getFileContents($file);
 				// Ensure XML to be not empty
 			if( empty($xmlString) ) {
 				throw new Exception('Import file: "' . basename($file) . '" is empty!');
 			}
-				// Optional: ensure XML to be valid
-			if( $validate ) {
-					// Load and insert DTD
-				$dtd	= $this->getFileContents( dirname($file) . DIRECTORY_SEPARATOR . 'libadmin.dtd');
-				$xmlString	= str_replace('<libraryconfiguration>', $dtd . '<libraryconfiguration>', $xmlString);
-
-					// Validate XML from DTD
-				$dom = new DOMDocument;
-				$dom->loadXML($xmlString);
-				if( !$dom->validate() ) {
-					throw new Exception('Invalid XML in file: "' . basename($file) . '".');
-				}
+				// Ensure XML to be valid - load and insert DTD
+			$dtd	= $this->getFileContents( dirname($file) . DIRECTORY_SEPARATOR . 'markup.dtd');
+			$xmlString	= str_replace('<libraryconfiguration>', $dtd . '<libraryconfiguration>', $xmlString);
+				// Validate XML from DTD
+			$dom = new DOMDocument;
+			$dom->loadXML($xmlString);
+			if( !$dom->validate() ) {
+				throw new Exception('Invalid XML in file: "' . basename($file) . '".');
 			}
 		} catch(Exception $e) {
 			throw new Exception($e->getMessage());
@@ -128,12 +181,12 @@ class LibadminXmlImporter {
 	 * @throws	Exception
 	 */
 	public function connectToDatabase() {
-		$dsn		= $this->__dbConfig['dsn'];
-		$server		= substr($dsn, strpos($dsn, ';host=') + 6);
+		$dsn		= $this->dbConfig['dsn'];
+		$host		= substr($dsn, strpos($dsn, ';host=') + 6);
 		$database	= substr($dsn, strpos($dsn, 'dbname=') + 7, strlen($dsn) - (strpos($dsn, ';host=')) - strlen('mysql:') - 1);
 
 		try {
-			$this->db	= new DB($server, $database, $this->__dbConfig['username'], $this->__dbConfig['password']);
+			$this->DB	= new DB($host, $database, $this->dbConfig['username'], $this->dbConfig['password']);
 		} catch(Exception $e) {
 			throw(new Exception($e->getMessage()));
 		}
@@ -143,32 +196,183 @@ class LibadminXmlImporter {
 // ==============================================================================
 
 /**
- * Database query helper class
+ * Database utility class
  */
 class DB {
 	/**
 	 * @var	Resource	MySQL link identifier
 	 */
-	protected $link;
+	private $link;
+
+	/**
+	 * @var	String
+	 */
+	private $queryLog;
+
+
 
 	/**
 	 * Connect to database
 	 *
 	 * @throws	Exception
-	 * @param	String		$server
+	 * @param	String		$host
 	 * @param	String		$database
 	 * @param	String		$username
 	 * @param	String		$password
 	 */
-	public function __construct($server, $database, $username, $password) {
-		$this->link = mysql_connect($server, $username, $password);
-		if( $this->link ) {
-			if( ! mysql_select_db($database, $this->link) ) {
-				throw new Exception('Selecting database failed');
+	public function __construct($host, $database, $username, $password) {
+		$this->link = mysqli_connect($host, $username, $password);
+		if( $this->isConnected() ) {
+			if( ! mysqli_select_db($this->link, $database) ) {
+				$errorMessage	= 'Selecting database failed';
+				$this->prependToQueryLog($errorMessage . ' - host:' . $host . ', database: ' . $database);
+				throw new Exception($errorMessage);
 			}
 		} else {
-			throw new Exception('MySQL connection failed');
+			$errorMessage	= 'MySQL connection failed.';
+			$this->prependToQueryLog($errorMessage . ' - host:' . $host . ', database: ' . $database . ', user: ' . $username . ', password: ' . $password);
+			throw new Exception($errorMessage);
 		}
 	}
 
+	/**
+	 * @return	Boolean		Database link setup correctly?
+	 */
+	private function isConnected() {
+		return is_object(($this->link)) && get_class($this->link) === 'mysqli';
+	}
+
+	/**
+	 * @throws	Exception
+	 * @param	Array	$fieldsValues
+	 * @param	String	$table
+	 */
+	public function execInsert(array $fieldsValues, $table) {
+		try {
+			$this->query( $this->buildInsertQuery($fieldsValues, $table) );
+
+		} catch(Exception $e) {
+			throw new Exception( $e->getMessage() );
+		}
+	}
+
+	/**
+	 * Build INSERT query
+	 *
+	 * @param	Array	$fieldsValues
+	 * @param	String	$table
+	 * @return	String
+	 */
+	private function buildInsertQuery(array $fieldsValues, $table) {
+		$fieldsValues	= self::prepareValuesForInsert($fieldsValues);
+		$table			= trim($table);
+
+		$query	=
+			'INSERT INTO `' . $table . '` ' . "\n"
+		  . '			(' . implode(',', array_keys($fieldsValues)) . ') ' . "\n"
+		  . ' VALUES	(' . implode(',', array_values($fieldsValues)) . '); ';
+
+		return $query;
+	}
+
+	/**
+	 * @throws	Exception
+	 * @param	Array		$fieldsValues
+	 * @return	Array
+	 */
+	private function prepareValuesForInsert(array $fieldsValues) {
+		if( $this->isConnected() ) {
+			foreach($fieldsValues as $key => $value) {
+				$fieldsValues[$key]	= '\'' . mysqli_real_escape_string($this->link, trim($value)) . '\'';
+			}
+		} else {
+			throw new Exception('Query failed: no database link');
+		}
+
+		return $fieldsValues;
+	}
+
+	/**
+	 * Send MySql query and add it the log
+	 *
+	 * @throws	Exception
+	 * @param	String			$query
+	 * @return	Object|Boolean
+	 */
+	private function query($query) {
+		if( $this->isConnected() ) {
+			$query		= trim($query);
+			$resource	= mysqli_query($this->link, $query);
+
+			$this->prependToQueryLog($query);
+			if( mysqli_errno($this->link) ) {
+				$errorMessage	= 'MySQL query failed: ' . mysqli_error($this->link);
+				$this->prependToQueryLog($errorMessage, false);
+				throw new Exception($errorMessage);
+			}
+		} else {
+			throw new Exception('Query failed: no database link');
+		}
+
+		return $resource;
+	}
+
+	/**
+	 * Add given query to top of query log
+	 *
+	 * @param	String	$query
+	 * @param	Boolean	$withTimestamp
+	 */
+	private function prependToQueryLog($query, $withTimestamp = true) {
+		$this->queryLog =
+			( $withTimestamp ? '---------------- ' . date('Y-m-d H:m:s') : '' )
+		.	"\n" . $query
+		.	"\n\n"
+		.	$this->queryLog;
+	}
+
+	/**
+	 * (Over)write query log file
+	 */
+	public function storeQueryLog() {
+		// @todo	implement?
+	}
+
+}
+
+// ==============================================================================
+
+/**
+ * Static utility class for data conversion / generation methods
+ */
+class dataHelper {
+
+	/**
+	 * Get ISIL from institution code
+	 *
+	 * @param	String	$institutionCode	Institution code
+	 * @param	String	$countryCode
+	 * @return	String
+	 */
+	public static function getISIL($institutionCode = '', $countryCode = 'ch') {
+		/**
+		 * ISIL = International Standard Identifier for Libraries and Related Organizations, ISO 15511
+		 *
+		 * Rules for valid institution code
+		 *		* Containing A-Z, a-z, 0-9, special chars: -, /, :
+		 * 		* Maximum length:	11 chars
+		 *
+		 * @see	http://de.wikipedia.org/wiki/ISO_15511#ISIL
+		 */
+		return strtoupper($countryCode) . '-' . $institutionCode;
+	}
+
+	/**
+	 * @param	String	$zipCode
+	 * @return	String
+	 */
+	public static function getCantonFromZip($zipCode) {
+		//@todo		implement maybe later...
+		return '';
+	}
 }

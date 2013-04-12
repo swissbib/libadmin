@@ -97,5 +97,3 @@ class InstitutionRelationFieldset extends Fieldset {
 	}
 
 }
-
-?>

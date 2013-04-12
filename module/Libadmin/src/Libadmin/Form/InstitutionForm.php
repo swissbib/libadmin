@@ -46,8 +46,6 @@ class InstitutionForm extends BaseForm {
 
 }
 
-?>
-
 
 
 

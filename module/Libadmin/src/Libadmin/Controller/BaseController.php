@@ -236,5 +236,3 @@ abstract class BaseController extends AbstractActionController {
 	}
 
 }
-
-?>

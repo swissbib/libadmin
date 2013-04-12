@@ -82,8 +82,6 @@ class GroupForm extends BaseForm {
 
 }
 
-?>
-
 
 
 

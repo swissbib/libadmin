@@ -19,5 +19,3 @@ class NoValidationSelect extends BaseSelect {
 	}
 
 }
-
-?>

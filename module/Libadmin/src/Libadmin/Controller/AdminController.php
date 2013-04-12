@@ -11,5 +11,3 @@ use Zend\View\Model\ViewModel;
 class AdminController extends AbstractActionController {
 
 }
-
-?>

@@ -174,5 +174,3 @@ class InstitutionController extends BaseController {
 	}
 
 }
-
-?>

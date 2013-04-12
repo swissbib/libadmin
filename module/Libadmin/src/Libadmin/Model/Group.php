@@ -1,17 +1,5 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: swissbib
- * Date: 12/13/12
- * Time: 2:58 PM
- * To change this template use File | Settings | File Templates.
- */
 namespace Libadmin\Model;
-
-//use Zend\InputFilter\Factory as InputFactory;     // <-- Add this import
-//use Zend\InputFilter\InputFilter;                 // <-- Add this import
-//use Zend\InputFilter\InputFilterAwareInterface;   // <-- Add this import
-//use Zend\InputFilter\InputFilterInterface;        // <-- Add this import
 
 use Libadmin\Model\BaseModel;
 
@@ -68,7 +56,7 @@ class Group extends BaseModel {
 	 * @return	String
 	 */
 	public function getTypeLabel() {
-		return 'Group';
+		return 'group';
 	}
 
 
@@ -148,11 +136,6 @@ class Group extends BaseModel {
 	public function setNotes($notes) {
 		$this->notes = $notes;
 	}
-
-
-
-
-
 
 
 

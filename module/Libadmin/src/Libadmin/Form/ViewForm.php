@@ -1,17 +1,17 @@
 <?php
 namespace Libadmin\Form;
 
+use Zend\Form\Element;
+use Zend\InputFilter\InputFilterProviderInterface;
+
 use Libadmin\Form\BaseForm;
 use Libadmin\Table\GroupTable;
-use Zend\Form\Element;
-use Zend\Form\Fieldset;
-
 
 /**
  * [Description]
  *
  */
-class ViewForm extends BaseForm {
+class ViewForm extends BaseForm implements InputFilterProviderInterface {
 
 	/**
 	 * @var	GroupTable
@@ -72,6 +72,26 @@ class ViewForm extends BaseForm {
 			$this->add($groupCheckboxes);
 		}
 
+	}
+
+
+	/**
+	 * Get input filters and validations
+	 *
+	 * @return	Array
+	 */
+	public function getInputFilterSpecification() {
+		return array(
+			'code' => array(
+				'required'	=> true,
+				'filters'	=> array(
+					array('name'=> 'StringTrim')
+				)
+			),
+			'label' => array(
+				'required'	=> true
+			)
+		);
 	}
 
 }

@@ -9,7 +9,7 @@ use Zend\InputFilter\InputFilter;
  * [Description]
  *
  */
-abstract class BaseModel implements InputFilterAwareInterface {
+abstract class BaseModel {
 
 	/**
 	 * @var InputFilter
@@ -19,33 +19,10 @@ abstract class BaseModel implements InputFilterAwareInterface {
 
 
 	/**
-	 * Set input filter
+	 * Get all object vars as array
 	 *
-	 * @param    InputFilterInterface $inputFilter
-	 * @return    InputFilterAwareInterface
-	 * @throws    \Exception
+	 * @return	Array
 	 */
-	public function setInputFilter(InputFilterInterface $inputFilter) {
-		throw new \Exception("Not used");
-	}
-
-
-
-	/**
-	 * Retrieve input filter
-	 *
-	 * @return InputFilterInterface
-	 */
-	public function getInputFilter() {
-		if( !$this->inputFilter ) {
-			$this->inputFilter = new InputFilter();
-		}
-
-		return $this->inputFilter;
-	}
-
-
-
 	public function getArrayCopy() {
 		return get_object_vars($this);
 	}
@@ -108,8 +85,21 @@ abstract class BaseModel implements InputFilterAwareInterface {
 	}
 
 
+
+	/**
+	 * Get list label key
+	 *
+	 * @return	String
+	 */
 	abstract public function getListLabel();
 
+
+
+	/**
+	 * Get type label key
+	 *
+	 * @return	String
+	 */
 	abstract public function getTypeLabel();
 
 }

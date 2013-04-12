@@ -100,7 +100,6 @@ class GroupController extends BaseController {
 
 		$request = $this->getRequest();
 		if( $request->isPost() ) {
-			$form->setInputFilter($group->getInputFilter());
 			$form->setData($request->getPost());
 
 			if( $form->isValid() ) {

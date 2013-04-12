@@ -93,40 +93,8 @@ class Institution extends BaseModel {
 	 * @return	String
 	 */
 	public function getTypeLabel() {
-		return 'Institution';
+		return 'institution';
 	}
-
-
-
-	/**
-	 * @return InputFilter|InputFilterInterface
-	 */
-	public function getInputFilter() {
-		if( !$this->inputFilter ) {
-			$this->inputFilter	= new InputFilter();
-			$factory     		= new InputFactory();
-
-			$this->inputFilter->add($factory->createInput(array(
-				'name'     => 'id',
-				'required' => true,
-				'filters'  => array(
-					array('name' => 'Int'),
-				),
-			)));
-
-			$this->inputFilter->add($factory->createInput(array(
-				'name'		=> 'bib_code',
-				'required'	=> true,
-				'filters'	=> array(
-					array('name' => 'StripTags'),
-					array('name' => 'StringTrim')
-				)
-			)));
-		}
-
-		return $this->inputFilter;
-	}
-
 
 
 	public function setAddress($address) {

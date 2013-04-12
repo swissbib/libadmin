@@ -1,9 +1,13 @@
 <?php
 namespace Libadmin\Form;
 
-use Libadmin\Form\Element\NoValidationCheckbox;
+use Zend\Form\Element;
 use Zend\Form\Fieldset;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
+use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Validator;
+
+use Libadmin\Form\Element\NoValidationCheckbox;
 use Libadmin\Model\Institution;
 use Libadmin\Model\View;
 
@@ -12,7 +16,7 @@ use Libadmin\Model\View;
  * All fields are in here instead in the institution form to support relations
  *
  */
-class InstitutionFieldset extends Fieldset {
+class InstitutionFieldset extends Fieldset implements InputFilterProviderInterface {
 
 	/**
 	 * Initialize
@@ -36,9 +40,9 @@ class InstitutionFieldset extends Fieldset {
             )
         ));
         $this->addText('label_de', 'language_german', true);
-        $this->addText('label_fr', 'language_french');
-        $this->addText('label_it', 'language_italian');
-        $this->addText('label_en', 'language_english');
+        $this->addText('label_fr', 'language_french', true);
+        $this->addText('label_it', 'language_italian', true);
+        $this->addText('label_en', 'language_english', true);
 
         $this->addText('name_de', 'language_german');
         $this->addText('name_fr', 'language_french');
@@ -95,8 +99,8 @@ class InstitutionFieldset extends Fieldset {
             'type'  => 'select',
             'options' => array(
                 'label' => 'canton',
+				'empty_option' => '- Kein Kanton -',
                 'value_options' => array(
-                    '0'		=> '- Kein Kanton -',
                     'ag'	=> 'Aargau',
                     'ai'	=> 'Appenzell Innerrhoden',
                     'ar'	=> 'Appenzell Ausserrhoden',
@@ -138,6 +142,50 @@ class InstitutionFieldset extends Fieldset {
 			// Relation fieldset (this may be replaced for new records in prepareElement() method)
 		$this->addRelations($views);
     }
+
+
+
+	/**
+	 * Get input filters and validations
+	 *
+	 * @return	Array
+	 */
+	public function getInputFilterSpecification() {
+		return array(
+			'bib_code' => array(
+				'required'	=> true,
+				'filters'	=> array(
+					array('name'=> 'StringTrim')
+				)
+			),
+			'sys_code' => array(
+				'required'	=> true
+			),
+			'label_de' => array(
+				'required'	=> true
+			),
+			'label_fr' => array(
+				'required'	=> true
+			),
+			'label_it' => array(
+				'required'	=> true
+			),
+			'label_en' => array(
+				'required'	=> true
+			),
+			'canton' => array(
+				'required'	=> false
+			),
+			'email'	=> array(
+				'required'	=> false,
+				'validators' => array(
+					array(
+						'name' => 'EmailAddress'
+					)
+				)
+			)
+		);
+	}
 
 
 
@@ -196,16 +244,16 @@ class InstitutionFieldset extends Fieldset {
    	 * @param	Boolean		$required
    	 */
    	protected function addText($name, $label, $required = false) {
-   		$this->add(array(
-   			'name' => $name,
-   			'attributes' => array(
-   				'type'  => 'text',
-   				'required'	=> !!$required
-   			),
-   			'options' => array(
-   				'label' => $label
-   			),
-   		));
+		$this->add(array(
+			'name' => $name,
+			'attributes' => array(
+				'type'  => 'text',
+				'required'	=> !!$required
+			),
+			'options' => array(
+				'label' => $label
+			),
+		));
    	}
 
 }

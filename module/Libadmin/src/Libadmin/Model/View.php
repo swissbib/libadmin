@@ -52,7 +52,7 @@ class View extends BaseModel {
 	 * @return	String
 	 */
 	public function getTypeLabel() {
-		return 'View';
+		return 'view';
 	}
 
 

@@ -5,7 +5,7 @@ use Libadmin\Model\BaseModel;
 
 $typeLabel	= $record->getTypeLabel();
 $itemLabel	= $record->getListLabel();
-$title		= 'Delete ' . $typeLabel;
+$title		= 'Delete ' . $this->translate($typeLabel, 'Libadmin');
 
 $this->headTitle($title);
 ?>

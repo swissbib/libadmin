@@ -42,7 +42,10 @@ class ViewTable extends BaseTable {
 
 
 	/**
-	 * @param int $limit
+	 * Get all views
+	 *
+	 * @param	Integer		$limit
+	 * @param	String		$order
 	 * @return	ResultSet
 	 */
 	public function getAll($limit = 30, $order = 'label') {
@@ -52,12 +55,37 @@ class ViewTable extends BaseTable {
 
 
 	/**
-	 * @param	Integer		$idGroup
+	 * Get view
+	 *
+	 * @param	Integer		$idView
 	 * @return	View
 	 */
-	public function getRecord($idGroup) {
-		return parent::getRecord($idGroup);
+	public function getRecord($idView) {
+		return parent::getRecord($idView);
 	}
+
+
+
+	/**
+	 * Get view by code
+	 *
+	 * @param	String		$code
+	 * @param	Boolean		$onlyActive
+	 * @return	View|null
+	 */
+	public function getViewByCode($code, $onlyActive = true) {
+		$conditions	= array(
+			'code'	=> $code
+		);
+
+		if( $onlyActive ) {
+			$conditions['is_active'] = 1;
+		}
+
+		return $this->tableGateway->select($conditions)->current();
+	}
+
+
 
 	/**
 	 *

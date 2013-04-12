@@ -22,13 +22,14 @@ class ApiController extends AbstractActionController {
 	public function indexAction() {
 		$serviceName	= 'export_system_' . $this->getSystem();
 
-		if( $this->serviceLocator->has($serviceName) ) {
+		if( $this->getServiceLocator()->has($serviceName) ) {
 			/** @var System $system  */
-			$system		= $this->serviceLocator->get($serviceName);
+			$system		= $this->getServiceLocator()->get($serviceName);
 
-			$system->setView($this->getView());
+			$system->setViewCode($this->getView());
 			$system->setOptions($this->getOptions());
 			$system->setResponse($this->getResponse());
+			$system->init();
 
 			try {
 				$result = $system->getData($this->getFormat());

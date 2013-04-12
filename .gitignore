@@ -1,4 +1,3 @@
-gh
 ._*
 .~lock.*
 .buildpath
@@ -6,4 +5,4 @@ gh
 .idea
 .project
 .settings
-composer.lock
+vendor/bin

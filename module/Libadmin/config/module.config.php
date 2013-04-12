@@ -9,6 +9,7 @@ return array(
             'Libadmin\Controller\Group'			=> 'Libadmin\Controller\GroupController',
             'Libadmin\Controller\View'			=> 'Libadmin\Controller\ViewController',
             'Libadmin\Controller\Admin'			=> 'Libadmin\Controller\AdminController',
+            'Libadmin\Controller\Api'			=> 'Libadmin\Controller\ApiController'
         ),
     ),
     // The following section is new and should be added to your file
@@ -70,6 +71,21 @@ return array(
 					),
 				),
 			),
+			'api' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/api/:system/:view:.:format',
+					'constraints' => array(
+						'system'=> '[a-zA-Z][a-zA-Z0-9_-]*',
+						'view'	=> '[a-zA-Z][a-zA-Z0-9_-]*',
+						'format'=> '(xml|json|fake)' // add more formats here
+					),
+					'defaults' => array(
+						'controller' => 'Libadmin\Controller\Api',
+						'action'     => 'index'
+					)
+				)
+			)
         ),
     ),
 
@@ -77,12 +93,18 @@ return array(
         'template_path_stack' => array(
             'libadmin' => __DIR__ . '/../view',
         ),
+		'strategies' => array(
+			'ViewJsonStrategy'
+		)
     ),
 
 	'service_manager' => array(
 	    'factories' => array(
 	        'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory'
-	    )
+	    ),
+		'invokables' => array(
+			'export_system_vufind' => 'Libadmin\Export\System\Vufind'
+		)
 	),
 
 	/**
@@ -130,5 +152,6 @@ return array(
 			)
 		),
 	)
+
 );
 

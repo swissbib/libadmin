@@ -55,7 +55,7 @@ class Institution extends BaseModel {
 	public $isil;
 	public $notes;
 
-
+	public $is_favorite; // This is not an actual record field
 	public $relations = array();
 
 
@@ -69,6 +69,7 @@ class Institution extends BaseModel {
 		$data = parent::getBaseData();
 
 		unset($data['relations']);
+		unset($data['is_favorite']);
 
 		return $data;
 	}
@@ -473,6 +474,23 @@ class Institution extends BaseModel {
 	public function getRelations() {
 		return $this->relations;
 	}
+
+
+
+	public function setIs_favorite($is_favorite) {
+		$this->is_favorite = $is_favorite;
+	}
+
+
+
+	public function getIs_favorite() {
+		return $this->is_favorite;
+	}
+
+	public function isFavorite() {
+		return $this->getIs_favorite() == 1;
+	}
+
 
 
 }

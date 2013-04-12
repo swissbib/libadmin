@@ -2,6 +2,7 @@
 namespace Libadmin\Controller;
 
 
+use Libadmin\Helper\RelationOverview;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
@@ -106,9 +107,13 @@ class ViewController extends BaseController {
 
 		$form->setAttribute('action', $this->makeUrl('view', 'edit', $idView));
 
+		/** @var RelationOverview $relationHelper  */
+		$relationHelper	= $this->serviceLocator->get('RelationOverviewHelper');
+
 		return $this->getAjaxView(array(
 			'form'		=> $form,
-			'title'		=> 'Edit View'
+			'title'		=> 'Edit View',
+			'relations'	=> $relationHelper->getData($view)
 		));
 	}
 

@@ -104,7 +104,7 @@ class InstitutionController extends BaseController {
 
 		return $this->getAjaxView(array(
 			'form'		=> $form,
-			'title'		=> 'Edit InstitutionForm'
+			'title'		=> 'Edit Institution'
 		));
 	}
 

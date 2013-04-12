@@ -17,6 +17,7 @@ use Libadmin\Table\BaseTable;
 use Libadmin\Model\BaseModel;
 use Libadmin\Model\Institution;
 use Libadmin\Model\InstitutionRelation;
+use Zend\Db\Sql\Sql;
 use Zend\Db\TableGateway\TableGateway;
 
 /**
@@ -28,10 +29,16 @@ class InstitutionTable extends BaseTable {
 	/**
 	 * @var InstitutionRelationTable
 	 */
-	protected $relationTabl;
+	protected $relationTable;
 
 
 
+	/**
+	 * Initialize with base and relation table
+	 *
+	 * @param	TableGateway				$institutionTableGateway
+	 * @param	InstitutionRelationTable	$relationTable
+	 */
 	public function __construct(TableGateway $institutionTableGateway, InstitutionRelationTable $relationTable) {
 		parent::__construct($institutionTableGateway);
 
@@ -89,6 +96,12 @@ class InstitutionTable extends BaseTable {
 
 
 
+	/**
+	 * Save institution
+	 *
+	 * @param	Institution		$institution
+	 * @return	Integer
+	 */
 	public function save(Institution $institution) {
 		$relations		= $institution->getRelations();
 		$idInstitution	= parent::save($institution);
@@ -101,6 +114,8 @@ class InstitutionTable extends BaseTable {
 
 
 	/**
+	 * Save institution relations
+	 *
 	 * @param	Integer		$idInstitution
 	 * @param	InstitutionRelation[]	$relations
 	 */
@@ -113,6 +128,39 @@ class InstitutionTable extends BaseTable {
 				$this->relationTable->add($relation);
 			}
 		}
+	}
+
+
+
+	/**
+	 * Get all institutions which are related with a view and group
+	 *
+	 * @param	Integer		$idView
+	 * @param	Integer		$idGroup
+	 * @param	Boolean		$activeOnly
+	 * @return	null|ResultSetInterface
+	 */
+	public function getAllGroupViewInstitutions($idView, $idGroup, $activeOnly = true) {
+		$select	= new Select($this->getTable());
+
+		$select->columns(array('*'))
+				->join(array('mm' => 'mm_institution_group_view'), 'institution.id = mm.id_institution', array('is_favorite'), $select::JOIN_LEFT)
+				->where(array(
+					'mm.id_view'	=> (int)$idView,
+					'mm.id_group'	=> (int)$idGroup
+				))
+				->order('mm.position');
+
+		if( $activeOnly ) {
+			$select->where(array(
+				'institution.is_active'	=> 1
+			));
+		}
+
+//		$sql = new Sql($this->tableGateway->getAdapter(), $this->getTable());
+//		var_dump($sql->getSqlStringForSqlObject($select));
+
+		return $this->tableGateway->selectWith($select);
 	}
 
 }

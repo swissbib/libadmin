@@ -42,7 +42,7 @@ class InstitutionRelation extends BaseModel {
 
 
     public function getTypeLabel() {
-        return 'Link';
+        return 'relation';
     }
 
 

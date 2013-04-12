@@ -41,7 +41,6 @@ class ViewController extends BaseController {
 
 		if( $request->isPost() ) {
 			$view = new View();
-			$form->setInputFilter($view->getInputFilter());
 			$form->setData($request->getPost());
 
 			if( $form->isValid() ) {
@@ -94,7 +93,6 @@ class ViewController extends BaseController {
 
 		$request = $this->getRequest();
 		if( $request->isPost() ) {
-			$form->setInputFilter($view->getInputFilter());
 			$form->setData($request->getPost());
 
 			if( $form->isValid() ) {

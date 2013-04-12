@@ -32,7 +32,6 @@ class InstitutionController extends BaseController {
 		$form->bind($institution);
 
 		if( $this->request->isPost() ) {
-//			$form->setInputFilter($institution->getInputFilter());
 			$form->setData($this->request->getPost());
 
 			if( $form->isValid()) {
@@ -78,7 +77,7 @@ class InstitutionController extends BaseController {
 			/** @var InstitutionForm $institution  */
 			$institution = $this->getInstitutionForEdit($idInstitution);
 		} catch(\Exception $ex ) {
-			$flashMessenger->addErrorMessage('InstitutionForm not found');
+			$flashMessenger->addErrorMessage('Institution not found');
 
 			return $this->forwardTo('home');
 		}
@@ -88,12 +87,12 @@ class InstitutionController extends BaseController {
 
 		$request = $this->getRequest();
 		if( $request->isPost() ) {
-			$form->setInputFilter($institution->getInputFilter());
 			$form->setData($request->getPost());
 
 			if( $form->isValid() ) {
 				$this->getTable()->save($form->getData());
-				$flashMessenger->addSuccessMessage('InstitutionForm saved');
+				$flashMessenger->addSuccessMessage('Institution saved');
+				$form->bind($this->getInstitutionForEdit($idInstitution)); // Reload data
 			} else {
 				//$messages = $form->getMessages();
 				$flashMessenger->addErrorMessage('Form not valid');
@@ -109,6 +108,13 @@ class InstitutionController extends BaseController {
 	}
 
 
+
+	/**
+	 * Get institution prepared to be bound to the form
+	 *
+	 * @param	Integer		$idInstitution
+	 * @return	Institution
+	 */
 	protected function getInstitutionForEdit($idInstitution) {
 		$institution		= $this->getTable()->getRecord($idInstitution);
 		/** @var View[]	$views  */

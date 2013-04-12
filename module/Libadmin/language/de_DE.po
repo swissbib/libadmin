@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Libadmin\n"
 "POT-Creation-Date: 2013-04-10 13:11+0100\n"
-"PO-Revision-Date: 2013-04-10 19:43+0100\n"
+"PO-Revision-Date: 2013-04-12 11:07+0100\n"
 "Last-Translator: Fabian Erni <ferni@snowflake.ch>\n"
 "Language-Team: Swissbib <admin@swissbib.ch>\n"
 "Language: de_DE\n"
@@ -77,6 +77,9 @@ msgstr "Views"
 #: ../view/libadmin/group/edit.phtml:52 ../view/libadmin/group/edit.phtml:88
 msgid "institutions"
 msgstr "Institutionen"
+
+msgid "institution"
+msgstr "Institution"
 
 #: ../view/libadmin/group/edit.phtml:58
 #: ../view/libadmin/institution/edit.phtml:53
@@ -222,3 +225,57 @@ msgstr "Koordinaten"
 
 msgid "isil"
 msgstr "ISIL"
+
+msgid "yes"
+msgstr "Ja"
+
+msgid "no"
+msgstr "Nein"
+
+msgid "bibsyscodes"
+msgstr "Bib-/Sys-Codes"
+
+msgid "is_favorite"
+msgstr "Ist Favorit"
+
+msgid "no_relations"
+msgstr "Es bestehen noch keine Verbindungen"
+
+msgid "navigation_home"
+msgstr "Start"
+
+msgid "navigation_institution"
+msgstr "Institutionen"
+
+msgid "navigation_groups"
+msgstr "Gruppen"
+
+msgid "navigation_views"
+msgstr "Views"
+
+msgid "navigation_admin"
+msgstr "Verwalten"
+
+msgid "app_title"
+msgstr "Bibliotheksverwaltung"
+
+msgid "add_new_xxx"
+msgstr "Hinzufügen:"
+
+msgid "group"
+msgstr "Gruppe"
+
+msgid "groups"
+msgstr "Gruppen"
+
+msgid "view"
+msgstr "View"
+
+msgid "views"
+msgstr "Views"
+
+msgid "home_no_records"
+msgstr "Es wurden noch keine %s erstellt"
+
+msgid "home_select_record"
+msgstr "Wählen Sie links aus der Navigation einen Datensatz"

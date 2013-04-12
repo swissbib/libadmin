@@ -1,5 +1,4 @@
-<?php echo $this->doctype(); ?>
-
+<?=$this->doctype()?>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -38,9 +37,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="<?= $this->url('home') ?>">Library Admin</a>
+                    <a class="brand" href="<?= $this->url('home') ?>"><?=$this->translate('app_title', 'Libadmin')?></a>
                     <div class="nav-collapse collapse">
-						<?= $this->navigation('Navigation')->menu()->setUlClass('nav') ?>
+						<?php
+							/** @var \Zend\View\Helper\Navigation\Menu $mainNav  */
+							$mainNav	= $this->navigation('Navigation')->menu();
+							$mainNav->setTranslatorTextDomain('Libadmin');
+							$mainNav->setUlClass('nav');
+							echo $mainNav;
+						?>
                     </div><!--/.nav-collapse -->
                 </div>
             </div>

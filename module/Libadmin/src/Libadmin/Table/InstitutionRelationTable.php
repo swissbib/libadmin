@@ -79,5 +79,3 @@ class InstitutionRelationTable extends BaseTable {
 	}
 
 }
-
-?>

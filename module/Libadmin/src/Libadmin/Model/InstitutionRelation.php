@@ -111,5 +111,3 @@ class InstitutionRelation extends BaseModel {
 
 
 }
-
-?>

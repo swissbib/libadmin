@@ -76,8 +76,6 @@ class ViewForm extends BaseForm {
 
 }
 
-?>
-
 
 
 

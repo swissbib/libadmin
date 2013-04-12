@@ -209,5 +209,3 @@ class InstitutionFieldset extends Fieldset {
    	}
 
 }
-
-?>

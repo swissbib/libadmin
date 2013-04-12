@@ -19,5 +19,3 @@ class NoValidationCheckbox extends BaseCheckbox {
 	}
 
 }
-
-?>

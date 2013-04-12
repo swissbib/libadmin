@@ -260,5 +260,3 @@ abstract class BaseTable {
 	}
 
 }
-
-?>

@@ -113,5 +113,3 @@ abstract class BaseModel implements InputFilterAwareInterface {
 	abstract public function getTypeLabel();
 
 }
-
-?>

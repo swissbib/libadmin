@@ -118,5 +118,3 @@ class ViewController extends BaseController {
 	}
 
 }
-
-?>

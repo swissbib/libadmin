@@ -109,5 +109,3 @@ class View extends BaseModel {
 	}
 
 }
-
-?>

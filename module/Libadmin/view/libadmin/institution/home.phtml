@@ -1,5 +1,6 @@
 <?=$this->render('libadmin/global/home-crud', array(
-	'entityName'		=> 'Institution',
-	'entityNamePlural'	=> 'Institutions',
+	'route'				=> 'institution',
+	'entityName'		=> $this->translate('institution', 'Libadmin'),
+	'entityNamePlural'	=> $this->translate('institutions', 'Libadmin'),
 	'listItems'			=> $listItems
 ));?>

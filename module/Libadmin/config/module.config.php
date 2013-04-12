@@ -109,23 +109,23 @@ return array(
 		'default' => array(
 			// And finally, here is where we define our page hierarchy
 			'home' => array(
-				'label' => 'Home',
+				'label' => 'navigation_home',
 				'route' => 'home'
 			),
 			'institution' => array(
-				'label'	=> 'Institutions',
+				'label'	=> 'navigation_institution',
 				'route'	=> 'institution'
 			),
 			'group' => array(
-				'label'	=> 'Groups',
+				'label'	=> 'navigation_groups',
 				'route'	=> 'group'
 			),
 			'view' => array(
-				'label'	=> 'Views',
+				'label'	=> 'navigation_views',
 				'route'	=> 'view'
 			),
 			'admin' => array(
-				'label'	=> 'Admin',
+				'label'	=> 'navigation_admin',
 				'route'	=> 'admin'
 			)
 		),

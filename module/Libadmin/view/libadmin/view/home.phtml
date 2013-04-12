@@ -1,5 +1,6 @@
 <?=$this->render('libadmin/global/home-crud', array(
-	'entityName'		=> 'View',
-	'entityNamePlural'	=> 'Views',
+	'route'				=> 'view',
+	'entityName'		=> $this->translate('view', 'Libadmin'),
+	'entityNamePlural'	=> $this->translate('views', 'Libadmin'),
 	'listItems'			=> isset($listItems) ? $listItems : null
 ));?>

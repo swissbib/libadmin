@@ -45,30 +45,36 @@ ul.adminNavi {
 	margin-top: 50px;
 }
 
-#relations .group label {
+#institution #relations .group label {
 	display: none;
 }
 
-#relations .group .controls {
+#institution #relations .group .controls {
 	margin-left: 0;
 }
 
-#relations .group .controls select {
+#institution #relations .group .controls select {
 	width: 90%;
 }
 
-#relations .favorite .control-group > label {
+#institution #relations .favorite .control-group > label {
 	width: 100px;
 }
 
-#relations .favorite .controls {
+#institution #relations .favorite .controls {
 	margin-left: 120px;
 }
 
 
-
-
-
+#view #relations th.nr {
+	width: 5%;
+}
+#view #relations th.codes {
+	width: 30%;
+}
+#view #relations th.favorite {
+	width: 10%;
+}
 
 
 

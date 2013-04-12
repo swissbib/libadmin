@@ -1,16 +1,27 @@
 <?php
 namespace Libadmin\Export\System;
 
+use Zend\ServiceManager\ServiceManager;
 use Zend\View\Model\JsonModel;
 use Zend\Http\Response as HttpResponse;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+
+use Libadmin\Model\View;
+use Libadmin\Table\GroupTable;
+use Libadmin\Table\InstitutionTable;
+use Libadmin\Table\ViewTable;
 
 /**
  * [Description]
  *
  */
-class System {
+class System implements ServiceLocatorAwareInterface {
 
 	/** @var String */
+	protected $viewCode;
+
+	/** @var View */
 	protected $view;
 
 	/** @var String */
@@ -22,6 +33,49 @@ class System {
 	/** @var HttpResponse */
 	protected $response;
 
+	/** @var  ServiceManager */
+	protected $serviceLocator;
+
+	/** @var InstitutionTable */
+	protected $institutionTable;
+
+	/** @var GroupTable */
+	protected $groupTable;
+
+	/** @var ViewTable */
+	protected $viewTable;
+
+
+
+	/**
+	 * Set service locator
+	 *
+	 * @param ServiceLocatorInterface $serviceLocator
+	 */
+	public function setServiceLocator(ServiceLocatorInterface $serviceLocator) {
+		$this->serviceLocator = $serviceLocator;
+	}
+
+
+
+	/**
+	 * Get service locator
+	 *
+	 * @return ServiceLocatorInterface
+	 */
+	public function getServiceLocator() {
+		return $this->serviceLocator;
+	}
+
+
+
+	public function init() {
+		$this->institutionTable	= $this->getServiceLocator()->get('Libadmin\Table\InstitutionTable');
+		$this->groupTable		= $this->getServiceLocator()->get('Libadmin\Table\GroupTable');
+		$this->viewTable		= $this->getServiceLocator()->get('Libadmin\Table\ViewTable');
+	}
+
+
 
 
 	/**
@@ -29,8 +83,8 @@ class System {
 	 *
 	 * @param	String		$view
 	 */
-	public function setView($view) {
-		$this->view	= $view;
+	public function setViewCode($view) {
+		$this->viewCode	= $view;
 	}
 
 
@@ -38,9 +92,31 @@ class System {
 	/**
 	 * Get view
 	 *
-	 * @return	String
+	 * @return String
 	 */
-	public function getView() {
+	public function getViewCode() {
+		return $this->viewCode;
+	}
+
+
+
+	/**
+	 * Get view object
+	 *
+	 * @throws	\Exception
+	 * @return	View|null
+	 */
+	protected function getView() {
+		if( $this->view === null && !empty($this->viewCode) && $this->viewTable !== null ) {
+			$view	= $this->viewTable->getViewByCode($this->viewCode);
+
+			if( !$view ) {
+				throw new \Exception('Unknown view "' . $this->viewCode . '"');
+			}
+
+			$this->view = $view;
+		}
+
 		return $this->view;
 	}
 

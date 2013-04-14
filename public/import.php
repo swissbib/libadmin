@@ -182,15 +182,43 @@ class Importer {
 	 */
 	public function connectToDatabase() {
 		$dsn		= $this->dbConfig['dsn'];
-		$host		= substr($dsn, strpos($dsn, ';host=') + 6);
-		$database	= substr($dsn, strpos($dsn, 'dbname=') + 7, strlen($dsn) - (strpos($dsn, ';host=')) - strlen('mysql:') - 1);
+
+        $dsnAttributes = explode(":",$dsn);
+
+        $HostAndDB = array();
+
+        $concatAttributes = null;
+        foreach ($dsnAttributes as $element) {
+            if (preg_match('/dbname/',strtolower($element)) && preg_match('/host/',strtolower($element)) ) {
+
+                $singleAttributes = explode(";",$element);
+                foreach ($singleAttributes as $attribute) {
+                    $tAttribute = explode("=",$attribute);
+
+                    $HostAndDB[$tAttribute[0]] = $tAttribute[1];
+                }
+
+
+            }
+        }
+
+        if (sizeof($HostAndDB) == 0) {
+            throw (new Exception ("wrong or missing definition of dbName and / or host name"));
+        }
+
+        //this doesn't work with a hostname like sb-db4.swissbib.unibas.ch
+		//$host		= substr($dsn, strpos($dsn, ';host=') + 6);
+		//$database	= substr($dsn, strpos($dsn, 'dbname=') + 7, strlen($dsn) - (strpos($dsn, ';host=')) - strlen('mysql:') - 1);
 
 		try {
-			$this->DB	= new DB($host, $database, $this->dbConfig['username'], $this->dbConfig['password']);
+			$this->DB	= new DB($HostAndDB["host"], $HostAndDB["dbname"], $this->dbConfig['username'], $this->dbConfig['password']);
 		} catch(Exception $e) {
 			throw(new Exception($e->getMessage()));
 		}
 	}
+
+
+
 }
 
 // ==============================================================================

@@ -25,3 +25,10 @@ return array(
         ),
     ),
 );
+
+
+/*
+ * procedure of database creation for a local DB is described on
+http://www.swissbib.org/wiki/index.php?title=Members:Libadmin
+
+*/

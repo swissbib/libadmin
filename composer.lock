@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "3f9f838713a4185d35edea399907f5b1",
+    "hash": "2b0c4a2b3a0ea319bba2248d60d83ef4",
     "packages": [
         {
             "name": "dlu/dlutwbootstrap",
@@ -160,12 +160,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/ZendDeveloperTools.git",
-                "reference": "5001db272e7a84a2ce14bdcd1fdaed2716e055a0"
+                "reference": "16291e15b461169a7ceec46eafac64afc2ebd98c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/ZendDeveloperTools/zipball/5001db272e7a84a2ce14bdcd1fdaed2716e055a0",
-                "reference": "5001db272e7a84a2ce14bdcd1fdaed2716e055a0",
+                "url": "https://api.github.com/repos/zendframework/ZendDeveloperTools/zipball/16291e15b461169a7ceec46eafac64afc2ebd98c",
+                "reference": "16291e15b461169a7ceec46eafac64afc2ebd98c",
                 "shasum": ""
             },
             "require": {
@@ -211,7 +211,7 @@
                 "module",
                 "zf2"
             ],
-            "time": "2013-04-12 08:04:34"
+            "time": "2013-04-12 17:26:34"
         },
         {
             "name": "zendframework/zendframework",
@@ -219,12 +219,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zf2.git",
-                "reference": "2195e7c6af12ff499eabe365db6a2c8d70c1eb06"
+                "reference": "c82da00a6949ac806f39670b06df2e037afd1dca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zf2/zipball/2195e7c6af12ff499eabe365db6a2c8d70c1eb06",
-                "reference": "2195e7c6af12ff499eabe365db6a2c8d70c1eb06",
+                "url": "https://api.github.com/repos/zendframework/zf2/zipball/c82da00a6949ac806f39670b06df2e037afd1dca",
+                "reference": "c82da00a6949ac806f39670b06df2e037afd1dca",
                 "shasum": ""
             },
             "require": {
@@ -322,7 +322,7 @@
                 "framework",
                 "zf2"
             ],
-            "time": "2013-04-11 17:42:32"
+            "time": "2013-04-12 19:48:27"
         }
     ],
     "packages-dev": [

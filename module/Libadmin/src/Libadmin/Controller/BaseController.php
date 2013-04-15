@@ -59,7 +59,7 @@ abstract class BaseController extends AbstractActionController {
 	public function searchAction() {
 		$query = $this->params()->fromQuery('query', '');
 		$data = array(
-			'route' => strtolower($this->getTypeName()),
+			'route'		=> strtolower($this->getTypeName()),
 			'listItems' => $this->getTable()->find($query, 30)
 		);
 

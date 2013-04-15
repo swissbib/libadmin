@@ -64,10 +64,11 @@ class InstitutionTable extends BaseTable {
 	 *
 	 * @param	String			$searchString
 	 * @param	Integer			$limit
+	 * @param	String			$order
 	 * @return	BaseModel[]
 	 */
-	public function find($searchString, $limit = 30) {
-		return $this->findFulltext($searchString, 'label_de', $limit);
+	public function find($searchString, $limit = 30, $order = 'bib_code') {
+		return $this->findFulltext($searchString, $order, $limit);
 	}
 
 

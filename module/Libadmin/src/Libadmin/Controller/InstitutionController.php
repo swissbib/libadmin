@@ -1,6 +1,8 @@
 <?php
 namespace Libadmin\Controller;
 
+//use RecursiveIteratorIterator;
+
 use Libadmin\Model\InstitutionRelation;
 use Zend\Db\ResultSet\ResultSetInterface;
 use Zend\View\Model\ViewModel;
@@ -94,8 +96,11 @@ class InstitutionController extends BaseController {
 				$flashMessenger->addSuccessMessage('Institution saved');
 				$form->bind($this->getInstitutionForEdit($idInstitution)); // Reload data
 			} else {
-				//$messages = $form->getMessages();
 				$flashMessenger->addErrorMessage('Form not valid');
+//				$messages = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($form->getMessages()));
+//				foreach($messages as $message) {
+//					$flashMessenger->addErrorMessage($message);
+//				}
 			}
 		}
 

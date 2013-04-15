@@ -24,6 +24,9 @@ abstract class BaseController extends AbstractActionController {
 	protected $table;
 
 
+	protected $translator;
+
+
 
 	/**
 	 * Initial view
@@ -233,6 +236,23 @@ abstract class BaseController extends AbstractActionController {
 			$this->table = $this->getServiceLocator()->get('Libadmin\Table\\' . $type . 'Table');
 		}
 		return $this->table;
+	}
+
+
+
+	/**
+	 * Translate key
+	 *
+	 * @param	String		$key
+	 * @param	String		$domain
+	 * @return	String
+	 */
+	protected function translate($key, $domain = 'Libadmin') {
+		if( null == $this->translator ) {
+			$this->translator = $this->getServiceLocator()->get('translator');
+		}
+
+		return $this->translator->translate($key, $domain);
 	}
 
 }

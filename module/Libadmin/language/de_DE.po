@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Libadmin\n"
 "POT-Creation-Date: 2013-04-10 13:11+0100\n"
-"PO-Revision-Date: 2013-04-12 17:04+0100\n"
+"PO-Revision-Date: 2013-04-15 12:02+0100\n"
 "Last-Translator: Fabian Erni <ferni@snowflake.ch>\n"
 "Language-Team: Swissbib <admin@swissbib.ch>\n"
 "Language: de_DE\n"
@@ -279,3 +279,18 @@ msgstr "Es wurden noch keine %s erstellt"
 
 msgid "home_select_record"
 msgstr "Wählen Sie links aus der Navigation einen Datensatz"
+
+msgid "saved_institution"
+msgstr "Institution gespeichert"
+
+msgid "saved_group"
+msgstr "Gruppe gespeichert"
+
+msgid "saved_view"
+msgstr "View gespeichert"
+
+msgid "form_invalid"
+msgstr "Die Eingegebenen Daten sind nicht korrekt!"
+
+msgid "notfound_record"
+msgstr "Datensatz wurde nicht gefunden"

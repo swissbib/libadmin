@@ -50,14 +50,14 @@ class GroupController extends BaseController {
 				try {
 					$idGroup	= $this->getTable()->save($group);
 
-					$flashMessenger->addSuccessMessage('New group added');
+					$flashMessenger->addSuccessMessage($this->translate('saved_group'));
 
 					return $this->redirectTo('edit', $idGroup);
 				} catch(\Exception $e) {
 					$flashMessenger->addErrorMessage($e->getMessage());
 				}
 			} else {
-				$flashMessenger->addErrorMessage('Form not valid');
+				$flashMessenger->addErrorMessage($this->translate('form_invalid'));
 			}
 		}
 
@@ -89,7 +89,7 @@ class GroupController extends BaseController {
 			$group = $this->getTable()->getRecord($idGroup);
 			$group->setViews($this->getTable()->getViewIDs($idGroup));
 		} catch(\Exception $ex ) {
-			$flashMessenger->addErrorMessage('Group not found');
+			$flashMessenger->addErrorMessage($this->translate('notfound_record'));
 //			$flashMessenger->addErrorMessage($ex->getMessage());
 
 			return $this->forwardTo('home');
@@ -104,9 +104,9 @@ class GroupController extends BaseController {
 
 			if( $form->isValid() ) {
 				$this->getTable()->save($form->getData());
-				$flashMessenger->addSuccessMessage('Group saved');
+				$flashMessenger->addSuccessMessage($this->translate('saved_group'));
 			} else {
-				$flashMessenger->addErrorMessage('Form not valid');
+				$flashMessenger->addErrorMessage($this->translate('form_invalid'));
 			}
 		}
 

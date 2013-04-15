@@ -40,11 +40,11 @@ class InstitutionController extends BaseController {
 				$institution->exchangeArray($form->getData());
 				$idInstitution	= $this->getTable()->save($institution);
 
-				$flashMessenger->addSuccessMessage('New institution added');
+				$flashMessenger->addSuccessMessage($this->translate('saved_institution'));
 
 				return $this->redirectTo('edit', $idInstitution);
 			} else {
-				$flashMessenger->addErrorMessage('Form not valid');
+				$flashMessenger->addErrorMessage($this->translate('form_invalid'));
 //				$messages = $form->getMessages();
 //				foreach($form->getMessages() as $message) {
 //					$flashMessenger->addErrorMessage($message);
@@ -79,7 +79,7 @@ class InstitutionController extends BaseController {
 			/** @var InstitutionForm $institution  */
 			$institution = $this->getInstitutionForEdit($idInstitution);
 		} catch(\Exception $ex ) {
-			$flashMessenger->addErrorMessage('Institution not found');
+			$flashMessenger->addErrorMessage($this->translate('notfound_record'));
 
 			return $this->forwardTo('home');
 		}
@@ -93,10 +93,10 @@ class InstitutionController extends BaseController {
 
 			if( $form->isValid() ) {
 				$this->getTable()->save($form->getData());
-				$flashMessenger->addSuccessMessage('Institution saved');
+				$flashMessenger->addSuccessMessage($this->translate('saved_institution'));
 				$form->bind($this->getInstitutionForEdit($idInstitution)); // Reload data
 			} else {
-				$flashMessenger->addErrorMessage('Form not valid');
+				$flashMessenger->addErrorMessage($this->translate('form_invalid'));
 //				$messages = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($form->getMessages()));
 //				foreach($messages as $message) {
 //					$flashMessenger->addErrorMessage($message);

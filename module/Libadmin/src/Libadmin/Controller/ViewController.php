@@ -47,11 +47,11 @@ class ViewController extends BaseController {
 				$view->exchangeArray($form->getData());
 				$idView	= $this->getTable()->save($view);
 
-				$flashMessenger->addSuccessMessage('New view added');
+				$flashMessenger->addSuccessMessage($this->translate('saved_view'));
 
 				return $this->redirectTo('edit', $idView);
 			} else {
-				$flashMessenger->addErrorMessage('Form not valid');
+				$flashMessenger->addErrorMessage($this->translate('form_invalid'));
 			}
 		}
 
@@ -83,7 +83,7 @@ class ViewController extends BaseController {
 			$view = $this->getTable()->getRecord($idView);
 			$view->setGroups($this->getTable()->getGroupIDs($idView));
 		} catch(\Exception $ex ) {
-			$flashMessenger->addErrorMessage('Group not found');
+			$flashMessenger->addErrorMessage($this->translate('notfound_record'));
 
 			return $this->forwardTo('home');
 		}
@@ -97,9 +97,9 @@ class ViewController extends BaseController {
 
 			if( $form->isValid() ) {
 				$this->getTable()->save($form->getData());
-				$flashMessenger->addSuccessMessage('View saved');
+				$flashMessenger->addSuccessMessage($this->translate('saved_view'));
 			} else {
-				$flashMessenger->addErrorMessage('Form not valid');
+				$flashMessenger->addErrorMessage($this->translate('form_invalid'));
 			}
 		}
 

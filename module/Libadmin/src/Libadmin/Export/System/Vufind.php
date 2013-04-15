@@ -15,26 +15,23 @@ use Libadmin\Model\Institution;
 class Vufind extends System {
 
 	/**
-	 * Initialize
-	 *
-	 */
-	public function init() {
-		parent::init();
-	}
-
-
-
-	/**
 	 * Get vufind json data
 	 *
 	 * @return	JsonModel
 	 */
 	public function getJsonData() {
-		$payload	= $this->getPayloadData();
-		$data		= array(
-			'success'	=> true,
-			'data'		=> $payload
-		);
+		try {
+			$data = array(
+				'success'	=> true,
+				'data'		=> $this->getJsonPayloadData()
+			);
+		} catch(\Exception $e) {
+			$data = array(
+				'success'	=> false,
+				'data'		=> array(),
+				'error'		=> $e->getMessage()
+			);
+		}
 
 		return new JsonModel($data);
 	}
@@ -46,7 +43,7 @@ class Vufind extends System {
 	 *
 	 * @return	Array
 	 */
-	protected function getPayloadData() {
+	protected function getJsonPayloadData() {
 		$data	= array();
 		$groups	= $this->getGroups();
 

@@ -1,0 +1,4 @@
+AuthUserFile .htpasswd
+AuthType Basic
+AuthName "Libadmin Institutionen Import"
+Require valid-user

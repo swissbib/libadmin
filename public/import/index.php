@@ -12,9 +12,10 @@ chdir(dirname(dirname(__DIR__)));
 $zf2LocalConf	= include('config/autoload/local.php');
 
 try {
-	$importer	= new Importer($zf2LocalConf['db']);
-	$xmlFile	= '/module/Libadmin/data/tpgreen-libraries.xml';
+	$flush	= true;
+	$importer	= new Importer($zf2LocalConf['db'], $flush);
 
+	$xmlFile	= '/module/Libadmin/data/tpgreen-libraries.xml';
 	echo $importer->import('module/Libadmin/data/tpgreen-libraries.xml');
 
 } catch(Exception $e) {

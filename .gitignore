@@ -6,3 +6,4 @@
 .project
 .settings
 vendor/bin
+public/.htaccess

@@ -88,6 +88,10 @@ class DB {
 	private function prepareValuesForInsert(array $fieldsValues) {
 		if( $this->isConnected() ) {
 			foreach($fieldsValues as $key => $value) {
+				if( ! is_numeric($value) ) {
+					$value	= utf8_decode($value);
+				}
+
 				$fieldsValues[$key]	= '\'' . mysqli_real_escape_string($this->link, trim($value)) . '\'';
 			}
 		} else {
@@ -104,7 +108,7 @@ class DB {
 	 * @param	String			$query
 	 * @return	Object|Boolean
 	 */
-	private function query($query) {
+	public function query($query) {
 		if( $this->isConnected() ) {
 			$query		= trim($query);
 			$resource	= mysqli_query($this->link, $query);

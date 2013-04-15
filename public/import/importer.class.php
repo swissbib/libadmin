@@ -22,9 +22,22 @@ class Importer {
 
 	/**
 	 * Constructor
+	 *
+	 * @throws	Exception
+	 * @param	Array		$dbConfig
+	 * @param	Boolean		$flush		Delete existing institution records initially?
 	 */
-	public function __construct(array $dbConfig) {
+	public function __construct(array $dbConfig, $flush) {
 		$this->setDbConfig($dbConfig);
+
+		try {
+			$this->connectToDatabase();
+			if( $flush ) {
+				$this->flushInstitutions();
+			}
+		} catch(Exception $e) {
+			throw new Exception( $e->getMessage() );
+		}
 	}
 
 	/**
@@ -43,14 +56,19 @@ class Importer {
 	}
 
 	/**
+	 * Flush existing institution records
+	 */
+	public function flushInstitutions() {
+		$this->DB->query('DELETE FROM institution WHERE 1');
+	}
+
+	/**
 	 * @throws	Exception
 	 * @param	String		$file			XML file to be imported
 	 * @return	String
 	 */
 	public function import($file) {
 		try {
-			$this->connectToDatabase();
-
 			/** @var $xml SimpleXMLElement */
 			$xml	= $this->initSimpleXmlFromFromFile($file);
 			$this->importLibraries( $xml->libraries );

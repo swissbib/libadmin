@@ -8,6 +8,7 @@ use Zend\InputFilter\InputFilterProviderInterface;
 use Libadmin\Form\BaseForm;
 use Libadmin\Table\ViewTable;
 use Libadmin\Model\Group;
+use Libadmin\Form\Element\NoValidationMultiCheckbox;
 
 /**
  * Group form
@@ -72,13 +73,28 @@ class GroupForm extends BaseForm implements InputFilterProviderInterface {
 			foreach($allViews as $view) {
 				$viewOptions[$view->getID()] = $view->getLabel();
 			}
-			$viewCheckboxes	= new Element\MultiCheckbox('views');
+			$viewCheckboxes	= new NoValidationMultiCheckbox('views');
 			$viewCheckboxes->setValueOptions($viewOptions);
-//			$viewCheckboxes->setOptions(array(
-//				'required'	=> false
-//			));
+			$viewCheckboxes->setUncheckedValue(0);
 			$this->add($viewCheckboxes);
 		}
+	}
+
+
+
+	/**
+	 * Set data
+	 * Make sure views data is always set
+	 *
+	 * @param	Array|\ArrayAccess|\Traversable	$data
+	 * @return	GroupForm
+	 */
+	public function setData($data) {
+		if( !isset($data['views']) ) {
+			$data['views'] = array();
+		}
+
+		return parent::setData($data);
 	}
 
 
@@ -107,6 +123,9 @@ class GroupForm extends BaseForm implements InputFilterProviderInterface {
 			),
 			'label_en' => array(
 				'required'	=> true
+			),
+			'view'	=> array(
+				'required'	=> false
 			)
 		);
 	}

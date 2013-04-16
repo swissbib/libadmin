@@ -131,8 +131,9 @@ class GroupTable extends BaseTable {
 	 */
 	public function save(Group $group) {
 		$idGroup	= parent::save($group);
+		$newViewIDs	= $group->getViews();
 
-		$this->saveViews($idGroup, $group->getViews());
+		$this->saveViews($idGroup, $newViewIDs);
 
 		return $idGroup;
 	}

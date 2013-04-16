@@ -1,13 +1,13 @@
 <?php
 namespace Libadmin\Form\Element;
 
-use Zend\Form\Element\Checkbox as BaseCheckbox;
+use Zend\Form\Element\MultiCheckbox;
 
 /**
  * [Description]
  *
  */
-class NoValidationCheckbox extends BaseCheckbox {
+class NoValidationMultiCheckbox extends MultiCheckbox {
 
 	/**
 	 * @return	Array
@@ -23,3 +23,5 @@ class NoValidationCheckbox extends BaseCheckbox {
 	}
 
 }
+
+?>

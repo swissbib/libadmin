@@ -3,6 +3,7 @@ How to administrate translations
 1. Location and file format
 2. Use Poedit http://www.poedit.net/
 3. How to create language files with Poedit
+4. Administration of labels that are used via config files only
 
 
 
@@ -51,3 +52,12 @@ translatable labels from a module.
 
  5. The catalog of editable labels now can be updated by clicking the
  	"Update" option from the main menu bar.
+	
+	
+4. Administration of generic labels
+-----------------------------------
+To administer "generic" labels which are not discoverable by PoEdit because of their code-pattern of occurence
+(e.g.: <?= $this->translate(....)) you can either add and edit those manually to the gettext catalog, or add
+them into a pseudo-template. This is a template, which is not actively used for displayed content of the module
+and only used as a means for transmitting labels. 
+The included pseudo-template can be found at: \view\libadmin\global\gettext-labels.phtml

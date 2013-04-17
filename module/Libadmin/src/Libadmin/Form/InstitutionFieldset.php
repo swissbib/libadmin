@@ -183,6 +183,12 @@ class InstitutionFieldset extends Fieldset implements InputFilterProviderInterfa
 						'name' => 'EmailAddress'
 					)
 				)
+			),
+			'zip' => array(
+				'required'	=> false,
+				'filters'	=> array(
+					array('name' => 'Digits')
+				)
 			)
 		);
 	}

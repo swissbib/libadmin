@@ -39,7 +39,7 @@ CREATE  TABLE IF NOT EXISTS `institution` (
   `isil` VARCHAR(45) NULL ,
   `notes` TEXT NULL ,
   PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
+ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 
 -- -----------------------------------------------------
@@ -57,7 +57,7 @@ CREATE  TABLE IF NOT EXISTS `group` (
   `notes` TEXT NULL ,
   `is_active` TINYINT(1)  NULL ,
   PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
+ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 
 -- -----------------------------------------------------
@@ -72,7 +72,7 @@ CREATE  TABLE IF NOT EXISTS `view` (
   `is_active` TINYINT(1)  NULL ,
   `notes` TEXT NULL ,
   PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
+ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 
 -- -----------------------------------------------------
@@ -102,7 +102,7 @@ CREATE  TABLE IF NOT EXISTS `mm_institution_group_view` (
     REFERENCES `group` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 
 -- -----------------------------------------------------
@@ -127,7 +127,7 @@ CREATE  TABLE IF NOT EXISTS `mm_group_view` (
     REFERENCES `view` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 
 -- -----------------------------------------------------
@@ -142,7 +142,7 @@ CREATE  TABLE IF NOT EXISTS `user` (
   `is_active` TINYINT(1)  NULL ,
   `is_admin` TINYINT(1)  NULL ,
   PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
+ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 
 -- -----------------------------------------------------
@@ -156,7 +156,7 @@ CREATE  TABLE IF NOT EXISTS `log` (
   `id_view` INT NULL ,
   `host` VARCHAR(100) NULL ,
   PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
+ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 
 

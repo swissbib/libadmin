@@ -2,7 +2,7 @@
 
 ## Export Formats
 
-The libadmin export api support all types of formats which are implemented by the requested system.
+The libadmin export API support all types of formats which are implemented by the requested system.
 Currently the following formats are enabled in routing (module.config.php):
 
 * JSON

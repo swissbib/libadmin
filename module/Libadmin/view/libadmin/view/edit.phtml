@@ -7,7 +7,7 @@ $form->prepare();
 $idView			= (int)$form->get('id')->getValue();
 $isNew			= !$idView;
 
-$saveButtonLabel= $this->translate($isNew ? 'action_create' : 'action_update',	'Libadmin');
+$saveButtonLabel= $this->translate($isNew ? 'action_create' : 'action_save',	'Libadmin');
 
 $formType		= 'horizontal';
 

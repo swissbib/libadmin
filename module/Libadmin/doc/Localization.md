@@ -1,14 +1,7 @@
 # Libadmin Localization - administrate translations
+---------------------------------------------------
 
-## Contents
-
-[1. Location and file format][locationandformat]
-[2. Use Poedit http://www.poedit.net/][poedit]
-[3. How to create language files with Poedit][createfiles]
-[4. Administration of generic labels][genericlabels]
-
-
-## [locationandformat]: 1. Location and file format
+## 1. Location and file format
 
 Translations are handled by the use of **/gettext catalog (.po)** files.
 All translation files are stored inside the module's `/language` folder.
@@ -17,13 +10,13 @@ of that respective language.
 Examples: `/language\de_DE.po` for german german, `/language\en_US` for american english.
 
 
-## [poedit]: 2. Use Poedit http://www.poedit.net/
+## 2. Use Poedit (http://www.poedit.net/)
 
 Poedit is a cross-plattform editor for gettext catalogs, that allows to conveniently edit
 translations by automatically collecting translatable labels from a module.
 
 
-## [creatfiles]: 3. How to create language files with Poedit
+## 3. How to create language files with Poedit
 
  1.	For Poedit to be able to find our templates, you have to add the pattern
  	for `.phtml` files to the configuration of Poedit's Parser:
@@ -54,7 +47,7 @@ translations by automatically collecting translatable labels from a module.
  	**/Update** option from the main menu bar.
 	
 	
-## [genericlabels]: 4. Administration of generic labels
+## 4. Administration of generic labels
 
 To administer "generic" labels which are not discoverable by PoEdit because of their code-pattern of occurence
 (e.g.: `<?= $this->translate(....)`) you can either add and edit those manually to the gettext catalog, or add

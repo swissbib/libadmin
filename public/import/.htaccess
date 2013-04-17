@@ -1,4 +1,2 @@
-AuthUserFile .htpasswd
-AuthType Basic
-AuthName "Libadmin Institutionen Import"
-Require valid-user
+# To allow access to the import, prefix the next line with a # to disable the statement
+deny from all

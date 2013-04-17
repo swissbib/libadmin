@@ -12,7 +12,7 @@ chdir(dirname(dirname(__DIR__)));
 $zf2LocalConf	= include('config/autoload/local.php');
 
 try {
-	$flush	= true;
+	$flush		= true;
 	$importer	= new Importer($zf2LocalConf['db'], $flush);
 
 	$xmlFile	= '/module/Libadmin/data/tpgreen-libraries.xml';

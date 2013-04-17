@@ -1,32 +1,32 @@
-How to administrate translations
-================================
-1. Location and file format
-2. Use Poedit http://www.poedit.net/
-3. How to create language files with Poedit
-4. Administration of labels that are used via config files only
+# Libadmin Localization - administrate translations
+
+## Contents
+
+[1. Location and file format][locationandformat]
+[2. Use Poedit http://www.poedit.net/][poedit]
+[3. How to create language files with Poedit][createfiles]
+[4. Administration of generic labels][genericlabels]
 
 
+## [locationandformat]: 1. Location and file format
 
-1. Location and file format
----------------------------
-Translations are handled by the use of gettext catalog (.po) files.
-All translation files are stored inside the module's \language\ folder.
+Translations are handled by the use of **/gettext catalog (.po)** files.
+All translation files are stored inside the module's `/language` folder.
 For each language there has to be created one language file, named by the code
 of that respective language.
-Examples: "language\de_DE.po" for german german, "language\en_US" for american english.
+Examples: `/language\de_DE.po` for german german, `/language\en_US` for american english.
 
 
-2. Use Poedit http://www.poedit.net/
-------------------------------------
-Poedit is a cross-plattform editor for gettext catalogs.
-That allows to conveniently edit translations by automatically collecting
-translatable labels from a module.
+## [poedit]: 2. Use Poedit http://www.poedit.net/
+
+Poedit is a cross-plattform editor for gettext catalogs, that allows to conveniently edit
+translations by automatically collecting translatable labels from a module.
 
 
-3. How to create language files with Poedit
--------------------------------------------
+## [creatfiles]: 3. How to create language files with Poedit
+
  1.	For Poedit to be able to find our templates, you have to add the pattern
- 	for "*.phtml" files to the configuration of Poedit's Parser:
+ 	for `.phtml` files to the configuration of Poedit's Parser:
  		* From the menu go to: File > Properties
  		* Change into the tab "Parser"
  		* Select the "PHP" parser and click the "Edit" button
@@ -51,13 +51,13 @@ translatable labels from a module.
  		* Enter item title: translate
 
  5. The catalog of editable labels now can be updated by clicking the
- 	"Update" option from the main menu bar.
+ 	**/Update** option from the main menu bar.
 	
 	
-4. Administration of generic labels
------------------------------------
+## [genericlabels]: 4. Administration of generic labels
+
 To administer "generic" labels which are not discoverable by PoEdit because of their code-pattern of occurence
-(e.g.: <?= $this->translate(....)) you can either add and edit those manually to the gettext catalog, or add
+(e.g.: `<?= $this->translate(....)`) you can either add and edit those manually to the gettext catalog, or add
 them into a pseudo-template. This is a template, which is not actively used for displayed content of the module
 and only used as a means for transmitting labels. 
-The included pseudo-template can be found at: \view\libadmin\global\gettext-labels.phtml
+The included pseudo-template can be found at: `\view\libadmin\global\gettext-labels.phtml`

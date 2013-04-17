@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Libadmin\n"
-"POT-Creation-Date: 2013-04-17 09:18+0100\n"
-"PO-Revision-Date: 2013-04-17 09:18+0100\n"
+"POT-Creation-Date: 2013-04-17 09:50+0100\n"
+"PO-Revision-Date: 2013-04-17 09:50+0100\n"
 "Last-Translator: Kay Stenschke <kstenschke@snowflake.ch>\n"
 "Language-Team: Swissbib <admin@swissbib.ch>\n"
 "Language: de_DE\n"
@@ -160,14 +160,18 @@ msgid "skype"
 msgstr "Skype"
 
 #: ../view/libadmin/global/gettext-labels.phtml:40
+msgid "syscode"
+msgstr "System-Code"
+
+#: ../view/libadmin/global/gettext-labels.phtml:41
 msgid "telefon"
 msgstr "Telefon"
 
-#: ../view/libadmin/global/gettext-labels.phtml:41
+#: ../view/libadmin/global/gettext-labels.phtml:42
 msgid "webseite"
 msgstr "Webseite"
 
-#: ../view/libadmin/global/gettext-labels.phtml:42
+#: ../view/libadmin/global/gettext-labels.phtml:43
 msgid "zip"
 msgstr "PLZ"
 
@@ -218,7 +222,9 @@ msgid "display"
 msgstr "Anzeige"
 
 #: ../view/libadmin/group/edit.phtml:53
-msgid "views "
+#: ../view/libadmin/institution/edit.phtml:144
+#: ../view/libadmin/view/home.phtml:4
+msgid "views"
 msgstr "Views"
 
 #: ../view/libadmin/group/edit.phtml:54 ../view/libadmin/group/edit.phtml:90
@@ -242,6 +248,7 @@ msgid "group"
 msgstr "Gruppe"
 
 #: ../view/libadmin/group/home.phtml:4
+#: ../view/libadmin/institution/edit.phtml:147
 msgid "groups"
 msgstr "Gruppen"
 
@@ -268,6 +275,11 @@ msgstr "Bibliotheksnamen (offiziell)"
 #: ../view/libadmin/institution/edit.phtml:124
 msgid "contactdata"
 msgstr "Kontaktdaten"
+
+#: ../view/libadmin/institution/edit.phtml:150
+#: ../view/libadmin/view/edit.phtml:88
+msgid "is_favorite"
+msgstr "Ist Favorit"
 
 #: ../view/libadmin/institution/home.phtml:3
 #: ../view/libadmin/view/edit.phtml:86
@@ -298,10 +310,6 @@ msgstr "Gruppen für View sortieren"
 msgid "bibsyscodes"
 msgstr "Bib-/Sys-Codes"
 
-#: ../view/libadmin/view/edit.phtml:88
-msgid "is_favorite"
-msgstr "Ist Favorit"
-
 #: ../view/libadmin/view/edit.phtml:101
 msgid "yes"
 msgstr "Ja"
@@ -313,10 +321,6 @@ msgstr "Es bestehen noch keine Verbindungen"
 #: ../view/libadmin/view/home.phtml:3
 msgid "view"
 msgstr "View"
-
-#: ../view/libadmin/view/home.phtml:4
-msgid "views"
-msgstr "Views"
 
 #: ../src/Libadmin/Controller/GroupController.php:53
 #: ../src/Libadmin/Controller/GroupController.php:107
@@ -332,24 +336,51 @@ msgstr "Gruppe gespeichert"
 msgid "form_invalid"
 msgstr "Die Eingegebenen Daten sind nicht korrekt!"
 
+#: ../src/Libadmin/Controller/GroupController.php:68
+msgid "group_add"
+msgstr "Gruppe erstellen"
+
 #: ../src/Libadmin/Controller/GroupController.php:92
 #: ../src/Libadmin/Controller/InstitutionController.php:82
 #: ../src/Libadmin/Controller/ViewController.php:86
 msgid "notfound_record"
 msgstr "Datensatz wurde nicht gefunden"
 
+#: ../src/Libadmin/Controller/GroupController.php:117
+msgid "group_edit"
+msgstr "Gruppe bearbeiten"
+
 #: ../src/Libadmin/Controller/InstitutionController.php:43
 #: ../src/Libadmin/Controller/InstitutionController.php:96
 msgid "saved_institution"
 msgstr "Institution gespeichert"
+
+#: ../src/Libadmin/Controller/InstitutionController.php:59
+msgid "institution_add"
+msgstr "Institution erstellen"
+
+#: ../src/Libadmin/Controller/InstitutionController.php:111
+msgid "institution_edit"
+msgstr "Institution bearbeiten"
 
 #: ../src/Libadmin/Controller/ViewController.php:50
 #: ../src/Libadmin/Controller/ViewController.php:100
 msgid "saved_view"
 msgstr "View gespeichert"
 
-#~ msgid "syscode"
-#~ msgstr "System-Code"
+#: ../src/Libadmin/Controller/ViewController.php:62
+msgid "view_add"
+msgstr "View erstellen"
+
+#: ../src/Libadmin/Controller/ViewController.php:113
+msgid "view_edit"
+msgstr "View bearbeiten"
+
+#~ msgid "views "
+#~ msgstr "Views"
+
+#~ msgid "edit_view"
+#~ msgstr "View Editieren"
 
 #~ msgid "navigation_view"
 #~ msgstr "View"

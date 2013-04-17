@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Libadmin\n"
-"POT-Creation-Date: 2013-04-17 09:02+0100\n"
-"PO-Revision-Date: 2013-04-17 09:05+0100\n"
+"POT-Creation-Date: 2013-04-17 09:18+0100\n"
+"PO-Revision-Date: 2013-04-17 09:18+0100\n"
 "Last-Translator: Kay Stenschke <kstenschke@snowflake.ch>\n"
 "Language-Team: Swissbib <admin@swissbib.ch>\n"
 "Language: de_DE\n"
@@ -31,145 +31,145 @@ msgid "logfiles"
 msgstr "Log Dateien"
 
 #: ../view/libadmin/global/gettext-labels.phtml:8
+#: ../view/libadmin/view/edit.phtml:51
+msgid "action_institutions_sort"
+msgstr "Institutionen sortieren"
+
+#: ../view/libadmin/global/gettext-labels.phtml:9
+msgid "action_save"
+msgstr "Speichern"
+
+#: ../view/libadmin/global/gettext-labels.phtml:10
 msgid "app_title"
 msgstr "Bibliotheksverwaltung"
 
-#: ../view/libadmin/global/gettext-labels.phtml:9
-msgid "navigation_home"
-msgstr "Start"
-
-#: ../view/libadmin/global/gettext-labels.phtml:10
-msgid "navigation_institutions"
-msgstr "Institutionen"
-
 #: ../view/libadmin/global/gettext-labels.phtml:11
-msgid "navigation_groups"
-msgstr "Gruppen"
-
-#: ../view/libadmin/global/gettext-labels.phtml:12
-msgid "navigation_views"
-msgstr "Views"
-
-#: ../view/libadmin/global/gettext-labels.phtml:13
-msgid "navigation_admin"
-msgstr "Verwalten"
-
-#: ../view/libadmin/global/gettext-labels.phtml:14
-msgid "pagedescription_administration"
-msgstr "Administration von Benutzern und Log-Dateien"
-
-#: ../view/libadmin/global/gettext-labels.phtml:15
-#: ../view/libadmin/global/gettext-labels.phtml:16
-msgid "action_update"
-msgstr "Aktualisieren"
-
-#: ../view/libadmin/global/gettext-labels.phtml:17
 msgid "assign_institutions_to_groups_and_views"
 msgstr "Institutionen zu Gruppen und Views zuweisen"
 
-#: ../view/libadmin/global/gettext-labels.phtml:18
-msgid "display_links_for_control"
-msgstr "Anzeige der vorhandenen Verknüpfungen (zur Kontrolle)"
-
-#: ../view/libadmin/global/gettext-labels.phtml:19
-msgid "is_active"
-msgstr "Ist Aktiv"
-
-#: ../view/libadmin/global/gettext-labels.phtml:20
-msgid "language_german"
-msgstr "Deutsch"
-
-#: ../view/libadmin/global/gettext-labels.phtml:21
-msgid "language_french"
-msgstr "Französisch"
-
-#: ../view/libadmin/global/gettext-labels.phtml:22
-msgid "language_italian"
-msgstr "Italienisch"
-
-#: ../view/libadmin/global/gettext-labels.phtml:23
-msgid "language_english"
-msgstr "Englisch"
-
-#: ../view/libadmin/global/gettext-labels.phtml:24
-msgid "internal_notes"
-msgstr "Interne Notizen"
-
-#: ../view/libadmin/global/gettext-labels.phtml:25
+#: ../view/libadmin/global/gettext-labels.phtml:12
 msgid "bibcode"
 msgstr "Bib-Code"
 
-#: ../view/libadmin/global/gettext-labels.phtml:26
-msgid "syscode"
-msgstr "System-Code"
-
-#: ../view/libadmin/global/gettext-labels.phtml:27
-msgid "zip"
-msgstr "PLZ"
-
-#: ../view/libadmin/global/gettext-labels.phtml:28
-msgid "city"
-msgstr "Ort"
-
-#: ../view/libadmin/global/gettext-labels.phtml:29
-msgid "country"
-msgstr "Land"
-
-#: ../view/libadmin/global/gettext-labels.phtml:30
-msgid "country_ch"
-msgstr "Schweiz"
-
-#: ../view/libadmin/global/gettext-labels.phtml:31
-msgid "country_li"
-msgstr "Lichtenstein"
-
-#: ../view/libadmin/global/gettext-labels.phtml:32
-msgid "country_de"
-msgstr "Deutschland"
-
-#: ../view/libadmin/global/gettext-labels.phtml:33
-msgid "country_it"
-msgstr "Italien"
-
-#: ../view/libadmin/global/gettext-labels.phtml:34
-msgid "country_fr"
-msgstr "Frankreich"
-
-#: ../view/libadmin/global/gettext-labels.phtml:35
+#: ../view/libadmin/global/gettext-labels.phtml:13
 msgid "canton"
 msgstr "Kanton"
 
-#: ../view/libadmin/global/gettext-labels.phtml:36
-msgid "webseite"
-msgstr "Webseite"
+#: ../view/libadmin/global/gettext-labels.phtml:14
+msgid "city"
+msgstr "Ort"
 
-#: ../view/libadmin/global/gettext-labels.phtml:37
+#: ../view/libadmin/global/gettext-labels.phtml:15
+msgid "coordinates"
+msgstr "Koordinaten"
+
+#: ../view/libadmin/global/gettext-labels.phtml:16
+msgid "country"
+msgstr "Land"
+
+#: ../view/libadmin/global/gettext-labels.phtml:17
+msgid "country_ch"
+msgstr "Schweiz"
+
+#: ../view/libadmin/global/gettext-labels.phtml:18
+msgid "country_de"
+msgstr "Deutschland"
+
+#: ../view/libadmin/global/gettext-labels.phtml:19
+msgid "country_fr"
+msgstr "Frankreich"
+
+#: ../view/libadmin/global/gettext-labels.phtml:20
+msgid "country_it"
+msgstr "Italien"
+
+#: ../view/libadmin/global/gettext-labels.phtml:21
+msgid "country_li"
+msgstr "Lichtenstein"
+
+#: ../view/libadmin/global/gettext-labels.phtml:22
+msgid "display_links_for_control"
+msgstr "Anzeige der vorhandenen Verknüpfungen (zur Kontrolle)"
+
+#: ../view/libadmin/global/gettext-labels.phtml:23
 msgid "email"
 msgstr "Email"
 
+#: ../view/libadmin/global/gettext-labels.phtml:24
+msgid "facebook"
+msgstr "Facebook"
+
+#: ../view/libadmin/global/gettext-labels.phtml:25
+msgid "internal_notes"
+msgstr "Interne Notizen"
+
+#: ../view/libadmin/global/gettext-labels.phtml:26
+msgid "is_active"
+msgstr "Ist Aktiv"
+
+#: ../view/libadmin/global/gettext-labels.phtml:27
+msgid "isil"
+msgstr "ISIL"
+
+#: ../view/libadmin/global/gettext-labels.phtml:28
+msgid "language_english"
+msgstr "Englisch"
+
+#: ../view/libadmin/global/gettext-labels.phtml:29
+msgid "language_french"
+msgstr "Französisch"
+
+#: ../view/libadmin/global/gettext-labels.phtml:30
+msgid "language_german"
+msgstr "Deutsch"
+
+#: ../view/libadmin/global/gettext-labels.phtml:31
+msgid "language_italian"
+msgstr "Italienisch"
+
+#: ../view/libadmin/global/gettext-labels.phtml:32
+msgid "navigation_admin"
+msgstr "Verwalten"
+
+#: ../view/libadmin/global/gettext-labels.phtml:33
+msgid "navigation_groups"
+msgstr "Gruppen"
+
+#: ../view/libadmin/global/gettext-labels.phtml:34
+msgid "navigation_home"
+msgstr "Start"
+
+#: ../view/libadmin/global/gettext-labels.phtml:35
+msgid "navigation_institutions"
+msgstr "Institutionen"
+
+#: ../view/libadmin/global/gettext-labels.phtml:36
+msgid "navigation_views"
+msgstr "Views"
+
+#: ../view/libadmin/global/gettext-labels.phtml:37
+msgid "no"
+msgstr "Nein"
+
 #: ../view/libadmin/global/gettext-labels.phtml:38
-msgid "telefon"
-msgstr "Telefon"
+msgid "pagedescription_administration"
+msgstr "Administration von Benutzern und Log-Dateien"
 
 #: ../view/libadmin/global/gettext-labels.phtml:39
 msgid "skype"
 msgstr "Skype"
 
 #: ../view/libadmin/global/gettext-labels.phtml:40
-msgid "facebook"
-msgstr "Facebook"
+msgid "telefon"
+msgstr "Telefon"
 
 #: ../view/libadmin/global/gettext-labels.phtml:41
-msgid "coordinates"
-msgstr "Koordinaten"
+msgid "webseite"
+msgstr "Webseite"
 
 #: ../view/libadmin/global/gettext-labels.phtml:42
-msgid "isil"
-msgstr "ISIL"
-
-#: ../view/libadmin/global/gettext-labels.phtml:43
-msgid "no"
-msgstr "Nein"
+msgid "zip"
+msgstr "PLZ"
 
 #: ../view/libadmin/global/home-crud.phtml:3
 msgid "add_new_xxx"
@@ -282,10 +282,6 @@ msgstr "Gruppen aktivieren"
 msgid "action_groups_sort"
 msgstr "Gruppen sortieren"
 
-#: ../view/libadmin/view/edit.phtml:51
-msgid "action_institutions_sort"
-msgstr "Institutionen sortieren"
-
 #: ../view/libadmin/view/edit.phtml:52
 msgid "linking"
 msgstr "Verknüpfung"
@@ -351,6 +347,9 @@ msgstr "Institution gespeichert"
 #: ../src/Libadmin/Controller/ViewController.php:100
 msgid "saved_view"
 msgstr "View gespeichert"
+
+#~ msgid "syscode"
+#~ msgstr "System-Code"
 
 #~ msgid "navigation_view"
 #~ msgstr "View"

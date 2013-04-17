@@ -9,7 +9,7 @@ $institution    = $form->get('institution');
 $idInstitution	= (int)$institution->get('id')->getValue();
 $isNew			= !$idInstitution;
 
-$saveButtonLabel= $this->translate($isNew ? 'action_create' : 'action_update',	'Libadmin');
+$saveButtonLabel= $this->translate($isNew ? 'action_create' : 'action_save',	'Libadmin');
 
 $formType		= 'horizontal';
 

@@ -56,7 +56,7 @@ class InstitutionController extends BaseController {
 
 		return $this->getAjaxView(array(
 			'form'	=> $form,
-			'title'	=> 'Add Institution'
+			'title'	=> $this->translate('institution_add', 'Libadmin'),
 		), 'libadmin/institution/edit');
 	}
 
@@ -108,7 +108,7 @@ class InstitutionController extends BaseController {
 
 		return $this->getAjaxView(array(
 			'form'		=> $form,
-			'title'		=> 'Edit Institution'
+			'title'		=> $this->translate('institution_edit', 'Libadmin'),
 		));
 	}
 
@@ -146,6 +146,11 @@ class InstitutionController extends BaseController {
 		return $institution;
 	}
 
+
+
+	/**
+	 * @return array
+	 */
 	protected function getViews() {
 		$results= $this->getTable('View')->getAll(30, 'id');
 
@@ -153,12 +158,22 @@ class InstitutionController extends BaseController {
 	}
 
 
+
+	/**
+	 * @return array
+	 */
 	protected function getGroups() {
 		$results	= $this->getTable('Group')->getAll();
 
 		return $this->toList($results);
 	}
 
+
+
+	/**
+	 * @param ResultSetInterface $set
+	 * @return array
+	 */
 	protected function toList(ResultSetInterface $set) {
 		$list	= array();
 

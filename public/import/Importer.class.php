@@ -59,6 +59,7 @@ class Importer {
 	 * Flush existing institution records
 	 */
 	public function flushInstitutions() {
+		$this->DB->query('DELETE FROM mm_institution_group_view WHERE 1');
 		$this->DB->query('DELETE FROM institution WHERE 1');
 	}
 

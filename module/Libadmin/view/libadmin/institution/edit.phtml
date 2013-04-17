@@ -9,7 +9,7 @@ $institution    = $form->get('institution');
 $idInstitution	= (int)$institution->get('id')->getValue();
 $isNew			= !$idInstitution;
 
-$saveButtonLabel= $this->translate($isNew ? 'action_create' : 'action_update',	'Libadmin');
+$saveButtonLabel= $this->translate($isNew ? 'action_create' : 'action_save',	'Libadmin');
 
 $formType		= 'horizontal';
 
@@ -139,6 +139,18 @@ $this->formSelectTwb()->setTranslatorTextDomain('Libadmin');
 				</div>
 
 				<div class="tab-pane" id="relations">
+					<div class="row">
+						<div class="span3 view">
+							<legend><?=$this->translate('views', 'Libadmin')?></legend>
+						</div>
+						<div class="span4 group">
+							<legend><?=$this->translate('groups', 'Libadmin')?></legend>
+						</div>
+						<div class="span2 favorite">
+							<legend><?=$this->translate('is_favorite', 'Libadmin')?>?</legend>
+						</div>
+					</div>
+
 					<?php foreach($institution->get('relations') as $relationFieldset): ?>
 						<div class="row">
 							<div class="span3 view">

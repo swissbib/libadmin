@@ -7,7 +7,7 @@ $form->prepare();
 $idGroup		= (int)$form->get('id')->getValue();
 $isNew			= !$idGroup;
 
-$saveButtonLabel= $this->translate($isNew ? 'action_create' : 'action_update',	'Libadmin');
+$saveButtonLabel= $this->translate($isNew ? 'action_create' : 'action_save',	'Libadmin');
 
 $formType	= 'horizontal';
 $group		= $form->get('group');
@@ -50,7 +50,7 @@ $this->formSelectTwb()->setTranslatorTextDomain('Libadmin');
 			<li class="active">
 				<a href="#display"><?= $this->translate('display', 'Libadmin') ?></a>
 			</li>
-			<li><a href="#views"><?= $this->translate('views ', 'Libadmin') ?></a></li>
+			<li><a href="#views"><?= $this->translate('views', 'Libadmin') ?></a></li>
 			<li><a href="#institutions"><?= $this->translate('institutions', 'Libadmin') ?></a></li>
 		</ul>
 

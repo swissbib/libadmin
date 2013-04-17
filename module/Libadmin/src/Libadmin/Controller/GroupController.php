@@ -65,7 +65,7 @@ class GroupController extends BaseController {
 
 		return $this->getAjaxView(array(
 			'form'	=> $form,
-			'title'	=> 'Add Group'
+			'title'	=> $this->translate('group_add', 'Libadmin'),
 		), 'libadmin/group/edit');
 	}
 
@@ -114,7 +114,7 @@ class GroupController extends BaseController {
 
 		return $this->getAjaxView(array(
 			'form'		=> $form,
-			'title'		=> 'Edit Group'
+			'title'		=> $this->translate('group_edit', 'Libadmin'),
 		));
 	}
 

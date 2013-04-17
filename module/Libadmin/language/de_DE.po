@@ -1,26 +1,26 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Libadmin\n"
-"POT-Creation-Date: 2013-04-10 13:11+0100\n"
-"PO-Revision-Date: 2013-04-15 12:02+0100\n"
-"Last-Translator: Fabian Erni <ferni@snowflake.ch>\n"
+"POT-Creation-Date: 2013-04-17 09:18+0100\n"
+"PO-Revision-Date: 2013-04-17 09:18+0100\n"
+"Last-Translator: Kay Stenschke <kstenschke@snowflake.ch>\n"
 "Language-Team: Swissbib <admin@swissbib.ch>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.5.5\n"
 "X-Poedit-KeywordsList: translate\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../view/libadmin/admin/home.phtml:1
-msgid "pagetitle_administration"
+msgid "administrationtitle"
 msgstr "Administration"
 
 #: ../view/libadmin/admin/home.phtml:2
-msgid "pagedescription_administration"
-msgstr "Administration von Benutzern und Log-Dateien"
+msgid "administrationsubtitle"
+msgstr "Administration der Institutionsdaten"
 
 #: ../view/libadmin/admin/navi.phtml:2
 msgid "user"
@@ -30,67 +30,220 @@ msgstr "Benutzer"
 msgid "logfiles"
 msgstr "Log Dateien"
 
+#: ../view/libadmin/global/gettext-labels.phtml:8
+#: ../view/libadmin/view/edit.phtml:51
+msgid "action_institutions_sort"
+msgstr "Institutionen sortieren"
+
+#: ../view/libadmin/global/gettext-labels.phtml:9
+msgid "action_save"
+msgstr "Speichern"
+
+#: ../view/libadmin/global/gettext-labels.phtml:10
+msgid "app_title"
+msgstr "Bibliotheksverwaltung"
+
+#: ../view/libadmin/global/gettext-labels.phtml:11
+msgid "assign_institutions_to_groups_and_views"
+msgstr "Institutionen zu Gruppen und Views zuweisen"
+
+#: ../view/libadmin/global/gettext-labels.phtml:12
+msgid "bibcode"
+msgstr "Bib-Code"
+
+#: ../view/libadmin/global/gettext-labels.phtml:13
+msgid "canton"
+msgstr "Kanton"
+
+#: ../view/libadmin/global/gettext-labels.phtml:14
+msgid "city"
+msgstr "Ort"
+
+#: ../view/libadmin/global/gettext-labels.phtml:15
+msgid "coordinates"
+msgstr "Koordinaten"
+
+#: ../view/libadmin/global/gettext-labels.phtml:16
+msgid "country"
+msgstr "Land"
+
+#: ../view/libadmin/global/gettext-labels.phtml:17
+msgid "country_ch"
+msgstr "Schweiz"
+
+#: ../view/libadmin/global/gettext-labels.phtml:18
+msgid "country_de"
+msgstr "Deutschland"
+
+#: ../view/libadmin/global/gettext-labels.phtml:19
+msgid "country_fr"
+msgstr "Frankreich"
+
+#: ../view/libadmin/global/gettext-labels.phtml:20
+msgid "country_it"
+msgstr "Italien"
+
+#: ../view/libadmin/global/gettext-labels.phtml:21
+msgid "country_li"
+msgstr "Lichtenstein"
+
+#: ../view/libadmin/global/gettext-labels.phtml:22
+msgid "display_links_for_control"
+msgstr "Anzeige der vorhandenen Verknüpfungen (zur Kontrolle)"
+
+#: ../view/libadmin/global/gettext-labels.phtml:23
+msgid "email"
+msgstr "Email"
+
+#: ../view/libadmin/global/gettext-labels.phtml:24
+msgid "facebook"
+msgstr "Facebook"
+
+#: ../view/libadmin/global/gettext-labels.phtml:25
+msgid "internal_notes"
+msgstr "Interne Notizen"
+
+#: ../view/libadmin/global/gettext-labels.phtml:26
+msgid "is_active"
+msgstr "Ist Aktiv"
+
+#: ../view/libadmin/global/gettext-labels.phtml:27
+msgid "isil"
+msgstr "ISIL"
+
+#: ../view/libadmin/global/gettext-labels.phtml:28
+msgid "language_english"
+msgstr "Englisch"
+
+#: ../view/libadmin/global/gettext-labels.phtml:29
+msgid "language_french"
+msgstr "Französisch"
+
+#: ../view/libadmin/global/gettext-labels.phtml:30
+msgid "language_german"
+msgstr "Deutsch"
+
+#: ../view/libadmin/global/gettext-labels.phtml:31
+msgid "language_italian"
+msgstr "Italienisch"
+
+#: ../view/libadmin/global/gettext-labels.phtml:32
+msgid "navigation_admin"
+msgstr "Verwalten"
+
+#: ../view/libadmin/global/gettext-labels.phtml:33
+msgid "navigation_groups"
+msgstr "Gruppen"
+
+#: ../view/libadmin/global/gettext-labels.phtml:34
+msgid "navigation_home"
+msgstr "Start"
+
+#: ../view/libadmin/global/gettext-labels.phtml:35
+msgid "navigation_institutions"
+msgstr "Institutionen"
+
+#: ../view/libadmin/global/gettext-labels.phtml:36
+msgid "navigation_views"
+msgstr "Views"
+
+#: ../view/libadmin/global/gettext-labels.phtml:37
+msgid "no"
+msgstr "Nein"
+
+#: ../view/libadmin/global/gettext-labels.phtml:38
+msgid "pagedescription_administration"
+msgstr "Administration von Benutzern und Log-Dateien"
+
+#: ../view/libadmin/global/gettext-labels.phtml:39
+msgid "skype"
+msgstr "Skype"
+
+#: ../view/libadmin/global/gettext-labels.phtml:40
+msgid "telefon"
+msgstr "Telefon"
+
+#: ../view/libadmin/global/gettext-labels.phtml:41
+msgid "webseite"
+msgstr "Webseite"
+
+#: ../view/libadmin/global/gettext-labels.phtml:42
+msgid "zip"
+msgstr "PLZ"
+
+#: ../view/libadmin/global/home-crud.phtml:3
+msgid "add_new_xxx"
+msgstr "Hinzufügen:"
+
+#: ../view/libadmin/global/home-crud.phtml:10
+msgid "home_no_records"
+msgstr "Es wurden noch keine %s erstellt"
+
+#: ../view/libadmin/global/home-crud.phtml:14
+msgid "home_select_record"
+msgstr "Wählen Sie links aus der Navigation einen Datensatz"
+
 #: ../view/libadmin/global/sidebar.phtml:4
 msgid "action_search "
 msgstr "Suchen"
 
 #: ../view/libadmin/group/edit.phtml:10
-#: ../view/libadmin/institution/edit.phtml:10
+#: ../view/libadmin/institution/edit.phtml:12
 #: ../view/libadmin/view/edit.phtml:10
 msgid "action_create"
 msgstr "Anlegen"
 
-#: ../view/libadmin/group/edit.phtml:11
-#: ../view/libadmin/institution/edit.phtml:11
-#: ../view/libadmin/view/edit.phtml:11
-msgid "action_update"
-msgstr "Aktualisieren"
-
-#: ../view/libadmin/group/edit.phtml:22
-#: ../view/libadmin/institution/edit.phtml:21
-#: ../view/libadmin/view/edit.phtml:22
+#: ../view/libadmin/group/edit.phtml:24
+#: ../view/libadmin/institution/edit.phtml:26
+#: ../view/libadmin/view/edit.phtml:24
 msgid "action_close"
 msgstr "Schliessen"
 
-#: ../view/libadmin/group/edit.phtml:25
-#: ../view/libadmin/institution/edit.phtml:25
-#: ../view/libadmin/view/edit.phtml:26
+#: ../view/libadmin/group/edit.phtml:27
+#: ../view/libadmin/institution/edit.phtml:30
+#: ../view/libadmin/view/edit.phtml:28
 msgid "action_delete"
 msgstr "Löschen"
 
-#: ../view/libadmin/group/edit.phtml:35
-#: ../view/libadmin/institution/edit.phtml:35
-#: ../view/libadmin/view/edit.phtml:36
+#: ../view/libadmin/group/edit.phtml:37
+#: ../view/libadmin/institution/edit.phtml:40
+#: ../view/libadmin/view/edit.phtml:38
 msgid "general"
 msgstr "Allgemein"
 
-#: ../view/libadmin/group/edit.phtml:49
-#: ../view/libadmin/institution/edit.phtml:45
-#: ../view/libadmin/view/edit.phtml:46
+#: ../view/libadmin/group/edit.phtml:51
+#: ../view/libadmin/institution/edit.phtml:50
+#: ../view/libadmin/view/edit.phtml:48
 msgid "display"
 msgstr "Anzeige"
 
-#: ../view/libadmin/group/edit.phtml:51
+#: ../view/libadmin/group/edit.phtml:53
 msgid "views "
 msgstr "Views"
 
-#: ../view/libadmin/group/edit.phtml:52 ../view/libadmin/group/edit.phtml:88
+#: ../view/libadmin/group/edit.phtml:54 ../view/libadmin/group/edit.phtml:90
+#: ../view/libadmin/institution/home.phtml:4
 msgid "institutions"
 msgstr "Institutionen"
 
-msgid "institution"
-msgstr "Institution"
-
-#: ../view/libadmin/group/edit.phtml:58
-#: ../view/libadmin/institution/edit.phtml:53
+#: ../view/libadmin/group/edit.phtml:60
+#: ../view/libadmin/institution/edit.phtml:58
 msgid "displaynames"
 msgstr "Display Namen"
 
-#: ../view/libadmin/group/edit.phtml:78
-#: ../view/libadmin/institution/edit.phtml:97
-#: ../view/libadmin/view/edit.phtml:56
+#: ../view/libadmin/group/edit.phtml:80
+#: ../view/libadmin/institution/edit.phtml:102
+#: ../view/libadmin/view/edit.phtml:58
 msgid "notes"
 msgstr "Notizen"
+
+#: ../view/libadmin/group/home.phtml:3
+msgid "group"
+msgstr "Gruppe"
+
+#: ../view/libadmin/group/home.phtml:4
+msgid "groups"
+msgstr "Gruppen"
 
 #: ../view/libadmin/home/index.phtml:3
 msgid "title_module"
@@ -100,197 +253,103 @@ msgstr "Library Administration"
 msgid "subtitle_module"
 msgstr "Administration von Bibliotheken"
 
-#: ../view/libadmin/institution/edit.phtml:46
+#: ../view/libadmin/institution/edit.phtml:51
 msgid "address"
 msgstr "Adresse"
 
-#: ../view/libadmin/institution/edit.phtml:47
+#: ../view/libadmin/institution/edit.phtml:52
 msgid "groups_and_views"
 msgstr "Gruppen & Views"
 
-#: ../view/libadmin/institution/edit.phtml:65
+#: ../view/libadmin/institution/edit.phtml:70
 msgid "title_library_names_official"
 msgstr "Bibliotheksnamen (offiziell)"
 
-#: ../view/libadmin/institution/edit.phtml:119
+#: ../view/libadmin/institution/edit.phtml:124
 msgid "contactdata"
 msgstr "Kontaktdaten"
 
-#: ../view/libadmin/institution/edit.phtml:137
-msgid "assign_institutions_to_groups_and_views"
-msgstr "Institutionen zu Gruppen und Views zuweisen"
+#: ../view/libadmin/institution/home.phtml:3
+#: ../view/libadmin/view/edit.phtml:86
+msgid "institution"
+msgstr "Institution"
 
-#: ../view/libadmin/view/edit.phtml:47
+#: ../view/libadmin/view/edit.phtml:49
 msgid "action_groups_activate"
 msgstr "Gruppen aktivieren"
 
-#: ../view/libadmin/view/edit.phtml:48
+#: ../view/libadmin/view/edit.phtml:50
 msgid "action_groups_sort"
 msgstr "Gruppen sortieren"
 
-#: ../view/libadmin/view/edit.phtml:49
-msgid "action_institutions_sort"
-msgstr "Institutionen sortieren"
-
-#: ../view/libadmin/view/edit.phtml:50
+#: ../view/libadmin/view/edit.phtml:52
 msgid "linking"
 msgstr "Verknüpfung"
 
-#: ../view/libadmin/view/edit.phtml:62
+#: ../view/libadmin/view/edit.phtml:64
 msgid "header_active_networkgroups"
 msgstr "Folgende Gruppen sind in diesem Netzwerk aktiv:"
 
-#: ../view/libadmin/view/edit.phtml:67
+#: ../view/libadmin/view/edit.phtml:69
 msgid "action_groups_sort_for_view"
 msgstr "Gruppen für View sortieren"
 
-#: ../view/libadmin/view/edit.phtml:75
-msgid "display_links_for_control"
-msgstr "Anzeige der vorhandenen Verknüpfungen (zur Kontrolle)"
-
-#: ../src/Libadmin/Form/GroupForm.php:47 ../src/Libadmin/Form/ViewForm.php:44
-msgid "is_active"
-msgstr "Ist Aktiv"
-
-#: ../src/Libadmin/Form/GroupForm.php:50
-msgid "language_german"
-msgstr "Deutsch"
-
-#: ../src/Libadmin/Form/GroupForm.php:51
-msgid "language_french"
-msgstr "Französisch"
-
-#: ../src/Libadmin/Form/GroupForm.php:52
-msgid "language_italian"
-msgstr "Italienisch"
-
-#: ../src/Libadmin/Form/GroupForm.php:53
-msgid "language_english"
-msgstr "Englisch"
-
-#: ../src/Libadmin/Form/GroupForm.php:59 ../src/Libadmin/Form/ViewForm.php:52
-msgid "internal_notes"
-msgstr "Interne Notizen"
-
-msgid "bibcode"
-msgstr "Bib-Code"
-
-msgid "syscode"
-msgstr "System-Code"
-
-msgid "zip"
-msgstr "PLZ"
-
-msgid "city"
-msgstr "Ort"
-
-msgid "country"
-msgstr "Land"
-
-msgid "country_ch"
-msgstr "Schweiz"
-
-msgid "country_li"
-msgstr "Lichtenstein"
-
-msgid "country_de"
-msgstr "Deutschland"
-
-msgid "country_it"
-msgstr "Italien"
-
-msgid "country_fr"
-msgstr "Frankreich"
-
-msgid "canton"
-msgstr "Kanton"
-
-msgid "webseite"
-msgstr "Webseite"
-
-msgid "email"
-msgstr "Email"
-
-msgid "telefon"
-msgstr "Telefon"
-
-msgid "skype"
-msgstr "Skype"
-
-msgid "facebook"
-msgstr "Facebook"
-
-msgid "coordinates"
-msgstr "Koordinaten"
-
-msgid "isil"
-msgstr "ISIL"
-
-msgid "yes"
-msgstr "Ja"
-
-msgid "no"
-msgstr "Nein"
-
+#: ../view/libadmin/view/edit.phtml:87
 msgid "bibsyscodes"
 msgstr "Bib-/Sys-Codes"
 
+#: ../view/libadmin/view/edit.phtml:88
 msgid "is_favorite"
 msgstr "Ist Favorit"
 
+#: ../view/libadmin/view/edit.phtml:101
+msgid "yes"
+msgstr "Ja"
+
+#: ../view/libadmin/view/edit.phtml:109
 msgid "no_relations"
 msgstr "Es bestehen noch keine Verbindungen"
 
-msgid "navigation_home"
-msgstr "Start"
-
-msgid "navigation_institution"
-msgstr "Institutionen"
-
-msgid "navigation_groups"
-msgstr "Gruppen"
-
-msgid "navigation_views"
-msgstr "Views"
-
-msgid "navigation_admin"
-msgstr "Verwalten"
-
-msgid "app_title"
-msgstr "Bibliotheksverwaltung"
-
-msgid "add_new_xxx"
-msgstr "Hinzufügen:"
-
-msgid "group"
-msgstr "Gruppe"
-
-msgid "groups"
-msgstr "Gruppen"
-
+#: ../view/libadmin/view/home.phtml:3
 msgid "view"
 msgstr "View"
 
+#: ../view/libadmin/view/home.phtml:4
 msgid "views"
 msgstr "Views"
 
-msgid "home_no_records"
-msgstr "Es wurden noch keine %s erstellt"
-
-msgid "home_select_record"
-msgstr "Wählen Sie links aus der Navigation einen Datensatz"
-
-msgid "saved_institution"
-msgstr "Institution gespeichert"
-
+#: ../src/Libadmin/Controller/GroupController.php:53
+#: ../src/Libadmin/Controller/GroupController.php:107
 msgid "saved_group"
 msgstr "Gruppe gespeichert"
 
-msgid "saved_view"
-msgstr "View gespeichert"
-
+#: ../src/Libadmin/Controller/GroupController.php:60
+#: ../src/Libadmin/Controller/GroupController.php:109
+#: ../src/Libadmin/Controller/InstitutionController.php:47
+#: ../src/Libadmin/Controller/InstitutionController.php:99
+#: ../src/Libadmin/Controller/ViewController.php:54
+#: ../src/Libadmin/Controller/ViewController.php:102
 msgid "form_invalid"
 msgstr "Die Eingegebenen Daten sind nicht korrekt!"
 
+#: ../src/Libadmin/Controller/GroupController.php:92
+#: ../src/Libadmin/Controller/InstitutionController.php:82
+#: ../src/Libadmin/Controller/ViewController.php:86
 msgid "notfound_record"
 msgstr "Datensatz wurde nicht gefunden"
+
+#: ../src/Libadmin/Controller/InstitutionController.php:43
+#: ../src/Libadmin/Controller/InstitutionController.php:96
+msgid "saved_institution"
+msgstr "Institution gespeichert"
+
+#: ../src/Libadmin/Controller/ViewController.php:50
+#: ../src/Libadmin/Controller/ViewController.php:100
+msgid "saved_view"
+msgstr "View gespeichert"
+
+#~ msgid "syscode"
+#~ msgstr "System-Code"
+
+#~ msgid "navigation_view"
+#~ msgstr "View"

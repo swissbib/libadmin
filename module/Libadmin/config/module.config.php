@@ -135,7 +135,7 @@ return array(
 				'route' => 'home'
 			),
 			'institution' => array(
-				'label'	=> 'navigation_institution',
+				'label'	=> 'navigation_institutions',
 				'route'	=> 'institution'
 			),
 			'group' => array(

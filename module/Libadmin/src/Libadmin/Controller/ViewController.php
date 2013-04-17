@@ -59,7 +59,7 @@ class ViewController extends BaseController {
 
 		return $this->getAjaxView(array(
 			'form'	=> $form,
-			'title'	=> 'Add View'
+			'title'	=> $this->translate('view_add', 'Libadmin'),
 		), 'libadmin/view/edit');
 	}
 
@@ -110,7 +110,7 @@ class ViewController extends BaseController {
 
 		return $this->getAjaxView(array(
 			'form'		=> $form,
-			'title'		=> 'Edit View',
+			'title'		=> $this->translate('view_edit', 'Libadmin'),
 			'relations'	=> $relationHelper->getData($view)
 		));
 	}

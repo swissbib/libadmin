@@ -12,18 +12,20 @@
 				->prependStylesheet($this->basePath() . '/css/style.css')
 				->prependStylesheet($this->basePath() . '/css/dlu-tw-bootstrap.css')
 				->prependStylesheet($this->basePath() . '/css/bootstrap.css')
+				->appendStylesheet($this->basePath() . '/css/jquery.loadmask.css')
 //				->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
 		?>
 
         <?php	// Scripts
-			$this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+			$this->headScript()
+				->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
 				->prependFile($this->basePath() . '/js/bootstrap.js')
 //				->prependFile($this->basePath() . '/js/bootstrap.min.js')
-				->prependFile($this->basePath() . '/js/jquery.js');
+				->prependFile($this->basePath() . '/js/jquery.js')
 //				->prependFile($this->basePath() . '/js/jquery.min.js');
-
-			$this->headScript()->appendFile($this->basePath() . '/js/libadmin.js')
-				->appendFile($this->basePath() . '/js/jquery.form.js');
+				->appendFile($this->basePath() . '/js/libadmin.js')
+				->appendFile($this->basePath() . '/js/jquery.form.js')
+				->appendFile($this->basePath() . '/js/jquery.loadmask.js');
 
 			echo $this->headScript();
 		?>

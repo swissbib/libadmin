@@ -1,5 +1,7 @@
 <?php
 
+namespace Libadmin;
+
 /**
  * Static utility class for data conversion / generation methods
  */
@@ -9,9 +11,9 @@ class DataHelper
 	/**
 	 * Get ISIL from institution code
 	 *
-	 * @param    String    $institutionCode    Institution code
-	 * @param    String    $countryCode
-	 * @return    String
+	 * @param	String    $institutionCode    Institution code
+	 * @param   String    $countryCode
+	 * @return  String
 	 */
 	public static function getISIL($institutionCode = '', $countryCode = 'ch')
 	{
@@ -28,14 +30,13 @@ class DataHelper
 	}
 
 
-
 	/**
 	 * @param    String    $zipCode
 	 * @return    String
 	 */
 	public static function getCantonFromZip($zipCode)
 	{
-		$zipCode = intval($zipCode);
+//		$zipCode = intval($zipCode);
 
 		return '';
 	}

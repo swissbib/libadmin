@@ -13,7 +13,7 @@ $zf2LocalConf = include('config/autoload/local.php');
 
 try {
 	$flush = true;
-	$importer = new Importer($zf2LocalConf['db'], $flush);
+	$importer = new \Libadmin\Importer($zf2LocalConf[ 'db' ], $flush);
 
 	$xmlFile = '/module/Libadmin/data/tpgreen-libraries.xml';
 	echo $importer->import('module/Libadmin/data/tpgreen-libraries.xml');

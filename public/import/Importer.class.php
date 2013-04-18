@@ -1,5 +1,7 @@
 <?php
 
+namespace Libadmin;
+
 /**
  * Import data from XML file into Database
  */
@@ -7,7 +9,7 @@ class Importer
 {
 
 	/**
-	 * @var    Array
+	 * @var		Array
 	 */
 	private $dbConfig;
 
@@ -26,9 +28,9 @@ class Importer
 	/**
 	 * Constructor
 	 *
-	 * @throws    Exception
 	 * @param    Array        $dbConfig
 	 * @param    Boolean        $flush        Delete existing institution records initially?
+	 * @throws	\Exception
 	 */
 	public function __construct(array $dbConfig, $flush)
 	{
@@ -39,16 +41,16 @@ class Importer
 			if ($flush) {
 				$this->flushInstitutions();
 			}
-		} catch (Exception $e) {
-			throw new Exception($e->getMessage());
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage());
 		}
 	}
 
 
 
 	/**
-	 * @param    Array        $dbConfig
-	 * @throws    Exception
+	 * @param	Array        $dbConfig
+	 * @throws	\Exception
 	 */
 	public function setDbConfig(array $dbConfig)
 	{
@@ -56,7 +58,7 @@ class Importer
 				|| !array_key_exists('username', $dbConfig)
 				|| !array_key_exists('password', $dbConfig)
 		) {
-			throw new Exception('Invalid database configuration.');
+			throw new \Exception('Invalid database configuration.');
 		}
 
 		$this->dbConfig = $dbConfig;
@@ -76,19 +78,19 @@ class Importer
 
 
 	/**
-	 * @throws    Exception
-	 * @param    String        $file            XML file to be imported
-	 * @return    String
+	 * @param	String        $file            XML file to be imported
+	 * @return	String
+	 * @throws	\Exception
 	 */
 	public function import($file)
 	{
 		try {
-			/** @var $xml SimpleXMLElement */
+			/** @var $xml \SimpleXMLElement */
 			$xml = $this->initSimpleXmlFromFromFile($file);
 			$this->importLibraries($xml->libraries);
 //			$queryLogfile	= $this->DB->storeQueryLog();
-		} catch (Exception $e) {
-			throw new Exception($e->getMessage());
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage());
 		}
 
 		return 'Data from "' . basename($file) . '" has been successfully imported.';
@@ -99,12 +101,13 @@ class Importer
 	/**
 	 * Import nodes from given SimpleXMLElement into given table
 	 *
-	 * @throws    Exception
-	 * @param    SimpleXMLElement[]    $xmlNodes
-	 * @param    String                $table
+	 * @param	\SimpleXMLElement[]    $xmlNodes
+	 * @param	String                $table
+	 * @throws	\Exception
 	 */
 	private function importLibraries($xmlNodes, $table = 'institution')
 	{
+		/** @var $xmlNodes \SimpleXMLElement */
 		foreach ($xmlNodes->children() as $library) {
 			$fieldsValues = array(
 //				'id'			=> (string) $library->id,
@@ -127,6 +130,7 @@ class Importer
 			);
 			// Add label translations
 			$translations = $library->translation->translations;
+			/** @var $translations	\SimpleXMLElement */
 			foreach ($translations->children() as $translation) {
 				$languageKey = strtolower((string)$translation->key);
 				if (in_array($languageKey, $this->languageKeys)) {
@@ -142,8 +146,8 @@ class Importer
 
 			try {
 				$this->DB->execInsert($fieldsValues, $table);
-			} catch (Exception $e) {
-				throw new Exception($e->getMessage());
+			} catch (\Exception $e) {
+				throw new \Exception($e->getMessage());
 			}
 		}
 	}
@@ -154,9 +158,9 @@ class Importer
 	 * Validate XML file via DTD, create SimpleXMLElement from it
 	 * Precondition: "markup.dtd" must exist in the same folder as the XML file
 	 *
-	 * @throws    Exception
-	 * @param    String                $file
-	 * @return    SimpleXMLElement    SimpleXMLElement Object from contents of given XML file
+	 * @param   String                $file
+	 * @return	\SimpleXMLElement    SimpleXMLElement Object from contents of given XML file
+	 * @throws	\Exception
 	 */
 	private function initSimpleXmlFromFromFile($file)
 	{
@@ -164,19 +168,19 @@ class Importer
 			$xmlString = $this->getFileContents($file);
 			// Ensure XML to be not empty
 			if (empty($xmlString)) {
-				throw new Exception('Import file: "' . basename($file) . '" is empty!');
+				throw new \Exception('Import file: "' . basename($file) . '" is empty!');
 			}
 			// Ensure XML to be valid - load and insert DTD
 			$dtd = $this->getFileContents(dirname($file) . DIRECTORY_SEPARATOR . 'markup.dtd');
 			$xmlString = str_replace('<libraryconfiguration>', $dtd . '<libraryconfiguration>', $xmlString);
 			// Validate XML from DTD
-			$dom = new DOMDocument;
+			$dom = new \DOMDocument;
 			$dom->loadXML($xmlString);
 			if (!$dom->validate()) {
-				throw new Exception('Invalid XML in file: "' . basename($file) . '".');
+				throw new \Exception('Invalid XML in file: "' . basename($file) . '".');
 			}
-		} catch (Exception $e) {
-			throw new Exception($e->getMessage());
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage());
 		}
 
 		return simplexml_load_string($xmlString);
@@ -185,14 +189,14 @@ class Importer
 
 
 	/**
-	 * @throws    Exception
-	 * @param    String        $file
-	 * @return    String        Contents of given file
+	 * @param	String        $file
+	 * @return	String        Contents of given file
+	 * @throws	\Exception
 	 */
 	private function getFileContents($file)
 	{
 		if (!is_file($file)) {
-			throw new Exception('File not found: ' . $file);
+			throw new \Exception('File not found: ' . $file);
 		}
 
 		return file_get_contents($file);
@@ -203,7 +207,7 @@ class Importer
 	/**
 	 * Connect to MySql database
 	 *
-	 * @throws    Exception
+	 * @throws    \Exception
 	 */
 	public function connectToDatabase()
 	{
@@ -223,7 +227,7 @@ class Importer
 			}
 		}
 		if (sizeof($HostAndDB) == 0) {
-			throw (new Exception ('Wrong or missing definition of dbName and / or host name'));
+			throw (new \Exception ('Wrong or missing definition of dbName and / or host name'));
 		}
 
 		try {
@@ -233,8 +237,8 @@ class Importer
 				$this->dbConfig['username'],
 				$this->dbConfig['password']
 			);
-		} catch (Exception $e) {
-			throw(new Exception($e->getMessage()));
+		} catch (\Exception $e) {
+			throw(new \Exception($e->getMessage()));
 		}
 	}
 }

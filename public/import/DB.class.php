@@ -1,5 +1,7 @@
 <?php
 
+namespace Libadmin;
+
 /**
  * Database utility class
  */
@@ -19,33 +21,6 @@ class DB
 
 
 	/**
-	 * Connect to database
-	 *
-	 * @throws    Exception
-	 * @param    String        $host
-	 * @param    String        $database
-	 * @param    String        $username
-	 * @param    String        $password
-	 */
-	public function __construct($host, $database, $username, $password)
-	{
-		$this->link = mysqli_connect($host, $username, $password);
-		if ($this->isConnected()) {
-			if (!mysqli_select_db($this->link, $database)) {
-				$errorMessage = 'Selecting database failed';
-				$this->prependToQueryLog($errorMessage . ' - host:' . $host . ', database: ' . $database);
-				throw new Exception($errorMessage);
-			}
-		} else {
-			$errorMessage = 'MySQL connection failed.';
-			$this->prependToQueryLog($errorMessage . ' - host:' . $host . ', database: ' . $database . ', user: ' . $username . ', password: ' . $password);
-			throw new Exception($errorMessage);
-		}
-	}
-
-
-
-	/**
 	 * @return    Boolean        Database link setup correctly?
 	 */
 	private function isConnected()
@@ -56,17 +31,49 @@ class DB
 
 
 	/**
-	 * @throws    Exception
+	 * Connect to database
+	 *
+	 * @param	String	$host
+	 * @param	String	$database
+	 * @param	String	$username
+	 * @param	String	$password
+	 * @throws	\Exception
+	 */
+	public function __construct($host, $database, $username, $password)
+	{
+		$this->link = mysqli_connect($host, $username, $password);
+		if ($this->isConnected()) {
+			if (!mysqli_select_db($this->link, $database)) {
+				$errorMessage = 'Selecting database failed';
+				$this->prependToQueryLog($errorMessage . ' - host:' . $host . ', database: ' . $database);
+				throw new \Exception($errorMessage);
+			}
+		} else {
+			$errorMessage = 'MySQL connection failed.';
+			$this->prependToQueryLog(
+				$errorMessage
+						. ' - host:' . $host
+						. ', database: ' . $database
+						. ', user: ' . $username
+						. ', password: ' . $password
+			);
+			throw new \Exception($errorMessage);
+		}
+	}
+
+
+
+	/**
 	 * @param    Array    $fieldsValues
 	 * @param    String    $table
+	 * @throws    \Exception
 	 */
 	public function execInsert(array $fieldsValues, $table)
 	{
 		try {
 			$this->query($this->buildInsertQuery($fieldsValues, $table));
-
-		} catch (Exception $e) {
-			throw new Exception($e->getMessage());
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage());
 		}
 	}
 
@@ -95,9 +102,9 @@ class DB
 
 
 	/**
-	 * @throws    Exception
-	 * @param    Array        $fieldsValues
-	 * @return    Array
+	 * @param   Array        $fieldsValues
+	 * @return	Array
+	 * @throws	\Exception
 	 */
 	private function prepareValuesForInsert(array $fieldsValues)
 	{
@@ -106,7 +113,7 @@ class DB
 				$fieldsValues[$key] = '\'' . mysqli_real_escape_string($this->link, trim($value)) . '\'';
 			}
 		} else {
-			throw new Exception('Query failed: no database link');
+			throw new \Exception('Query failed: no database link');
 		}
 
 		return $fieldsValues;
@@ -117,9 +124,9 @@ class DB
 	/**
 	 * Send MySql query and add it the log
 	 *
-	 * @throws    Exception
 	 * @param    String            $query
 	 * @return    Object|Boolean
+	 * @throws    \Exception
 	 */
 	public function query($query)
 	{
@@ -131,10 +138,10 @@ class DB
 			if (mysqli_errno($this->link)) {
 				$errorMessage = 'MySQL query failed: ' . mysqli_error($this->link);
 				$this->prependToQueryLog($errorMessage, false);
-				throw new Exception($errorMessage);
+				throw new \Exception($errorMessage);
 			}
 		} else {
-			throw new Exception('Query failed: no database link');
+			throw new \Exception('Query failed: no database link');
 		}
 
 		return $resource;

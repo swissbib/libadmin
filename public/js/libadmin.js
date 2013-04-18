@@ -160,6 +160,7 @@ var LibAdmin = {
 		},
 
 		onListUpdated: function() {
+			$("#search-results-list").unmask();
 			this.initList();
 
 			if( this.listUpdate ) {
@@ -169,6 +170,7 @@ var LibAdmin = {
 
 
 		updateList: function() {
+			$("#search-results-list").mask("Loading...");
 			$('#search-form').submit();
 		},
 

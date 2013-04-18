@@ -36,7 +36,7 @@ abstract class BaseController extends AbstractActionController
 	public function indexAction()
 	{
 		return array(
-			'listItems' => $this->getTable()->getAll(30)
+			'listItems' => $this->getTable()->getAll(15)
 		);
 	}
 
@@ -51,7 +51,7 @@ abstract class BaseController extends AbstractActionController
 	{
 		return $this->getAjaxView(
 			array(
-				'listItems' => $this->getTable()->getAll(30)
+				'listItems' => $this->getTable()->getAll(15)
 		));
 	}
 
@@ -67,7 +67,7 @@ abstract class BaseController extends AbstractActionController
 		$query = $this->params()->fromQuery('query', '');
 		$data = array(
 			'route' => strtolower($this->getTypeName()),
-			'listItems' => $this->getTable()->find($query, 30)
+			'listItems' => $this->getTable()->find($query, 15)
 		);
 
 		return $this->getAjaxView($data, 'libadmin/global/search');

@@ -12,21 +12,24 @@ use Zend\Db\Adapter\Adapter;
 
 use Libadmin\Model\BaseModel;
 
-
 /**
  * [Description]
  *
  */
-abstract class BaseTable {
+abstract class BaseTable
+{
 
 	/**
-	 * @var	String[]	Fulltext search fields
+	 * @var    String[]    Fulltext search fields
 	 */
 	protected $searchFields = array();
 
 	protected $tableGateway;
 
-	public function __construct(TableGateway $tableGateway) {
+
+
+	public function __construct(TableGateway $tableGateway)
+	{
 		$this->tableGateway = $tableGateway;
 	}
 
@@ -35,19 +38,20 @@ abstract class BaseTable {
 	/**
 	 *
 	 *
-	 * @param	String		$searchString
-	 * @return	PredicateSet
+	 * @param    String        $searchString
+	 * @return    PredicateSet
 	 */
-	public function getSearchFieldsLikeCondition($searchString) {
-		$searchString	= trim($searchString);
-		$searchWords	= explode(' ', $searchString);
-		$searchWords	= array_map('trim', $searchWords);
-		$predicateSet	= new PredicateSet();
+	public function getSearchFieldsLikeCondition($searchString)
+	{
+		$searchString = trim($searchString);
+		$searchWords = explode(' ', $searchString);
+		$searchWords = array_map('trim', $searchWords);
+		$predicateSet = new PredicateSet();
 
-		foreach($searchWords as $searchWord) {
+		foreach ($searchWords as $searchWord) {
 			$likeWhere = new Where(null, Where::COMBINED_BY_OR);
 
-			foreach($this->searchFields as $searchField) {
+			foreach ($this->searchFields as $searchField) {
 				$likeWhere->like($searchField, '%' . $searchWord . '%');
 			}
 
@@ -58,17 +62,19 @@ abstract class BaseTable {
 	}
 
 
+
 	/**
 	 * Find records
 	 *
-	 * @param	String			$searchString
-	 * @param	String			$order
-	 * @param	Integer			$limit
-	 * @return	ResultSet
+	 * @param    String            $searchString
+	 * @param    String            $order
+	 * @param    Integer            $limit
+	 * @return    ResultSet
 	 */
-	protected function findFulltext($searchString, $order, $limit = 30) {
-		$select 		= new Select();
-		$likeCondition	= $this->getSearchFieldsLikeCondition($searchString);
+	protected function findFulltext($searchString, $order, $limit = 30)
+	{
+		$select = new Select();
+		$likeCondition = $this->getSearchFieldsLikeCondition($searchString);
 
 		$select->from($this->getTable())
 				->order($order)
@@ -86,9 +92,10 @@ abstract class BaseTable {
 	/**
 	 * Get table name (shortcut)
 	 *
-	 * @return	String
+	 * @return    String
 	 */
-	protected function getTable() {
+	protected function getTable()
+	{
 		return $this->tableGateway->getTable();
 	}
 
@@ -97,9 +104,9 @@ abstract class BaseTable {
 	/**
 	 * Find elements
 	 *
-	 * @param	String		$searchString
-	 * @param	Integer		$limit
-	 * @return	BaseModel[]
+	 * @param    String        $searchString
+	 * @param    Integer        $limit
+	 * @return    BaseModel[]
 	 */
 	abstract public function find($searchString, $limit = 30);
 
@@ -107,14 +114,15 @@ abstract class BaseTable {
 
 	/**
 	 *
-	 * @param	Integer		$idRecord
-	 * @return	BaseModel
-	 * @throws	\Exception
+	 * @param    Integer        $idRecord
+	 * @return    BaseModel
+	 * @throws    \Exception
 	 */
-	public function getRecord($idRecord) {
+	public function getRecord($idRecord)
+	{
 		$record = $this->tableGateway->select(array('id' => $idRecord))->current();
 
-		if( !$record ) {
+		if (!$record) {
 			throw new \Exception("Could not find record $idRecord in table " . $this->getTable());
 		}
 
@@ -124,26 +132,25 @@ abstract class BaseTable {
 
 
 	/**
-	 * @param	BaseModel	$record
-	 * @return	Integer		(New) object ID
-	 * @throws	\Exception
+	 * @param    BaseModel    $record
+	 * @return    Integer        (New) object ID
+	 * @throws    \Exception
 	 */
-	public function save(BaseModel $record) {
-		$idRecord	= $record->getID();
-		$data		= $record->getBaseData();
+	public function save(BaseModel $record)
+	{
+		$idRecord = $record->getID();
+		$data = $record->getBaseData();
 
-		if( $idRecord == 0 ) {
-			$numRows	= $this->tableGateway->insert($data);
+		if ($idRecord == 0) {
+			$numRows = $this->tableGateway->insert($data);
 
-			if( $numRows == 1 ) {
+			if ($numRows == 1) {
 				$idRecord = $this->tableGateway->getLastInsertValue();
 			}
-		}
-		else {
-			if( $this->getRecord($idRecord) ) {
+		} else {
+			if ($this->getRecord($idRecord)) {
 				$this->tableGateway->update($data, array('id' => $idRecord));
-			}
-			else {
+			} else {
 				throw new \Exception(get_class($record) . ' [' . $idRecord . '] does not exist');
 			}
 		}
@@ -156,21 +163,24 @@ abstract class BaseTable {
 	/**
 	 * Delete record
 	 *
-	 * @param	Integer		$idRecord
+	 * @param    Integer        $idRecord
 	 */
-	public function delete($idRecord) {
+	public function delete($idRecord)
+	{
 		$this->tableGateway->delete(array('id' => $idRecord));
 	}
+
 
 
 	/**
 	 * Get all records from table
 	 *
-	 * @param	String		$order
-	 * @param	Integer		$limit
-	 * @return	ResultSetInterface
+	 * @param    String        $order
+	 * @param    Integer        $limit
+	 * @return    ResultSetInterface
 	 */
-	protected function getAll($order, $limit = 30) {
+	protected function getAll($order, $limit = 30)
+	{
 		$select = new Select();
 		$select->from($this->getTable())
 				->order($order)
@@ -184,23 +194,24 @@ abstract class BaseTable {
 	/**
 	 * Delete group view relation
 	 *
-	 * @param	Integer		$idGroup
-	 * @param	Integer		$idView
+	 * @param    Integer        $idGroup
+	 * @param    Integer        $idView
 	 */
-	protected function deleteGroupViewRelation($idGroup, $idView) {
-		/** @var Adapter $adapter  */
-		$adapter	= $this->tableGateway->getAdapter();
-		$sql		= new Sql($adapter);
-		$delete		= $sql->delete('mm_group_view');
+	protected function deleteGroupViewRelation($idGroup, $idView)
+	{
+		/** @var Adapter $adapter */
+		$adapter = $this->tableGateway->getAdapter();
+		$sql = new Sql($adapter);
+		$delete = $sql->delete('mm_group_view');
 
 		$delete->where(array(
-					'id_group'	=> $idGroup,
-					'id_view'	=> $idView
-				));
+			'id_group' => $idGroup,
+			'id_view' => $idView
+		));
 
 		$query = $sql->getSqlStringForSqlObject($delete);
 
-	//		var_dump($sql->getSqlStringForSqlObject($select));
+		//		var_dump($sql->getSqlStringForSqlObject($select));
 
 		$adapter->query($query, $adapter::QUERY_MODE_EXECUTE);
 	}
@@ -210,18 +221,19 @@ abstract class BaseTable {
 	/**
 	 * Add a group-view relation
 	 *
-	 * @param	Integer		$idGroup
-	 * @param	Integer		$idView
+	 * @param    Integer        $idGroup
+	 * @param    Integer        $idView
 	 */
-	protected function addGroupViewRelation($idGroup, $idView) {
-		/** @var Adapter $adapter  */
-		$adapter	= $this->tableGateway->getAdapter();
-		$sql		= new Sql($adapter);
-		$insert		= $sql->insert('mm_group_view');
+	protected function addGroupViewRelation($idGroup, $idView)
+	{
+		/** @var Adapter $adapter */
+		$adapter = $this->tableGateway->getAdapter();
+		$sql = new Sql($adapter);
+		$insert = $sql->insert('mm_group_view');
 
 		$insert->values(array(
-			'id_group'	=> $idGroup,
-			'id_view'	=> $idView
+			'id_group' => $idGroup,
+			'id_view' => $idView
 		));
 
 		$query = $sql->getSqlStringForSqlObject($insert);
@@ -229,34 +241,39 @@ abstract class BaseTable {
 	}
 
 
+
 	/**
-	 * @param $idGroup
+	 * Get view IDs for relation
+	 *
+	 * @param	String		$column
+	 * @param	String		$matchColumn
+	 * @param	Integer		$idRecord
 	 * @return	Integer[]
 	 */
-	protected function getRelatedGroupViewIDs($column, $matchColumn, $idRecord) {
-		/** @var Adapter $adapter  */
-		$adapter	= $this->tableGateway->getAdapter();
-		$sql		= new Sql($adapter);
-		$select		= $sql->select();
+	protected function getRelatedGroupViewIDs($column, $matchColumn, $idRecord)
+	{
+		/** @var Adapter $adapter */
+		$adapter = $this->tableGateway->getAdapter();
+		$sql = new Sql($adapter);
+		$select = $sql->select();
 
 		$select->columns(array($column))
 				->from('mm_group_view')
 				->where(array(
-					$matchColumn	=> $idRecord
+					$matchColumn => $idRecord
 				));
 
 		$selectString = $sql->getSqlStringForSqlObject($select);
 
 //		var_dump($sql->getSqlStringForSqlObject($select));
 
-		$results	= $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE)->toArray();
-		$viewIds	= array();
+		$results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE)->toArray();
+		$viewIds = array();
 
-		foreach($results as $result) {
+		foreach ($results as $result) {
 			$viewIds[] = (int)$result[$column];
 		}
 
 		return $viewIds;
 	}
-
 }

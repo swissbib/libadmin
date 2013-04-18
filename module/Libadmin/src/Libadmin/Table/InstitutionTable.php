@@ -17,14 +17,14 @@ use Libadmin\Table\BaseTable;
 use Libadmin\Model\BaseModel;
 use Libadmin\Model\Institution;
 use Libadmin\Model\InstitutionRelation;
-use Zend\Db\Sql\Sql;
 use Zend\Db\TableGateway\TableGateway;
 
 /**
  * Class InstitutionTable
  * @package Libadmin\Table
  */
-class InstitutionTable extends BaseTable {
+class InstitutionTable extends BaseTable
+{
 
 	/**
 	 * @var InstitutionRelationTable
@@ -36,10 +36,11 @@ class InstitutionTable extends BaseTable {
 	/**
 	 * Initialize with base and relation table
 	 *
-	 * @param	TableGateway				$institutionTableGateway
-	 * @param	InstitutionRelationTable	$relationTable
+	 * @param    TableGateway                $institutionTableGateway
+	 * @param    InstitutionRelationTable    $relationTable
 	 */
-	public function __construct(TableGateway $institutionTableGateway, InstitutionRelationTable $relationTable) {
+	public function __construct(TableGateway $institutionTableGateway, InstitutionRelationTable $relationTable)
+	{
 		parent::__construct($institutionTableGateway);
 
 		$this->relationTable = $relationTable;
@@ -48,7 +49,7 @@ class InstitutionTable extends BaseTable {
 
 
 	/**
-	 * @var	String[]	Fulltext search fields
+	 * @var    String[]    Fulltext search fields
 	 */
 	protected $searchFields = array(
 		'bib_code',
@@ -62,12 +63,13 @@ class InstitutionTable extends BaseTable {
 	/**
 	 * Find institutions
 	 *
-	 * @param	String			$searchString
-	 * @param	Integer			$limit
-	 * @param	String			$order
-	 * @return	BaseModel[]
+	 * @param    String            $searchString
+	 * @param    Integer            $limit
+	 * @param    String            $order
+	 * @return    BaseModel[]
 	 */
-	public function find($searchString, $limit = 30, $order = 'bib_code') {
+	public function find($searchString, $limit = 30, $order = 'bib_code')
+	{
 		return $this->findFulltext($searchString, $order, $limit);
 	}
 
@@ -76,10 +78,11 @@ class InstitutionTable extends BaseTable {
 	/**
 	 * Get all institutions
 	 *
-	 * @param	Integer		$limit
-	 * @return	ResultSetInterface
+	 * @param    Integer        $limit
+	 * @return    ResultSetInterface
 	 */
-	public function getAll($limit = 30) {
+	public function getAll($limit = 30)
+	{
 		return parent::getAll('label_de', $limit);
 	}
 
@@ -88,10 +91,11 @@ class InstitutionTable extends BaseTable {
 	/**
 	 * Get institution
 	 *
-	 * @param	Integer		$idInstitution
-	 * @return	Institution
+	 * @param    Integer        $idInstitution
+	 * @return    Institution
 	 */
-	public function getRecord($idInstitution) {
+	public function getRecord($idInstitution)
+	{
 		return parent::getRecord($idInstitution);
 	}
 
@@ -100,12 +104,13 @@ class InstitutionTable extends BaseTable {
 	/**
 	 * Save institution
 	 *
-	 * @param	Institution		$institution
-	 * @return	Integer
+	 * @param    Institution        $institution
+	 * @return    Integer
 	 */
-	public function save(Institution $institution) {
-		$relations		= $institution->getRelations();
-		$idInstitution	= parent::save($institution);
+	public function save(Institution $institution)
+	{
+		$relations = $institution->getRelations();
+		$idInstitution = parent::save($institution);
 
 		$this->saveRelations($idInstitution, $relations);
 
@@ -117,14 +122,15 @@ class InstitutionTable extends BaseTable {
 	/**
 	 * Save institution relations
 	 *
-	 * @param	Integer		$idInstitution
-	 * @param	InstitutionRelation[]	$relations
+	 * @param    Integer        $idInstitution
+	 * @param    InstitutionRelation[]    $relations
 	 */
-	protected function saveRelations($idInstitution, array $relations) {
+	protected function saveRelations($idInstitution, array $relations)
+	{
 		$this->relationTable->clear($idInstitution);
 
-		foreach($relations as $relation) {
-			if( $relation->hasView() ) {
+		foreach ($relations as $relation) {
+			if ($relation->hasView()) {
 				$relation->setIdInstitution($idInstitution);
 				$this->relationTable->add($relation);
 			}
@@ -136,25 +142,31 @@ class InstitutionTable extends BaseTable {
 	/**
 	 * Get all institutions which are related with a view and group
 	 *
-	 * @param	Integer		$idView
-	 * @param	Integer		$idGroup
-	 * @param	Boolean		$activeOnly
-	 * @return	null|ResultSetInterface
+	 * @param    Integer        $idView
+	 * @param    Integer        $idGroup
+	 * @param    Boolean        $activeOnly
+	 * @return    null|ResultSetInterface
 	 */
-	public function getAllGroupViewInstitutions($idView, $idGroup, $activeOnly = true) {
-		$select	= new Select($this->getTable());
+	public function getAllGroupViewInstitutions($idView, $idGroup, $activeOnly = true)
+	{
+		$select = new Select($this->getTable());
 
 		$select->columns(array('*'))
-				->join(array('mm' => 'mm_institution_group_view'), 'institution.id = mm.id_institution', array('is_favorite'), $select::JOIN_LEFT)
+				->join(array(
+						'mm' => 'mm_institution_group_view'),
+						'institution.id = mm.id_institution',
+						array('is_favorite'),
+						$select::JOIN_LEFT
+					)
 				->where(array(
-					'mm.id_view'	=> (int)$idView,
-					'mm.id_group'	=> (int)$idGroup
+					'mm.id_view' => (int)$idView,
+					'mm.id_group' => (int)$idGroup
 				))
 				->order('mm.position');
 
-		if( $activeOnly ) {
+		if ($activeOnly) {
 			$select->where(array(
-				'institution.is_active'	=> 1
+				'institution.is_active' => 1
 			));
 		}
 
@@ -163,5 +175,4 @@ class InstitutionTable extends BaseTable {
 
 		return $this->tableGateway->selectWith($select);
 	}
-
 }

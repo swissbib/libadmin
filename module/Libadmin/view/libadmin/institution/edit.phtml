@@ -4,29 +4,32 @@ $this->headTitle($title);
 $form = $this->form;
 $form->prepare();
 
-$institution    = $form->get('institution');
+$institution = $form->get('institution');
 
-$idInstitution	= (int)$institution->get('id')->getValue();
-$isNew			= !$idInstitution;
+$idInstitution = (int)$institution->get('id')->getValue();
+$isNew = !$idInstitution;
 
-$saveButtonLabel= $this->translate($isNew ? 'action_create' : 'action_save',	'Libadmin');
+$saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save', 'Libadmin');
 
-$formType		= 'horizontal';
+$formType = 'horizontal';
 
-	// Force Libadmin text domain (@todo cleaner way?)
+// Force Libadmin text domain (@todo cleaner way?)
 $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
 $this->formLabel()->setTranslatorTextDomain('Libadmin');
 $this->formSelectTwb()->setTranslatorTextDomain('Libadmin');
 
 ?>
-<?=$this->formTwb()->openTag($form, $formType)?>
+<?= $this->formTwb()->openTag($form, $formType) ?>
 	<div class="topButtons">
-		<input type="submit" value="<?=$this->escapeHtml($saveButtonLabel)?>" class="submitButton btn btn-primary btn-medium" id="submitbutton" name="submit">
-		<a href="<?=$this->url('institution', array('action'=>'home'));?>" class="ajaxButton closeButton btn btn-medium" id="closebutton">
+		<input type="submit" value="<?= $this->escapeHtml($saveButtonLabel) ?>"
+			   class="submitButton btn btn-primary btn-medium" id="submitbutton" name="submit">
+		<a href="<?= $this->url('institution', array('action' => 'home')); ?>"
+		   class="ajaxButton closeButton btn btn-medium" id="closebutton">
 			<?= $this->translate('action_close', 'Libadmin') ?>
 		</a>
-		<?php if(!$isNew): ?>
-			<a href="<?=$this->url('institution', array('action'=>'delete', 'id' => $idInstitution));?>" class="ajaxButton deleteButton btn btn-danger btn-medium" id="deletebutton">
+		<?php if (!$isNew): ?>
+			<a href="<?= $this->url('institution', array('action' => 'delete', 'id' => $idInstitution)); ?>"
+			   class="ajaxButton deleteButton btn btn-danger btn-medium" id="deletebutton">
 				<?= $this->translate('action_delete', 'Libadmin') ?>
 			</a>
 		<?php endif; ?>
@@ -34,14 +37,14 @@ $this->formSelectTwb()->setTranslatorTextDomain('Libadmin');
 
 	<h1><?php echo $this->escapeHtml($title); ?></h1>
 
-	<?=$this->ztbFlashMessenger()->render()?>
+<?= $this->ztbFlashMessenger()->render() ?>
 
 	<fieldset class="general">
 		<legend><?= $this->translate('general', 'Libadmin') ?></legend>
 		<div class="row-fluid">
-			<div class="span5"><?=$this->formRowTwb($institution->get('bib_code'))?></div>
-			<div class="span5"><?=$this->formRowTwb($institution->get('sys_code'))?></div>
-			<div class="span2"><?=$this->formRowTwb($institution->get('is_active'))?></div>
+			<div class="span5"><?= $this->formRowTwb($institution->get('bib_code')) ?></div>
+			<div class="span5"><?= $this->formRowTwb($institution->get('sys_code')) ?></div>
+			<div class="span2"><?= $this->formRowTwb($institution->get('is_active')) ?></div>
 		</div>
 	</fieldset>
 
@@ -53,119 +56,119 @@ $this->formSelectTwb()->setTranslatorTextDomain('Libadmin');
 		</ul>
 
 		<div class="tab-content">
-				<div class="tab-pane active" id="display">
-					<fieldset>
-						<legend><?= $this->translate('displaynames', 'Libadmin') ?></legend>
-						<div class="row-fluid">
-							<div class="span6"><?=$this->formRowTwb($institution->get('label_de'))?></div>
-							<div class="span6"><?=$this->formRowTwb($institution->get('label_fr'))?></div>
-						</div>
-						<div class="row-fluid">
-							<div class="span6"><?=$this->formRowTwb($institution->get('label_it'))?></div>
-							<div class="span6"><?=$this->formRowTwb($institution->get('label_en'))?></div>
-						</div>
-					</fieldset>
+			<div class="tab-pane active" id="display">
+				<fieldset>
+					<legend><?= $this->translate('displaynames', 'Libadmin') ?></legend>
+					<div class="row-fluid">
+						<div class="span6"><?= $this->formRowTwb($institution->get('label_de')) ?></div>
+						<div class="span6"><?= $this->formRowTwb($institution->get('label_fr')) ?></div>
+					</div>
+					<div class="row-fluid">
+						<div class="span6"><?= $this->formRowTwb($institution->get('label_it')) ?></div>
+						<div class="span6"><?= $this->formRowTwb($institution->get('label_en')) ?></div>
+					</div>
+				</fieldset>
 
-					<fieldset>
-						<legend><?= $this->translate('title_library_names_official', 'Libadmin') ?></legend>
-						<div class="row-fluid">
-							<div class="span6"><?=$this->formRowTwb($institution->get('name_de'))?></div>
-							<div class="span6"><?=$this->formRowTwb($institution->get('name_fr'))?></div>
-						</div>
-						<div class="row-fluid">
-							<div class="span6"><?=$this->formRowTwb($institution->get('name_it'))?></div>
-							<div class="span6"><?=$this->formRowTwb($institution->get('name_en'))?></div>
-						</div>
-					</fieldset>
+				<fieldset>
+					<legend><?= $this->translate('title_library_names_official', 'Libadmin') ?></legend>
+					<div class="row-fluid">
+						<div class="span6"><?= $this->formRowTwb($institution->get('name_de')) ?></div>
+						<div class="span6"><?= $this->formRowTwb($institution->get('name_fr')) ?></div>
+					</div>
+					<div class="row-fluid">
+						<div class="span6"><?= $this->formRowTwb($institution->get('name_it')) ?></div>
+						<div class="span6"><?= $this->formRowTwb($institution->get('name_en')) ?></div>
+					</div>
+				</fieldset>
 
-					<fieldset>
-						<legend>URL Bibliotheksinformationen</legend>
-						<div class="row-fluid">
-							<div class="span6">
-								<?=$this->formRowTwb($institution->get('url_de'))?>
-							</div>
-							<div class="span6">
-								<?=$this->formRowTwb($institution->get('url_fr'))?>
-							</div>
+				<fieldset>
+					<legend>URL Bibliotheksinformationen</legend>
+					<div class="row-fluid">
+						<div class="span6">
+							<?= $this->formRowTwb($institution->get('url_de')) ?>
 						</div>
-						<div class="row-fluid">
-							<div class="span6">
-								<?=$this->formRowTwb($institution->get('url_it'))?>
-							</div>
-							<div class="span6">
-								<?=$this->formRowTwb($institution->get('url_en'))?>
-							</div>
-						</div>
-					</fieldset>
-
-					<fieldset class="notes">
-						<legend><?= $this->translate('notes', 'Libadmin') ?></legend>
-						<?=$this->formRowTwb($institution->get('notes'))?>
-					</fieldset>
-
-				</div>
-
-				<div class="tab-pane" id="address">
-
-					<fieldset class="address">
-						<legend>Adresse</legend>
-						<div class="row-fluid">
-							<div class="span6"><?=$this->formRowTwb($institution->get('address'))?></div>
-							<div class="span6">
-								<?=$this->formRowTwb($institution->get('zip'))?>
-								<?=$this->formRowTwb($institution->get('city'))?>
-								<?=$this->formRowTwb($institution->get('country'))?>
-								<?=$this->formRowTwb($institution->get('canton'))?>
-							</div>
-						</div>
-					</fieldset>
-
-					<fieldset class="contact">
-						<legend><?= $this->translate('contactdata', 'Libadmin') ?></legend>
-						<div class="row-fluid">
-							<div class="span6">
-								<?=$this->formRowTwb($institution->get('website'))?>
-								<?=$this->formRowTwb($institution->get('email'))?>
-								<?=$this->formRowTwb($institution->get('phone'))?>
-							</div>
-							<div class="span6">
-								<?=$this->formRowTwb($institution->get('skype'))?>
-								<?=$this->formRowTwb($institution->get('facebook'))?>
-								<?=$this->formRowTwb($institution->get('coordinates'))?>
-								<?=$this->formRowTwb($institution->get('isil'))?>
-							</div>
-						</div>
-					</fieldset>
-				</div>
-
-				<div class="tab-pane" id="relations">
-					<div class="row">
-						<div class="span3 view">
-							<legend><?=$this->translate('views', 'Libadmin')?></legend>
-						</div>
-						<div class="span4 group">
-							<legend><?=$this->translate('groups', 'Libadmin')?></legend>
-						</div>
-						<div class="span2 favorite">
-							<legend><?=$this->translate('is_favorite', 'Libadmin')?>?</legend>
+						<div class="span6">
+							<?= $this->formRowTwb($institution->get('url_fr')) ?>
 						</div>
 					</div>
-
-					<?php foreach($institution->get('relations') as $relationFieldset): ?>
-						<div class="row">
-							<div class="span3 view">
-								<?=$this->formRowTwb($relationFieldset->get('id_view'))?>
-							</div>
-							<div class="span4 group">
-								<?=$this->formRowTwb($relationFieldset->get('id_group'))?>
-							</div>
-							<div class="span2 favorite">
-								<?=$this->formRowTwb($relationFieldset->get('is_favorite'))?>
-							</div>
+					<div class="row-fluid">
+						<div class="span6">
+							<?= $this->formRowTwb($institution->get('url_it')) ?>
 						</div>
-					<?php endforeach; ?>
+						<div class="span6">
+							<?= $this->formRowTwb($institution->get('url_en')) ?>
+						</div>
+					</div>
+				</fieldset>
+
+				<fieldset class="notes">
+					<legend><?= $this->translate('notes', 'Libadmin') ?></legend>
+					<?= $this->formRowTwb($institution->get('notes')) ?>
+				</fieldset>
+
+			</div>
+
+			<div class="tab-pane" id="address">
+
+				<fieldset class="address">
+					<legend>Adresse</legend>
+					<div class="row-fluid">
+						<div class="span6"><?= $this->formRowTwb($institution->get('address')) ?></div>
+						<div class="span6">
+							<?= $this->formRowTwb($institution->get('zip')) ?>
+							<?= $this->formRowTwb($institution->get('city')) ?>
+							<?= $this->formRowTwb($institution->get('country')) ?>
+							<?= $this->formRowTwb($institution->get('canton')) ?>
+						</div>
+					</div>
+				</fieldset>
+
+				<fieldset class="contact">
+					<legend><?= $this->translate('contactdata', 'Libadmin') ?></legend>
+					<div class="row-fluid">
+						<div class="span6">
+							<?= $this->formRowTwb($institution->get('website')) ?>
+							<?= $this->formRowTwb($institution->get('email')) ?>
+							<?= $this->formRowTwb($institution->get('phone')) ?>
+						</div>
+						<div class="span6">
+							<?= $this->formRowTwb($institution->get('skype')) ?>
+							<?= $this->formRowTwb($institution->get('facebook')) ?>
+							<?= $this->formRowTwb($institution->get('coordinates')) ?>
+							<?= $this->formRowTwb($institution->get('isil')) ?>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+
+			<div class="tab-pane" id="relations">
+				<div class="row">
+					<div class="span3 view">
+						<legend><?= $this->translate('views', 'Libadmin') ?></legend>
+					</div>
+					<div class="span4 group">
+						<legend><?= $this->translate('groups', 'Libadmin') ?></legend>
+					</div>
+					<div class="span2 favorite">
+						<legend><?= $this->translate('is_favorite', 'Libadmin') ?>?</legend>
+					</div>
 				</div>
+
+				<?php foreach ($institution->get('relations') as $relationFieldset): ?>
+					<div class="row">
+						<div class="span3 view">
+							<?= $this->formRowTwb($relationFieldset->get('id_view')) ?>
+						</div>
+						<div class="span4 group">
+							<?= $this->formRowTwb($relationFieldset->get('id_group')) ?>
+						</div>
+						<div class="span2 favorite">
+							<?= $this->formRowTwb($relationFieldset->get('is_favorite')) ?>
+						</div>
+					</div>
+				<?php endforeach; ?>
+			</div>
 		</div>
 	</div>
 
-<?=$this->form()->closeTag();?>
+<?= $this->form()->closeTag(); ?>

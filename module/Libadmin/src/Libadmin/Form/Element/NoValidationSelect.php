@@ -7,9 +7,11 @@ use Zend\Form\Element\Select as BaseSelect;
  * [Description]
  *
  */
-class NoValidationSelect extends BaseSelect {
+class NoValidationSelect extends BaseSelect
+{
 
-	public function getInputSpecification() {
+	public function getInputSpecification()
+	{
 		$spec = parent::getInputSpecification();
 
 		unset($spec['required']);
@@ -17,5 +19,4 @@ class NoValidationSelect extends BaseSelect {
 
 		return $spec;
 	}
-
 }

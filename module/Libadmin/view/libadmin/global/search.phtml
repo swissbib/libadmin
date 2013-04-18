@@ -1,12 +1,13 @@
 <?php
 use Libadmin\Model\BaseModel;
+
 /**
- * @var BaseModel[]	$listItems
- * @var String		$route
+ * @var BaseModel[]    $listItems
+ * @var String        $route
  */
 ?>
-<?php foreach($listItems as $listItem): ?>
-	<li><a href="<?=$this->url($route, array('action'=>'edit', 'id' => $listItem->getID()));?>">
-		<?=$this->escapeHtml($listItem->getListLabel())?>
-	</a></li>
+<?php foreach ($listItems as $listItem): ?>
+	<li><a href="<?= $this->url($route, array('action' => 'edit', 'id' => $listItem->getID())); ?>">
+			<?= $this->escapeHtml($listItem->getListLabel()) ?>
+		</a></li>
 <?php endforeach; ?>

@@ -7,12 +7,17 @@ use Libadmin\Model\BaseModel;
  * Class View
  * @package Libadmin\Model
  */
-class View extends BaseModel {
+class View extends BaseModel
+{
 
 	public $id;
+
 	public $code;
+
 	public $is_active;
+
 	public $label;
+
 	public $notes;
 
 	public $groups = array();
@@ -23,10 +28,11 @@ class View extends BaseModel {
 	 * Get base data
 	 * Remove groups relation
 	 *
-	 * @return	Array
+	 * @return    Array
 	 */
-	public function getBaseData() {
-		$data	= parent::getBaseData();
+	public function getBaseData()
+	{
+		$data = parent::getBaseData();
 
 		unset($data['groups']);
 
@@ -38,9 +44,10 @@ class View extends BaseModel {
 	/**
 	 * Get list label
 	 *
-	 * @return	String
+	 * @return    String
 	 */
-	public function getListLabel() {
+	public function getListLabel()
+	{
 		return $this->code . ': ' . $this->label;
 	}
 
@@ -49,63 +56,73 @@ class View extends BaseModel {
 	/**
 	 * Get type label
 	 *
-	 * @return	String
+	 * @return    String
 	 */
-	public function getTypeLabel() {
+	public function getTypeLabel()
+	{
 		return 'view';
 	}
 
 
-	public function getLabel() {
+
+	public function getLabel()
+	{
 		return $this->label;
 	}
 
 
 
-	public function setCode($code) {
+	public function setCode($code)
+	{
 		$this->code = $code;
 	}
 
 
 
-	public function getCode() {
+	public function getCode()
+	{
 		return $this->code;
 	}
 
 
 
-	public function setGroups($groups) {
+	public function setGroups($groups)
+	{
 		$this->groups = $groups;
 	}
 
 
 
-	public function getGroups() {
+	public function getGroups()
+	{
 		return $this->groups;
 	}
 
 
 
-	public function setIsActive($is_active) {
+	public function setIsActive($is_active)
+	{
 		$this->is_active = $is_active;
 	}
 
 
 
-	public function getIsActive() {
+	public function getIsActive()
+	{
 		return $this->is_active;
 	}
 
 
 
-	public function setNotes($notes) {
+	public function setNotes($notes)
+	{
 		$this->notes = $notes;
 	}
 
 
 
-	public function getNotes() {
+	public function getNotes()
+	{
 		return $this->notes;
 	}
-
 }

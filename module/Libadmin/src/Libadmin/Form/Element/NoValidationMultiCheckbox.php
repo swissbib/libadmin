@@ -7,12 +7,14 @@ use Zend\Form\Element\MultiCheckbox;
  * [Description]
  *
  */
-class NoValidationMultiCheckbox extends MultiCheckbox {
+class NoValidationMultiCheckbox extends MultiCheckbox
+{
 
 	/**
-	 * @return	Array
+	 * @return    Array
 	 */
-	public function getInputSpecification() {
+	public function getInputSpecification()
+	{
 		$spec = parent::getInputSpecification();
 
 		$spec['required'] = false;
@@ -21,7 +23,4 @@ class NoValidationMultiCheckbox extends MultiCheckbox {
 
 		return $spec;
 	}
-
 }
-
-?>

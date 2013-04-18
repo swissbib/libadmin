@@ -1,29 +1,30 @@
 <?php
 use Libadmin\Model\BaseModel;
 
-/** @var BaseModel $record  */
+/** @var BaseModel $record */
 
-$typeLabel	= $record->getTypeLabel();
-$itemLabel	= $record->getListLabel();
-$title		= 'Delete ' . $this->translate($typeLabel, 'Libadmin');
+$typeLabel = $record->getTypeLabel();
+$itemLabel = $record->getListLabel();
+$title = 'Delete ' . $this->translate($typeLabel, 'Libadmin');
 
 $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 
-<p>Are you sure that you want to delete '<?=$this->escapeHtml($itemLabel); ?>?</p>
+<p>Are you sure that you want to delete '<?= $this->escapeHtml($itemLabel); ?>?</p>
 
 <?php
 $url = $this->url($route, array(
-    'action' => 'delete',
-    'id'     => $id
+	'action' => 'delete',
+	'id' => $id
 ));
 ?>
-<form action="<?=$url?>" method="post" style="display:inline">
-    <input type="hidden" name="id" value="<?=$id?>" />
-    <input type="submit" name="del" value="Yes" class="btn btn-danger btn-medium"/>
+<form action="<?= $url ?>" method="post" style="display:inline">
+	<input type="hidden" name="id" value="<?= $id ?>"/>
+	<input type="submit" name="del" value="Yes" class="btn btn-danger btn-medium"/>
 </form>
 
-<a href="<?=$this->url($route, array('action'=>'edit', 'id' => $id));?>" class="ajaxButton returnButton btn btn-medium">
+<a href="<?= $this->url($route, array('action' => 'edit', 'id' => $id)); ?>"
+   class="ajaxButton returnButton btn btn-medium">
 	No
 </a>

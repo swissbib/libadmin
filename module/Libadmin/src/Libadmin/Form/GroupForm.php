@@ -8,16 +8,18 @@ use Zend\InputFilter\InputFilterProviderInterface;
 use Libadmin\Form\BaseForm;
 use Libadmin\Table\ViewTable;
 use Libadmin\Model\Group;
+use Libadmin\Model\View;
 use Libadmin\Form\Element\NoValidationMultiCheckbox;
 
 /**
  * Group form
  *
  */
-class GroupForm extends BaseForm implements InputFilterProviderInterface {
+class GroupForm extends BaseForm implements InputFilterProviderInterface
+{
 
 	/**
-	 * @var	ViewTable	To access views
+	 * @var    ViewTable    To access views
 	 */
 	protected $viewTable;
 
@@ -27,11 +29,12 @@ class GroupForm extends BaseForm implements InputFilterProviderInterface {
 	 * Initialize
 	 * Inject view table
 	 *
-	 * @param	ViewTable		$viewTable
-	 * @param	String|Null		$name
-	 * @param	Array			$options
+	 * @param    ViewTable        $viewTable
+	 * @param    String|Null        $name
+	 * @param    Array            $options
 	 */
-	public function __construct(ViewTable $viewTable, $name = null, $options = array()) {
+	public function __construct(ViewTable $viewTable, $name = null, $options = array())
+	{
 		parent::__construct('group', $options);
 
 		$this->viewTable = $viewTable;
@@ -43,7 +46,7 @@ class GroupForm extends BaseForm implements InputFilterProviderInterface {
 		$this->addText('code', 'Code', true);
 		$this->add(array(
 			'name' => 'is_active',
-			'type'  => 'checkbox',
+			'type' => 'checkbox',
 			'options' => array(
 				'label' => 'is_active'
 			)
@@ -55,25 +58,25 @@ class GroupForm extends BaseForm implements InputFilterProviderInterface {
 
 		$this->add(array(
 			'name' => 'notes',
-			'type'  => 'textarea',
+			'type' => 'textarea',
 			'options' => array(
 				'label' => 'internal_notes'
 			),
 			'attributes' => array(
-				'rows'	=> 10
+				'rows' => 10
 			)
 		));
 
-
-			// @todo wrap in a method or a field type
-			// Make not required
-		$allViews	= $viewTable->getAll();
-		if( sizeof($allViews) ) {
-			$viewOptions= array();
-			foreach($allViews as $view) {
+		// @todo wrap in a method or a field type
+		// Make not required
+		$allViews = $viewTable->getAll();
+		if (sizeof($allViews)) {
+			$viewOptions = array();
+			foreach ($allViews as $view) {
+				/** @var View $view */
 				$viewOptions[$view->getID()] = $view->getLabel();
 			}
-			$viewCheckboxes	= new NoValidationMultiCheckbox('views');
+			$viewCheckboxes = new NoValidationMultiCheckbox('views');
 			$viewCheckboxes->setValueOptions($viewOptions);
 			$viewCheckboxes->setUncheckedValue(0);
 			$this->add($viewCheckboxes);
@@ -86,11 +89,12 @@ class GroupForm extends BaseForm implements InputFilterProviderInterface {
 	 * Set data
 	 * Make sure views data is always set
 	 *
-	 * @param	Array|\ArrayAccess|\Traversable	$data
-	 * @return	GroupForm
+	 * @param    Array|\ArrayAccess|\Traversable    $data
+	 * @return    GroupForm
 	 */
-	public function setData($data) {
-		if( !isset($data['views']) ) {
+	public function setData($data)
+	{
+		if (!isset($data['views'])) {
 			$data['views'] = array();
 		}
 
@@ -102,38 +106,32 @@ class GroupForm extends BaseForm implements InputFilterProviderInterface {
 	/**
 	 * Get input filters and validations
 	 *
-	 * @return	Array
+	 * @return    Array
 	 */
-	public function getInputFilterSpecification() {
+	public function getInputFilterSpecification()
+	{
 		return array(
 			'code' => array(
-				'required'	=> true,
-				'filters'	=> array(
-					array('name'=> 'StringTrim')
+				'required' => true,
+				'filters' => array(
+					array('name' => 'StringTrim')
 				)
 			),
 			'label_de' => array(
-				'required'	=> true
+				'required' => true
 			),
 			'label_fr' => array(
-				'required'	=> true
+				'required' => true
 			),
 			'label_it' => array(
-				'required'	=> true
+				'required' => true
 			),
 			'label_en' => array(
-				'required'	=> true
+				'required' => true
 			),
-			'view'	=> array(
-				'required'	=> false
+			'view' => array(
+				'required' => false
 			)
 		);
 	}
-
 }
-
-
-
-
-
-

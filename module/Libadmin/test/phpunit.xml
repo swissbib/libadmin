@@ -2,13 +2,13 @@
 
 <phpunit bootstrap="Bootstrap.php">
 
-    <testsuites>
-        <testsuite name="zf2tutorial">
-            <directory>./LibrariesTest</directory>
+	<testsuites>
+		<testsuite name="zf2tutorial">
+			<directory>./LibrariesTest</directory>
 
-        </testsuite>
+		</testsuite>
 
-    </testsuites>
+	</testsuites>
 
 
 </phpunit>

@@ -1,29 +1,28 @@
 <?php
 namespace Libadmin\Controller;
 
-
-use Libadmin\Helper\RelationOverview;
-use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Http\Request;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
 
-//use Libadmin\Table\ViewTable;
+use Libadmin\Helper\RelationOverview;
 use Libadmin\Form\ViewForm;
 use Libadmin\Model\View;
-
 
 /**
  * [Description]
  *
  */
-class ViewController extends BaseController {
+class ViewController extends BaseController
+{
 
 
 	/**
 	 *
-	 * @return	ViewForm
+	 * @return    ViewForm
 	 */
-	protected function getViewForm() {
+	protected function getViewForm()
+	{
 		return $this->serviceLocator->get('ViewForm');
 	}
 
@@ -32,20 +31,22 @@ class ViewController extends BaseController {
 	/**
 	 * Add view
 	 *
-	 * @return	Response|ViewModel
+	 * @return    Response|ViewModel
 	 */
-	public function addAction() {
-		$form			= $this->getViewForm();
-		$request		= $this->getRequest();
-		$flashMessenger	= $this->flashMessenger();
+	public function addAction()
+	{
+		$form = $this->getViewForm();
+		/** @var Request $request */
+		$request = $this->getRequest();
+		$flashMessenger = $this->flashMessenger();
 
-		if( $request->isPost() ) {
+		if ($request->isPost()) {
 			$view = new View();
 			$form->setData($request->getPost());
 
-			if( $form->isValid() ) {
+			if ($form->isValid()) {
 				$view->exchangeArray($form->getData());
-				$idView	= $this->getTable()->save($view);
+				$idView = $this->getTable()->save($view);
 
 				$flashMessenger->addSuccessMessage($this->translate('saved_view'));
 
@@ -58,8 +59,8 @@ class ViewController extends BaseController {
 		$form->setAttribute('action', $this->makeUrl('view', 'add'));
 
 		return $this->getAjaxView(array(
-			'form'	=> $form,
-			'title'	=> $this->translate('view_add', 'Libadmin'),
+			'form' => $form,
+			'title' => $this->translate('view_add', 'Libadmin'),
 		), 'libadmin/view/edit');
 	}
 
@@ -68,21 +69,22 @@ class ViewController extends BaseController {
 	/**
 	 * Edit view
 	 *
-	 * @return	ViewModel
+	 * @return    ViewModel
 	 */
-	public function editAction() {
-		$idView	= (int)$this->params()->fromRoute('id', 0);
-		$flashMessenger	= $this->flashMessenger();
+	public function editAction()
+	{
+		$idView = (int)$this->params()->fromRoute('id', 0);
+		$flashMessenger = $this->flashMessenger();
 
-		if( !$idView ) {
+		if (!$idView) {
 			return $this->forwardTo('home');
 		}
 
 		try {
-			/** @var View $view  */
+			/** @var View $view */
 			$view = $this->getTable()->getRecord($idView);
 			$view->setGroups($this->getTable()->getGroupIDs($idView));
-		} catch(\Exception $ex ) {
+		} catch (\Exception $ex) {
 			$flashMessenger->addErrorMessage($this->translate('notfound_record'));
 
 			return $this->forwardTo('home');
@@ -91,11 +93,12 @@ class ViewController extends BaseController {
 		$form = $this->getViewForm();
 		$form->bind($view);
 
+		/** @var Request $request */
 		$request = $this->getRequest();
-		if( $request->isPost() ) {
+		if ($request->isPost()) {
 			$form->setData($request->getPost());
 
-			if( $form->isValid() ) {
+			if ($form->isValid()) {
 				$this->getTable()->save($form->getData());
 				$flashMessenger->addSuccessMessage($this->translate('saved_view'));
 			} else {
@@ -105,14 +108,13 @@ class ViewController extends BaseController {
 
 		$form->setAttribute('action', $this->makeUrl('view', 'edit', $idView));
 
-		/** @var RelationOverview $relationHelper  */
-		$relationHelper	= $this->serviceLocator->get('RelationOverviewHelper');
+		/** @var RelationOverview $relationHelper */
+		$relationHelper = $this->serviceLocator->get('RelationOverviewHelper');
 
 		return $this->getAjaxView(array(
-			'form'		=> $form,
-			'title'		=> $this->translate('view_edit', 'Libadmin'),
-			'relations'	=> $relationHelper->getData($view)
+			'form' => $form,
+			'title' => $this->translate('view_edit', 'Libadmin'),
+			'relations' => $relationHelper->getData($view)
 		));
 	}
-
 }

@@ -4,7 +4,9 @@ namespace Libadmin\Controller;
 //use RecursiveIteratorIterator;
 
 use Libadmin\Model\InstitutionRelation;
+use Libadmin\Table\InstitutionRelationTable;
 use Zend\Db\ResultSet\ResultSetInterface;
+use Zend\Http\Request;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
 use Zend\Db\ResultSet\ResultSet;
@@ -13,32 +15,36 @@ use Libadmin\Form\InstitutionForm;
 use Libadmin\Model\Institution;
 use Libadmin\Controller\BaseController;
 use Libadmin\Model\View;
-
+use Libadmin\Model\Group;
 
 /**
  * [Description]
  *
  */
-class InstitutionController extends BaseController {
+class InstitutionController extends BaseController
+{
 
 	/**
 	 * Add institution
 	 *
 	 * @return Response|ViewModel
 	 */
-	public function addAction() {
+	public function addAction()
+	{
 		$form			= $this->getInstitutionForm();
 		$flashMessenger	= $this->flashMessenger();
-        $institution    = new Institution();
+		$institution	= new Institution();
+		/** @var Request $request */
+		$request		= $this->getRequest();
 
 		$form->bind($institution);
 
-		if( $this->request->isPost() ) {
-			$form->setData($this->request->getPost());
+		if ($$request->isPost()) {
+			$form->setData($$request->getPost());
 
-			if( $form->isValid()) {
+			if ($form->isValid()) {
 				$institution->exchangeArray($form->getData());
-				$idInstitution	= $this->getTable()->save($institution);
+				$idInstitution = $this->getTable()->save($institution);
 
 				$flashMessenger->addSuccessMessage($this->translate('saved_institution'));
 
@@ -55,8 +61,8 @@ class InstitutionController extends BaseController {
 		$form->setAttribute('action', $this->makeUrl('institution', 'add'));
 
 		return $this->getAjaxView(array(
-			'form'	=> $form,
-			'title'	=> $this->translate('institution_add', 'Libadmin'),
+			'form' => $form,
+			'title' => $this->translate('institution_add', 'Libadmin'),
 		), 'libadmin/institution/edit');
 	}
 
@@ -67,18 +73,19 @@ class InstitutionController extends BaseController {
 	 *
 	 * @return ViewModel
 	 */
-	public function editAction() {
-		$idInstitution	= (int)$this->params()->fromRoute('id', 0);
-		$flashMessenger	= $this->flashMessenger();
+	public function editAction()
+	{
+		$idInstitution = (int)$this->params()->fromRoute('id', 0);
+		$flashMessenger = $this->flashMessenger();
 
-		if( !$idInstitution ) {
+		if (!$idInstitution) {
 			return $this->forwardTo('home');
 		}
 
 		try {
-			/** @var InstitutionForm $institution  */
+			/** @var InstitutionForm $institution */
 			$institution = $this->getInstitutionForEdit($idInstitution);
-		} catch(\Exception $ex ) {
+		} catch (\Exception $ex) {
 			$flashMessenger->addErrorMessage($this->translate('notfound_record'));
 
 			return $this->forwardTo('home');
@@ -87,11 +94,12 @@ class InstitutionController extends BaseController {
 		$form = $this->getInstitutionForm();
 		$form->bind($institution);
 
+		/** @var Request $request */
 		$request = $this->getRequest();
-		if( $request->isPost() ) {
+		if ($request->isPost()) {
 			$form->setData($request->getPost());
 
-			if( $form->isValid() ) {
+			if ($form->isValid()) {
 				$this->getTable()->save($form->getData());
 				$flashMessenger->addSuccessMessage($this->translate('saved_institution'));
 				$form->bind($this->getInstitutionForEdit($idInstitution)); // Reload data
@@ -107,8 +115,8 @@ class InstitutionController extends BaseController {
 		$form->setAttribute('action', $this->makeUrl('institution', 'edit', $idInstitution));
 
 		return $this->getAjaxView(array(
-			'form'		=> $form,
-			'title'		=> $this->translate('institution_edit', 'Libadmin'),
+			'form' => $form,
+			'title' => $this->translate('institution_edit', 'Libadmin'),
 		));
 	}
 
@@ -117,22 +125,23 @@ class InstitutionController extends BaseController {
 	/**
 	 * Get institution prepared to be bound to the form
 	 *
-	 * @param	Integer		$idInstitution
-	 * @return	Institution
+	 * @param    Integer        $idInstitution
+	 * @return    Institution
 	 */
-	protected function getInstitutionForEdit($idInstitution) {
-		$institution		= $this->getTable()->getRecord($idInstitution);
-		/** @var View[]	$views  */
-		$views				= $this->getViews();
-		/** @var InstitutionRelation[] $existingRelations  */
-		$existingRelations	= $this->getTable('InstitutionRelation')->getRelations($idInstitution);
+	protected function getInstitutionForEdit($idInstitution)
+	{
+		$institution 		= $this->getTable()->getRecord($idInstitution);
+		/** @var View[]    $views */
+		$views 				= $this->getViews();
+		/** @var InstitutionRelationTable $relationTable */
+		$relationTable		= $this->getTable('InstitutionRelation');
+		/** @var InstitutionRelation[] $existingRelations */
+		$existingRelations	= $relationTable->getRelations($idInstitution);
 		$relations			= array();
 
-
-
-		foreach($views as $view) {
-			foreach($existingRelations as $index => $existingRelation) {
-				if( $view->getId() == $existingRelation->getIdView() ) {
+		foreach ($views as $view) {
+			foreach ($existingRelations as $index => $existingRelation) {
+				if ($view->getId() == $existingRelation->getIdView()) {
 					$relations[] = $existingRelation;
 					unset($existingRelations[$index]);
 					continue 2;
@@ -149,10 +158,13 @@ class InstitutionController extends BaseController {
 
 
 	/**
-	 * @return array
+	 * Get views
+	 *
+	 * @return	View[]
 	 */
-	protected function getViews() {
-		$results= $this->getTable('View')->getAll(30, 'id');
+	protected function getViews()
+	{
+		$results = $this->getTable('View')->getAll(30, 'id');
 
 		return $this->toList($results);
 	}
@@ -160,10 +172,13 @@ class InstitutionController extends BaseController {
 
 
 	/**
-	 * @return array
+	 * Get groups
+	 *
+	 * @return	Group[]
 	 */
-	protected function getGroups() {
-		$results	= $this->getTable('Group')->getAll();
+	protected function getGroups()
+	{
+		$results = $this->getTable('Group')->getAll();
 
 		return $this->toList($results);
 	}
@@ -174,10 +189,11 @@ class InstitutionController extends BaseController {
 	 * @param ResultSetInterface $set
 	 * @return array
 	 */
-	protected function toList(ResultSetInterface $set) {
-		$list	= array();
+	protected function toList(ResultSetInterface $set)
+	{
+		$list = array();
 
-		foreach($set as $item) {
+		foreach ($set as $item) {
 			$list[] = $item;
 		}
 
@@ -189,14 +205,14 @@ class InstitutionController extends BaseController {
 	/**
 	 *
 	 *
-	 * @return	InstitutionForm
+	 * @return    InstitutionForm
 	 */
-	protected function getInstitutionForm() {
+	protected function getInstitutionForm()
+	{
 		$views	= $this->getViews();
 		$groups	= $this->getGroups();
 
-		/** @var InstitutionForm $form  */
+		/** @var InstitutionForm $form */
 		return new InstitutionForm($views, $groups);
 	}
-
 }

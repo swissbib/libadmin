@@ -13,12 +13,15 @@ use Zend\Db\ResultSet\ResultSetInterface;
  * Group by groups
  *
  */
-class RelationOverview {
+class RelationOverview
+{
 
 	/** @var View $view */
 	protected $view;
+
 	/** @var GroupTable $groupTable */
 	protected $groupTable;
+
 	/** @var InstitutionTable $institutionTable */
 	protected $institutionTable;
 
@@ -27,12 +30,13 @@ class RelationOverview {
 	/**
 	 * Initialize with required tables
 	 *
-	 * @param	GroupTable			$groupTable
-	 * @param	InstitutionTable	$institutionTable
+	 * @param    GroupTable            $groupTable
+	 * @param    InstitutionTable    $institutionTable
 	 */
-	public function __construct(GroupTable $groupTable, InstitutionTable $institutionTable) {
-		$this->groupTable		= $groupTable;
-		$this->institutionTable	= $institutionTable;
+	public function __construct(GroupTable $groupTable, InstitutionTable $institutionTable)
+	{
+		$this->groupTable = $groupTable;
+		$this->institutionTable = $institutionTable;
 	}
 
 
@@ -40,20 +44,21 @@ class RelationOverview {
 	/**
 	 * Get relations grouped by groups
 	 *
-	 * @param	View	$view
-	 * @return	Array[]
+	 * @param    View    $view
+	 * @return    Array[]
 	 */
-	public function getData(View $view) {
-		$this->view	= $view;
+	public function getData(View $view)
+	{
+		$this->view = $view;
 
-		$data	= array();
-		$groups	= $this->getGroups();
+		$data = array();
+		$groups = $this->getGroups();
 
-		foreach($groups as $group) {
+		foreach ($groups as $group) {
 			/** @var Group $group */
 			$data[] = array(
-				'group'			=> $group,
-				'institutions'	=> $this->getInstitutions($group->getId())
+				'group' => $group,
+				'institutions' => $this->getInstitutions($group->getId())
 			);
 		}
 
@@ -65,10 +70,11 @@ class RelationOverview {
 	/**
 	 * Get groups for view
 	 *
-	 * @param	Boolean		$activeOnly
-	 * @return	null|ResultSetInterface
+	 * @param    Boolean        $activeOnly
+	 * @return    null|ResultSetInterface
 	 */
-	protected function getGroups($activeOnly = true) {
+	protected function getGroups($activeOnly = true)
+	{
 		return $this->groupTable->getAllViewGroups($this->view->getId(), $activeOnly);
 	}
 
@@ -77,19 +83,19 @@ class RelationOverview {
 	/**
 	 * Get institutions for group in view
 	 *
-	 * @param	Integer		$idGroup
-	 * @param	Boolean		$activeOnly
-	 * @return	Institution[]
+	 * @param    Integer        $idGroup
+	 * @param    Boolean        $activeOnly
+	 * @return    Institution[]
 	 */
-	protected function getInstitutions($idGroup, $activeOnly = true) {
-		$results		= $this->institutionTable->getAllGroupViewInstitutions($this->view->getId(), $idGroup, $activeOnly);
-		$institutions	= array();
+	protected function getInstitutions($idGroup, $activeOnly = true)
+	{
+		$results = $this->institutionTable->getAllGroupViewInstitutions($this->view->getId(), $idGroup, $activeOnly);
+		$institutions = array();
 
-		foreach($results as $result) {
+		foreach ($results as $result) {
 			$institutions[] = $result;
 		}
 
 		return $institutions;
 	}
-
 }

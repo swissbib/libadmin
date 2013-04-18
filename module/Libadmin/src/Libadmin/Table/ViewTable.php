@@ -9,17 +9,16 @@
 
 namespace Libadmin\Table;
 
-
 use Zend\Db\ResultSet\ResultSet;
 
 use Libadmin\Table\BaseTable;
 use Libadmin\Model\View;
 
-
-class ViewTable extends BaseTable {
+class ViewTable extends BaseTable
+{
 
 	/**
-	 * @var	String[]	Fulltext search fields
+	 * @var    String[]    Fulltext search fields
 	 */
 	protected $searchFields = array(
 		'code',
@@ -28,14 +27,16 @@ class ViewTable extends BaseTable {
 	);
 
 
+
 	/**
 	 * Find institutions
 	 *
-	 * @param	String			$searchString
-	 * @param	Integer			$limit
-	 * @return	ResultSet
+	 * @param    String            $searchString
+	 * @param    Integer            $limit
+	 * @return    ResultSet
 	 */
-	public function find($searchString, $limit = 30) {
+	public function find($searchString, $limit = 30)
+	{
 		return $this->findFulltext($searchString, 'label', $limit);
 	}
 
@@ -44,11 +45,12 @@ class ViewTable extends BaseTable {
 	/**
 	 * Get all views
 	 *
-	 * @param	Integer		$limit
-	 * @param	String		$order
-	 * @return	ResultSet
+	 * @param    Integer        $limit
+	 * @param    String        $order
+	 * @return    ResultSet
 	 */
-	public function getAll($limit = 30, $order = 'label') {
+	public function getAll($limit = 30, $order = 'label')
+	{
 		return parent::getAll($order, $limit);
 	}
 
@@ -57,10 +59,11 @@ class ViewTable extends BaseTable {
 	/**
 	 * Get view
 	 *
-	 * @param	Integer		$idView
-	 * @return	View
+	 * @param    Integer        $idView
+	 * @return    View
 	 */
-	public function getRecord($idView) {
+	public function getRecord($idView)
+	{
 		return parent::getRecord($idView);
 	}
 
@@ -69,16 +72,17 @@ class ViewTable extends BaseTable {
 	/**
 	 * Get view by code
 	 *
-	 * @param	String		$code
-	 * @param	Boolean		$onlyActive
-	 * @return	View|null
+	 * @param    String        $code
+	 * @param    Boolean        $onlyActive
+	 * @return    View|null
 	 */
-	public function getViewByCode($code, $onlyActive = true) {
-		$conditions	= array(
-			'code'	=> $code
+	public function getViewByCode($code, $onlyActive = true)
+	{
+		$conditions = array(
+			'code' => $code
 		);
 
-		if( $onlyActive ) {
+		if ($onlyActive) {
 			$conditions['is_active'] = 1;
 		}
 
@@ -90,10 +94,11 @@ class ViewTable extends BaseTable {
 	/**
 	 *
 	 *
-	 * @param	Integer		$idView
-	 * @return	Integer[]
+	 * @param    Integer        $idView
+	 * @return    Integer[]
 	 */
-	public function getGroupIDs($idView) {
+	public function getGroupIDs($idView)
+	{
 		return $this->getRelatedGroupViewIDs('id_group', 'id_view', $idView);
 	}
 
@@ -102,11 +107,12 @@ class ViewTable extends BaseTable {
 	/**
 	 * Save with with group relations
 	 *
-	 * @param	View	$view
-	 * @return	Integer
+	 * @param    View    $view
+	 * @return    Integer
 	 */
-	public function save(View $view) {
-		$idView	= parent::save($view);
+	public function save(View $view)
+	{
+		$idView = parent::save($view);
 
 		$this->saveGroups($idView, $view->getGroups());
 
@@ -114,22 +120,24 @@ class ViewTable extends BaseTable {
 	}
 
 
+
 	/**
 	 * Save group relations
 	 *
-	 * @param	Integer		$idView
-	 * @param	Integer[]	$newGroupIDs
+	 * @param    Integer        $idView
+	 * @param    Integer[]    $newGroupIDs
 	 */
-	protected function saveGroups($idView, array $newGroupIDs) {
-		$oldGroupIDs	= $this->getGroupIDs($idView);
+	protected function saveGroups($idView, array $newGroupIDs)
+	{
+		$oldGroupIDs = $this->getGroupIDs($idView);
 
-		foreach($newGroupIDs as $newGroupID) {
-			if( !in_array($newGroupID, $oldGroupIDs) ) {
+		foreach ($newGroupIDs as $newGroupID) {
+			if (!in_array($newGroupID, $oldGroupIDs)) {
 				$this->addGroupViewRelation($newGroupID, $idView);
 			}
 		}
-		foreach($oldGroupIDs as $oldGroupID) {
-			if( !in_array($oldGroupID, $newGroupIDs) ) {
+		foreach ($oldGroupIDs as $oldGroupID) {
+			if (!in_array($oldGroupID, $newGroupIDs)) {
 				$this->deleteGroupViewRelation($oldGroupID, $idView);
 			}
 		}

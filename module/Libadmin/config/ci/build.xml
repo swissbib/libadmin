@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="libadmin" default="build">
 
-	<property name="build" location="${basedir}/../../../../build" />
-	<property name="logs" location="${build}/logs" />
-	<property name="source" location="${basedir}/../.." /> <!--this module-->
-	<property name="memorylimit" value="512M" />
+	<property name="build" location="${basedir}/../../../../build"/>
+	<property name="logs" location="${build}/logs"/>
+	<property name="source" location="${basedir}/../.."/>
+	<!--this module-->
+	<property name="memorylimit" value="512M"/>
 
 
 	<target name="build" depends="preparefolders,lint,phploc,phpcs"/>
@@ -20,11 +21,11 @@
 			<arg value="-l"/>
 			<fileset dir="${source}">
 				<include name="**/*.php"/>
-				<exclude name="**/vendor/*" />
-				<exclude name="**/public/*" />
-				<exclude name="**/data/*" />
-				<exclude name="**/test/*" />
-				<modified />
+				<exclude name="**/vendor/*"/>
+				<exclude name="**/public/*"/>
+				<exclude name="**/data/*"/>
+				<exclude name="**/test/*"/>
+				<modified/>
 			</fileset>
 		</apply>
 	</target>
@@ -48,7 +49,6 @@
 			<arg value="--report=checkstyle"/>
 			<arg value="--report-file=${logs}/checkstyle.xml"/>
 			<arg value="--standard=${basedir}/ruleset.xml"/>
-			<arg value="--extensions=php" />
 			<arg path="${source}"/>
 		</exec>
 	</target>

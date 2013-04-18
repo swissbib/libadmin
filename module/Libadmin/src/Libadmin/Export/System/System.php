@@ -2,6 +2,7 @@
 namespace Libadmin\Export\System;
 
 use Zend\ServiceManager\ServiceManager;
+use Zend\Stdlib\ResponseInterface;
 use Zend\View\Model\JsonModel;
 use Zend\Http\Response as HttpResponse;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
@@ -16,7 +17,8 @@ use Libadmin\Table\ViewTable;
  * [Description]
  *
  */
-class System implements ServiceLocatorAwareInterface {
+class System implements ServiceLocatorAwareInterface
+{
 
 	/** @var String */
 	protected $viewCode;
@@ -52,7 +54,8 @@ class System implements ServiceLocatorAwareInterface {
 	 *
 	 * @param ServiceLocatorInterface $serviceLocator
 	 */
-	public function setServiceLocator(ServiceLocatorInterface $serviceLocator) {
+	public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+	{
 		$this->serviceLocator = $serviceLocator;
 	}
 
@@ -63,28 +66,30 @@ class System implements ServiceLocatorAwareInterface {
 	 *
 	 * @return ServiceLocatorInterface
 	 */
-	public function getServiceLocator() {
+	public function getServiceLocator()
+	{
 		return $this->serviceLocator;
 	}
 
 
 
-	public function init() {
-		$this->institutionTable	= $this->getServiceLocator()->get('Libadmin\Table\InstitutionTable');
-		$this->groupTable		= $this->getServiceLocator()->get('Libadmin\Table\GroupTable');
-		$this->viewTable		= $this->getServiceLocator()->get('Libadmin\Table\ViewTable');
+	public function init()
+	{
+		$this->institutionTable = $this->getServiceLocator()->get('Libadmin\Table\InstitutionTable');
+		$this->groupTable = $this->getServiceLocator()->get('Libadmin\Table\GroupTable');
+		$this->viewTable = $this->getServiceLocator()->get('Libadmin\Table\ViewTable');
 	}
-
 
 
 
 	/**
 	 * Set view
 	 *
-	 * @param	String		$view
+	 * @param    String        $view
 	 */
-	public function setViewCode($view) {
-		$this->viewCode	= $view;
+	public function setViewCode($view)
+	{
+		$this->viewCode = $view;
 	}
 
 
@@ -94,7 +99,8 @@ class System implements ServiceLocatorAwareInterface {
 	 *
 	 * @return String
 	 */
-	public function getViewCode() {
+	public function getViewCode()
+	{
 		return $this->viewCode;
 	}
 
@@ -103,14 +109,15 @@ class System implements ServiceLocatorAwareInterface {
 	/**
 	 * Get view object
 	 *
-	 * @throws	\Exception
-	 * @return	View|null
+	 * @throws    \Exception
+	 * @return    View|null
 	 */
-	protected function getView() {
-		if( $this->view === null && !empty($this->viewCode) && $this->viewTable !== null ) {
-			$view	= $this->viewTable->getViewByCode($this->viewCode);
+	protected function getView()
+	{
+		if ($this->view === null && !empty($this->viewCode) && $this->viewTable !== null) {
+			$view = $this->viewTable->getViewByCode($this->viewCode);
 
-			if( !$view ) {
+			if (!$view) {
 				throw new \Exception('Unknown view "' . $this->viewCode . '"');
 			}
 
@@ -125,9 +132,10 @@ class System implements ServiceLocatorAwareInterface {
 	/**
 	 * Set options
 	 *
-	 * @param	Array	$options
+	 * @param    Array    $options
 	 */
-	public function setOptions(array $options) {
+	public function setOptions(array $options)
+	{
 		$this->options = $options;
 	}
 
@@ -136,9 +144,10 @@ class System implements ServiceLocatorAwareInterface {
 	/**
 	 * Get options
 	 *
-	 * @return	Array
+	 * @return    Array
 	 */
-	public function getOptions() {
+	public function getOptions()
+	{
 		return $this->options;
 	}
 
@@ -147,11 +156,12 @@ class System implements ServiceLocatorAwareInterface {
 	/**
 	 * Get option
 	 *
-	 * @param	String		$name
-	 * @param	Mixed		$default
-	 * @return	Mixed
+	 * @param    String        $name
+	 * @param    Mixed        $default
+	 * @return    Mixed
 	 */
-	public function getOption($name, $default = null) {
+	public function getOption($name, $default = null)
+	{
 		return isset($this->options[$name]) ? $this->options[$name] : $default;
 	}
 
@@ -161,9 +171,10 @@ class System implements ServiceLocatorAwareInterface {
 	 * Set response
 	 * Current response object to set custom headers
 	 *
-	 * @param	HttpResponse	$response
+	 * @param    ResponseInterface    $response
 	 */
-	public function setResponse($response) {
+	public function setResponse($response)
+	{
 		$this->response = $response;
 	}
 
@@ -172,14 +183,15 @@ class System implements ServiceLocatorAwareInterface {
 	/**
 	 * Get data for response
 	 *
-	 * @param	String		$format
-	 * @return	Mixed
-	 * @throws	\Exception
+	 * @param    String        $format
+	 * @return    Mixed
+	 * @throws    \Exception
 	 */
-	public function getData($format) {
-		$method	= 'get' . ucfirst($format) . 'Data';
+	public function getData($format)
+	{
+		$method = 'get' . ucfirst($format) . 'Data';
 
-		if( !method_exists($this, $method) ) {
+		if (!method_exists($this, $method)) {
 			throw new \Exception('Unknown export format "' . $format . '"');
 		}
 
@@ -192,9 +204,10 @@ class System implements ServiceLocatorAwareInterface {
 	 * Get data as json (model)
 	 *
 	 * @throws \Exception
-	 * @return	JsonModel
+	 * @return    JsonModel
 	 */
-	public function getJsonData() {
+	public function getJsonData()
+	{
 		throw new \Exception('Json export is not supported for system "' . get_class($this) . '"');
 	}
 
@@ -204,10 +217,10 @@ class System implements ServiceLocatorAwareInterface {
 	 * Get data as xml string
 	 *
 	 * @throws \Exception
-	 * @return	String
+	 * @return    String
 	 */
-	public function getXmlData() {
+	public function getXmlData()
+	{
 		throw new \Exception('Xml export is not supported for system "' . get_class($this) . '"');
 	}
-
 }

@@ -1,27 +1,26 @@
 <?php
 namespace Libadmin\Controller;
 
-
-use Libadmin\Table\ViewTable;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
+use Zend\Http\Request;
 
 use Libadmin\Controller\BaseController;
-use Libadmin\Table\GroupTable;
 use Libadmin\Form\GroupForm;
 use Libadmin\Model\Group;
-
 
 /**
  * [Description]
  *
  */
-class GroupController extends BaseController {
+class GroupController extends BaseController
+{
 
 	/**
-	 * @return	GroupForm
+	 * @return    GroupForm
 	 */
-	protected function getGroupForm() {
+	protected function getGroupForm()
+	{
 		return $this->serviceLocator->get('GroupForm');
 	}
 
@@ -30,30 +29,32 @@ class GroupController extends BaseController {
 	/**
 	 * Show edit form and add data
 	 *
-	 * @return	ViewModel|Response
+	 * @return    ViewModel|Response
 	 */
-	public function addAction() {
-		$form			= $this->getGroupForm(); // new GroupForm();
-		$group			= new Group();
-		$request		= $this->getRequest();
-		$flashMessenger	= $this->flashMessenger();
+	public function addAction()
+	{
+		$form	= $this->getGroupForm(); // new GroupForm();
+		$group	= new Group();
+		/** @var Request $request */
+		$request= $this->getRequest();
+		$flashMessenger = $this->flashMessenger();
 
 		$form->bind($group);
 
-		if( $request->isPost() ) {
+		if ($request->isPost()) {
 //			$form->setInputFilter($group->getInputFilter());
 			$form->setData($request->getPost());
 
-			if( $form->isValid() ) {
+			if ($form->isValid()) {
 				$group->exchangeArray($form->getData());
 
 				try {
-					$idGroup	= $this->getTable()->save($group);
+					$idGroup = $this->getTable()->save($group);
 
 					$flashMessenger->addSuccessMessage($this->translate('saved_group'));
 
 					return $this->redirectTo('edit', $idGroup);
-				} catch(\Exception $e) {
+				} catch (\Exception $e) {
 					$flashMessenger->addErrorMessage($e->getMessage());
 				}
 			} else {
@@ -64,8 +65,8 @@ class GroupController extends BaseController {
 		$form->setAttribute('action', $this->makeUrl('group', 'add'));
 
 		return $this->getAjaxView(array(
-			'form'	=> $form,
-			'title'	=> $this->translate('group_add', 'Libadmin'),
+			'form' => $form,
+			'title' => $this->translate('group_add', 'Libadmin'),
 		), 'libadmin/group/edit');
 	}
 
@@ -74,21 +75,22 @@ class GroupController extends BaseController {
 	/**
 	 * Show edit form and update data
 	 *
-	 * @return	ViewModel
+	 * @return    ViewModel
 	 */
-	public function editAction() {
-		$idGroup	= (int)$this->params()->fromRoute('id', 0);
-		$flashMessenger	= $this->flashMessenger();
+	public function editAction()
+	{
+		$idGroup = (int)$this->params()->fromRoute('id', 0);
+		$flashMessenger = $this->flashMessenger();
 
-		if( !$idGroup ) {
+		if (!$idGroup) {
 			return $this->forwardTo('home');
 		}
 
 		try {
-			/** @var Group $group  */
+			/** @var Group $group */
 			$group = $this->getTable()->getRecord($idGroup);
 			$group->setViews($this->getTable()->getViewIDs($idGroup));
-		} catch(\Exception $ex ) {
+		} catch (\Exception $ex) {
 			$flashMessenger->addErrorMessage($this->translate('notfound_record'));
 //			$flashMessenger->addErrorMessage($ex->getMessage());
 
@@ -98,11 +100,12 @@ class GroupController extends BaseController {
 		$form = $this->getGroupForm(); // new GroupForm();
 		$form->bind($group);
 
+		/** @var Request $request */
 		$request = $this->getRequest();
-		if( $request->isPost() ) {
+		if ($request->isPost()) {
 			$form->setData($request->getPost());
 
-			if( $form->isValid() ) {
+			if ($form->isValid()) {
 				$this->getTable()->save($form->getData());
 				$flashMessenger->addSuccessMessage($this->translate('saved_group'));
 			} else {
@@ -113,9 +116,8 @@ class GroupController extends BaseController {
 		$form->setAttribute('action', $this->makeUrl('group', 'edit', $idGroup));
 
 		return $this->getAjaxView(array(
-			'form'		=> $form,
-			'title'		=> $this->translate('group_edit', 'Libadmin'),
+			'form' => $form,
+			'title' => $this->translate('group_edit', 'Libadmin'),
 		));
 	}
-
 }

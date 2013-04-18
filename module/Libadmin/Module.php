@@ -17,21 +17,22 @@ use Libadmin\Table\ViewTable;
 use Libadmin\Form\ViewForm;
 use Libadmin\Helper\RelationOverview;
 
-
-class Module {
+class Module
+{
 
 	/**
-	 * @param	MvcEvent	$e
+	 * @param    MvcEvent    $e
 	 */
 	public function onBootStrap(MvcEvent $e)
 	{
-		$translator	= $e->getApplication()->getServiceManager()->get('translator');
-		$translator->setLocale('de_DE')/*->setFallbackLocale('en_US')*/;
+		$translator = $e->getApplication()->getServiceManager()->get('translator');
+		$translator->setLocale('de_DE'); /*->setFallbackLocale('en_US')*/
 	}
 
 
 
-	public function getAutoloaderConfig() {
+	public function getAutoloaderConfig()
+	{
 		return array(
 			'Zend\Loader\ClassMapAutoloader' => array(
 				__DIR__ . '/autoload_classmap.php',
@@ -46,18 +47,20 @@ class Module {
 
 
 
-	public function getConfig() {
+	public function getConfig()
+	{
 		return include __DIR__ . '/config/module.config.php';
 	}
 
 
 
-	public function getServiceConfig() {
+	public function getServiceConfig()
+	{
 		return array(
 			'factories' => array(
 				'Libadmin\Table\InstitutionTable' => function ($sm) {
 					$institutionTableGateway = $sm->get('InstitutionTableGateway');
-					$institutionRelationTable =  $sm->get('Libadmin\Table\InstitutionRelationTable');
+					$institutionRelationTable = $sm->get('Libadmin\Table\InstitutionRelationTable');
 					return new InstitutionTable($institutionTableGateway, $institutionRelationTable);
 				},
 				'InstitutionTableGateway' => function ($sm) {
@@ -96,19 +99,19 @@ class Module {
 					$resultSetPrototype->setArrayObjectPrototype(new InstitutionRelation());
 					return new TableGateway('mm_institution_group_view', $dbAdapter, null, $resultSetPrototype);
 				},
-				'GroupForm' => function($sm) {
+				'GroupForm' => function ($sm) {
 					$viewTable = $sm->get('Libadmin\Table\ViewTable');
 
 					return new GroupForm($viewTable);
 				},
-				'ViewForm' => function($sm) {
+				'ViewForm' => function ($sm) {
 					$groupTable = $sm->get('Libadmin\Table\GroupTable');
 
 					return new ViewForm($groupTable);
 				},
-				'RelationOverviewHelper' => function($sm) {
-					$groupTable			= $sm->get('Libadmin\Table\GroupTable');
-					$institutionTable	= $sm->get('Libadmin\Table\InstitutionTable');
+				'RelationOverviewHelper' => function ($sm) {
+					$groupTable = $sm->get('Libadmin\Table\GroupTable');
+					$institutionTable = $sm->get('Libadmin\Table\InstitutionTable');
 
 					return new RelationOverview($groupTable, $institutionTable);
 				}

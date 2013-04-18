@@ -1,4 +1,3 @@
-
 <!DOCTYPE libraryconfiguration [
 		<!ELEMENT libraryconfiguration (librarygroups|libraries)*>
 		<!ELEMENT librarygroups (librarygroup)*>

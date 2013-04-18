@@ -7,12 +7,14 @@ use Zend\Form\Element\Checkbox as BaseCheckbox;
  * [Description]
  *
  */
-class NoValidationCheckbox extends BaseCheckbox {
+class NoValidationCheckbox extends BaseCheckbox
+{
 
 	/**
-	 * @return	Array
+	 * @return    Array
 	 */
-	public function getInputSpecification() {
+	public function getInputSpecification()
+	{
 		$spec = parent::getInputSpecification();
 
 		$spec['required'] = false;
@@ -21,5 +23,4 @@ class NoValidationCheckbox extends BaseCheckbox {
 
 		return $spec;
 	}
-
 }

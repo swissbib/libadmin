@@ -3,7 +3,6 @@ namespace Libadmin\Controller;
 
 use Zend\Http\Response as HttpResponse;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\JsonModel;
 
 use Libadmin\Export\System\System;
 
@@ -11,7 +10,8 @@ use Libadmin\Export\System\System;
  * Export api controller
  *
  */
-class ApiController extends AbstractActionController {
+class ApiController extends AbstractActionController
+{
 
 	/**
 	 * Handle export request
@@ -19,12 +19,13 @@ class ApiController extends AbstractActionController {
 	 * @return array
 	 * @throws \Exception
 	 */
-	public function indexAction() {
-		$serviceName	= 'export_system_' . $this->getSystem();
+	public function indexAction()
+	{
+		$serviceName = 'export_system_' . $this->getSystem();
 
-		if( $this->getServiceLocator()->has($serviceName) ) {
-			/** @var System $system  */
-			$system		= $this->getServiceLocator()->get($serviceName);
+		if ($this->getServiceLocator()->has($serviceName)) {
+			/** @var System $system */
+			$system = $this->getServiceLocator()->get($serviceName);
 
 			$system->setViewCode($this->getView());
 			$system->setOptions($this->getOptions());
@@ -33,7 +34,7 @@ class ApiController extends AbstractActionController {
 
 			try {
 				$result = $system->getData($this->getFormat());
-			} catch(\Exception $e) {
+			} catch (\Exception $e) {
 				throw $e; // Currently just throw again
 			}
 		} else {
@@ -48,9 +49,10 @@ class ApiController extends AbstractActionController {
 	/**
 	 * Get system
 	 *
-	 * @return	String
+	 * @return    String
 	 */
-	protected function getSystem() {
+	protected function getSystem()
+	{
 		return strtolower($this->params()->fromRoute('system'));
 	}
 
@@ -59,9 +61,10 @@ class ApiController extends AbstractActionController {
 	/**
 	 * Get format
 	 *
-	 * @return	String
+	 * @return    String
 	 */
-	protected function getFormat() {
+	protected function getFormat()
+	{
 		return strtolower($this->params()->fromRoute('format'));
 	}
 
@@ -70,9 +73,10 @@ class ApiController extends AbstractActionController {
 	/**
 	 * Get view
 	 *
-	 * @return	String
+	 * @return    String
 	 */
-	protected function getView() {
+	protected function getView()
+	{
 		return strtolower($this->params()->fromRoute('view'));
 	}
 
@@ -81,18 +85,18 @@ class ApiController extends AbstractActionController {
 	/**
 	 * Get options
 	 *
-	 * @return	Array
+	 * @return    Array
 	 */
-	protected function getOptions() {
-		$options	= $this->params()->fromQuery('option', array());
+	protected function getOptions()
+	{
+		$options = $this->params()->fromQuery('option', array());
 
-		if( !is_array($options) ) {
+		if (!is_array($options)) {
 			$options = array(
-				'default'	=> $options
+				'default' => $options
 			);
 		}
 
 		return $options;
 	}
-
 }

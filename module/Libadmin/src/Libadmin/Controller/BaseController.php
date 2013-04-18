@@ -11,12 +11,12 @@ use Libadmin\Table\GroupTable;
 use Libadmin\Table\InstitutionTable;
 use Libadmin\Table\ViewTable;
 
-
 /**
  * [Description]
  *
  */
-abstract class BaseController extends AbstractActionController {
+abstract class BaseController extends AbstractActionController
+{
 
 	/**
 	 * @var BaseTable
@@ -33,7 +33,8 @@ abstract class BaseController extends AbstractActionController {
 	 *
 	 * @return array
 	 */
-	public function indexAction() {
+	public function indexAction()
+	{
 		return array(
 			'listItems' => $this->getTable()->getAll(30)
 		);
@@ -44,12 +45,14 @@ abstract class BaseController extends AbstractActionController {
 	/**
 	 * Home view
 	 *
-	 * @return	ViewModel
+	 * @return    ViewModel
 	 */
-	public function homeAction() {
-		return $this->getAjaxView(array(
-            'listItems' => $this->getTable()->getAll(30)
-        ));
+	public function homeAction()
+	{
+		return $this->getAjaxView(
+			array(
+				'listItems' => $this->getTable()->getAll(30)
+		));
 	}
 
 
@@ -57,12 +60,13 @@ abstract class BaseController extends AbstractActionController {
 	/**
 	 * Search matching records
 	 *
-	 * @return	ViewModel
+	 * @return    ViewModel
 	 */
-	public function searchAction() {
+	public function searchAction()
+	{
 		$query = $this->params()->fromQuery('query', '');
 		$data = array(
-			'route'		=> strtolower($this->getTypeName()),
+			'route' => strtolower($this->getTypeName()),
 			'listItems' => $this->getTable()->find($query, 30)
 		);
 
@@ -74,23 +78,24 @@ abstract class BaseController extends AbstractActionController {
 	/**
 	 * Delete record or show delete confirmation form
 	 *
-	 * @return	Response|ViewModel
+	 * @return    Response|ViewModel
 	 */
-	public function deleteAction() {
+	public function deleteAction()
+	{
 		$idRecord = (int)$this->params()->fromRoute('id', 0);
 
-		if( !$idRecord ) {
+		if (!$idRecord) {
 			$this->flashMessenger()->addErrorMessage('No record defined for deletion. Something went wrong');
 
 			return $this->redirectTo('home');
 		}
 
-		/** @var Request $request  */
+		/** @var Request $request */
 		$request = $this->getRequest();
-		if( $request->isPost() ) {
+		if ($request->isPost()) {
 			$isDeleteRequest = $request->getPost('del') !== null;
 
-			if( $isDeleteRequest ) {
+			if ($isDeleteRequest) {
 				$idRecord = (int)$request->getPost('id');
 				$this->getTable()->delete($idRecord);
 				// @todo message is shown to late, solve this problem and re-enable message
@@ -101,9 +106,9 @@ abstract class BaseController extends AbstractActionController {
 		}
 
 		return $this->getAjaxView(array(
-			'id'	=> $idRecord,
-			'route'	=> $this->getRouteName(),
-			'record'=> $this->getTable()->getRecord($idRecord)
+			'id' => $idRecord,
+			'route' => $this->getRouteName(),
+			'record' => $this->getTable()->getRecord($idRecord)
 		), 'libadmin/global/delete');
 	}
 
@@ -112,10 +117,11 @@ abstract class BaseController extends AbstractActionController {
 	/**
 	 * Get type name of class from the class name
 	 *
-	 * @return	String
+	 * @return    String
 	 */
-	protected function getTypeName() {
-		$nameParts	= explode('\\', get_class($this));
+	protected function getTypeName()
+	{
+		$nameParts = explode('\\', get_class($this));
 
 		return str_replace('Controller', '', array_pop($nameParts));
 	}
@@ -125,9 +131,10 @@ abstract class BaseController extends AbstractActionController {
 	/**
 	 * Get route name (same as class type in lowercase)
 	 *
-	 * @return	String
+	 * @return    String
 	 */
-	protected function getRouteName() {
+	protected function getRouteName()
+	{
 		return strtolower($this->getTypeName());
 	}
 
@@ -136,14 +143,15 @@ abstract class BaseController extends AbstractActionController {
 	/**
 	 * Forward to other controller action
 	 *
-	 * @param	String		$action
-	 * @param	Array		$params
-	 * @return	ViewModel
+	 * @param    String        $action
+	 * @param    Array        $params
+	 * @return    ViewModel
 	 */
-	protected function forwardTo($action, array $params = array()) {
-		$name		= $this->getTypeName();
-		$params		= array_merge_recursive(array(
-			'action'	=> $action
+	protected function forwardTo($action, array $params = array())
+	{
+		$name = $this->getTypeName();
+		$params = array_merge_recursive(array(
+			'action' => $action
 		), $params);
 
 		return $this->forward()->dispatch('Libadmin\Controller\\' . $name, $params);
@@ -154,19 +162,20 @@ abstract class BaseController extends AbstractActionController {
 	/**
 	 * Redirect to other controller action
 	 *
-	 * @param	String		$action
-	 * @param	Integer		$idRecord
-	 * @return	Response
+	 * @param    String        $action
+	 * @param    Integer        $idRecord
+	 * @return    Response
 	 */
-	protected function redirectTo($action = '', $idRecord = 0) {
-		$route	= strtolower($this->getTypeName());
-		$params	= array();
+	protected function redirectTo($action = '', $idRecord = 0)
+	{
+		$route = strtolower($this->getTypeName());
+		$params = array();
 
-		if( $action ) {
+		if ($action) {
 			$params['action'] = $action;
 		}
 
-		if( $idRecord ) {
+		if ($idRecord) {
 			$params['id'] = $idRecord;
 		}
 
@@ -178,15 +187,16 @@ abstract class BaseController extends AbstractActionController {
 	/**
 	 * Get terminal view model for ajax
 	 *
-	 * @param	Array	$variables
-	 * @param	String	$template
-	 * @return	ViewModel
+	 * @param    Array    $variables
+	 * @param    String    $template
+	 * @return    ViewModel
 	 */
-	protected function getAjaxView($variables = array(), $template = '') {
+	protected function getAjaxView($variables = array(), $template = '')
+	{
 		$viewModel = new ViewModel($variables);
 		$viewModel->setTerminal(true);
 
-		if( $template ) {
+		if ($template) {
 			$viewModel->setTemplate($template);
 		}
 
@@ -199,18 +209,19 @@ abstract class BaseController extends AbstractActionController {
 	 * Make url based on route
 	 * Add action and element id to route if specified
 	 *
-	 * @param	String		$route
-	 * @param	String		$action
-	 * @param	Integer		$idElement
-	 * @param	Array		$additionalParams
-	 * @return	String
+	 * @param    String        $route
+	 * @param    String        $action
+	 * @param    Integer        $idElement
+	 * @param    Array        $additionalParams
+	 * @return    String
 	 */
-	protected function makeUrl($route, $action, $idElement = 0, array $additionalParams = array()) {
-		$params	= array(
-			'action'	=> $action
+	protected function makeUrl($route, $action, $idElement = 0, array $additionalParams = array())
+	{
+		$params = array(
+			'action' => $action
 		);
 
-		if( $idElement ) {
+		if ($idElement) {
 			$params['id'] = $idElement;
 		}
 		$params = array_merge($params, $additionalParams);
@@ -223,16 +234,17 @@ abstract class BaseController extends AbstractActionController {
 	/**
 	 * Get table
 	 *
-	 * @param	String|Null		$type
-	 * @return	InstitutionTable|GroupTable|ViewTable
+	 * @param    String|Null        $type
+	 * @return    InstitutionTable|GroupTable|ViewTable
 	 */
-	protected function getTable($type = null) {
-		if( !is_null($type) ) {
+	protected function getTable($type = null)
+	{
+		if (!is_null($type)) {
 			return $this->getServiceLocator()->get('Libadmin\Table\\' . ucfirst($type) . 'Table');
 		}
 
-		if( !$this->table ) {
-			$type	= $this->getTypeName();
+		if (!$this->table) {
+			$type = $this->getTypeName();
 			$this->table = $this->getServiceLocator()->get('Libadmin\Table\\' . $type . 'Table');
 		}
 		return $this->table;
@@ -243,16 +255,16 @@ abstract class BaseController extends AbstractActionController {
 	/**
 	 * Translate key
 	 *
-	 * @param	String		$key
-	 * @param	String		$domain
-	 * @return	String
+	 * @param    String        $key
+	 * @param    String        $domain
+	 * @return    String
 	 */
-	protected function translate($key, $domain = 'Libadmin') {
-		if( null == $this->translator ) {
+	protected function translate($key, $domain = 'Libadmin')
+	{
+		if (null == $this->translator) {
 			$this->translator = $this->getServiceLocator()->get('translator');
 		}
 
 		return $this->translator->translate($key, $domain);
 	}
-
 }

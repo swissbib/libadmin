@@ -1,15 +1,18 @@
 <?php
 namespace Libadmin\Model;
 
-use Zend\InputFilter\InputFilterAwareInterface;
-use Zend\InputFilter\InputFilterInterface;
 use Zend\InputFilter\InputFilter;
 
 /**
  * [Description]
  *
  */
-abstract class BaseModel {
+abstract class BaseModel
+{
+
+	/** @var  Integer */
+	protected $id;
+
 
 	/**
 	 * @var InputFilter
@@ -21,9 +24,10 @@ abstract class BaseModel {
 	/**
 	 * Get all object vars as array
 	 *
-	 * @return	Array
+	 * @return    Array
 	 */
-	public function getArrayCopy() {
+	public function getArrayCopy()
+	{
 		return get_object_vars($this);
 	}
 
@@ -32,10 +36,11 @@ abstract class BaseModel {
 	/**
 	 * Get data for record without relations
 	 *
-	 * @return	Array
+	 * @return    Array
 	 */
-	public function getBaseData() {
-		$data	= $this->getArrayCopy();
+	public function getBaseData()
+	{
+		$data = $this->getArrayCopy();
 
 		unset($data['id']);
 		unset($data['inputFilter']);
@@ -45,8 +50,9 @@ abstract class BaseModel {
 
 
 
-	public function exchangeArray($data) {
-		if( is_object($data) ) {
+	public function exchangeArray($data)
+	{
+		if (is_object($data)) {
 			$data = $data->getArrayCopy();
 		}
 
@@ -58,14 +64,17 @@ abstract class BaseModel {
 	/**
 	 * Get record ID
 	 *
-	 * @return	Integer
+	 * @return    Integer
 	 */
-	public function getId() {
+	public function getId()
+	{
 		return (int)$this->id;
 	}
 
 
-	public function setId($id) {
+
+	public function setId($id)
+	{
 		$this->id = $id;
 	}
 
@@ -74,11 +83,12 @@ abstract class BaseModel {
 	/**
 	 * Initialize local variables if present
 	 *
-	 * @param	Array	$data
+	 * @param    Array    $data
 	 */
-	protected function initLocalVariables(array $data) {
-		foreach($data as $key => $value) {
-			if( property_exists($this, $key) ) {
+	protected function initLocalVariables(array $data)
+	{
+		foreach ($data as $key => $value) {
+			if (property_exists($this, $key)) {
 				$this->$key = $value;
 			}
 		}
@@ -89,7 +99,7 @@ abstract class BaseModel {
 	/**
 	 * Get list label key
 	 *
-	 * @return	String
+	 * @return    String
 	 */
 	abstract public function getListLabel();
 
@@ -98,8 +108,7 @@ abstract class BaseModel {
 	/**
 	 * Get type label key
 	 *
-	 * @return	String
+	 * @return    String
 	 */
 	abstract public function getTypeLabel();
-
 }

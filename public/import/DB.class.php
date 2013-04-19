@@ -110,6 +110,9 @@ class DB
 	{
 		if ($this->isConnected()) {
 			foreach ($fieldsValues as $key => $value) {
+				if (!is_numeric($value)) {
+					$value = utf8_decode($value);
+				}
 				$fieldsValues[$key] = '\'' . mysqli_real_escape_string($this->link, trim($value)) . '\'';
 			}
 		} else {

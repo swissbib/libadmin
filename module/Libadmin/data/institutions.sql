@@ -15,6 +15,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 TRUNCATE TABLE institution;
+TRUNCATE TABLE mm_institution_group_view;
 
 --
 -- Daten für Tabelle `institution`

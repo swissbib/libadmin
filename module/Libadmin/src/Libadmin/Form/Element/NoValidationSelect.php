@@ -14,7 +14,7 @@ class NoValidationSelect extends BaseSelect
 	{
 		$spec = parent::getInputSpecification();
 
-		unset($spec['required']);
+		$spec['required'] = false;
 		unset($spec['validators']);
 
 		return $spec;

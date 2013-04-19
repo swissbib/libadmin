@@ -1,16 +1,21 @@
 <?php
+use Libadmin\Form\GroupFieldset;
+use Libadmin\Form\GroupForm;
+
+/** @var GroupFieldset $group */
+/** @var GroupForm	$form */
+
 $this->headTitle($title);
 
 $form = $this->form;
 $form->prepare();
 
-$idGroup = (int)$form->get('id')->getValue();
-$isNew = !$idGroup;
+$formType		= 'horizontal';
+$group			= $form->get('group');
 
+$idGroup		= (int)$group->get('id')->getValue();
+$isNew			= !$idGroup;
 $saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save', 'Libadmin');
-
-$formType = 'horizontal';
-$group = $form->get('group');
 
 // Force Libadmin text domain (@todo cleaner way?)
 $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
@@ -40,10 +45,10 @@ $this->formSelectTwb()->setTranslatorTextDomain('Libadmin');
 		<legend><?= $this->translate('general', 'Libadmin') ?></legend>
 		<div class="row-fluid">
 			<div class="span10">
-				<?= $this->formRowTwb($form->get('code')) ?>
+				<?= $this->formRowTwb($group->get('code')) ?>
 			</div>
 			<div class="span2">
-				<?= $this->formRowTwb($form->get('is_active')) ?>
+				<?= $this->formRowTwb($group->get('is_active')) ?>
 			</div>
 		</div>
 	</fieldset>
@@ -63,34 +68,59 @@ $this->formSelectTwb()->setTranslatorTextDomain('Libadmin');
 					<legend><?= $this->translate('displaynames', 'Libadmin') ?></legend>
 					<div class="row-fluid">
 						<div class="span6">
-							<?= $this->formRowTwb($form->get('label_de')) ?>
+							<?= $this->formRowTwb($group->get('label_de')) ?>
 						</div>
 						<div class="span6">
-							<?= $this->formRowTwb($form->get('label_fr')) ?>
+							<?= $this->formRowTwb($group->get('label_fr')) ?>
 						</div>
 					</div>
 					<div class="row-fluid">
 						<div class="span6">
-							<?= $this->formRowTwb($form->get('label_it')) ?>
+							<?= $this->formRowTwb($group->get('label_it')) ?>
 						</div>
 						<div class="span6">
-							<?= $this->formRowTwb($form->get('label_en')) ?>
+							<?= $this->formRowTwb($group->get('label_en')) ?>
 						</div>
 					</div>
 				</fieldset>
 
 				<fieldset class="notes">
 					<legend><?= $this->translate('notes', 'Libadmin') ?></legend>
-					<?= $this->formRowTwb($form->get('notes')) ?>
+					<?= $this->formRowTwb($group->get('notes')) ?>
 				</fieldset>
 			</div>
 
 			<div class="tab-pane" id="views">
-				<?= $this->formRowTwb($form->get('views')) ?>
+				<?php
+					$views	= $group->get('views');
+				?>
+				<?php if( $views ): ?>
+					<?= $this->formRowTwb($group->get('views')) ?>
+				<?php else: ?>
+					<p><?= $this->translate('noviews', 'Libadmin') ?></p>
+				<?php endif; ?>
 			</div>
 
 			<div class="tab-pane" id="institutions">
-				<p><?= $this->translate('institutions', 'Libadmin') ?></p>
+
+				<?php foreach ($group->get('relations') as $relationFieldset): ?>
+					<div class="row-fluid">
+						<div class="span10"><h3><?=$this->escapeHtml($relationFieldset->getLabel())?></h3></div>
+					</div>
+					<div class="row-fluid">
+						<div class="span5 source listElement">
+							<?= $this->formRowTwb($relationFieldset->get('source')) ?>
+						</div>
+						<div class="span2 buttons">
+							<?= $this->formRowTwb($relationFieldset->get('add')) ?>
+							<?= $this->formRowTwb($relationFieldset->get('remove')) ?>
+						</div>
+						<div class="span5 selection listElement">
+							<?= $this->formRowTwb($relationFieldset->get('institutions')) ?>
+						</div>
+					</div>
+				<?php endforeach; ?>
+
 			</div>
 		</div>
 	</div>

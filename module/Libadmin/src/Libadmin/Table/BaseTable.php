@@ -183,8 +183,11 @@ abstract class BaseTable
 	{
 		$select = new Select();
 		$select->from($this->getTable())
-				->order($order)
-				->limit($limit);
+				->order($order);
+
+		if ($limit) {
+			$select->limit($limit);
+		}
 
 		return $this->tableGateway->selectWith($select);
 	}
@@ -246,11 +249,46 @@ abstract class BaseTable
 	 * Get view IDs for relation
 	 *
 	 * @param	String		$column
-	 * @param	String		$matchColumn
-	 * @param	Integer		$idRecord
+	 * @param	Array		$where
 	 * @return	Integer[]
 	 */
-	protected function getRelatedGroupViewIDs($column, $matchColumn, $idRecord)
+	protected function getGroupViewRelationIDs($column, array $where)
+	{
+		return $this->getRelationIDs($column, 'mm_group_view', $where);
+	}
+
+
+	protected function getInstitutionRelationIDs($column, array $where)
+	{
+		return $this->getRelationIDs($column, 'mm_institution_group_view', $where);
+	}
+
+
+
+	/**
+	 * @param $idGroup
+	 * @param $idView
+	 * @return \Integer[]
+	 */
+	public function getRelationInstitutionIDs($idGroup, $idView)
+	{
+		return $this->getRelationIDs('id_institution', 'mm_institution_group_view', array(
+																						 'id_view'	=> (int)$idView,
+																						 'id_group'	=> (int)$idGroup
+																					));
+	}
+
+
+
+	/**
+	 * Get relation IDs
+	 *
+	 * @param	String		$column
+	 * @param	String		$table
+	 * @param	Array		$where
+	 * @return	Integer[]
+	 */
+	protected function getRelationIDs($column, $table, $where)
 	{
 		/** @var Adapter $adapter */
 		$adapter = $this->tableGateway->getAdapter();
@@ -258,22 +296,20 @@ abstract class BaseTable
 		$select = $sql->select();
 
 		$select->columns(array($column))
-				->from('mm_group_view')
-				->where(array(
-					$matchColumn => $idRecord
-				));
+				->from($table)
+				->where($where);
 
 		$selectString = $sql->getSqlStringForSqlObject($select);
 
 //		var_dump($sql->getSqlStringForSqlObject($select));
 
 		$results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE)->toArray();
-		$viewIds = array();
+		$recordIDs = array();
 
 		foreach ($results as $result) {
-			$viewIds[] = (int)$result[$column];
+			$recordIDs[] = (int)$result[$column];
 		}
 
-		return $viewIds;
+		return $recordIDs;
 	}
 }

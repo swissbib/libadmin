@@ -1,6 +1,8 @@
 <?php
 namespace Libadmin\Controller;
 
+use Libadmin\Model\Institution;
+use Zend\Db\ResultSet\ResultSetInterface;
 use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -10,6 +12,9 @@ use Libadmin\Table\BaseTable;
 use Libadmin\Table\GroupTable;
 use Libadmin\Table\InstitutionTable;
 use Libadmin\Table\ViewTable;
+use Libadmin\Model\BaseModel;
+use Libadmin\Model\Group;
+use Libadmin\Model\View;
 
 /**
  * [Description]
@@ -266,5 +271,65 @@ abstract class BaseController extends AbstractActionController
 		}
 
 		return $this->translator->translate($key, $domain);
+	}
+
+
+
+	/**
+	 * Extract all result items from a result set to work with a simple list
+	 *
+	 * @param	ResultSetInterface	$set
+	 * @return	BaseModel[]
+	 */
+	protected function toList(ResultSetInterface $set)
+	{
+		$list = array();
+
+		foreach ($set as $item) {
+			$list[] = $item;
+		}
+
+		return $list;
+	}
+
+
+	/**
+	 * Get views
+	 *
+	 * @return	View[]
+	 */
+	protected function getViews()
+	{
+		$results = $this->getTable('View')->getAll(30, 'id');
+
+		return $this->toList($results);
+	}
+
+
+
+	/**
+	 * Get groups
+	 *
+	 * @return	Group[]
+	 */
+	protected function getGroups()
+	{
+		$results = $this->getTable('Group')->getAll();
+
+		return $this->toList($results);
+	}
+
+
+
+	/**
+	 * Get institutions
+	 *
+	 * @return	Institution[]
+	 */
+	protected function getInstitutions()
+	{
+		$results = $this->getTable('Institution')->getAll(0);
+
+		return $this->toList($results);
 	}
 }

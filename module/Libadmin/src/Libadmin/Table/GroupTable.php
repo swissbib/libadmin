@@ -87,7 +87,9 @@ class GroupTable extends BaseTable
 	 */
 	public function getViewIDs($idGroup)
 	{
-		return $this->getRelatedGroupViewIDs('id_view', 'id_group', $idGroup);
+		return $this->getGroupViewRelationIDs('id_view', array(
+															'id_group'	=> $idGroup
+														));
 	}
 
 

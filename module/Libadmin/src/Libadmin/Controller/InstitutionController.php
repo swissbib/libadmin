@@ -39,7 +39,7 @@ class InstitutionController extends BaseController
 
 		$form->bind($institution);
 
-		if ($$request->isPost()) {
+		if ($request->isPost()) {
 			$form->setData($$request->getPost());
 
 			if ($form->isValid()) {
@@ -131,12 +131,11 @@ class InstitutionController extends BaseController
 	protected function getInstitutionForEdit($idInstitution)
 	{
 		$institution 		= $this->getTable()->getRecord($idInstitution);
-		/** @var View[]    $views */
 		$views 				= $this->getViews();
 		/** @var InstitutionRelationTable $relationTable */
 		$relationTable		= $this->getTable('InstitutionRelation');
 		/** @var InstitutionRelation[] $existingRelations */
-		$existingRelations	= $relationTable->getRelations($idInstitution);
+		$existingRelations	= $relationTable->getInstitutionRelations($idInstitution);
 		$relations			= array();
 
 		foreach ($views as $view) {
@@ -153,51 +152,6 @@ class InstitutionController extends BaseController
 		$institution->setRelations($relations);
 
 		return $institution;
-	}
-
-
-
-	/**
-	 * Get views
-	 *
-	 * @return	View[]
-	 */
-	protected function getViews()
-	{
-		$results = $this->getTable('View')->getAll(30, 'id');
-
-		return $this->toList($results);
-	}
-
-
-
-	/**
-	 * Get groups
-	 *
-	 * @return	Group[]
-	 */
-	protected function getGroups()
-	{
-		$results = $this->getTable('Group')->getAll();
-
-		return $this->toList($results);
-	}
-
-
-
-	/**
-	 * @param ResultSetInterface $set
-	 * @return array
-	 */
-	protected function toList(ResultSetInterface $set)
-	{
-		$list = array();
-
-		foreach ($set as $item) {
-			$list[] = $item;
-		}
-
-		return $list;
 	}
 
 

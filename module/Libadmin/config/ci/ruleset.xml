@@ -3,8 +3,12 @@
 	<description>Coding standard for swissbib libadmin (zend module)</description>
 
 	<exclude-pattern>*/config/*</exclude-pattern>
+	<exclude-pattern>*\config\*</exclude-pattern>
 	<exclude-pattern>*/test/*</exclude-pattern>
+	<exclude-pattern>*\test\*</exclude-pattern>
 	<exclude-pattern>*/data/*</exclude-pattern>
+	<exclude-pattern>*\data\*</exclude-pattern>
+	<exclude-pattern>*.phtml</exclude-pattern>
 
 	<!--Allow tabs -->
 	<rule ref="PSR2">

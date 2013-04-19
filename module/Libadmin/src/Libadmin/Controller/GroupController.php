@@ -1,6 +1,7 @@
 <?php
 namespace Libadmin\Controller;
 
+use Libadmin\Model\InstitutionRelationList;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
 use Zend\Http\Request;
@@ -8,6 +9,8 @@ use Zend\Http\Request;
 use Libadmin\Controller\BaseController;
 use Libadmin\Form\GroupForm;
 use Libadmin\Model\Group;
+use Libadmin\Table\InstitutionRelationTable;
+use Libadmin\Model\InstitutionRelation;
 
 /**
  * [Description]
@@ -17,23 +20,13 @@ class GroupController extends BaseController
 {
 
 	/**
-	 * @return    GroupForm
-	 */
-	protected function getGroupForm()
-	{
-		return $this->serviceLocator->get('GroupForm');
-	}
-
-
-
-	/**
 	 * Show edit form and add data
 	 *
 	 * @return    ViewModel|Response
 	 */
 	public function addAction()
 	{
-		$form	= $this->getGroupForm(); // new GroupForm();
+		$form	= $this->getGroupForm();
 		$group	= new Group();
 		/** @var Request $request */
 		$request= $this->getRequest();
@@ -42,7 +35,6 @@ class GroupController extends BaseController
 		$form->bind($group);
 
 		if ($request->isPost()) {
-//			$form->setInputFilter($group->getInputFilter());
 			$form->setData($request->getPost());
 
 			if ($form->isValid()) {
@@ -88,16 +80,15 @@ class GroupController extends BaseController
 
 		try {
 			/** @var Group $group */
-			$group = $this->getTable()->getRecord($idGroup);
-			$group->setViews($this->getTable()->getViewIDs($idGroup));
+			$group	= $this->getGroupForEdit($idGroup);
 		} catch (\Exception $ex) {
 			$flashMessenger->addErrorMessage($this->translate('notfound_record'));
-//			$flashMessenger->addErrorMessage($ex->getMessage());
+			$flashMessenger->addErrorMessage($ex->getMessage());
 
 			return $this->forwardTo('home');
 		}
 
-		$form = $this->getGroupForm(); // new GroupForm();
+		$form = $this->getGroupForm();
 		$form->bind($group);
 
 		/** @var Request $request */
@@ -119,5 +110,44 @@ class GroupController extends BaseController
 			'form' => $form,
 			'title' => $this->translate('group_edit', 'Libadmin'),
 		));
+	}
+
+
+
+	/**
+	 * Get group form
+	 *
+	 * @return    GroupForm
+	 */
+	protected function getGroupForm()
+	{
+		$views			= $this->getViews();
+		$institutions	= $this->getInstitutions();
+
+		return new GroupForm($views, $institutions);
+	}
+
+
+
+	/**
+	 *
+	 * @param	Integer		$idGroup
+	 * @return	Group
+	 */
+	protected function getGroupForEdit($idGroup)
+	{
+		$group		= $this->getTable()->getRecord($idGroup);
+		$views		= $this->getViews();
+		$relations	= array();
+		/** @var InstitutionRelationTable $relationTable */
+		$relationTable		= $this->getTable('InstitutionRelation');
+
+		foreach ($views as $view) {
+			$relations[] = new InstitutionRelationList($relationTable->getGroupViewRelations($idGroup, $view->getId()));
+		}
+
+		$group->setRelations($relations);
+
+		return $group;
 	}
 }

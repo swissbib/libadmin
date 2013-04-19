@@ -78,6 +78,23 @@ ul.adminNavi {
 
 
 
+
+#group #institutions .listElement .controls {
+	margin-left: 0;
+}
+#group #institutions .listElement select {
+	width: 90%;
+}
+
+#group #institutions .buttons label {
+	display: none;
+}
+
+#group #institutions .buttons .controls {
+	margin-left: 0;
+}
+
+
 body {
     padding-top: 60px;
     padding-bottom: 40px;

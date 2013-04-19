@@ -62,7 +62,7 @@ class ViewForm extends BaseForm implements InputFilterProviderInterface
 		// @todo wrap in a method or a field type
 		// Make not required
 		$allGroups = $this->groupTable->getAll();
-		if ($allGroups) {
+		if ($allGroups->count()) {
 			$groupOptions = array();
 			foreach ($allGroups as $group) {
 				/** @var Group $group */
@@ -70,12 +70,8 @@ class ViewForm extends BaseForm implements InputFilterProviderInterface
 			}
 			$groupCheckboxes = new Element\MultiCheckbox('groups');
 			$groupCheckboxes->setValueOptions($groupOptions);
-			//		$groupCheckboxes->setOptions(array(
-			//			'required'	=> false
-			//		));
 			$this->add($groupCheckboxes);
 		}
-
 	}
 
 

@@ -10,13 +10,14 @@ use Zend\Validator;
 use Libadmin\Form\Element\NoValidationCheckbox;
 use Libadmin\Model\Institution;
 use Libadmin\Model\View;
+use Libadmin\Form\BaseFieldset;
 
 /**
  * Base fieldset for institution
  * All fields are in here instead in the institution form to support relations
  *
  */
-class InstitutionFieldset extends Fieldset implements InputFilterProviderInterface
+class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInterface
 {
 
 	/**
@@ -30,7 +31,7 @@ class InstitutionFieldset extends Fieldset implements InputFilterProviderInterfa
 		parent::__construct('institution', $options);
 
 		$this->setHydrator(new ClassMethodsHydrator(false))
-				->setObject(new Institution());
+				->setObject(new Institution);
 
 		$this->addHidden('id');
 
@@ -230,43 +231,4 @@ class InstitutionFieldset extends Fieldset implements InputFilterProviderInterfa
 		}
 	}
 
-
-
-	/**
-	 * Add hidden field
-	 *
-	 * @param    String        $name
-	 */
-	protected function addHidden($name)
-	{
-		$this->add(array(
-			'name' => $name,
-			'attributes' => array(
-				'type' => 'hidden',
-			),
-		));
-	}
-
-
-
-	/**
-	 * Add text field
-	 *
-	 * @param    String        $name
-	 * @param    String        $label
-	 * @param    Boolean        $required
-	 */
-	protected function addText($name, $label, $required = false)
-	{
-		$this->add(array(
-			'name' => $name,
-			'attributes' => array(
-				'type' => 'text',
-				'required' => !!$required
-			),
-			'options' => array(
-				'label' => $label
-			),
-		));
-	}
 }

@@ -66,7 +66,7 @@ class InstitutionRelationTable extends BaseTable
 	 * @param    Integer        $idInstitution
 	 * @return    ResultSet
 	 */
-	public function getRelations($idInstitution)
+	public function getInstitutionRelations($idInstitution)
 	{
 		$results = $this->tableGateway->select(array(
 			'id_institution' => (int)$idInstitution
@@ -79,5 +79,45 @@ class InstitutionRelationTable extends BaseTable
 		}
 
 		return $relations;
+	}
+
+
+
+	/**
+	 *
+	 *
+	 * @param	Integer		$idGroup
+	 * @param	Integer		$idView
+	 * @return	InstitutionRelation[]
+	 */
+	public function getGroupViewRelations($idGroup, $idView)
+	{
+		$results = $this->tableGateway->select(array(
+			'id_group'	=> (int)$idGroup,
+			'id_view'	=> (int)$idView
+		));
+
+		$relations = array();
+
+		foreach ($results as $result) {
+			$relations[] = $result;
+		}
+
+		return $relations;
+	}
+
+
+
+	/**
+	 * @param	Integer		$idGroup
+	 * @param	Integer		$idView
+	 * @return \Integer[]
+	 */
+	public function getnInstitutionRelatioIDs($idGroup, $idView)
+	{
+		return $this->getGroupViewRelationIDs('id_institution', array(
+															'id_group'	=> $idGroup,
+															'id_view'	=> $idView
+														));
 	}
 }

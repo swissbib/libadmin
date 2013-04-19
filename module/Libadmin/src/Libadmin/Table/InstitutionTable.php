@@ -83,7 +83,7 @@ class InstitutionTable extends BaseTable
 	 */
 	public function getAll($limit = 30)
 	{
-		return parent::getAll('label_de', $limit);
+		return parent::getAll('bib_code', $limit);
 	}
 
 

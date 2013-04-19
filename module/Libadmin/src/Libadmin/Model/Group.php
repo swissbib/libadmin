@@ -30,6 +30,23 @@ class Group extends BaseModel
 	public $views = array();
 
 
+	public $relations = array();
+
+
+
+	public function setRelations($relations)
+	{
+		$this->relations = $relations;
+	}
+
+
+
+	public function getRelations()
+	{
+		return $this->relations;
+	}
+
+
 
 	/**
 	 * Get data for the record (without relation data)

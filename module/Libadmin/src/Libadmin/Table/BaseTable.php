@@ -138,7 +138,7 @@ abstract class BaseTable
 	 */
 	public function save(BaseModel $record)
 	{
-		$idRecord = $record->getID();
+		$idRecord = $record->getId();
 		$data = $record->getBaseData();
 
 		if ($idRecord == 0) {

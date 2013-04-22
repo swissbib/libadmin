@@ -1,7 +1,7 @@
 <?php
 namespace Libadmin\Controller;
 
-use Libadmin\Model\Institution;
+
 use Zend\Db\ResultSet\ResultSetInterface;
 use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -15,6 +15,7 @@ use Libadmin\Table\ViewTable;
 use Libadmin\Model\BaseModel;
 use Libadmin\Model\Group;
 use Libadmin\Model\View;
+use Libadmin\Model\Institution;
 
 /**
  * [Description]
@@ -279,14 +280,20 @@ abstract class BaseController extends AbstractActionController
 	 * Extract all result items from a result set to work with a simple list
 	 *
 	 * @param	ResultSetInterface	$set
+	 * @param	Boolean				$idAsIndex
 	 * @return	BaseModel[]
 	 */
-	protected function toList(ResultSetInterface $set)
+	protected function toList(ResultSetInterface $set, $idAsIndex = false)
 	{
 		$list = array();
 
+		/** @var BaseModel $item */
 		foreach ($set as $item) {
-			$list[] = $item;
+			if ($idAsIndex) {
+				$list[$item->getId()] = $item;
+			} else {
+				$list[] = $item;
+			}
 		}
 
 		return $list;
@@ -330,6 +337,6 @@ abstract class BaseController extends AbstractActionController
 	{
 		$results = $this->getTable('Institution')->getAll(0);
 
-		return $this->toList($results);
+		return $this->toList($results, true);
 	}
 }

@@ -71,7 +71,8 @@ class Module
 				},
 				'Libadmin\Table\GroupTable' => function ($sm) {
 					$tableGateway = $sm->get('GroupTableGateway');
-					return new GroupTable($tableGateway);
+					$institutionRelationTable = $sm->get('Libadmin\Table\InstitutionRelationTable');
+					return new GroupTable($tableGateway, $institutionRelationTable);
 				},
 				'GroupTableGateway' => function ($sm) {
 					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
@@ -99,11 +100,11 @@ class Module
 					$resultSetPrototype->setArrayObjectPrototype(new InstitutionRelation());
 					return new TableGateway('mm_institution_group_view', $dbAdapter, null, $resultSetPrototype);
 				},
-				'GroupForm' => function ($sm) {
-					$viewTable = $sm->get('Libadmin\Table\ViewTable');
-
-					return new GroupForm($viewTable);
-				},
+//				'GroupForm' => function ($sm) {
+//					$viewTable = $sm->get('Libadmin\Table\ViewTable');
+//
+//					return new GroupForm($viewTable);
+//				},
 				'ViewForm' => function ($sm) {
 					$groupTable = $sm->get('Libadmin\Table\GroupTable');
 

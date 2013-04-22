@@ -69,7 +69,7 @@ class GroupFieldset extends BaseFieldset implements InputFilterProviderInterface
 			$this->add($viewCheckboxes);
 		}
 
-		$this->addRelations($this->views);
+		$this->addInstitutionRelations();
 	}
 
 
@@ -77,34 +77,19 @@ class GroupFieldset extends BaseFieldset implements InputFilterProviderInterface
 	/**
 	 * Add relations based on views
 	 *
-	 * @param    View[]    $views
 	 */
-	protected function addRelations(array $views)
+	protected function addInstitutionRelations()
 	{
 		$this->add(array(
 			'type' => 'Zend\Form\Element\Collection',
 			'name' => 'relations',
 			'options' => array(
-				'count' => sizeof($views),
+				'count' => sizeof($this->views),
 				'target_element' => array(
 					'type' => 'Libadmin\Form\GroupRelationFieldset'
 				)
 			)
 		));
-
-		/** @var Fieldset[]    $relations */
-		$relations = $this->get('relations')->fieldsets;
-
-//		$x = 3;
-//
-//		foreach ($relations as $index => $relationFieldset) {
-//			$relationFieldset->setLabel('5555555555555555555');
-////			/** @var NoValidationCheckbox $viewCheckbox */
-////			$viewCheckbox = $relation->get('id_view');
-////
-////			$viewCheckbox->setCheckedValue((string)$views[$index]->getid());
-////			$viewCheckbox->setLabel($views[$index]->getLabel());
-//		}
 	}
 
 
@@ -137,6 +122,9 @@ class GroupFieldset extends BaseFieldset implements InputFilterProviderInterface
 			),
 			'view' => array(
 				'required' => false
+			),
+			'relations' => array(
+				'required'	=> false
 			)
 		);
 	}

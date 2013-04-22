@@ -103,4 +103,15 @@ class GroupForm extends BaseForm
 	{
 		return $this->institutions;
 	}
+
+
+
+	/**
+	 * @param	Integer		$idInstitution
+	 * @return	Institution
+	 */
+	public function getInstitution($idInstitution)
+	{
+		return $this->institutions[$idInstitution];
+	}
 }

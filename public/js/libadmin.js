@@ -72,6 +72,115 @@ var LibAdmin = {
 
 		onSearchListUpdated: function() {
 
+		},
+
+
+
+		/**
+		 * Initialize relations event handlers
+		 *
+		 */
+		initRelations: function() {
+			$('.source select').dblclick(this.onSourceListDoubleClick);
+			$('.selection select').dblclick(this.onSelectionListDoubleClick);
+			$('.selection select').blur(this.onSelectionListBlur);
+			$('#institutions button[value=add]').click(this.onAddClick);
+			$('#institutions button[value=remove]').click(this.onRemoveClick);
+		},
+
+
+
+		/**
+		 * Source list double click: add item
+		 *
+		 * @param event
+		 */
+		onSourceListDoubleClick: function(event) {
+			var option		= event.target,
+				selection	= $(this).parents('.row-fluid').find('.selection select')[0];
+
+			selection.options[selection.options.length] = new Option(option.text, option.value, true, true);
+			this.remove(this.selectedIndex);
+		},
+
+
+
+		/**
+		 * Selection list double click: remove item
+		 *
+		 * @param event
+		 */
+		onSelectionListDoubleClick: function(event) {
+			var option	= event.target,
+				target	= $(this).parents('.row-fluid').find('.source select')[0];
+
+			target.options[target.options.length] = new Option(option.text, option.value, false, false);
+			this.remove(this.selectedIndex);
+
+				// Make sure all items are still selected
+			$(this).find('option').map(function(item) {
+				this.selected = true;
+			});
+		},
+
+
+
+		/**
+		 * Selection list blur
+		 * Select all items
+		 */
+		onSelectionListBlur: function() {
+			var options = $(this).find('option');
+
+			setTimeout(function(){
+				options.map(function(item) {
+					this.selected = true;
+				});
+			}, 500);
+		},
+
+
+
+		/**
+		 * Add button click
+		 *
+		 * @param event
+		 */
+		onAddClick: function(event) {
+			var row			= $(this).parents('.row-fluid'),
+				selection	= row.find('.selection select')[0],
+				source		= row.find('.source select')[0],
+				selected	= row.find('.source option:selected');
+
+			selected.each(function(index, option) {
+				selection.options[selection.options.length] = new Option(option.text, option.value, true, true);
+			});
+			selected.each(function(index, option) {
+				source.remove(option);
+			});
+		},
+
+
+
+		/**
+		 * Handle remove button click
+		 * Remove all selected institutions from selectionlist
+		 *
+		 * @param	{Object}	event
+		 */
+		onRemoveClick: function(event) {
+			var row			= $(this).parents('.row-fluid'),
+				selection	= row.find('.selection select')[0],
+				source		= row.find('.source select')[0],
+				selected	= row.find('.selection option:selected');
+
+			selected.each(function(index, option) {
+				source.options[source.options.length] = new Option(option.text, option.value, true, true);
+			});
+			selected.each(function(index, option) {
+				selection.remove(option);
+			});
+			source.selectedIndex = -1;
 		}
 	},
 

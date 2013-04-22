@@ -103,8 +103,17 @@ $this->formSelectTwb()->setTranslatorTextDomain('Libadmin');
 
 			<div class="tab-pane" id="institutions">
 
+				<div class="row-fluid">
+					<div class="btn-group">
+						<?php foreach ($group->get('relations') as $relationFieldset): ?>
+							<button class="btn" type="button" onclick="location.hash='view-<?=$relationFieldset->get('view')->getValue()?>'"><?=$this->escapeHtml($relationFieldset->getLabel())?></button>
+						<?php endforeach; ?>
+					</div>
+				</div>
+
 				<?php foreach ($group->get('relations') as $relationFieldset): ?>
-					<div class="row-fluid">
+					<?=$this->formHidden($relationFieldset->get('view'));?>
+					<div class="row-fluid" id="view-<?=$relationFieldset->get('view')->getValue()?>">
 						<div class="span10"><h3><?=$this->escapeHtml($relationFieldset->getLabel())?></h3></div>
 					</div>
 					<div class="row-fluid">
@@ -126,3 +135,7 @@ $this->formSelectTwb()->setTranslatorTextDomain('Libadmin');
 	</div>
 
 <?= $this->form()->closeTag(); ?>
+
+<script type="text/javascript">
+	LibAdmin.Group.initRelations();
+</script>

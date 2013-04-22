@@ -86,6 +86,10 @@ ul.adminNavi {
 	width: 90%;
 }
 
+#group #institutions .buttons {
+	padding-top: 50px;
+}
+
 #group #institutions .buttons label {
 	display: none;
 }
@@ -93,6 +97,13 @@ ul.adminNavi {
 #group #institutions .buttons .controls {
 	margin-left: 0;
 }
+
+#group #institutions .buttons .controls button {
+	width: 100px;
+}
+
+
+
 
 
 body {

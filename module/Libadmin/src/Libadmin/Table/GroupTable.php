@@ -9,6 +9,7 @@
 
 namespace Libadmin\Table;
 
+use Libadmin\Model\InstitutionRelation;
 use Zend\Db\ResultSet\ResultSetInterface;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Predicate\PredicateSet;
@@ -17,6 +18,8 @@ use Zend\Db\Adapter\Adapter;
 use Libadmin\Table\BaseTable;
 use Libadmin\Model\BaseModel;
 use Libadmin\Model\Group;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Class GroupTable
@@ -36,6 +39,24 @@ class GroupTable extends BaseTable
 		'label_en',
 		'notes'
 	);
+
+
+	protected $relationTable;
+
+
+
+	/**
+	 * Initialize with extra relation table
+	 *
+	 * @param	TableGateway				$tableGateway
+	 * @param	InstitutionRelationTable	$institutionRelationTable
+	 */
+	public function __construct(TableGateway $tableGateway, InstitutionRelationTable $institutionRelationTable)
+	{
+		parent::__construct($tableGateway);
+
+		$this->relationTable = $institutionRelationTable;
+	}
 
 
 
@@ -131,16 +152,24 @@ class GroupTable extends BaseTable
 
 	/**
 	 * Save group
+	 * Added special array handling to simplify relation management (caused problems, but may be solved clean later)
 	 *
-	 * @param	Group|Object   	$group
+	 * @param	Array   	$groupData
+	 * @param	Integer		$idGroup
 	 * @return	Integer
 	 */
-	public function save(Group $group)
+	public function save(array $groupData, $idGroup = 0)
 	{
-		$idGroup = parent::save($group);
+		$group	= new Group();
+		$group->exchangeArray($groupData['group']);
+		$group->setId($idGroup);
+
+		$idGroup	= parent::save($group);
 		$newViewIDs = $group->getViews();
+		$relations	= $group->getRelatedInstitutionsByView();
 
 		$this->saveViews($idGroup, $newViewIDs);
+		$this->saveInstitutionRelations($idGroup, $relations);
 
 		return $idGroup;
 	}
@@ -168,4 +197,52 @@ class GroupTable extends BaseTable
 			}
 		}
 	}
+
+
+
+	/**
+	 * Save institution relations
+	 *
+	 * @param	Integer		$idGroup
+	 * @param	Array[]	$relations
+	 */
+	protected function saveInstitutionRelations($idGroup, array $relations)
+	{
+		foreach ($relations as $idView => $newInstitutionIDs) {
+			$oldInstitutionIDs	= $this->getRelationInstitutionIDs($idGroup, $idView);
+
+				// Add missing
+			foreach ($newInstitutionIDs as $newInstitutionID) {
+				if (!in_array($newInstitutionID, $oldInstitutionIDs)) {
+					$this->addInstitutionRelation($newInstitutionID, $idGroup, $idView);
+				}
+			}
+
+				// Delete removed
+			foreach ($oldInstitutionIDs as $oldInstitutionID) {
+				if (!in_array($oldInstitutionID, $newInstitutionIDs)) {
+					$this->relationTable->removeRelation($oldInstitutionID, $idGroup, $idView);
+				}
+			}
+		}
+	}
+
+
+
+	/**
+	 * Add a new institution relation
+	 *
+	 * @param	Integer		$idInstitution
+	 * @param	Integer		$idGroup
+	 * @param	Integer		$idView
+	 */
+	protected function addInstitutionRelation($idInstitution, $idGroup, $idView)
+	{
+		$relation	= new InstitutionRelation();
+		$relation->setIdGroup($idGroup);
+		$relation->setIdView($idView);
+		$relation->setIdInstitution($idInstitution);
+		$this->relationTable->add($relation);
+	}
+
 }

@@ -36,8 +36,10 @@ class GroupRelationFieldset extends BaseFieldset implements InputFilterProviderI
 					'type'	=> 'button',
 					'name'	=> 'add',
 					'options'	=> array(
-						'label'	=> 'Add >',
-						'value'	=> 'ddddddddd'
+						'label'	=> 'Add >'
+					),
+					'attributes'	=> array(
+						'value'	=> 'add'
 					)
 			   ));
 		$this->add(array(
@@ -45,17 +47,15 @@ class GroupRelationFieldset extends BaseFieldset implements InputFilterProviderI
 					'name'	=> 'remove',
 					'options'	=> array(
 						'label'	=> '< Remove'
+					),
+					'attributes'	=> array(
+						'value'	=> 'remove'
 					)
 			   ));
 
 		$this->add(array(
 					'type'	=> 'hidden',
 					'name'	=> 'view',
-					'value'	=> 0
-				   ));
-		$this->add(array(
-					'type'	=> 'hidden',
-					'name'	=> 'group',
 					'value'	=> 0
 				   ));
 	}
@@ -72,9 +72,13 @@ class GroupRelationFieldset extends BaseFieldset implements InputFilterProviderI
 
 		$view	= $this->getMatchingView($form);
 
+			// Set view label
 		$this->setLabel($view->getLabel());
 
-		$this->fillSelectionList();
+			// Set hidden view parameter
+		$this->get('view')->setValue($view->getId());
+
+		$this->fillSelectionList($form);
 		$this->fillSourceList($form->getInstitutions());
 	}
 
@@ -92,15 +96,19 @@ class GroupRelationFieldset extends BaseFieldset implements InputFilterProviderI
 	}
 
 
-	protected function fillSelectionList()
+
+	/**
+	 * @param	GroupForm	$form
+	 */
+	protected function fillSelectionList(GroupForm $form)
 	{
 		/** @var InstitutionList $institutionSelect */
 		$institutionSelect	= $this->get('institutions');
 		$options			= array();
 
-		foreach ($this->object as $institutionRelation) {
+		foreach ($this->object->getRelations() as $institutionRelation) {
 			/** @var InstitutionRelation $institutionRelation */
-			$options[$institutionRelation->getIdInstitution()] = 'Institution id: ' . $institutionRelation->getIdInstitution();
+			$options[$institutionRelation->getIdInstitution()] = $form->getInstitution($institutionRelation->getIdInstitution())->getListLabel(); // 'Institution id: ' . $institutionRelation->getIdInstitution();
 		}
 
 		$institutionSelect->setValueOptions($options);

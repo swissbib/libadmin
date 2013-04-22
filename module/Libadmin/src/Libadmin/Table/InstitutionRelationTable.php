@@ -84,7 +84,7 @@ class InstitutionRelationTable extends BaseTable
 
 
 	/**
-	 *
+	 * Get relations for group and view combination
 	 *
 	 * @param	Integer		$idGroup
 	 * @param	Integer		$idView
@@ -109,15 +109,20 @@ class InstitutionRelationTable extends BaseTable
 
 
 	/**
+	 * Remove a specific relation
+	 *
+	 * @param	Integer		$idInstitution
 	 * @param	Integer		$idGroup
 	 * @param	Integer		$idView
-	 * @return \Integer[]
+	 * @return	Boolean
 	 */
-	public function getnInstitutionRelatioIDs($idGroup, $idView)
+	public function removeRelation($idInstitution, $idGroup, $idView)
 	{
-		return $this->getGroupViewRelationIDs('id_institution', array(
-															'id_group'	=> $idGroup,
-															'id_view'	=> $idView
-														));
+		return $this->tableGateway->delete(array(
+										'id_institution'	=> (int)$idInstitution,
+										'id_group'			=> (int)$idGroup,
+										'id_view'			=> (int)$idView
+									)) === 1;
 	}
+
 }

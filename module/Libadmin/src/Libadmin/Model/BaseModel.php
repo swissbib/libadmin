@@ -10,10 +10,6 @@ use Zend\InputFilter\InputFilter;
 abstract class BaseModel
 {
 
-	/** @var  Integer */
-	protected $id;
-
-
 	/**
 	 * @var InputFilter
 	 */
@@ -101,7 +97,10 @@ abstract class BaseModel
 	 *
 	 * @return    String
 	 */
-	abstract public function getListLabel();
+	public function getListLabel()
+	{
+		return get_class($this);
+	}
 
 
 
@@ -110,5 +109,8 @@ abstract class BaseModel
 	 *
 	 * @return    String
 	 */
-	abstract public function getTypeLabel();
+	public function getTypeLabel()
+	{
+		return get_class($this);
+	}
 }

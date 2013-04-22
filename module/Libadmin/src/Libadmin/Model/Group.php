@@ -49,6 +49,32 @@ class Group extends BaseModel
 
 
 	/**
+	 * Get institutions IDs grouped by views
+	 *
+	 * @return	Array[]
+	 */
+	public function getRelatedInstitutionsByView()
+	{
+		$data	= array();
+
+		if (!is_array($this->relations) || !sizeof($this->relations)) {
+			return $data;
+		}
+
+		if ($this->relations[0] instanceof InstitutionRelationList) {
+			return $data;
+		}
+
+		foreach ($this->relations as $relation) {
+			$data[$relation['view']] = isset($relation['institutions'])  ? $relation['institutions'] : array();
+		}
+
+		return $data;
+	}
+
+
+
+	/**
 	 * Get data for the record (without relation data)
 	 *
 	 * @return    Array
@@ -58,6 +84,7 @@ class Group extends BaseModel
 		$data = parent::getBaseData();
 
 		unset($data['views']);
+		unset($data['relations']);
 
 		return $data;
 	}
@@ -196,7 +223,7 @@ class Group extends BaseModel
 
 
 
-	public function setViews($views)
+	public function setViews(array $views)
 	{
 		$this->views = $views;
 

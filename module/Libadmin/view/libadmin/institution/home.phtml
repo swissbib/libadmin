@@ -1,7 +1,8 @@
-<?=
-$this->render('libadmin/global/home-crud', array(
+<?php
+
+echo $this->render('libadmin/global/home-crud', array(
 	'route' => 'institution',
 	'entityName' => $this->translate('institution', 'Libadmin'),
 	'entityNamePlural' => $this->translate('institutions', 'Libadmin'),
 	'listItems' => $listItems
-));?>
+));

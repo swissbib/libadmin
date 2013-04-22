@@ -2,6 +2,7 @@
 namespace Libadmin\Controller;
 
 use Libadmin\Model\InstitutionRelationList;
+use Zend\Form\FormInterface;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
 use Zend\Http\Request;
@@ -38,10 +39,11 @@ class GroupController extends BaseController
 			$form->setData($request->getPost());
 
 			if ($form->isValid()) {
-				$group->exchangeArray($form->getData());
+//				$group->exchangeArray($form->getData());
 
 				try {
-					$idGroup = $this->getTable()->save($group);
+					$storageData= $form->getData(FormInterface::VALUES_AS_ARRAY);
+					$idGroup	 = $this->getTable()->save($storageData);
 
 					$flashMessenger->addSuccessMessage($this->translate('saved_group'));
 
@@ -97,7 +99,8 @@ class GroupController extends BaseController
 			$form->setData($request->getPost());
 
 			if ($form->isValid()) {
-				$this->getTable()->save($form->getData());
+				$storageData	= $form->getData(FormInterface::VALUES_AS_ARRAY);
+				$this->getTable()->save($storageData, $idGroup);
 				$flashMessenger->addSuccessMessage($this->translate('saved_group'));
 			} else {
 				$flashMessenger->addErrorMessage($this->translate('form_invalid'));
@@ -140,13 +143,16 @@ class GroupController extends BaseController
 		$views		= $this->getViews();
 		$relations	= array();
 		/** @var InstitutionRelationTable $relationTable */
-		$relationTable		= $this->getTable('InstitutionRelation');
+		$relationTable	= $this->getTable('InstitutionRelation');
+		$groupViewIds	= $this->getTable('Group')->getViewIDs($idGroup);
 
 		foreach ($views as $view) {
-			$relations[] = new InstitutionRelationList($relationTable->getGroupViewRelations($idGroup, $view->getId()));
+			$viewRelations	= $relationTable->getGroupViewRelations($idGroup, $view->getId());
+			$relations[]	= new InstitutionRelationList($view->getId(), $viewRelations);
 		}
 
 		$group->setRelations($relations);
+		$group->setViews($groupViewIds);
 
 		return $group;
 	}

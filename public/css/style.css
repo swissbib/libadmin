@@ -83,7 +83,8 @@ ul.adminNavi {
 	margin-left: 0;
 }
 #group #institutions .listElement select {
-	width: 90%;
+	width: 95%;
+	font-size: 0.9em;
 }
 
 #group #institutions .buttons {
@@ -98,8 +99,13 @@ ul.adminNavi {
 	margin-left: 0;
 }
 
-#group #institutions .buttons .controls button {
-	width: 100px;
+#group #institutions .buttons button {
+	width: 95%;
+	margin-bottom: 20px;
+}
+
+#group #institutions .naviButtons {
+	margin-bottom: 20px;
 }
 
 

@@ -103,11 +103,17 @@ $this->formSelectTwb()->setTranslatorTextDomain('Libadmin');
 
 			<div class="tab-pane" id="institutions">
 
-				<div class="row-fluid">
+				<div class="row-fluid naviButtons">
 					<div class="btn-group">
 						<?php foreach ($group->get('relations') as $relationFieldset): ?>
 							<button class="btn" type="button" onclick="location.hash='view-<?=$relationFieldset->get('view')->getValue()?>'"><?=$this->escapeHtml($relationFieldset->getLabel())?></button>
 						<?php endforeach; ?>
+					</div>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span12">
+						<p class="muted">Institutionen können mit einem Doppelklick auf das Element in die andere Gruppe verschoben werden. Mehrere Institutionen können durch Mehrfachauswahl und die Buttons in der Mitte verschoben werden.</p>
 					</div>
 				</div>
 
@@ -121,8 +127,8 @@ $this->formSelectTwb()->setTranslatorTextDomain('Libadmin');
 							<?= $this->formRowTwb($relationFieldset->get('source')) ?>
 						</div>
 						<div class="span2 buttons">
-							<?= $this->formRowTwb($relationFieldset->get('add')) ?>
-							<?= $this->formRowTwb($relationFieldset->get('remove')) ?>
+							<button value="add" class="btn" type="button"><i class="icon-plus-sign"></i> Add <i class="icon-chevron-right"></i></button>
+							<button value="remove" class="btn" type="button"><i class="icon-chevron-left"></i> Remove <i class="icon-minus-sign"></i></button>
 						</div>
 						<div class="span5 selection listElement">
 							<?= $this->formRowTwb($relationFieldset->get('institutions')) ?>

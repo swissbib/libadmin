@@ -102,6 +102,8 @@ class GroupController extends BaseController
 				$storageData	= $form->getData(FormInterface::VALUES_AS_ARRAY);
 				$this->getTable()->save($storageData, $idGroup);
 				$flashMessenger->addSuccessMessage($this->translate('saved_group'));
+				$group	= $this->getGroupForEdit($idGroup);
+				$form->bind($group);
 			} else {
 				$flashMessenger->addErrorMessage($this->translate('form_invalid'));
 			}

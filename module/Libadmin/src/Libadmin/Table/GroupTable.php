@@ -244,5 +244,4 @@ class GroupTable extends BaseTable
 		$relation->setIdInstitution($idInstitution);
 		$this->relationTable->add($relation);
 	}
-
 }

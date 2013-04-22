@@ -118,19 +118,20 @@ $this->formSelectTwb()->setTranslatorTextDomain('Libadmin');
 				</div>
 
 				<?php foreach ($group->get('relations') as $relationFieldset): ?>
+					<?php $idView = $relationFieldset->get('view')->getValue(); ?>
 					<?=$this->formHidden($relationFieldset->get('view'));?>
-					<div class="row-fluid" id="view-<?=$relationFieldset->get('view')->getValue()?>">
+					<div class="row-fluid" id="view-<?=$idView?>">
 						<div class="span10"><h3><?=$this->escapeHtml($relationFieldset->getLabel())?></h3></div>
 					</div>
 					<div class="row-fluid">
-						<div class="span5 source listElement">
+						<div class="span5 source listElement" id="view-<?=$idView?>-source">
 							<?= $this->formRowTwb($relationFieldset->get('source')) ?>
 						</div>
 						<div class="span2 buttons">
 							<button value="add" class="btn" type="button"><i class="icon-plus-sign"></i> Add <i class="icon-chevron-right"></i></button>
 							<button value="remove" class="btn" type="button"><i class="icon-chevron-left"></i> Remove <i class="icon-minus-sign"></i></button>
 						</div>
-						<div class="span5 selection listElement">
+						<div class="span5 selection listElement" id="view-<?=$idView?>-selection">
 							<?= $this->formRowTwb($relationFieldset->get('institutions')) ?>
 						</div>
 					</div>
@@ -143,5 +144,5 @@ $this->formSelectTwb()->setTranslatorTextDomain('Libadmin');
 <?= $this->form()->closeTag(); ?>
 
 <script type="text/javascript">
-	LibAdmin.Group.initRelations();
+	LibAdmin.Group.initRelations(<?=json_encode($lockLists)?>);
 </script>

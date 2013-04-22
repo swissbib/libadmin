@@ -59,8 +59,9 @@ class GroupController extends BaseController
 		$form->setAttribute('action', $this->makeUrl('group', 'add'));
 
 		return $this->getAjaxView(array(
-			'form' => $form,
-			'title' => $this->translate('group_add', 'Libadmin'),
+			'form' 		=> $form,
+			'lockLists'	=> array(),
+			'title'		=> $this->translate('group_add', 'Libadmin'),
 		), 'libadmin/group/edit');
 	}
 
@@ -112,9 +113,28 @@ class GroupController extends BaseController
 		$form->setAttribute('action', $this->makeUrl('group', 'edit', $idGroup));
 
 		return $this->getAjaxView(array(
-			'form' => $form,
-			'title' => $this->translate('group_edit', 'Libadmin'),
+			'form'		=> $form,
+			'lockLists'	=> $this->getInstitutionLockLists(),
+			'title' 	=> $this->translate('group_edit', 'Libadmin'),
 		));
+	}
+
+
+
+	/**
+	 * Get list of institutions grouped by their relation to the views
+	 *
+	 * @return	Array[]
+	 */
+	protected function getInstitutionLockLists()
+	{
+		$lockLists	= array();
+
+		foreach ($this->getViews() as $view) {
+			$lockLists[$view->getId()] = $this->getTable()->getViewInstitutionIDs($view->getId());
+		}
+
+		return $lockLists;
 	}
 
 

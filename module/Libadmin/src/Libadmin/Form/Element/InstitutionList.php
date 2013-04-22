@@ -16,11 +16,18 @@ class InstitutionList extends MultiSelect
 
 		$this->disableInArrayValidator = true;
 
-		$this->setAttribute('size', 20);
+		$this->setAttribute('size', 25);
 	}
 
 
 
+	/**
+	 * Set value
+	 * handle object data and extract institution IDs
+	 *
+	 * @param	Array|Mixed		$value
+	 * @return	InstitutionList
+	 */
 	public function setValue($value)
 	{
 		$options = array();

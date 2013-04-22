@@ -63,6 +63,8 @@ class GroupRelationFieldset extends BaseFieldset implements InputFilterProviderI
 
 
 	/**
+	 * Prepare fieldset
+	 * Set label
 	 * @param	GroupForm|FormInterface		$form
 	 * @return	void
 	 */
@@ -73,7 +75,7 @@ class GroupRelationFieldset extends BaseFieldset implements InputFilterProviderI
 		$view	= $this->getMatchingView($form);
 
 			// Set view label
-		$this->setLabel($view->getLabel());
+		$this->setLabel($view->getListLabel());
 
 			// Set hidden view parameter
 		$this->get('view')->setValue($view->getId());
@@ -84,20 +86,9 @@ class GroupRelationFieldset extends BaseFieldset implements InputFilterProviderI
 
 
 
-	public function populateValues($data)
-	{
-		if (!isset($data['institutions'])) {
-			$data = array(
-						'institutions' => $data
-					);
-		}
-
-		parent::populateValues($data);
-	}
-
-
-
 	/**
+	 * Populate selection list with options for current relations
+	 *
 	 * @param	GroupForm	$form
 	 */
 	protected function fillSelectionList(GroupForm $form)
@@ -108,7 +99,8 @@ class GroupRelationFieldset extends BaseFieldset implements InputFilterProviderI
 
 		foreach ($this->object->getRelations() as $institutionRelation) {
 			/** @var InstitutionRelation $institutionRelation */
-			$options[$institutionRelation->getIdInstitution()] = $form->getInstitution($institutionRelation->getIdInstitution())->getListLabel(); // 'Institution id: ' . $institutionRelation->getIdInstitution();
+			$idInstitution			= $institutionRelation->getIdInstitution();
+			$options[$idInstitution]= $form->getInstitution($idInstitution)->getListLabel();
 		}
 
 		$institutionSelect->setValueOptions($options);
@@ -117,6 +109,8 @@ class GroupRelationFieldset extends BaseFieldset implements InputFilterProviderI
 
 
 	/**
+	 * Populate source list with options which are selectable
+	 *
 	 * @param	Institution[]	$institutions
 	 */
 	protected function fillSourceList(array $institutions)

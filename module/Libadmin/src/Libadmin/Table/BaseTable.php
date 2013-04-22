@@ -281,6 +281,21 @@ abstract class BaseTable
 
 
 	/**
+	 * Get IDs of all institutions which are related to a view
+	 *
+	 * @param	Integer		$idView
+	 * @return	Integer[]
+	 */
+	public function getViewInstitutionIDs($idView)
+	{
+		return $this->getRelationIDs('id_institution', 'mm_institution_group_view', array(
+																						 'id_view'	=> (int)$idView
+																					));
+	}
+
+
+
+	/**
 	 * Get relation IDs
 	 *
 	 * @param	String		$column

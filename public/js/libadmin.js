@@ -53,6 +53,9 @@ var LibAdmin = {
 	},
 
 	Group: {
+
+		lockList: {},
+
 		init: function() {
 			this.initSidebar();
 			this.initEditor();
@@ -80,12 +83,39 @@ var LibAdmin = {
 		 * Initialize relations event handlers
 		 *
 		 */
-		initRelations: function() {
+		initRelations: function(lockList) {
+			this.lockList = lockList;
+
+			this.initLockList(lockList);
+
 			$('.source select').dblclick(this.onSourceListDoubleClick);
 			$('.selection select').dblclick(this.onSelectionListDoubleClick);
 			$('.selection select').blur(this.onSelectionListBlur);
 			$('#institutions button[value=add]').click(this.onAddClick);
 			$('#institutions button[value=remove]').click(this.onRemoveClick);
+		},
+
+
+
+		/**
+		 * Remove institutions which are already related to the view with another group
+		 *
+		 * @param	{Array}		lockList
+		 */
+		initLockList: function(lockList) {
+			var list,
+				option;
+
+			$.each(lockList, function(idView, lockedInstitutionIDs) {
+				list = $('#view-' + idView + '-source select')[0];
+
+				$.each(lockedInstitutionIDs, function(index, item){
+					option = $(list).find('option[value=' + item + ']');
+					if( option[0] ) {
+						list.remove(option[0].index);
+					}
+				});
+			});
 		},
 
 
@@ -156,7 +186,7 @@ var LibAdmin = {
 				selection.options[selection.options.length] = new Option(option.text, option.value, true, true);
 			});
 			selected.each(function(index, option) {
-				source.remove(option);
+				source.remove(option.index);
 			});
 		},
 
@@ -178,7 +208,7 @@ var LibAdmin = {
 				source.options[source.options.length] = new Option(option.text, option.value, true, true);
 			});
 			selected.each(function(index, option) {
-				selection.remove(option);
+				selection.remove(option.index);
 			});
 			source.selectedIndex = -1;
 		}

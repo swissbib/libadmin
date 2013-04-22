@@ -88,7 +88,7 @@ class View extends BaseModel
 
 	public function setGroups($groups)
 	{
-		$this->groups = $groups;
+		$this->groups = is_array($groups) ? $groups : array();
 	}
 
 

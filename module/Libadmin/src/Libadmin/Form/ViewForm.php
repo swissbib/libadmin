@@ -1,6 +1,7 @@
 <?php
 namespace Libadmin\Form;
 
+use Libadmin\Form\Element\NoValidationMultiCheckbox;
 use Libadmin\Model\Group;
 use Zend\Form\Element;
 use Zend\InputFilter\InputFilterProviderInterface;
@@ -68,7 +69,7 @@ class ViewForm extends BaseForm implements InputFilterProviderInterface
 				/** @var Group $group */
 				$groupOptions[$group->getID()] = $group->getCode();
 			}
-			$groupCheckboxes = new Element\MultiCheckbox('groups');
+			$groupCheckboxes = new NoValidationMultiCheckbox('groups');
 			$groupCheckboxes->setValueOptions($groupOptions);
 			$this->add($groupCheckboxes);
 		}

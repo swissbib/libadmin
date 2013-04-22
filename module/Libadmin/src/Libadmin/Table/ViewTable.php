@@ -109,8 +109,8 @@ class ViewTable extends BaseTable
 	/**
 	 * Save with with group relations
 	 *
-	 * @param    View    $view
-	 * @return    Integer
+	 * @param	View    $view
+	 * @return	Integer
 	 */
 	public function save(View $view)
 	{

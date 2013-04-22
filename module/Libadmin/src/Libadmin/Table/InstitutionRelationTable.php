@@ -5,6 +5,8 @@ use Zend\Db\Sql\Delete;
 use Zend\Db\ResultSet\ResultSet;
 
 use Libadmin\Model\InstitutionRelation;
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Sql;
 
 /**
  * Relation table for institution-group-view
@@ -92,10 +94,28 @@ class InstitutionRelationTable extends BaseTable
 	 */
 	public function getGroupViewRelations($idGroup, $idView)
 	{
-		$results = $this->tableGateway->select(array(
-			'id_group'	=> (int)$idGroup,
-			'id_view'	=> (int)$idView
-		));
+		$select	= new Select();
+
+		$select->from('mm_institution_group_view')
+				->join('institution',
+						'mm_institution_group_view.id_institution = institution.id',
+						array()
+					   )
+				->where(array(
+						'mm_institution_group_view.id_group'	=> (int)$idGroup,
+						'mm_institution_group_view.id_view'	=> (int)$idView
+				   ))
+				->order('institution.bib_code');
+
+//		$sql = new Sql($this->tableGateway->getAdapter());
+//		var_dump($sql->getSqlStringForSqlObject($select));
+
+		$results = $this->tableGateway->selectWith($select);
+
+//		$results = $this->tableGateway->select(array(
+//			'id_group'	=> (int)$idGroup,
+//			'id_view'	=> (int)$idView
+//		));
 
 		$relations = array();
 

@@ -111,22 +111,22 @@ class Importer
 		foreach ($xmlNodes->children() as $library) {
 			$fieldsValues = array(
 //				'id'			=> (string) $library->id,
-				'bib_code' => (string)$library->libraryIdentifier,
-				'sys_code' => (string)$library->name,
-				'is_active' => 1,
-				'address' => (string)$library->road,
-				'zip' => (string)$library->zipCode,
-				'city' => (string)$library->town,
-				'country' => 'ch',
-				'canton' => DataHelper::getCantonFromZip((string)$library->zipCode),
-				'website' => (string)$library->addressURL,
-				'email' => '',
-				'phone' => '',
-				'skype' => '',
-				'facebook' => '',
-				'coordinates' => '',
-				'isil' => DataHelper::getISIL((string)$library->libraryIdentifier, 'ch'),
-				'notes' => '',
+				'bib_code'		=> (string)$library->libraryIdentifier,
+				'sys_code'		=> (string)$library->name,
+				'is_active'		=> 1,
+				'address'		=> (string)$library->road,
+				'zip'			=> (string)$library->zipCode,
+				'city'			=> (string)$library->town,
+				'country'		=> 'ch',
+				'canton'		=> DataHelper::getCantonFromZip((string)$library->zipCode),
+				'website'		=> (string)$library->institutionURL,	// = URL website
+				'email'			=> '',
+				'phone'			=> '',
+				'skype'			=> '',
+				'facebook'		=> '',
+				'coordinates'	=> '',
+				'isil'			=> DataHelper::getISIL((string)$library->libraryIdentifier, 'ch'),
+				'notes'			=> '',
 			);
 			// Add label translations
 			$translations = $library->translation->translations;
@@ -139,7 +139,7 @@ class Importer
 			}
 
 			// Add URLs
-			$url = (string)$library->url;
+			$url = (string)$library->addressURL;	// = URL library infos
 			foreach ($this->languageKeys as $key) {
 				$fieldsValues['url_' . $key] = $url;
 			}

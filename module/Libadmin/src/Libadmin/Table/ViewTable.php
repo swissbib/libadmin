@@ -100,8 +100,8 @@ class ViewTable extends BaseTable
 	public function getGroupIDs($idView)
 	{
 		return $this->getGroupViewRelationIDs('id_group', array(
-															  'id_view'	=> $idView
-														 ));
+			'id_view'	=> $idView
+		));
 	}
 
 

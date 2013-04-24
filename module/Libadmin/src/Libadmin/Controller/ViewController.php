@@ -112,9 +112,11 @@ class ViewController extends BaseController
 		$relationHelper = $this->serviceLocator->get('RelationOverviewHelper');
 
 		return $this->getAjaxView(array(
-			'form' => $form,
-			'title' => $this->translate('view_edit', 'Libadmin'),
-			'relations' => $relationHelper->getData($view)
+			'groups'		=> $this->getGroups(),
+			'institutions'	=> $this->getInstitutions(),
+			'form'			=> $form,
+			'title'			=> $this->translate('view_edit', 'Libadmin'),
+			'relations' 	=> $relationHelper->getData($view)
 		));
 	}
 }

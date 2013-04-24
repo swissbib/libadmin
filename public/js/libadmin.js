@@ -28,29 +28,7 @@ var LibAdmin = {
 
 
 
-	Institution: {
-		init: function() {
-			this.initSidebar();
-			this.initEditor();
-		},
 
-		initSidebar: function() {
-			LibAdmin.Sidebar.init($.proxy(this.onSearchListUpdated, this), $.proxy(this.onContentUpdated, this));
-		},
-
-		initEditor: function() {
-			LibAdmin.Editor.init($.proxy(this.onContentUpdated, this));
-		},
-
-		onContentUpdated: function() {
-			this.initEditor();
-		},
-
-		onSearchListUpdated: function() {
-
-		}
-
-	},
 
 	Group: {
 
@@ -215,24 +193,61 @@ var LibAdmin = {
 		}
 	},
 
+	/**
+	 * Views Administration: CRUD for Views, activation, sorting of groups and institutions, relations reviewing
+	 */
 	View: {
+		/**
+		 * Init View area
+		 */
 		init: function() {
 			this.initSidebar();
 			this.initEditor();
 		},
 
+		/**
+		 * Init view records search list
+		 */
 		initSidebar: function() {
 			LibAdmin.Sidebar.init($.proxy(this.onSearchListUpdated, this), $.proxy(this.onContentUpdated, this));
 		},
 
+		/**
+		 * Init editor part of view area
+		 */
 		initEditor: function() {
 			LibAdmin.Editor.init($.proxy(this.onContentUpdated, this));
+			this.initSortables();
 		},
 
+		/**
+		 * Init drag and drop sorting of items of: groups, institutions
+		 */
+		initSortables: function() {
+			this.initSortable( $('#groupssortable') );
+			this.initSortable( $('#institutionssortable') );
+		},
+
+		/**
+		 * Init sortability of given UL list
+		 *
+		 * @param	{element}	el
+		 */
+		initSortable: function(el) {
+			el.sortable();
+			el.disableSelection();
+		},
+
+		/**
+		 * Event handler after content update: re-init edit
+		 */
 		onContentUpdated: function() {
 			this.initEditor();
 		},
 
+		/**
+		 * Event handler after records search list update
+		 */
 		onSearchListUpdated: function() {
 
 		}

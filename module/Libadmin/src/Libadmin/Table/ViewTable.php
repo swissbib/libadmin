@@ -116,6 +116,7 @@ class ViewTable extends BaseTable
 	{
 		$idView = parent::save($view);
 
+			// Save groups: add new records, delete old ones that have been removed
 		$this->saveGroups($idView, $view->getGroups());
 
 		return $idView;

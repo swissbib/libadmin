@@ -96,10 +96,15 @@ class ViewController extends BaseController
 		/** @var Request $request */
 		$request = $this->getRequest();
 		if ($request->isPost()) {
-			$form->setData($request->getPost());
+			$postData = $request->getPost();
+			$form->setData($postData);
 
 			if ($form->isValid()) {
 				$this->getTable()->save($form->getData());
+
+				$groupIdsSorted			= trim($postData->get('groupsortableids'));
+				$institutionIdsSorted	= trim($postData->get('institutionsortableids'));
+
 				$flashMessenger->addSuccessMessage($this->translate('saved_view'));
 			} else {
 				$flashMessenger->addErrorMessage($this->translate('form_invalid'));

@@ -100,10 +100,10 @@ class ViewController extends BaseController
 			$form->setData($postData);
 
 			if ($form->isValid()) {
-				$this->getTable()->save($form->getData());
+				$groupIdsSorted			= $postData->get('groupsortableids');
+				$institutionIdsSorted	= $postData->get('institutionsortableids');
 
-				$groupIdsSorted			= trim($postData->get('groupsortableids'));
-				$institutionIdsSorted	= trim($postData->get('institutionsortableids'));
+				$this->getTable()->save($form->getData(), $groupIdsSorted, $institutionIdsSorted);
 
 				$flashMessenger->addSuccessMessage($this->translate('saved_view'));
 			} else {

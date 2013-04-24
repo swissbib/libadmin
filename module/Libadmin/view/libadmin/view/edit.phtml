@@ -80,13 +80,26 @@ $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
 
 			<!-- ------------------- Tab Pane: Sort Groups -->
 			<div class="tab-pane" id="groupsort">
-				<div class="row">
+				<div class="row vsort-scrollable">
 					<div class="span8">
-						<ul id="groupssortable" class="nav nav-tabs nav-stacked">
+						<input type="hidden" id="groupsortableids" name="groupsortableids" value="" />
+						<ul id="groupsortable" class="nav nav-tabs nav-stacked">
 							<?php /** @var	Libadmin\Model\Group[] 	$groups */ ?>
 							<?php foreach($groups as $group): ?>
-								<li class="ui-state-default">
-									<a href="#"><?= $group->getListLabel() ?></a>
+								<li id="<?= $group->getId() ?>" class="ui-state-default">
+									<a href="#">
+										<table><tr>
+											<td class="item-label"><?= $group->getListLabel() ?></td>
+<!--
+											<td class="to-top">
+												<a class="btn btn-small make-topmost-group" title="<?= $this->translate('maketopmostitem', 'Libadmin') ?>" href="#"><div class="icon"></div></a>
+											</td>
+											<td class="to-bottom">
+												<a class="btn btn-small make-bottommost-group" title="<?= $this->translate('makebottommostitem', 'Libadmin') ?>" href="#"><div class="icon"></div></a>
+											</td>
+-->
+										</tr></table>
+									</a>
 								</li>
 							<?php endforeach; ?>
 						</ul>
@@ -96,13 +109,25 @@ $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
 
 			<!-- ------------------- Tab Pane: Sort Institutions -->
 			<div class="tab-pane" id="institutionsort">
-				<div class="row">
+				<div class="row vsort-scrollable">
 					<div class="span8">
+						<input type="hidden" id="institutionsortableids" name="institutionsortableids" value="" />
 						<ul id="institutionssortable" class="nav nav-tabs nav-stacked">
 							<?php /** @var	Libadmin\Model\Institution[] 	$institutions */ ?>
 							<?php foreach($institutions as $institution): ?>
-								<li class="ui-state-default">
-									<a href="#"><?= $institution->getListLabel() ?></a>
+								<li id="<?= $institution->getId() ?>" class="ui-state-default">
+									<a href="#">
+										<table><tr>
+											<td class="item-label"><?= $institution->getListLabel() ?></td>
+<!--											<td class="to-top">
+												<a class="btn btn-small make-topmost-institution" title="<?= $this->translate('maketopmostitem', 'Libadmin') ?>" href="#"><div class="icon"></div></a>
+											</td>
+											<td class="to-bottom">
+												<a class="btn btn-small make-bottommost-institution" title="<?= $this->translate('makebottommostitem', 'Libadmin') ?>" href="#"><div class="icon"></div></a>
+											</td>
+-->
+										</tr></table>
+									</a>
 								</li>
 							<?php endforeach; ?>
 						</ul>

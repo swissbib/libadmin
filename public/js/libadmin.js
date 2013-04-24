@@ -86,13 +86,24 @@ var LibAdmin = {
 		initRelations: function(lockList) {
 			this.lockList = lockList;
 
-			this.initLockList(lockList);
+			this.removeLockedInstitutions(lockList);
 
 			$('.source select').dblclick(this.onSourceListDoubleClick);
 			$('.selection select').dblclick(this.onSelectionListDoubleClick);
-			$('.selection select').blur(this.onSelectionListBlur);
 			$('#institutions button[value=add]').click(this.onAddClick);
 			$('#institutions button[value=remove]').click(this.onRemoveClick);
+			$('#submitbutton').mouseover($.proxy(this.beforeSaving, this));
+		},
+
+
+
+		/**
+		 * Actions before saving
+		 * Make sure all selection institutions are selected
+		 *
+		 */
+		beforeSaving: function() {
+			this.selectAllSelectedInstitutions();
 		},
 
 
@@ -102,7 +113,7 @@ var LibAdmin = {
 		 *
 		 * @param	{Array}		lockList
 		 */
-		initLockList: function(lockList) {
+		removeLockedInstitutions: function(lockList) {
 			var list,
 				option;
 
@@ -146,27 +157,17 @@ var LibAdmin = {
 
 			target.options[target.options.length] = new Option(option.text, option.value, false, false);
 			this.remove(this.selectedIndex);
-
-				// Make sure all items are still selected
-			$(this).find('option').map(function(item) {
-				this.selected = true;
-			});
 		},
 
 
 
 		/**
-		 * Selection list blur
-		 * Select all items
+		 * Select all selection items (to be submitted in form save request)
 		 */
-		onSelectionListBlur: function() {
-			var options = $(this).find('option');
-
-			setTimeout(function(){
-				options.map(function(item) {
-					this.selected = true;
-				});
-			}, 500);
+		selectAllSelectedInstitutions: function() {
+			$('.selection.listElement select option').map(function(index, option) {
+				option.selected = true;
+			});
 		},
 
 

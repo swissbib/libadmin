@@ -99,8 +99,11 @@ class GroupRelationFieldset extends BaseFieldset implements InputFilterProviderI
 
 		foreach ($this->object->getRelations() as $institutionRelation) {
 			/** @var InstitutionRelation $institutionRelation */
-			$idInstitution			= $institutionRelation->getIdInstitution();
-			$options[$idInstitution]= $form->getInstitution($idInstitution)->getListLabel();
+			$idInstitution	= $institutionRelation->getIdInstitution();
+			$institution	= $form->getInstitution($idInstitution);
+			if (!is_null($institution)) {
+				$options[$idInstitution]= $institution->getListLabel();
+			}
 		}
 
 		$institutionSelect->setValueOptions($options);

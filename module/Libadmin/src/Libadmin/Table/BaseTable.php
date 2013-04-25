@@ -237,13 +237,13 @@ abstract class BaseTable
 	protected function addGroupViewRelation($idGroup, $idView)
 	{
 		/** @var Adapter $adapter */
-		$adapter = $this->tableGateway->getAdapter();
-		$sql = new Sql($adapter);
+		$adapter= $this->tableGateway->getAdapter();
+		$sql	= new Sql($adapter);
 		$insert = $sql->insert('mm_group_view');
 
 		$insert->values(array(
-			'id_group' => $idGroup,
-			'id_view' => $idView
+			'id_group'	=> $idGroup,
+			'id_view'	=> $idView
 		));
 
 		$query = $sql->getSqlStringForSqlObject($insert);

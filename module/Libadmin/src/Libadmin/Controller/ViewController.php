@@ -96,10 +96,15 @@ class ViewController extends BaseController
 		/** @var Request $request */
 		$request = $this->getRequest();
 		if ($request->isPost()) {
-			$form->setData($request->getPost());
+			$postData = $request->getPost();
+			$form->setData($postData);
 
 			if ($form->isValid()) {
-				$this->getTable()->save($form->getData());
+				$groupIdsSorted			= $postData->get('groupsortableids');
+				$institutionIdsSorted	= $postData->get('institutionsortableids');
+
+				$this->getTable()->save($form->getData(), $groupIdsSorted, $institutionIdsSorted);
+
 				$flashMessenger->addSuccessMessage($this->translate('saved_view'));
 			} else {
 				$flashMessenger->addErrorMessage($this->translate('form_invalid'));
@@ -112,9 +117,11 @@ class ViewController extends BaseController
 		$relationHelper = $this->serviceLocator->get('RelationOverviewHelper');
 
 		return $this->getAjaxView(array(
-			'form' => $form,
-			'title' => $this->translate('view_edit', 'Libadmin'),
-			'relations' => $relationHelper->getData($view)
+			'groups'		=> $this->getGroups(),
+			'institutions'	=> $this->getInstitutions(),
+			'form'			=> $form,
+			'title'			=> $this->translate('view_edit', 'Libadmin'),
+			'relations' 	=> $relationHelper->getData($view)
 		));
 	}
 }

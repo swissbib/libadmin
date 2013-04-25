@@ -144,3 +144,24 @@ body {
 .btn-success:active, .btn-success.active {
   background-color: #57a900;
 }
+
+
+
+
+.vsort-scrollable {
+	height:500px;
+	overflow:scroll
+}
+.vsort-scrollable td div.icon {
+	width:16px;
+	height:16px;
+}
+.vsort-scrollable td.to-top div.icon {
+	background: url("../img/glyphicons-halflings.png") no-repeat scroll -288px -144px transparent;
+}
+.vsort-scrollable td.to-bottom div.icon {
+	background: url("../img/glyphicons-halflings.png") no-repeat scroll -310px -144px transparent;
+}
+.vsort-scrollable td.item-label {
+	width:660px;
+}

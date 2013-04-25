@@ -28,29 +28,7 @@ var LibAdmin = {
 
 
 
-	Institution: {
-		init: function() {
-			this.initSidebar();
-			this.initEditor();
-		},
 
-		initSidebar: function() {
-			LibAdmin.Sidebar.init($.proxy(this.onSearchListUpdated, this), $.proxy(this.onContentUpdated, this));
-		},
-
-		initEditor: function() {
-			LibAdmin.Editor.init($.proxy(this.onContentUpdated, this));
-		},
-
-		onContentUpdated: function() {
-			this.initEditor();
-		},
-
-		onSearchListUpdated: function() {
-
-		}
-
-	},
 
 	Group: {
 
@@ -63,6 +41,10 @@ var LibAdmin = {
 
 		initSidebar: function() {
 			LibAdmin.Sidebar.init($.proxy(this.onSearchListUpdated, this), $.proxy(this.onContentUpdated, this));
+		},
+
+		initButtons: function() {
+			$('#submitbutton').mouseover($.proxy(this.beforeSaving, this));
 		},
 
 		initEditor: function() {
@@ -81,7 +63,6 @@ var LibAdmin = {
 
 		/**
 		 * Initialize relations event handlers
-		 *
 		 */
 		initRelations: function(lockList) {
 			this.lockList = lockList;
@@ -90,23 +71,21 @@ var LibAdmin = {
 
 			$('.source select').dblclick(this.onSourceListDoubleClick);
 			$('.selection select').dblclick(this.onSelectionListDoubleClick);
-			$('#institutions button[value=add]').click(this.onAddClick);
-			$('#institutions button[value=remove]').click(this.onRemoveClick);
-			$('#submitbutton').mouseover($.proxy(this.beforeSaving, this));
+
+			var institutions	= $('#institutions');
+			institutions.find('button[value=add]').click(this.onAddClick);
+			institutions.find('button[value=remove]').click(this.onRemoveClick);
+
+			this.initButtons();
 		},
-
-
 
 		/**
 		 * Actions before saving
 		 * Make sure all selection institutions are selected
-		 *
 		 */
 		beforeSaving: function() {
 			this.selectAllSelectedInstitutions();
 		},
-
-
 
 		/**
 		 * Remove institutions which are already related to the view with another group
@@ -129,8 +108,6 @@ var LibAdmin = {
 			});
 		},
 
-
-
 		/**
 		 * Source list double click: add item
 		 *
@@ -143,8 +120,6 @@ var LibAdmin = {
 			selection.options[selection.options.length] = new Option(option.text, option.value, true, true);
 			this.remove(this.selectedIndex);
 		},
-
-
 
 		/**
 		 * Selection list double click: remove item
@@ -159,8 +134,6 @@ var LibAdmin = {
 			this.remove(this.selectedIndex);
 		},
 
-
-
 		/**
 		 * Select all selection items (to be submitted in form save request)
 		 */
@@ -169,8 +142,6 @@ var LibAdmin = {
 				option.selected = true;
 			});
 		},
-
-
 
 		/**
 		 * Add button click
@@ -190,8 +161,6 @@ var LibAdmin = {
 				source.remove(option.index);
 			});
 		},
-
-
 
 		/**
 		 * Handle remove button click
@@ -215,24 +184,89 @@ var LibAdmin = {
 		}
 	},
 
+
+
+	/**
+	 * Views Administration: CRUD for Views, activation, sorting of groups and institutions, relations reviewing
+	 */
 	View: {
+		/**
+		 * Init View area
+		 */
 		init: function() {
 			this.initSidebar();
 			this.initEditor();
 		},
 
+		/**
+		 * Init view records search list
+		 */
 		initSidebar: function() {
 			LibAdmin.Sidebar.init($.proxy(this.onSearchListUpdated, this), $.proxy(this.onContentUpdated, this));
 		},
 
+		/**
+		 * Init editor part of view area
+		 */
 		initEditor: function() {
 			LibAdmin.Editor.init($.proxy(this.onContentUpdated, this));
+			this.initSortables();
 		},
 
+		/**
+		 * Init drag and drop sorting of items of: groups, institutions
+		 */
+		initSortables: function() {
+			this.initSortable( $('#groupsortable') );
+			this.initSortable( $('#institutionsortable') );
+		},
+
+		/**
+		 * Init sortability of given UL list
+		 *
+		 * @param	{element}	el
+		 */
+		initSortable: function(el) {
+			el.sortable({
+				stop: function(event, ui) {
+					LibAdmin.View.storeSortingPositions(event.target);
+				}
+			});
+			el.disableSelection();
+
+//			$('a.make-topmost-group').each(function(id, el) {
+//				el.click(function() {
+//					alert('click maketop');
+//				});
+//			});
+
+		},
+
+		/**
+		 * Read sortable items positions of given element
+		 * and put it as a comma separated list into the resp. positions-list field
+		 *
+		 * @param	{Element}	el
+		 */
+		storeSortingPositions: function(el) {
+			var itemIDsCSV	= $('#' + el.id).find('li').map(function() {
+				return this.id;
+			}).get().join(",");
+
+			var fieldStore	= $('#' + el.id + 'ids');
+			fieldStore.attr('value', itemIDsCSV);
+		},
+
+		/**
+		 * Event handler after content update: re-init edit
+		 */
 		onContentUpdated: function() {
 			this.initEditor();
 		},
 
+		/**
+		 * Event handler after records search list update
+		 */
 		onSearchListUpdated: function() {
 
 		}

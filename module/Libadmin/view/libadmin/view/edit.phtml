@@ -17,6 +17,7 @@ $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
 ?>
 
 <?= $this->formTwb()->openTag($form, $formType) ?>
+	<!-- ------------------- CRUD buttons: create/save, close, delete  -->
 	<div class="topButtons">
 		<input type="submit" value="<?= $this->escapeHtml($saveButtonLabel) ?>"
 			   class="submitButton btn btn-primary btn-medium" id="submitbutton" name="submit">
@@ -36,6 +37,7 @@ $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
 
 <?= $this->ztbFlashMessenger()->render() ?>
 
+	<!-- ------------------- General data fieldset: code, label, is active -->
 	<fieldset class="general">
 		<legend><?= $this->translate('general', 'Libadmin') ?></legend>
 		<div class="row-fluid">
@@ -46,6 +48,7 @@ $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
 	</fieldset>
 
 	<div class="tabbable">
+		<!-- ------------------- View Area tabs menu -->
 		<ul class="nav nav-tabs formTabs">
 			<li class="active"><a href="#display"><?= $this->translate('display', 'Libadmin') ?></a></li>
 			<li><a href="#groups"><?= $this->translate('action_groups_activate', 'Libadmin') ?></a></li>
@@ -54,7 +57,10 @@ $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
 			<li><a href="#relations"><?= $this->translate('linking', 'Libadmin') ?></a></li>
 		</ul>
 
+		<!-- ------------------- Tabs content container -->
 		<div class="tab-content">
+
+			<!-- ------------------- Tab Pane: Display (internal notes) -->
 			<div class="tab-pane active" id="display">
 				<fieldset class="notes">
 					<legend><?= $this->translate('notes', 'Libadmin') ?></legend>
@@ -62,6 +68,7 @@ $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
 				</fieldset>
 			</div>
 
+			<!-- ------------------- Tab Pane: Activate Groups -->
 			<div class="tab-pane" id="groups">
 				<?php if($form->get('groups')): ?>
 					<p><?= $this->translate('header_active_networkgroups', 'Libadmin') ?></p>
@@ -71,14 +78,64 @@ $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
 				<?php endif; ?>
 			</div>
 
+			<!-- ------------------- Tab Pane: Sort Groups -->
 			<div class="tab-pane" id="groupsort">
-				<p><?= $this->translate('action_groups_sort_for_view', 'Libadmin') ?></p>
+				<div class="row vsort-scrollable">
+					<div class="span8">
+						<input type="hidden" id="groupsortableids" name="groupsortableids" value="" />
+						<ul id="groupsortable" class="nav nav-tabs nav-stacked">
+							<?php /** @var	Libadmin\Model\Group[] 	$groups */ ?>
+							<?php foreach($groups as $group): ?>
+								<li id="<?= $group->getId() ?>" class="ui-state-default">
+									<a href="#">
+										<table><tr>
+											<td class="item-label"><?= $group->getListLabel() ?></td>
+<!--
+											<td class="to-top">
+												<a class="btn btn-small make-topmost-group" title="<?= $this->translate('maketopmostitem', 'Libadmin') ?>" href="#"><div class="icon"></div></a>
+											</td>
+											<td class="to-bottom">
+												<a class="btn btn-small make-bottommost-group" title="<?= $this->translate('makebottommostitem', 'Libadmin') ?>" href="#"><div class="icon"></div></a>
+											</td>
+-->
+										</tr></table>
+									</a>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+				</div>
 			</div>
 
+			<!-- ------------------- Tab Pane: Sort Institutions -->
 			<div class="tab-pane" id="institutionsort">
-				<p>institutions sort content</p>
+				<div class="row vsort-scrollable">
+					<div class="span8">
+						<input type="hidden" id="institutionsortableids" name="institutionsortableids" value="" />
+						<ul id="institutionssortable" class="nav nav-tabs nav-stacked">
+							<?php /** @var	Libadmin\Model\Institution[] 	$institutions */ ?>
+							<?php foreach($institutions as $institution): ?>
+								<li id="<?= $institution->getId() ?>" class="ui-state-default">
+									<a href="#">
+										<table><tr>
+											<td class="item-label"><?= $institution->getListLabel() ?></td>
+<!--											<td class="to-top">
+												<a class="btn btn-small make-topmost-institution" title="<?= $this->translate('maketopmostitem', 'Libadmin') ?>" href="#"><div class="icon"></div></a>
+											</td>
+											<td class="to-bottom">
+												<a class="btn btn-small make-bottommost-institution" title="<?= $this->translate('makebottommostitem', 'Libadmin') ?>" href="#"><div class="icon"></div></a>
+											</td>
+-->
+										</tr></table>
+									</a>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+				</div>
 			</div>
 
+			<!-- ------------------- Tab Pane: View Relations -->
 			<div class="tab-pane" id="relations">
 				<?php if (isset($relations) && sizeof($relations) > 0): ?>
 

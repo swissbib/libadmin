@@ -12,6 +12,7 @@
 				->prependStylesheet($this->basePath() . '/css/style.css')
 				->prependStylesheet($this->basePath() . '/css/dlu-tw-bootstrap.css')
 				->prependStylesheet($this->basePath() . '/css/bootstrap.css')
+//				->prependStylesheet($this->basePath() . '/css/jquery-ui.css')
 				->appendStylesheet($this->basePath() . '/css/jquery.loadmask.css')
 //				->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
 		?>
@@ -23,6 +24,7 @@
 //				->prependFile($this->basePath() . '/js/bootstrap.min.js')
 				->prependFile($this->basePath() . '/js/jquery.js')
 //				->prependFile($this->basePath() . '/js/jquery.min.js');
+				->appendFile($this->basePath() . '/js/jquery-ui.js')
 				->appendFile($this->basePath() . '/js/libadmin.js')
 				->appendFile($this->basePath() . '/js/jquery.form.js')
 				->appendFile($this->basePath() . '/js/jquery.loadmask.js');

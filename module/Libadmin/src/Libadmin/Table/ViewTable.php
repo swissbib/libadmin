@@ -11,9 +11,14 @@ namespace Libadmin\Table;
 
 use Zend\Db\ResultSet\ResultSet;
 
+use Libadmin\Helper\DataTransform;
 use Libadmin\Table\BaseTable;
 use Libadmin\Model\View;
 
+/**
+ * Class ViewTable
+ * @package Libadmin\Table
+ */
 class ViewTable extends BaseTable
 {
 
@@ -100,8 +105,8 @@ class ViewTable extends BaseTable
 	public function getGroupIDs($idView)
 	{
 		return $this->getGroupViewRelationIDs('id_group', array(
-															  'id_view'	=> $idView
-														 ));
+			'id_view'	=> $idView
+		));
 	}
 
 
@@ -109,13 +114,19 @@ class ViewTable extends BaseTable
 	/**
 	 * Save with with group relations
 	 *
-	 * @param	View    $view
+	 * @param	View    	$view
+	 * @param	String		$groupIdsSorted
+	 * @param	String		$institutionIdsSorted
 	 * @return	Integer
 	 */
-	public function save(View $view)
+	public function save(View $view, $groupIdsSorted, $institutionIdsSorted)
 	{
-		$idView = parent::save($view);
+		$groupIdsSorted			= DataTransform::intExplode($groupIdsSorted);
+		$institutionIdsSorted	= DataTransform::intExplode($groupIdsSorted);
 
+		$idView			= parent::save($view);
+
+			// Save groups: add new records, delete old ones that have been removed
 		$this->saveGroups($idView, $view->getGroups());
 
 		return $idView;

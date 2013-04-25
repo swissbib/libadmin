@@ -17,6 +17,7 @@ use Libadmin\Table\BaseTable;
 use Libadmin\Model\BaseModel;
 use Libadmin\Model\Institution;
 use Libadmin\Model\InstitutionRelation;
+use Zend\Db\Sql\Sql;
 use Zend\Db\TableGateway\TableGateway;
 
 /**
@@ -78,12 +79,13 @@ class InstitutionTable extends BaseTable
 	/**
 	 * Get all institutions
 	 *
-	 * @param    Integer        $limit
-	 * @return    ResultSetInterface
+	 * @param   String        	$order
+	 * @param   Integer        	$limit
+	 * @return	ResultSetInterface
 	 */
-	public function getAll($limit = 30)
+	public function getAll($order = 'bib_code', $limit = 30)
 	{
-		return parent::getAll('bib_code', $limit);
+		return parent::getAll($order, $limit);
 	}
 
 
@@ -97,6 +99,37 @@ class InstitutionTable extends BaseTable
 	public function getRecord($idInstitution)
 	{
 		return parent::getRecord($idInstitution);
+	}
+
+
+
+	/**
+	 * Get all institutions which are related to the given view
+	 *
+	 * @param   Integer        $idView
+	 * @param   String         $order
+	 * @return	null|ResultSetInterface
+	 */
+	public function getViewInstitutions($idView, $order = 'position')
+	{
+		$select = new Select($this->getTable());
+
+		$select->columns(array('*'))
+			->join(array(
+				'mm' => 'mm_institution_group_view'),
+				'institution.id = mm.id_institution',
+				array('position')
+			)
+			->where(array(
+				'mm.id_view' => (int)$idView
+			))
+			->order($order)
+			->group('institution.id');
+
+//			$sql = new Sql($this->tableGateway->getAdapter(), $this->getTable());
+//			var_dump($sql->getSqlStringForSqlObject($select));
+
+		return $this->tableGateway->selectWith($select);
 	}
 
 

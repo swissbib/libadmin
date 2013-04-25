@@ -18,6 +18,7 @@ use Zend\Db\Adapter\Adapter;
 use Libadmin\Table\BaseTable;
 use Libadmin\Model\BaseModel;
 use Libadmin\Model\Group;
+use Zend\Db\Sql\Sql;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Stdlib\ArrayUtils;
 
@@ -77,12 +78,13 @@ class GroupTable extends BaseTable
 	/**
 	 * Get all groups
 	 *
-	 * @param    Integer        $limit
-	 * @return    ResultSetInterface
+	 * @param    String        $order
+	 * @param    Integer       $limit
+	 * @return   ResultSetInterface
 	 */
-	public function getAll($limit = 30)
+	public function getAll($order = 'label_de', $limit = 30)
 	{
-		return parent::getAll('label_de', $limit);
+		return parent::getAll($order, $limit);
 	}
 
 
@@ -109,38 +111,34 @@ class GroupTable extends BaseTable
 	public function getViewIDs($idGroup)
 	{
 		return $this->getGroupViewRelationIDs('id_view', array(
-															'id_group'	=> $idGroup
-														));
+			'id_group'	=> $idGroup
+		));
 	}
 
 
 
 	/**
-	 * Get all groups which are related to a view over an institution
+	 * Get all groups which are related to a view (not via institution)
 	 *
-	 * @param    Integer        $idView
-	 * @param    Boolean        $activeOnly
-	 * @return    null|ResultSetInterface
+	 * @param   Integer        $idView
+	 * @param   String         $order
+	 * @return	null|ResultSetInterface
 	 */
-	public function getAllViewGroups($idView, $activeOnly = true)
+	public function getViewGroups($idView, $order = 'position')
 	{
 		$select = new Select($this->getTable());
 
 		$select->columns(array('*'))
-				->join(array('mm' => 'mm_institution_group_view'), 'group.id = mm.id_group', array(), $select::JOIN_RIGHT)
+				->join(array(
+						'mm' => 'mm_group_view'),
+					    'group.id = mm.id_group',
+					  	array('position')
+				)
 				->where(array(
 					'mm.id_view' => (int)$idView
 				))
-				->order('group.code')
+				->order($order)
 				->group('group.id');
-
-		if ($activeOnly) {
-			$select->join(array('i' => 'institution'), 'mm.id_institution = i.id', array());
-			$select->where(array(
-				'group.is_active' => 1,
-				'i.is_active' => 1
-			));
-		}
 
 //		$sql = new Sql($this->tableGateway->getAdapter(), $this->getTable());
 //		var_dump($sql->getSqlStringForSqlObject($select));
@@ -148,6 +146,46 @@ class GroupTable extends BaseTable
 		return $this->tableGateway->selectWith($select);
 	}
 
+
+
+	/**
+		 * Get all groups which are related to a view over an institution
+		 *
+		 * @param   Integer        $idView
+		 * @param   Boolean        $activeOnly
+		 * @param   String         $order
+		 * @return	null|ResultSetInterface
+		 */
+		public function getViewGroupsRelatedViaInstitution($idView, $activeOnly = true, $order = 'group.code')
+		{
+			$select = new Select($this->getTable());
+
+			$select->columns(array('*'))
+					->join(array(
+							'mm' => 'mm_institution_group_view'),
+						    'group.id = mm.id_group',
+						  	array(),
+						    $select::JOIN_RIGHT
+					)
+					->where(array(
+						'mm.id_view' => (int)$idView
+					))
+					->order($order)
+					->group('group.id');
+
+			if ($activeOnly) {
+				$select->join(array('i' => 'institution'), 'mm.id_institution = i.id', array());
+				$select->where(array(
+					'group.is_active'	=> 1,
+					'i.is_active'		=> 1
+				));
+			}
+
+	//		$sql = new Sql($this->tableGateway->getAdapter(), $this->getTable());
+	//		var_dump($sql->getSqlStringForSqlObject($select));
+
+			return $this->tableGateway->selectWith($select);
+		}
 
 
 	/**

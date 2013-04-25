@@ -57,8 +57,8 @@ class RelationOverview
 		foreach ($groups as $group) {
 			/** @var Group $group */
 			$data[] = array(
-				'group' => $group,
-				'institutions' => $this->getInstitutions($group->getId())
+				'group'			=> $group,
+				'institutions'	=> $this->getInstitutions($group->getId())
 			);
 		}
 
@@ -75,7 +75,7 @@ class RelationOverview
 	 */
 	protected function getGroups($activeOnly = true)
 	{
-		return $this->groupTable->getAllViewGroups($this->view->getId(), $activeOnly);
+		return $this->groupTable->getViewGroupsRelatedViaInstitution($this->view->getId(), $activeOnly);
 	}
 
 

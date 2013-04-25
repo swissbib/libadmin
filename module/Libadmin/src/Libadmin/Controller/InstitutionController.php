@@ -86,7 +86,7 @@ class InstitutionController extends BaseController
 			/** @var InstitutionForm $institution */
 			$institution = $this->getInstitutionForEdit($idInstitution);
 		} catch (\Exception $ex) {
-			$flashMessenger->addErrorMessage($this->translate('notfound_record'));
+			$flashMessenger->addErrorMessage($this->translate('notfound_record') );
 
 			return $this->forwardTo('home');
 		}
@@ -125,8 +125,8 @@ class InstitutionController extends BaseController
 	/**
 	 * Get institution prepared to be bound to the form
 	 *
-	 * @param    Integer        $idInstitution
-	 * @return    Institution
+	 * @param   Integer        $idInstitution
+	 * @return	Institution
 	 */
 	protected function getInstitutionForEdit($idInstitution)
 	{

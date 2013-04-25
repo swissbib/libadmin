@@ -1,6 +1,7 @@
 <?php
 namespace Libadmin\Controller;
 
+use Libadmin\Table\GroupTable;
 use Zend\Http\Request;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
@@ -18,7 +19,6 @@ class ViewController extends BaseController
 
 
 	/**
-	 *
 	 * @return    ViewForm
 	 */
 	protected function getViewForm()
@@ -59,8 +59,8 @@ class ViewController extends BaseController
 		$form->setAttribute('action', $this->makeUrl('view', 'add'));
 
 		return $this->getAjaxView(array(
-			'form' => $form,
-			'title' => $this->translate('view_add', 'Libadmin'),
+			'form'	=> $form,
+			'title'	=> $this->translate('view_add', 'Libadmin'),
 		), 'libadmin/view/edit');
 	}
 
@@ -113,12 +113,20 @@ class ViewController extends BaseController
 
 		$form->setAttribute('action', $this->makeUrl('view', 'edit', $idView));
 
+		/** @var GroupTable $groupTable */
+		$groupTable	= $this->getTable('Group');
+
+		/** @var GroupTable $groupTable */
+		$institutionTable	= $this->getTable('Institution');
+
 		/** @var RelationOverview $relationHelper */
 		$relationHelper = $this->serviceLocator->get('RelationOverviewHelper');
 
 		return $this->getAjaxView(array(
-			'groups'		=> $this->getGroups(),
-			'institutions'	=> $this->getInstitutions(),
+			'groups'		=> $groupTable->getViewGroups($idView),
+//			'institutions'	=> $this->getInstitutions(),
+			'institutions'	=> $institutionTable->getViewInstitutions($idView),
+
 			'form'			=> $form,
 			'title'			=> $this->translate('view_edit', 'Libadmin'),
 			'relations' 	=> $relationHelper->getData($view)

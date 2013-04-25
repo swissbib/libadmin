@@ -168,7 +168,7 @@ var LibAdmin = {
 		/**
 		 * Add button click
 		 *
-		 * @param event
+		 * @param	{Event}	event
 		 */
 		onAddClick: function(event) {
 			var row			= $(this).parents('.row-fluid'),
@@ -188,7 +188,7 @@ var LibAdmin = {
 		 * Handle remove button click
 		 * Remove all selected institutions from selectionlist
 		 *
-		 * @param	{Object}	event
+		 * @param	{Event}	event
 		 */
 		onRemoveClick: function(event) {
 			var row			= $(this).parents('.row-fluid'),

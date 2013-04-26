@@ -42,7 +42,7 @@ abstract class BaseController extends AbstractActionController
 	public function indexAction()
 	{
 		return array(
-			'listItems' => $this->getTable()->getAll(15)
+			'listItems' => $this->getTable()->getAll(null, 15)
 		);
 	}
 
@@ -57,7 +57,7 @@ abstract class BaseController extends AbstractActionController
 	{
 		return $this->getAjaxView(
 			array(
-				'listItems' => $this->getTable()->getAll(15)
+				'listItems' => $this->getTable()->getAll()
 		));
 	}
 
@@ -307,7 +307,7 @@ abstract class BaseController extends AbstractActionController
 	 */
 	protected function getViews()
 	{
-		$results = $this->getTable('View')->getAll(30, 'id');
+		$results = $this->getTable('View')->getAll('id', 30);
 
 		return $this->toList($results);
 	}
@@ -317,9 +317,10 @@ abstract class BaseController extends AbstractActionController
 	/**
 	 * Get groups
 	 *
-	 * @return	Group[]
+	 * @param	String		$order
+	 * @return	\Libadmin\Model\BaseModel[]
 	 */
-	protected function getGroups()
+	protected function getGroups($order = null)
 	{
 		$results = $this->getTable('Group')->getAll();
 
@@ -327,15 +328,15 @@ abstract class BaseController extends AbstractActionController
 	}
 
 
-
 	/**
 	 * Get institutions
 	 *
-	 * @return	Institution[]
+	 * @param	String	$order
+	 * @return \Libadmin\Model\BaseModel[]
 	 */
-	protected function getInstitutions()
+	protected function getInstitutions($order = null)
 	{
-		$results = $this->getTable('Institution')->getAll(0);
+		$results = $this->getTable('Institution')->getAll();
 
 		return $this->toList($results, true);
 	}

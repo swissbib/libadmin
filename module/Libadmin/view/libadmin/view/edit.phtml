@@ -87,19 +87,9 @@ $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
 							<?php /** @var	Libadmin\Model\Group[] 	$groups */ ?>
 							<?php foreach($groups as $group): ?>
 								<li id="<?= $group->getId() ?>" class="ui-state-default">
-									<a href="#">
-										<table><tr>
-											<td class="item-label"><?= $group->getListLabel() ?></td>
-<!--
-											<td class="to-top">
-												<a class="btn btn-small make-topmost-group" title="<?= $this->translate('maketopmostitem', 'Libadmin') ?>" href="#"><div class="icon"></div></a>
-											</td>
-											<td class="to-bottom">
-												<a class="btn btn-small make-bottommost-group" title="<?= $this->translate('makebottommostitem', 'Libadmin') ?>" href="#"><div class="icon"></div></a>
-											</td>
--->
-										</tr></table>
-									</a>
+									<a href="#"><table><tr>
+										<td class="item-label"><?= $group->getListLabel() ?></td>
+									</tr></table></a>
 								</li>
 							<?php endforeach; ?>
 						</ul>
@@ -112,22 +102,13 @@ $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
 				<div class="row vsort-scrollable">
 					<div class="span8">
 						<input type="hidden" id="institutionsortableids" name="institutionsortableids" value="" />
-						<ul id="institutionssortable" class="nav nav-tabs nav-stacked">
+						<ul id="institutionsortable" class="nav nav-tabs nav-stacked">
 							<?php /** @var	Libadmin\Model\Institution[] 	$institutions */ ?>
 							<?php foreach($institutions as $institution): ?>
 								<li id="<?= $institution->getId() ?>" class="ui-state-default">
-									<a href="#">
-										<table><tr>
+									<a href="#"><table><tr>
 											<td class="item-label"><?= $institution->getListLabel() ?></td>
-<!--											<td class="to-top">
-												<a class="btn btn-small make-topmost-institution" title="<?= $this->translate('maketopmostitem', 'Libadmin') ?>" href="#"><div class="icon"></div></a>
-											</td>
-											<td class="to-bottom">
-												<a class="btn btn-small make-bottommost-institution" title="<?= $this->translate('makebottommostitem', 'Libadmin') ?>" href="#"><div class="icon"></div></a>
-											</td>
--->
-										</tr></table>
-									</a>
+									</tr></table></a>
 								</li>
 							<?php endforeach; ?>
 						</ul>

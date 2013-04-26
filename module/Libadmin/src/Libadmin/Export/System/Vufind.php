@@ -135,7 +135,7 @@ class Vufind extends System
 	{
 		$idView = $this->getView()->getId();
 
-		return $this->groupTable->getAllViewGroups($idView);
+		return $this->groupTable->getViewGroupsRelatedViaInstitution($idView);
 	}
 
 

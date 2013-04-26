@@ -24,10 +24,16 @@ abstract class BaseTable
 	 */
 	protected $searchFields = array();
 
+	/**
+	 * @var    TableGateway    Fulltext search fields
+	 */
 	protected $tableGateway;
 
-
-
+	/**
+	 * Constructor
+	 *
+	 * @param	 TableGateway	$tableGateway
+	 */
 	public function __construct(TableGateway $tableGateway)
 	{
 		$this->tableGateway = $tableGateway;
@@ -36,10 +42,8 @@ abstract class BaseTable
 
 
 	/**
-	 *
-	 *
-	 * @param    String        $searchString
-	 * @return    PredicateSet
+	 * @param	String        $searchString
+	 * @return  PredicateSet
 	 */
 	public function getSearchFieldsLikeCondition($searchString)
 	{
@@ -175,15 +179,18 @@ abstract class BaseTable
 	/**
 	 * Get all records from table
 	 *
-	 * @param    String        $order
-	 * @param    Integer        $limit
-	 * @return    ResultSetInterface
+	 * @param   String         $order
+	 * @param   Integer        $limit
+	 * @return	ResultSetInterface
 	 */
 	protected function getAll($order, $limit = 30)
 	{
 		$select = new Select();
-		$select->from($this->getTable())
-				->order($order);
+		$select->from($this->getTable());
+
+		if (!is_null($order)) {
+			$select->order($order);
+		}
 
 		if ($limit) {
 			$select->limit($limit);
@@ -214,7 +221,7 @@ abstract class BaseTable
 
 		$query = $sql->getSqlStringForSqlObject($delete);
 
-		//		var_dump($sql->getSqlStringForSqlObject($select));
+//		var_dump($sql->getSqlStringForSqlObject($select));
 
 		$adapter->query($query, $adapter::QUERY_MODE_EXECUTE);
 	}
@@ -230,13 +237,13 @@ abstract class BaseTable
 	protected function addGroupViewRelation($idGroup, $idView)
 	{
 		/** @var Adapter $adapter */
-		$adapter = $this->tableGateway->getAdapter();
-		$sql = new Sql($adapter);
+		$adapter= $this->tableGateway->getAdapter();
+		$sql	= new Sql($adapter);
 		$insert = $sql->insert('mm_group_view');
 
 		$insert->values(array(
-			'id_group' => $idGroup,
-			'id_view' => $idView
+			'id_group'	=> $idGroup,
+			'id_view'	=> $idView
 		));
 
 		$query = $sql->getSqlStringForSqlObject($insert);
@@ -258,6 +265,68 @@ abstract class BaseTable
 	}
 
 
+
+	/**
+	 * Update positions of groups of given view into given sorting order
+	 *
+	 * @param	Integer	$idView
+	 * @param	Array	$groupIdsSorted
+	 */
+	protected function updateGroupsPositions($idView, array $groupIdsSorted)
+	{
+		$this->updateRelationPositions('group', $idView, $groupIdsSorted);
+	}
+
+
+
+	/**
+	 * Update positions of institutions of given view into given sorting order
+	 *
+	 * @param	Integer	$idView
+	 * @param	Array	$groupIdsSorted
+	 */
+	protected function updateInstitutionsPositions($idView, array $groupIdsSorted)
+	{
+		$this->updateRelationPositions('institution', $idView, $groupIdsSorted, '_group');
+	}
+
+	/**
+	 * Update positions of related records of given view into given sorting order
+	 *
+	 * @param	String		$relatedRecordName
+	 * @param	Integer		$idView
+	 * @param	Array		$relatedIdsSorted
+	 * @param	String		$tablePostFix
+	 */
+	protected function updateRelationPositions($relatedRecordName, $idView, array $relatedIdsSorted, $tablePostFix = '')
+	{
+		/** @var Adapter $adapter */
+		$adapter= $this->tableGateway->getAdapter();
+
+		$table	= 'mm_' . $relatedRecordName . (!empty($tablePostFix) ? $tablePostFix : '') . '_view';
+		foreach ($relatedIdsSorted as $position => $idGroup) {
+			$sql = new Sql($adapter);
+			$update = $sql->update($table)
+				->set(array('position'	=> $position))
+				->where(array(
+					'id_view'					=> $idView,
+					'id_' . $relatedRecordName	=> $idGroup
+				));
+			$query = $sql->getSqlStringForSqlObject($update);
+
+			$adapter->query($query, $adapter::QUERY_MODE_EXECUTE);
+		}
+	}
+
+
+
+	/**
+	 * Get institution relation IDs with given COLUMN / WHERE
+	 *
+	 * @param	String		$column
+	 * @param	Array		$where
+	 * @return \Integer[]
+	 */
 	protected function getInstitutionRelationIDs($column, array $where)
 	{
 		return $this->getRelationIDs($column, 'mm_institution_group_view', $where);
@@ -266,16 +335,16 @@ abstract class BaseTable
 
 
 	/**
-	 * @param $idGroup
-	 * @param $idView
-	 * @return \Integer[]
+	 * @param	Integer		$idGroup
+	 * @param	Integer		$idView
+	 * @return	Integer[]
 	 */
 	public function getRelationInstitutionIDs($idGroup, $idView)
 	{
 		return $this->getRelationIDs('id_institution', 'mm_institution_group_view', array(
-																						 'id_view'	=> (int)$idView,
-																						 'id_group'	=> (int)$idGroup
-																					));
+			'id_view'	=> (int)$idView,
+			'id_group'	=> (int)$idGroup
+		));
 	}
 
 
@@ -289,8 +358,8 @@ abstract class BaseTable
 	public function getViewInstitutionIDs($idView)
 	{
 		return $this->getRelationIDs('id_institution', 'mm_institution_group_view', array(
-																						 'id_view'	=> (int)$idView
-																					));
+			'id_view'	=> (int)$idView
+		));
 	}
 
 

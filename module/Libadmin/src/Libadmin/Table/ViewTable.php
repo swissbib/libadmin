@@ -38,7 +38,7 @@ class ViewTable extends BaseTable
 	 *
 	 * @param    String            $searchString
 	 * @param    Integer            $limit
-	 * @return    ResultSet
+	 * @return   ResultSet
 	 */
 	public function find($searchString, $limit = 30)
 	{
@@ -50,11 +50,11 @@ class ViewTable extends BaseTable
 	/**
 	 * Get all views
 	 *
-	 * @param    Integer        $limit
-	 * @param    String        $order
-	 * @return    ResultSet
+	 * @param    String         $order
+	 * @param    Integer		$limit
+	 * @return   ResultSet
 	 */
-	public function getAll($limit = 30, $order = 'label')
+	public function getAll($order = 'label', $limit = 30)
 	{
 		return parent::getAll($order, $limit);
 	}
@@ -65,7 +65,7 @@ class ViewTable extends BaseTable
 	 * Get view
 	 *
 	 * @param    Integer        $idView
-	 * @return    View
+	 * @return   View
 	 */
 	public function getRecord($idView)
 	{
@@ -79,7 +79,7 @@ class ViewTable extends BaseTable
 	 *
 	 * @param    String        $code
 	 * @param    Boolean        $onlyActive
-	 * @return    View|null
+	 * @return   View|null
 	 */
 	public function getViewByCode($code, $onlyActive = true)
 	{
@@ -97,10 +97,10 @@ class ViewTable extends BaseTable
 
 
 	/**
-	 *
+	 * Get IDs of groups related to given view
 	 *
 	 * @param    Integer        $idView
-	 * @return    Integer[]
+	 * @return   Integer[]
 	 */
 	public function getGroupIDs($idView)
 	{
@@ -112,22 +112,31 @@ class ViewTable extends BaseTable
 
 
 	/**
-	 * Save with with group relations
+	 * Save view with group relations
+	 * If given: update sorting of view's groups / institutions
 	 *
 	 * @param	View    	$view
-	 * @param	String		$groupIdsSorted
-	 * @param	String		$institutionIdsSorted
+	 * @param	String		[$groupIdsSorted]
+	 * @param	String		[$institutionIdsSorted]
 	 * @return	Integer
 	 */
-	public function save(View $view, $groupIdsSorted, $institutionIdsSorted)
+	public function save(View $view, $groupIdsSorted = '', $institutionIdsSorted = '')
 	{
 		$groupIdsSorted			= DataTransform::intExplode($groupIdsSorted);
-		$institutionIdsSorted	= DataTransform::intExplode($groupIdsSorted);
+		$institutionIdsSorted	= DataTransform::intExplode($institutionIdsSorted);
 
-		$idView			= parent::save($view);
+		$idView	= parent::save($view);
 
 			// Save groups: add new records, delete old ones that have been removed
 		$this->saveGroups($idView, $view->getGroups());
+
+			// Save sorting of groups / institutions of view
+		if (count($groupIdsSorted) > 0) {
+			$this->updateGroupsPositions($idView, $groupIdsSorted);
+		}
+		if (count($institutionIdsSorted) > 0) {
+			$this->updateInstitutionsPositions($idView, $institutionIdsSorted);
+		}
 
 		return $idView;
 	}
@@ -155,4 +164,5 @@ class ViewTable extends BaseTable
 			}
 		}
 	}
+
 }

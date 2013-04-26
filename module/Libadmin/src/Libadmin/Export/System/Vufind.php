@@ -109,12 +109,12 @@ class Vufind extends System
 				'it' => $institution->getLabel_it(),
 				'en' => $institution->getLabel_en()
 			),
-			'name' => array(
-				'de' => $institution->getName_de(),
-				'fr' => $institution->getName_fr(),
-				'it' => $institution->getName_it(),
-				'en' => $institution->getName_en()
-			),
+//			'name' => array(
+//				'de' => $institution->getName_de(),
+//				'fr' => $institution->getName_fr(),
+//				'it' => $institution->getName_it(),
+//				'en' => $institution->getName_en()
+//			),
 			'url' => array(
 				'de' => $institution->getUrl_de(),
 				'fr' => $institution->getUrl_fr(),

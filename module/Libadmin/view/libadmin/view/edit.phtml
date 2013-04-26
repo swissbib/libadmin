@@ -80,16 +80,16 @@ $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
 
 			<!-- ------------------- Tab Pane: Sort Groups -->
 			<div class="tab-pane" id="groupsort">
-				<div class="row vsort-scrollable">
-					<div class="span8">
+				<div class="row">
+					<div class="span9 vsort-scrollable">
 						<input type="hidden" id="groupsortableids" name="groupsortableids" value="" />
 						<ul id="groupsortable" class="nav nav-tabs nav-stacked">
 							<?php /** @var	Libadmin\Model\Group[] 	$groups */ ?>
 							<?php foreach($groups as $group): ?>
 								<li id="<?= $group->getId() ?>" class="ui-state-default">
-									<a href="#"><table><tr>
-										<td class="item-label"><?= $group->getListLabel() ?></td>
-									</tr></table></a>
+									<a href="javascript:void(0)" class="item-label">
+										<?=$this->escapeHtml($group->getListLabel())?>
+									</a>
 								</li>
 							<?php endforeach; ?>
 						</ul>
@@ -99,16 +99,16 @@ $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
 
 			<!-- ------------------- Tab Pane: Sort Institutions -->
 			<div class="tab-pane" id="institutionsort">
-				<div class="row vsort-scrollable">
-					<div class="span8">
+				<div class="row">
+					<div class="span9 vsort-scrollable">
 						<input type="hidden" id="institutionsortableids" name="institutionsortableids" value="" />
 						<ul id="institutionsortable" class="nav nav-tabs nav-stacked">
 							<?php /** @var	Libadmin\Model\Institution[] 	$institutions */ ?>
 							<?php foreach($institutions as $institution): ?>
 								<li id="<?= $institution->getId() ?>" class="ui-state-default">
-									<a href="#"><table><tr>
-											<td class="item-label"><?= $institution->getListLabel() ?></td>
-									</tr></table></a>
+									<a href="javascript:void(0)" class="item-label">
+										<?=$this->escapeHtml($institution->getListLabel())?>
+									</a>
 								</li>
 							<?php endforeach; ?>
 						</ul>

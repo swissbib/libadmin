@@ -66,7 +66,7 @@ var LibAdmin = {
 		},
 
 		initButtons: function() {
-			$('#submitbutton').mouseover($.proxy(this.beforeSaving, this));
+			$('#submitbutton').click($.proxy(this.onSave, this));
 		},
 
 		initEditor: function() {
@@ -101,13 +101,17 @@ var LibAdmin = {
 			this.initButtons();
 		},
 
+
+
 		/**
 		 * Actions before saving
 		 * Make sure all selection institutions are selected
 		 */
-		beforeSaving: function() {
+		onSave: function() {
 			this.selectAllSelectedInstitutions();
 		},
+
+
 
 		/**
 		 * Remove institutions which are already related to the view with another group

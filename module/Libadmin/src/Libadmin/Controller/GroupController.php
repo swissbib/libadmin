@@ -130,7 +130,7 @@ class GroupController extends BaseController
 	{
 		$lockLists	= array();
 
-		foreach ($this->getViews() as $view) {
+		foreach ($this->getAllViews() as $view) {
 			$lockLists[$view->getId()] = $this->getTable()->getViewInstitutionIDs($view->getId());
 		}
 
@@ -146,8 +146,8 @@ class GroupController extends BaseController
 	 */
 	protected function getGroupForm()
 	{
-		$views			= $this->getViews();
-		$institutions	= $this->getInstitutions();
+		$views			= $this->getAllViews();
+		$institutions	= $this->getInstitutions('bib_code', 0);
 
 		return new GroupForm($views, $institutions);
 	}
@@ -162,7 +162,7 @@ class GroupController extends BaseController
 	protected function getGroupForEdit($idGroup)
 	{
 		$group		= $this->getTable()->getRecord($idGroup);
-		$views		= $this->getViews();
+		$views		= $this->getAllViews();
 		$relations	= array();
 		/** @var InstitutionRelationTable $relationTable */
 		$relationTable	= $this->getTable('InstitutionRelation');

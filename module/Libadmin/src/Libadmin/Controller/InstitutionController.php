@@ -131,7 +131,7 @@ class InstitutionController extends BaseController
 	protected function getInstitutionForEdit($idInstitution)
 	{
 		$institution 		= $this->getTable()->getRecord($idInstitution);
-		$views 				= $this->getViews();
+		$views 				= $this->getAllViews();
 		/** @var InstitutionRelationTable $relationTable */
 		$relationTable		= $this->getTable('InstitutionRelation');
 		/** @var InstitutionRelation[] $existingRelations */
@@ -157,13 +157,13 @@ class InstitutionController extends BaseController
 
 
 	/**
-	 *
+	 * Get institution form initialized with view and group data
 	 *
 	 * @return    InstitutionForm
 	 */
 	protected function getInstitutionForm()
 	{
-		$views	= $this->getViews();
+		$views	= $this->getAllViews();
 		$groups	= $this->getGroups();
 
 		/** @var InstitutionForm $form */

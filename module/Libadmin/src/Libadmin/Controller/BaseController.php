@@ -1,7 +1,6 @@
 <?php
 namespace Libadmin\Controller;
 
-
 use Zend\Db\ResultSet\ResultSetInterface;
 use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -57,8 +56,8 @@ abstract class BaseController extends AbstractActionController
 	{
 		return $this->getAjaxView(
 			array(
-				'listItems' => $this->getTable()->getAll()
-		));
+				 'listItems' => $this->getTable()->getAll()
+			));
 	}
 
 
@@ -112,10 +111,10 @@ abstract class BaseController extends AbstractActionController
 		}
 
 		return $this->getAjaxView(array(
-			'id' => $idRecord,
-			'route' => $this->getRouteName(),
-			'record' => $this->getTable()->getRecord($idRecord)
-		), 'libadmin/global/delete');
+									   'id' => $idRecord,
+									   'route' => $this->getRouteName(),
+									   'record' => $this->getTable()->getRecord($idRecord)
+								  ), 'libadmin/global/delete');
 	}
 
 
@@ -157,8 +156,8 @@ abstract class BaseController extends AbstractActionController
 	{
 		$name = $this->getTypeName();
 		$params = array_merge_recursive(array(
-			'action' => $action
-		), $params);
+											 'action' => $action
+										), $params);
 
 		return $this->forward()->dispatch('Libadmin\Controller\\' . $name, $params);
 	}
@@ -279,9 +278,9 @@ abstract class BaseController extends AbstractActionController
 	/**
 	 * Extract all result items from a result set to work with a simple list
 	 *
-	 * @param	ResultSetInterface	$set
-	 * @param	Boolean				$idAsIndex
-	 * @return	BaseModel[]
+	 * @param    ResultSetInterface    $set
+	 * @param    Boolean                $idAsIndex
+	 * @return    BaseModel[]
 	 */
 	protected function toList(ResultSetInterface $set, $idAsIndex = false)
 	{
@@ -300,14 +299,15 @@ abstract class BaseController extends AbstractActionController
 	}
 
 
+
 	/**
-	 * Get views
+	 * Get all views
 	 *
-	 * @return	View[]
+	 * @return    View[]
 	 */
-	protected function getViews()
+	protected function getAllViews()
 	{
-		$results = $this->getTable('View')->getAll('id', 30);
+		$results = $this->getTable('View')->getAll('id', 0);
 
 		return $this->toList($results);
 	}
@@ -317,8 +317,8 @@ abstract class BaseController extends AbstractActionController
 	/**
 	 * Get groups
 	 *
-	 * @param	String		$order
-	 * @return	\Libadmin\Model\BaseModel[]
+	 * @param    String        $order
+	 * @return    \Libadmin\Model\BaseModel[]
 	 */
 	protected function getGroups($order = null)
 	{
@@ -328,15 +328,17 @@ abstract class BaseController extends AbstractActionController
 	}
 
 
+
 	/**
 	 * Get institutions
 	 *
-	 * @param	String	$order
-	 * @return \Libadmin\Model\BaseModel[]
+	 * @param    String|Null        $order
+	 * @param    Integer        $limit
+	 * @return    Institution[]
 	 */
-	protected function getInstitutions($order = null)
+	protected function getInstitutions($order = 'bib_code', $limit = 30)
 	{
-		$results = $this->getTable('Institution')->getAll();
+		$results = $this->getTable('Institution')->getAll($order, $limit);
 
 		return $this->toList($results, true);
 	}

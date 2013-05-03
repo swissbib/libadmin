@@ -103,6 +103,7 @@ class Vufind extends System
 			'id' => $institution->getId(),
 			'bib_code' => $institution->getBib_code(),
 			'sys_code' => $institution->getSys_code(),
+			'position' => $institution->getPosition(),
 			'label' => array(
 				'de' => $institution->getLabel_de(),
 				'fr' => $institution->getLabel_fr(),

@@ -188,7 +188,7 @@ class InstitutionTable extends BaseTable
 				->join(array(
 						'mm' => 'mm_institution_group_view'),
 						'institution.id = mm.id_institution',
-						array('is_favorite'),
+						array('is_favorite', 'position'),
 						$select::JOIN_LEFT
 					)
 				->where(array(

@@ -16,6 +16,7 @@ use Libadmin\Model\View;
 use Libadmin\Table\ViewTable;
 use Libadmin\Form\ViewForm;
 use Libadmin\Helper\RelationOverview;
+use Libadmin\Table\GroupRelationTable;
 
 class Module
 {
@@ -89,6 +90,14 @@ class Module
 					$resultSetPrototype = new ResultSet();
 					$resultSetPrototype->setArrayObjectPrototype(new View());
 					return new TableGateway('view', $dbAdapter, null, $resultSetPrototype);
+				},
+				'Libadmin\Table\GroupRelationTable' => function ($sm) {
+					$tableGateway = $sm->get('GroupRelationTableGateway');
+					return new GroupRelationTable($tableGateway);
+				},
+				'GroupRelationTableGateway' => function ($sm) {
+					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+					return new TableGateway('mm_group_view', $dbAdapter);
 				},
 				'Libadmin\Table\InstitutionRelationTable' => function ($sm) {
 					$tableGateway = $sm->get('InstitutionRelationTableGateway');

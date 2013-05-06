@@ -15,6 +15,8 @@ use Libadmin\Model\BaseModel;
 use Libadmin\Model\Group;
 use Libadmin\Model\View;
 use Libadmin\Model\Institution;
+use Libadmin\Table\GroupRelationTable;
+use Libadmin\Table\InstitutionRelationTable;
 
 /**
  * [Description]
@@ -102,7 +104,9 @@ abstract class BaseController extends AbstractActionController
 
 			if ($isDeleteRequest) {
 				$idRecord = (int)$request->getPost('id');
+				$this->beforeDelete($idRecord);
 				$this->getTable()->delete($idRecord);
+				$this->afterDelete($idRecord);
 				// @todo message is shown to late, solve this problem and re-enable message
 				//	$this->flashMessenger()->addSuccessMessage('Record deleted');
 			}
@@ -115,6 +119,30 @@ abstract class BaseController extends AbstractActionController
 									   'route' => $this->getRouteName(),
 									   'record' => $this->getTable()->getRecord($idRecord)
 								  ), 'libadmin/global/delete');
+	}
+
+
+
+	/**
+	 * Template method which is run before record delete
+	 *
+	 * @param	Integer		$idRecord
+	 */
+	protected function beforeDelete($idRecord)
+	{
+
+	}
+
+
+
+	/**
+	 * Template method which is run after record delete
+	 *
+	 * @param	Integer		$idRecord
+	 */
+	protected function afterDelete($idRecord)
+	{
+
 	}
 
 
@@ -341,5 +369,29 @@ abstract class BaseController extends AbstractActionController
 		$results = $this->getTable('Institution')->getAll($order, $limit);
 
 		return $this->toList($results, true);
+	}
+
+
+
+	/**
+	 * Get institution relation table
+	 *
+	 * @return	InstitutionRelationTable
+	 */
+	protected function getInstitutionRelationTable()
+	{
+		return $this->getServiceLocator()->get('Libadmin\Table\InstitutionRelationTable');
+	}
+
+
+
+	/**
+	 * Get group relation table
+	 *
+	 * @return	GroupRelationTable
+	 */
+	protected function getGroupRelationTable()
+	{
+		return $this->getServiceLocator()->get('Libadmin\Table\GroupRelationTable');
 	}
 }

@@ -110,18 +110,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mwillbanks/ZfcTwitterBootstrap.git",
-                "reference": "46573d66f1a4810ae7da15a47a33937e73985cc1"
+                "reference": "95a81c7f6bf087c280d775f997840f889251d9c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mwillbanks/ZfcTwitterBootstrap/zipball/46573d66f1a4810ae7da15a47a33937e73985cc1",
-                "reference": "46573d66f1a4810ae7da15a47a33937e73985cc1",
+                "url": "https://api.github.com/repos/mwillbanks/ZfcTwitterBootstrap/zipball/95a81c7f6bf087c280d775f997840f889251d9c8",
+                "reference": "95a81c7f6bf087c280d775f997840f889251d9c8",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
                 "zendframework/zend-filter": "2.*",
                 "zendframework/zend-form": "2.*",
+                "zendframework/zend-navigation": "2.*",
                 "zendframework/zend-view": "2.*"
             },
             "require-dev": {
@@ -152,7 +153,7 @@
                 "twitter bootstrap",
                 "zf2"
             ],
-            "time": "2013-05-06 03:58:13"
+            "time": "2013-06-04 02:34:13"
         },
         {
             "name": "zendframework/zend-developer-tools",
@@ -160,12 +161,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/ZendDeveloperTools.git",
-                "reference": "9e2cf51ffbd3778f07be4a245e6b7a84a6a18a1c"
+                "reference": "d5ec47c8e916a083fe2ef8a5711b859e8864b042"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/ZendDeveloperTools/zipball/9e2cf51ffbd3778f07be4a245e6b7a84a6a18a1c",
-                "reference": "9e2cf51ffbd3778f07be4a245e6b7a84a6a18a1c",
+                "url": "https://api.github.com/repos/zendframework/ZendDeveloperTools/zipball/d5ec47c8e916a083fe2ef8a5711b859e8864b042",
+                "reference": "d5ec47c8e916a083fe2ef8a5711b859e8864b042",
                 "shasum": ""
             },
             "require": {
@@ -211,20 +212,20 @@
                 "module",
                 "zf2"
             ],
-            "time": "2013-05-19 14:33:45"
+            "time": "2013-06-07 08:49:48"
         },
         {
             "name": "zendframework/zendframework",
-            "version": "dev-develop",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zf2.git",
-                "reference": "4578c47b0b8c0ebf96345908f318774e5f751d97"
+                "reference": "b0df08d9526f4567e3bf908024b9da08044a8a52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zf2/zipball/4578c47b0b8c0ebf96345908f318774e5f751d97",
-                "reference": "4578c47b0b8c0ebf96345908f318774e5f751d97",
+                "url": "https://api.github.com/repos/zendframework/zf2/zipball/b0df08d9526f4567e3bf908024b9da08044a8a52",
+                "reference": "b0df08d9526f4567e3bf908024b9da08044a8a52",
                 "shasum": ""
             },
             "require": {
@@ -323,7 +324,7 @@
                 "framework",
                 "zf2"
             ],
-            "time": "2013-05-15 10:49:46"
+            "time": "2013-06-11 14:40:08"
         }
     ],
     "packages-dev": [

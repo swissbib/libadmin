@@ -22,6 +22,19 @@ class GroupController extends BaseController
 {
 
 	/**
+	 * Search groups
+	 * Extend limit to always see all items
+	 *
+	 * @return ViewModel
+	 */
+	public function searchAction()
+	{
+		return parent::searchAction(300);
+	}
+
+
+
+	/**
 	 * Show edit form and add data
 	 *
 	 * @return    ViewModel|Response

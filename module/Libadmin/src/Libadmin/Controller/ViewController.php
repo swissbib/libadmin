@@ -1,7 +1,6 @@
 <?php
 namespace Libadmin\Controller;
 
-use Libadmin\Table\GroupTable;
 use Zend\Http\Request;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
@@ -9,6 +8,8 @@ use Zend\Http\Response;
 use Libadmin\Helper\RelationOverview;
 use Libadmin\Form\ViewForm;
 use Libadmin\Model\View;
+use Libadmin\Table\GroupRelationTable;
+use Libadmin\Table\GroupTable;
 
 /**
  * [Description]
@@ -131,5 +132,18 @@ class ViewController extends BaseController
 			'title'			=> $this->translate('view_edit', 'Libadmin'),
 			'relations' 	=> $relationHelper->getData($view)
 		));
+	}
+
+
+
+	/**
+	 * Before view delete, remove all relations
+	 *
+	 * @param    Integer        $idView
+	 */
+	protected function beforeDelete($idView)
+	{
+		$this->getGroupRelationTable()->deleteViewRelations($idView);
+		$this->getInstitutionRelationTable()->deleteViewRelations($idView);
 	}
 }

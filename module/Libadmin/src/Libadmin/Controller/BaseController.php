@@ -15,6 +15,8 @@ use Libadmin\Model\BaseModel;
 use Libadmin\Model\Group;
 use Libadmin\Model\View;
 use Libadmin\Model\Institution;
+use Libadmin\Table\GroupRelationTable;
+use Libadmin\Table\InstitutionRelationTable;
 
 /**
  * [Description]
@@ -65,14 +67,15 @@ abstract class BaseController extends AbstractActionController
 	/**
 	 * Search matching records
 	 *
-	 * @return    ViewModel
-	 */
-	public function searchAction()
+	 * @param	Integer		$limit        Search result limit
+	 * @return	ViewModel
+	 **/
+	public function searchAction($limit = 15)
 	{
 		$query = $this->params()->fromQuery('query', '');
 		$data = array(
 			'route' => strtolower($this->getTypeName()),
-			'listItems' => $this->getTable()->find($query, 15)
+			'listItems' => $this->getTable()->find($query, $limit)
 		);
 
 		return $this->getAjaxView($data, 'libadmin/global/search');
@@ -102,7 +105,9 @@ abstract class BaseController extends AbstractActionController
 
 			if ($isDeleteRequest) {
 				$idRecord = (int)$request->getPost('id');
+				$this->beforeDelete($idRecord);
 				$this->getTable()->delete($idRecord);
+				$this->afterDelete($idRecord);
 				// @todo message is shown to late, solve this problem and re-enable message
 				//	$this->flashMessenger()->addSuccessMessage('Record deleted');
 			}
@@ -115,6 +120,30 @@ abstract class BaseController extends AbstractActionController
 									   'route' => $this->getRouteName(),
 									   'record' => $this->getTable()->getRecord($idRecord)
 								  ), 'libadmin/global/delete');
+	}
+
+
+
+	/**
+	 * Template method which is run before record delete
+	 *
+	 * @param    Integer $idRecord
+	 */
+	protected function beforeDelete($idRecord)
+	{
+
+	}
+
+
+
+	/**
+	 * Template method which is run after record delete
+	 *
+	 * @param    Integer $idRecord
+	 */
+	protected function afterDelete($idRecord)
+	{
+
 	}
 
 
@@ -148,8 +177,8 @@ abstract class BaseController extends AbstractActionController
 	/**
 	 * Forward to other controller action
 	 *
-	 * @param    String        $action
-	 * @param    Array        $params
+	 * @param    String $action
+	 * @param    Array $params
 	 * @return    ViewModel
 	 */
 	protected function forwardTo($action, array $params = array())
@@ -167,8 +196,8 @@ abstract class BaseController extends AbstractActionController
 	/**
 	 * Redirect to other controller action
 	 *
-	 * @param    String        $action
-	 * @param    Integer        $idRecord
+	 * @param    String $action
+	 * @param    Integer $idRecord
 	 * @return    Response
 	 */
 	protected function redirectTo($action = '', $idRecord = 0)
@@ -192,8 +221,8 @@ abstract class BaseController extends AbstractActionController
 	/**
 	 * Get terminal view model for ajax
 	 *
-	 * @param    Array    $variables
-	 * @param    String    $template
+	 * @param    Array $variables
+	 * @param    String $template
 	 * @return    ViewModel
 	 */
 	protected function getAjaxView($variables = array(), $template = '')
@@ -214,10 +243,10 @@ abstract class BaseController extends AbstractActionController
 	 * Make url based on route
 	 * Add action and element id to route if specified
 	 *
-	 * @param    String        $route
-	 * @param    String        $action
-	 * @param    Integer        $idElement
-	 * @param    Array        $additionalParams
+	 * @param    String $route
+	 * @param    String $action
+	 * @param    Integer $idElement
+	 * @param    Array $additionalParams
 	 * @return    String
 	 */
 	protected function makeUrl($route, $action, $idElement = 0, array $additionalParams = array())
@@ -239,7 +268,7 @@ abstract class BaseController extends AbstractActionController
 	/**
 	 * Get table
 	 *
-	 * @param    String|Null        $type
+	 * @param    String|Null $type
 	 * @return    InstitutionTable|GroupTable|ViewTable
 	 */
 	protected function getTable($type = null)
@@ -260,8 +289,8 @@ abstract class BaseController extends AbstractActionController
 	/**
 	 * Translate key
 	 *
-	 * @param    String        $key
-	 * @param    String        $domain
+	 * @param    String $key
+	 * @param    String $domain
 	 * @return    String
 	 */
 	protected function translate($key, $domain = 'Libadmin')
@@ -278,8 +307,8 @@ abstract class BaseController extends AbstractActionController
 	/**
 	 * Extract all result items from a result set to work with a simple list
 	 *
-	 * @param    ResultSetInterface    $set
-	 * @param    Boolean                $idAsIndex
+	 * @param    ResultSetInterface $set
+	 * @param    Boolean $idAsIndex
 	 * @return    BaseModel[]
 	 */
 	protected function toList(ResultSetInterface $set, $idAsIndex = false)
@@ -317,7 +346,7 @@ abstract class BaseController extends AbstractActionController
 	/**
 	 * Get groups
 	 *
-	 * @param    String        $order
+	 * @param    String $order
 	 * @return    \Libadmin\Model\BaseModel[]
 	 */
 	protected function getGroups($order = null)
@@ -332,8 +361,8 @@ abstract class BaseController extends AbstractActionController
 	/**
 	 * Get institutions
 	 *
-	 * @param    String|Null        $order
-	 * @param    Integer        $limit
+	 * @param    String|Null $order
+	 * @param    Integer $limit
 	 * @return    Institution[]
 	 */
 	protected function getInstitutions($order = 'bib_code', $limit = 30)
@@ -341,5 +370,29 @@ abstract class BaseController extends AbstractActionController
 		$results = $this->getTable('Institution')->getAll($order, $limit);
 
 		return $this->toList($results, true);
+	}
+
+
+
+	/**
+	 * Get institution relation table
+	 *
+	 * @return    InstitutionRelationTable
+	 */
+	protected function getInstitutionRelationTable()
+	{
+		return $this->getServiceLocator()->get('Libadmin\Table\InstitutionRelationTable');
+	}
+
+
+
+	/**
+	 * Get group relation table
+	 *
+	 * @return    GroupRelationTable
+	 */
+	protected function getGroupRelationTable()
+	{
+		return $this->getServiceLocator()->get('Libadmin\Table\GroupRelationTable');
 	}
 }

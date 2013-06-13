@@ -169,4 +169,16 @@ class InstitutionController extends BaseController
 		/** @var InstitutionForm $form */
 		return new InstitutionForm($views, $groups);
 	}
+
+
+
+	/**
+	 * Before institution delete, remove all relations
+	 *
+	 * @param    Integer        $idView
+	 */
+	protected function beforeDelete($idView)
+	{
+		$this->getInstitutionRelationTable()->deleteInstitutionRelations($idView);
+	}
 }

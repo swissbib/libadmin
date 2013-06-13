@@ -53,11 +53,41 @@ class InstitutionRelationTable extends BaseTable
 	 * @param    Integer        $idInstitution
 	 * @return    Boolean
 	 */
-	public function clear($idInstitution)
+	public function deleteInstitutionRelations($idInstitution)
 	{
 		return $this->tableGateway->delete(array(
 			'id_institution' => (int)$idInstitution
 		)) > 0;
+	}
+
+
+
+	/**
+	 * Delete all relations with selected group
+	 *
+	 * @param	Integer		$idGroup
+	 * @return	Boolean
+	 */
+	public function deleteGroupRelations($idGroup)
+	{
+		return $this->tableGateway->delete(array(
+										 'id_group' => (int)$idGroup
+									)) > 0;
+	}
+
+
+
+	/**
+	 * Delete all relations with selected view
+	 *
+	 * @param	Integer		$idView
+	 * @return	Boolean
+	 */
+	public function deleteViewRelations($idView)
+	{
+		return $this->tableGateway->delete(array(
+										 'id_view' => (int)$idView
+									)) > 0;
 	}
 
 

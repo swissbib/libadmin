@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "2b0c4a2b3a0ea319bba2248d60d83ef4",
+    "hash": "bf7391dd9069d2c831f9673fc7fa6f71",
     "packages": [
         {
             "name": "dlu/dlutwbootstrap",
@@ -110,18 +110,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mwillbanks/ZfcTwitterBootstrap.git",
-                "reference": "596e9ab4d6f8afebdc52a7c2b9e54993069ad94f"
+                "reference": "95a81c7f6bf087c280d775f997840f889251d9c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mwillbanks/ZfcTwitterBootstrap/zipball/596e9ab4d6f8afebdc52a7c2b9e54993069ad94f",
-                "reference": "596e9ab4d6f8afebdc52a7c2b9e54993069ad94f",
+                "url": "https://api.github.com/repos/mwillbanks/ZfcTwitterBootstrap/zipball/95a81c7f6bf087c280d775f997840f889251d9c8",
+                "reference": "95a81c7f6bf087c280d775f997840f889251d9c8",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
                 "zendframework/zend-filter": "2.*",
                 "zendframework/zend-form": "2.*",
+                "zendframework/zend-navigation": "2.*",
                 "zendframework/zend-view": "2.*"
             },
             "require-dev": {
@@ -152,7 +153,7 @@
                 "twitter bootstrap",
                 "zf2"
             ],
-            "time": "2013-04-10 15:38:58"
+            "time": "2013-06-04 02:34:13"
         },
         {
             "name": "zendframework/zend-developer-tools",
@@ -160,12 +161,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/ZendDeveloperTools.git",
-                "reference": "16291e15b461169a7ceec46eafac64afc2ebd98c"
+                "reference": "d5ec47c8e916a083fe2ef8a5711b859e8864b042"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/ZendDeveloperTools/zipball/16291e15b461169a7ceec46eafac64afc2ebd98c",
-                "reference": "16291e15b461169a7ceec46eafac64afc2ebd98c",
+                "url": "https://api.github.com/repos/zendframework/ZendDeveloperTools/zipball/d5ec47c8e916a083fe2ef8a5711b859e8864b042",
+                "reference": "d5ec47c8e916a083fe2ef8a5711b859e8864b042",
                 "shasum": ""
             },
             "require": {
@@ -211,20 +212,20 @@
                 "module",
                 "zf2"
             ],
-            "time": "2013-04-12 17:26:34"
+            "time": "2013-06-07 08:49:48"
         },
         {
             "name": "zendframework/zendframework",
-            "version": "dev-develop",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zf2.git",
-                "reference": "c82da00a6949ac806f39670b06df2e037afd1dca"
+                "reference": "da88f956baa65b0a660ba9ece1aa53f6d8f5bea4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zf2/zipball/c82da00a6949ac806f39670b06df2e037afd1dca",
-                "reference": "c82da00a6949ac806f39670b06df2e037afd1dca",
+                "url": "https://api.github.com/repos/zendframework/zf2/zipball/da88f956baa65b0a660ba9ece1aa53f6d8f5bea4",
+                "reference": "da88f956baa65b0a660ba9ece1aa53f6d8f5bea4",
                 "shasum": ""
             },
             "require": {
@@ -283,16 +284,17 @@
                 "zendframework/zend-xmlrpc": "self.version"
             },
             "require-dev": {
-                "doctrine/common": ">=2.1",
+                "doctrine/annotations": ">=1.0",
                 "ircmaxell/random-lib": "dev-master",
                 "ircmaxell/security-lib": "dev-master",
+                "ocramius/proxy-manager": "0.3.*",
                 "phpunit/phpunit": "3.7.*"
             },
             "suggest": {
-                "doctrine/common": "Doctrine\\Common >=2.1 for annotation features",
-                "ext-intl": "ext/intl for i18n features",
+                "doctrine/annotations": "Doctrine Annotations >=1.0 for annotation features",
+                "ext-intl": "ext/intl for i18n features (included in default builds of PHP)",
                 "ircmaxell/random-lib": "Fallback random byte generator for Zend\\Math\\Rand if OpenSSL/Mcrypt extensions are unavailable",
-                "pecl-weakref": "Implementation of weak references for Zend\\Stdlib\\CallbackHandler",
+                "ocramius/proxy-manager": "ProxyManager to handle lazy initialization of services",
                 "zendframework/zendpdf": "ZendPdf for creating PDF representations of barcodes",
                 "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha for rendering ReCaptchas in Zend\\Captcha and/or Zend\\Form"
             },
@@ -302,8 +304,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1-dev",
-                    "dev-develop": "2.2-dev"
+                    "dev-master": "2.2-dev",
+                    "dev-develop": "2.3-dev"
                 }
             },
             "autoload": {
@@ -322,7 +324,7 @@
                 "framework",
                 "zf2"
             ],
-            "time": "2013-04-12 19:48:27"
+            "time": "2013-06-12 20:16:03"
         }
     ],
     "packages-dev": [

@@ -40,7 +40,7 @@ class InstitutionController extends BaseController
 		$form->bind($institution);
 
 		if ($request->isPost()) {
-			$form->setData($$request->getPost());
+			$form->setData($request->getPost());
 
 			if ($form->isValid()) {
 				$institution->exchangeArray($form->getData());
@@ -168,5 +168,17 @@ class InstitutionController extends BaseController
 
 		/** @var InstitutionForm $form */
 		return new InstitutionForm($views, $groups);
+	}
+
+
+
+	/**
+	 * Before institution delete, remove all relations
+	 *
+	 * @param    Integer        $idView
+	 */
+	protected function beforeDelete($idView)
+	{
+		$this->getInstitutionRelationTable()->deleteInstitutionRelations($idView);
 	}
 }

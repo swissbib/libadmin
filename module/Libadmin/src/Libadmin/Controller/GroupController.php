@@ -2,6 +2,7 @@
 namespace Libadmin\Controller;
 
 use Libadmin\Model\InstitutionRelationList;
+use Libadmin\Table\GroupRelationTable;
 use Zend\Form\FormInterface;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
@@ -19,6 +20,19 @@ use Libadmin\Model\InstitutionRelation;
  */
 class GroupController extends BaseController
 {
+
+	/**
+	 * Search groups
+	 * Extend limit to always see all items
+	 *
+	 * @return ViewModel
+	 */
+	public function searchAction()
+	{
+		return parent::searchAction(300);
+	}
+
+
 
 	/**
 	 * Show edit form and add data
@@ -177,5 +191,18 @@ class GroupController extends BaseController
 		$group->setViews($groupViewIds);
 
 		return $group;
+	}
+
+
+
+	/**
+	 * Before group delete, remove all relations
+	 *
+	 * @param	Integer		$idGroup
+	 */
+	protected function beforeDelete($idGroup)
+	{
+		$this->getGroupRelationTable()->deleteGroupRelations($idGroup);
+		$this->getInstitutionRelationTable()->deleteGroupRelations($idGroup);
 	}
 }

@@ -1,12 +1,4 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: swissbib
- * Date: 12/13/12
- * Time: 2:59 PM
- * To change this template use File | Settings | File Templates.
- */
-
 namespace Libadmin\Table;
 
 use Zend\Db\ResultSet\ResultSetInterface;
@@ -160,7 +152,7 @@ class InstitutionTable extends BaseTable
 	 */
 	protected function saveRelations($idInstitution, array $relations)
 	{
-		$this->relationTable->clear($idInstitution);
+		$this->relationTable->deleteInstitutionRelations($idInstitution);
 
 		foreach ($relations as $relation) {
 			if ($relation->hasView()) {

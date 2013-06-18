@@ -43,7 +43,7 @@ abstract class BaseController extends AbstractActionController
 	public function indexAction()
 	{
 		return array(
-			'listItems' => $this->getTable()->getAll(null, 15)
+			'listItems' => $this->getTable()->getAll()
 		);
 	}
 

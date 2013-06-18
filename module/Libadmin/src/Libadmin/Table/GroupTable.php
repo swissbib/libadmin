@@ -82,7 +82,7 @@ class GroupTable extends BaseTable
 	 * @param    Integer       $limit
 	 * @return   ResultSetInterface
 	 */
-	public function getAll($order = 'label_de', $limit = 30)
+	public function getAll($order = 'label_de', $limit = 300)
 	{
 		return parent::getAll($order, $limit);
 	}

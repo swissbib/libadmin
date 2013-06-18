@@ -245,6 +245,7 @@ var LibAdmin = {
 		initSortables: function() {
 			this.initSortable( $('#groupsortable') );
 			this.initSortable( $('#institutionsortable') );
+			this.initAutoSortButton();
 		},
 
 		/**
@@ -267,6 +268,26 @@ var LibAdmin = {
 //			});
 
 		},
+
+
+
+		/**
+		 * Handle sort button
+		 * Sort institutions by german label which is located in the title attribute
+		 *
+		 */
+		initAutoSortButton: function() {
+			$('.institutionSortButton').click(function(event){
+					// Sort nodes in list
+				$('ul#institutionsortable>li').tsort({
+					attr: 'title'
+				});
+					// Store sorting order
+				LibAdmin.View.storeSortingPositions($('#institutionsortable')[0]);
+			});
+		},
+
+
 
 		/**
 		 * Read sortable items positions of given element

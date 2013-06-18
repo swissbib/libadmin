@@ -1,18 +1,72 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Libadmin\n"
-"POT-Creation-Date: 2013-04-24 14:18+0100\n"
-"PO-Revision-Date: 2013-04-24 14:19+0100\n"
-"Last-Translator: Kay Stenschke <kstenschke@snowflake.ch>\n"
+"POT-Creation-Date: 2013-06-18 13:54+0100\n"
+"PO-Revision-Date: 2013-06-18 13:54+0100\n"
+"Last-Translator: Fabian Erni <ferni@snowflake.ch>\n"
 "Language-Team: Swissbib <admin@swissbib.ch>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-KeywordsList: translate\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
+
+#: ../src/Libadmin/Controller/GroupController.php:62
+#: ../src/Libadmin/Controller/GroupController.php:119
+msgid "saved_group"
+msgstr "Gruppe gespeichert"
+
+#: ../src/Libadmin/Controller/GroupController.php:69
+#: ../src/Libadmin/Controller/GroupController.php:123
+#: ../src/Libadmin/Controller/InstitutionController.php:53
+#: ../src/Libadmin/Controller/InstitutionController.php:107
+#: ../src/Libadmin/Controller/ViewController.php:56
+#: ../src/Libadmin/Controller/ViewController.php:111
+msgid "form_invalid"
+msgstr "Die Eingegebenen Daten sind nicht korrekt!"
+
+#: ../src/Libadmin/Controller/GroupController.php:78
+msgid "group_add"
+msgstr "Gruppe erstellen"
+
+#: ../src/Libadmin/Controller/GroupController.php:102
+#: ../src/Libadmin/Controller/InstitutionController.php:89
+#: ../src/Libadmin/Controller/ViewController.php:89
+msgid "notfound_record"
+msgstr "Datensatz wurde nicht gefunden"
+
+#: ../src/Libadmin/Controller/GroupController.php:132
+msgid "group_edit"
+msgstr "Gruppe bearbeiten"
+
+#: ../src/Libadmin/Controller/InstitutionController.php:49
+#: ../src/Libadmin/Controller/InstitutionController.php:104
+msgid "saved_institution"
+msgstr "Institution gespeichert"
+
+#: ../src/Libadmin/Controller/InstitutionController.php:65
+msgid "institution_add"
+msgstr "Institution erstellen"
+
+#: ../src/Libadmin/Controller/InstitutionController.php:119
+msgid "institution_edit"
+msgstr "Institution bearbeiten"
+
+#: ../src/Libadmin/Controller/ViewController.php:52
+#: ../src/Libadmin/Controller/ViewController.php:109
+msgid "saved_view"
+msgstr "View gespeichert"
+
+#: ../src/Libadmin/Controller/ViewController.php:64
+msgid "view_add"
+msgstr "View erstellen"
+
+#: ../src/Libadmin/Controller/ViewController.php:132
+msgid "view_edit"
+msgstr "View bearbeiten"
 
 #: ../view/libadmin/admin/home.phtml:1
 msgid "administrationtitle"
@@ -281,12 +335,12 @@ msgid "contactdata"
 msgstr "Kontaktdaten"
 
 #: ../view/libadmin/institution/edit.phtml:153
-#: ../view/libadmin/view/edit.phtml:146
+#: ../view/libadmin/view/edit.phtml:141
 msgid "is_favorite"
 msgstr "Ist Favorit"
 
 #: ../view/libadmin/institution/home.phtml:5
-#: ../view/libadmin/view/edit.phtml:144
+#: ../view/libadmin/view/edit.phtml:139
 msgid "institution"
 msgstr "Institution"
 
@@ -310,24 +364,19 @@ msgstr "Folgende Gruppen sind in diesem Netzwerk aktiv:"
 msgid "nogroups"
 msgstr "Es wurden noch keine Gruppen erfasst"
 
-#: ../view/libadmin/view/edit.phtml:93 ../view/libadmin/view/edit.phtml:96
-#: ../view/libadmin/view/edit.phtml:119
-msgid "maketopmostitem"
-msgstr "An oberste Position schieben"
+#: ../view/libadmin/view/edit.phtml:106
+msgid "sortInstitutions"
+msgstr "Institutionen sortieren (A-Z, deutsch)"
 
-#: ../view/libadmin/view/edit.phtml:122
-msgid "makebottommostitem"
-msgstr "An untersterste Position schieben"
-
-#: ../view/libadmin/view/edit.phtml:145
+#: ../view/libadmin/view/edit.phtml:140
 msgid "bibsyscodes"
 msgstr "Bib-/Sys-Codes"
 
-#: ../view/libadmin/view/edit.phtml:160
+#: ../view/libadmin/view/edit.phtml:155
 msgid "yes"
 msgstr "Ja"
 
-#: ../view/libadmin/view/edit.phtml:168
+#: ../view/libadmin/view/edit.phtml:163
 msgid "no_relations"
 msgstr "Es bestehen noch keine Verbindungen"
 
@@ -335,59 +384,11 @@ msgstr "Es bestehen noch keine Verbindungen"
 msgid "view"
 msgstr "View"
 
-#: ../src/Libadmin/Controller/GroupController.php:48
-#: ../src/Libadmin/Controller/GroupController.php:105
-msgid "saved_group"
-msgstr "Gruppe gespeichert"
+#~ msgid "maketopmostitem"
+#~ msgstr "An oberste Position schieben"
 
-#: ../src/Libadmin/Controller/GroupController.php:55
-#: ../src/Libadmin/Controller/GroupController.php:109
-#: ../src/Libadmin/Controller/InstitutionController.php:53
-#: ../src/Libadmin/Controller/InstitutionController.php:107
-#: ../src/Libadmin/Controller/ViewController.php:55
-#: ../src/Libadmin/Controller/ViewController.php:105
-msgid "form_invalid"
-msgstr "Die Eingegebenen Daten sind nicht korrekt!"
-
-#: ../src/Libadmin/Controller/GroupController.php:64
-msgid "group_add"
-msgstr "Gruppe erstellen"
-
-#: ../src/Libadmin/Controller/GroupController.php:88
-#: ../src/Libadmin/Controller/InstitutionController.php:89
-#: ../src/Libadmin/Controller/ViewController.php:88
-msgid "notfound_record"
-msgstr "Datensatz wurde nicht gefunden"
-
-#: ../src/Libadmin/Controller/GroupController.php:118
-msgid "group_edit"
-msgstr "Gruppe bearbeiten"
-
-#: ../src/Libadmin/Controller/InstitutionController.php:49
-#: ../src/Libadmin/Controller/InstitutionController.php:104
-msgid "saved_institution"
-msgstr "Institution gespeichert"
-
-#: ../src/Libadmin/Controller/InstitutionController.php:65
-msgid "institution_add"
-msgstr "Institution erstellen"
-
-#: ../src/Libadmin/Controller/InstitutionController.php:119
-msgid "institution_edit"
-msgstr "Institution bearbeiten"
-
-#: ../src/Libadmin/Controller/ViewController.php:51
-#: ../src/Libadmin/Controller/ViewController.php:103
-msgid "saved_view"
-msgstr "View gespeichert"
-
-#: ../src/Libadmin/Controller/ViewController.php:63
-msgid "view_add"
-msgstr "View erstellen"
-
-#: ../src/Libadmin/Controller/ViewController.php:118
-msgid "view_edit"
-msgstr "View bearbeiten"
+#~ msgid "makebottommostitem"
+#~ msgstr "An untersterste Position schieben"
 
 #~ msgid "action_groups_sort_for_view"
 #~ msgstr "Gruppen für View sortieren"

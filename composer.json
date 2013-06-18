@@ -10,10 +10,9 @@
 	"require": {
 		"php": ">=5.3.3",
 		"zendframework/zendframework": "2.2.*",
-		"dlu/dlutwbootstrap": "dev-master",
-		"dlu/dlutwbootstrapdemo": "dev-master",
+		"dlu/dlutwbootstrap": "dev-master@dev",
+		"dlu/dlutwbootstrapdemo": "dev-master@dev",
 		"mwillbanks/zfc-twitter-bootstrap": "@dev",
-		"zendframework/zend-developer-tools": "dev-master"
-	},
-	"minimum-stability": "dev"
+		"zendframework/zend-developer-tools": "dev-master@dev"
+	}
 }

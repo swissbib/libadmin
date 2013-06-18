@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "bf7391dd9069d2c831f9673fc7fa6f71",
+    "hash": "2334c5506fdd9b24e14a7c91b6490ee2",
     "packages": [
         {
             "name": "dlu/dlutwbootstrap",
@@ -216,16 +216,16 @@
         },
         {
             "name": "zendframework/zendframework",
-            "version": "dev-master",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zf2.git",
-                "reference": "b6fc1bc21f5ef88070a2dc09a13ffe452d8fab4b"
+                "reference": "release-2.2.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zf2/zipball/b6fc1bc21f5ef88070a2dc09a13ffe452d8fab4b",
-                "reference": "b6fc1bc21f5ef88070a2dc09a13ffe452d8fab4b",
+                "url": "https://api.github.com/repos/zendframework/zf2/zipball/release-2.2.1",
+                "reference": "release-2.2.1",
                 "shasum": ""
             },
             "require": {
@@ -324,7 +324,7 @@
                 "framework",
                 "zf2"
             ],
-            "time": "2013-06-13 16:26:07"
+            "time": "2013-06-12 20:13:34"
         }
     ],
     "packages-dev": [
@@ -333,7 +333,7 @@
     "aliases": [
 
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": {
         "dlu/dlutwbootstrap": 20,
         "dlu/dlutwbootstrapdemo": 20,

@@ -40,7 +40,7 @@ class InstitutionController extends BaseController
 		$form->bind($institution);
 
 		if ($request->isPost()) {
-			$form->setData($$request->getPost());
+			$form->setData($request->getPost());
 
 			if ($form->isValid()) {
 				$institution->exchangeArray($form->getData());

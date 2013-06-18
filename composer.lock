@@ -161,12 +161,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/ZendDeveloperTools.git",
-                "reference": "d5ec47c8e916a083fe2ef8a5711b859e8864b042"
+                "reference": "8e04c24099ac4b843d101522fda17457765332ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/ZendDeveloperTools/zipball/d5ec47c8e916a083fe2ef8a5711b859e8864b042",
-                "reference": "d5ec47c8e916a083fe2ef8a5711b859e8864b042",
+                "url": "https://api.github.com/repos/zendframework/ZendDeveloperTools/zipball/8e04c24099ac4b843d101522fda17457765332ce",
+                "reference": "8e04c24099ac4b843d101522fda17457765332ce",
                 "shasum": ""
             },
             "require": {
@@ -212,7 +212,7 @@
                 "module",
                 "zf2"
             ],
-            "time": "2013-06-07 08:49:48"
+            "time": "2013-06-15 07:41:17"
         },
         {
             "name": "zendframework/zendframework",
@@ -220,12 +220,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zf2.git",
-                "reference": "da88f956baa65b0a660ba9ece1aa53f6d8f5bea4"
+                "reference": "b6fc1bc21f5ef88070a2dc09a13ffe452d8fab4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zf2/zipball/da88f956baa65b0a660ba9ece1aa53f6d8f5bea4",
-                "reference": "da88f956baa65b0a660ba9ece1aa53f6d8f5bea4",
+                "url": "https://api.github.com/repos/zendframework/zf2/zipball/b6fc1bc21f5ef88070a2dc09a13ffe452d8fab4b",
+                "reference": "b6fc1bc21f5ef88070a2dc09a13ffe452d8fab4b",
                 "shasum": ""
             },
             "require": {
@@ -324,7 +324,7 @@
                 "framework",
                 "zf2"
             ],
-            "time": "2013-06-12 20:16:03"
+            "time": "2013-06-13 16:26:07"
         }
     ],
     "packages-dev": [

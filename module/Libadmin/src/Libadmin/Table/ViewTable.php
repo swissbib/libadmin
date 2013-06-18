@@ -128,8 +128,8 @@ class ViewTable extends BaseTable
 		$idView	= parent::save($view);
 
 			// Save groups: add new records, delete old ones that have been removed
-		$viewModelGroups	= $view->getGroups() ?: array();
-		$this->saveGroups($idView, $viewModelGroups);
+		$groupIds	= $view->getGroups() ?: array();
+		$this->saveGroups($idView, $groupIds);
 
 			// Save sorting of groups / institutions of view
 		if (count($groupIdsSorted) > 0) {

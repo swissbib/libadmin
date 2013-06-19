@@ -7,3 +7,4 @@
 .settings
 vendor/bin
 public/.htaccess
+local/passwords

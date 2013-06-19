@@ -72,6 +72,7 @@ $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
 			<div class="tab-pane" id="groups">
 				<?php if($form->get('groups')): ?>
 					<p><?= $this->translate('header_active_networkgroups', 'Libadmin') ?></p>
+					<p><?= $this->translate('header_active_networkgroups_info', 'Libadmin') ?></p>
 					<?= $this->formRowTwb($form->get('groups')) ?>
 				<?php else: ?>
 					<p><?= $this->translate('nogroups', 'Libadmin') ?></p>
@@ -81,47 +82,60 @@ $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
 			<!-- ------------------- Tab Pane: Sort Groups -->
 			<div class="tab-pane" id="groupsort">
 				<div class="row">
-					<div class="span9 vsort-scrollable">
-						<input type="hidden" id="groupsortableids" name="groupsortableids" value="" />
-						<ul id="groupsortable" class="nav nav-tabs nav-stacked">
-							<?php /** @var	Libadmin\Model\Group[] 	$groups */ ?>
-							<?php foreach($groups as $group): ?>
-								<li id="<?= $group->getId() ?>" class="ui-state-default">
-									<a href="javascript:void(0)" class="item-label">
-										<?=$this->escapeHtml($group->getListLabel())?>
-									</a>
-								</li>
-							<?php endforeach; ?>
-						</ul>
-					</div>
+					<?php /** @var	Libadmin\Model\Group[] 	$groups */ ?>
+					<?php if (sizeof($groups)): ?>
+						<div class="span9 vsort-scrollable">
+							<input type="hidden" id="groupsortableids" name="groupsortableids" value="" />
+							<ul id="groupsortable" class="nav nav-tabs nav-stacked">
+
+								<?php foreach($groups as $group): ?>
+									<li id="<?= $group->getId() ?>" class="ui-state-default">
+										<a href="javascript:void(0)" class="item-label">
+											<?=$this->escapeHtml($group->getListLabel())?>
+										</a>
+									</li>
+								<?php endforeach; ?>
+							</ul>
+						</div>
+					<?php else: ?>
+						<div class="span9">
+							<p><?=$this->escapeHtml($this->translate('no_data_available', 'Libadmin'))?></p>
+						</div>
+					<?php endif; ?>
 				</div>
 			</div>
 
 			<!-- ------------------- Tab Pane: Sort Institutions -->
 			<div class="tab-pane" id="institutionsort">
+				<?php /** @var	Libadmin\Model\Institution[] 	$institutions */ ?>
 				<div class="row">
-					<div class="span9">
-						<div class="row" style="margin-bottom: 20px">
-							<div class="span9">
-								<button type="button" class="btn institutionSortButton"><?=$this->translate('sortInstitutions', 'Libadmin');?></button>
+					<?php if (sizeof($institutions)): ?>
+						<div class="span9">
+							<div class="row" style="margin-bottom: 20px">
+								<div class="span9">
+									<button type="button" class="btn institutionSortButton"><?=$this->translate('sortInstitutions', 'Libadmin');?></button>
+								</div>
+							</div>
+							<div class="row">
+								<div class="span9 vsort-scrollable">
+									<input type="hidden" id="institutionsortableids" name="institutionsortableids" value="" />
+									<ul id="institutionsortable" class="nav nav-tabs nav-stacked">
+										<?php foreach($institutions as $institution): ?>
+											<li id="<?= $institution->getId() ?>" class="ui-state-default" title="<?=$this->escapeHtml($institution->getLabel_de())?>">
+												<a href="javascript:void(0)" class="item-label">
+													<?=$this->escapeHtml($institution->getLabel_de() . ' [' . $institution->getBib_code() . ']')?>
+												</a>
+											</li>
+										<?php endforeach; ?>
+									</ul>
+								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="span9 vsort-scrollable">
-								<input type="hidden" id="institutionsortableids" name="institutionsortableids" value="" />
-								<ul id="institutionsortable" class="nav nav-tabs nav-stacked">
-									<?php /** @var	Libadmin\Model\Institution[] 	$institutions */ ?>
-									<?php foreach($institutions as $institution): ?>
-										<li id="<?= $institution->getId() ?>" class="ui-state-default" title="<?=$this->escapeHtml($institution->getLabel_de())?>">
-											<a href="javascript:void(0)" class="item-label">
-												<?=$this->escapeHtml($institution->getLabel_de() . ' [' . $institution->getBib_code() . ']')?>
-											</a>
-										</li>
-									<?php endforeach; ?>
-								</ul>
-							</div>
+					<?php else: ?>
+						<div class="span9">
+							<p><?=$this->escapeHtml($this->translate('no_data_available', 'Libadmin'))?></p>
 						</div>
-					</div>
+					<?php endif; ?>
 				</div>
 			</div>
 

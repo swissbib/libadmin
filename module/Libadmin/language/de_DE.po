@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Libadmin\n"
-"POT-Creation-Date: 2013-06-18 13:54+0100\n"
-"PO-Revision-Date: 2013-06-18 13:54+0100\n"
+"POT-Creation-Date: 2013-06-19 10:30+0100\n"
+"PO-Revision-Date: 2013-06-19 10:30+0100\n"
 "Last-Translator: Fabian Erni <ferni@snowflake.ch>\n"
 "Language-Team: Swissbib <admin@swissbib.ch>\n"
 "Language: de_DE\n"
@@ -24,7 +24,7 @@ msgstr "Gruppe gespeichert"
 #: ../src/Libadmin/Controller/InstitutionController.php:53
 #: ../src/Libadmin/Controller/InstitutionController.php:107
 #: ../src/Libadmin/Controller/ViewController.php:56
-#: ../src/Libadmin/Controller/ViewController.php:111
+#: ../src/Libadmin/Controller/ViewController.php:115
 msgid "form_invalid"
 msgstr "Die Eingegebenen Daten sind nicht korrekt!"
 
@@ -56,7 +56,7 @@ msgid "institution_edit"
 msgstr "Institution bearbeiten"
 
 #: ../src/Libadmin/Controller/ViewController.php:52
-#: ../src/Libadmin/Controller/ViewController.php:109
+#: ../src/Libadmin/Controller/ViewController.php:113
 msgid "saved_view"
 msgstr "View gespeichert"
 
@@ -64,7 +64,7 @@ msgstr "View gespeichert"
 msgid "view_add"
 msgstr "View erstellen"
 
-#: ../src/Libadmin/Controller/ViewController.php:132
+#: ../src/Libadmin/Controller/ViewController.php:136
 msgid "view_edit"
 msgstr "View bearbeiten"
 
@@ -335,12 +335,12 @@ msgid "contactdata"
 msgstr "Kontaktdaten"
 
 #: ../view/libadmin/institution/edit.phtml:153
-#: ../view/libadmin/view/edit.phtml:141
+#: ../view/libadmin/view/edit.phtml:148
 msgid "is_favorite"
 msgstr "Ist Favorit"
 
 #: ../view/libadmin/institution/home.phtml:5
-#: ../view/libadmin/view/edit.phtml:139
+#: ../view/libadmin/view/edit.phtml:146
 msgid "institution"
 msgstr "Institution"
 
@@ -358,31 +358,43 @@ msgstr "Verknüpfung"
 
 #: ../view/libadmin/view/edit.phtml:74
 msgid "header_active_networkgroups"
-msgstr "Folgende Gruppen sind in diesem Netzwerk aktiv:"
+msgstr "Folgende Gruppen sind in diesem Netzwerk aktiv"
 
-#: ../view/libadmin/view/edit.phtml:77
+#: ../view/libadmin/view/edit.phtml:75
+msgid "header_active_networkgroups_info"
+msgstr ""
+"(Zuerst speichern, damit die Gruppen in den anderen Tabs vorhanden sind)"
+
+#: ../view/libadmin/view/edit.phtml:78
 msgid "nogroups"
 msgstr "Es wurden noch keine Gruppen erfasst"
 
-#: ../view/libadmin/view/edit.phtml:106
+#: ../view/libadmin/view/edit.phtml:109
 msgid "sortInstitutions"
 msgstr "Institutionen sortieren (A-Z, deutsch)"
 
-#: ../view/libadmin/view/edit.phtml:140
+#: ../view/libadmin/view/edit.phtml:129
+msgid "no_data_available"
+msgstr "Es wurden noch keine Daten erfasst"
+
+#: ../view/libadmin/view/edit.phtml:147
 msgid "bibsyscodes"
 msgstr "Bib-/Sys-Codes"
 
-#: ../view/libadmin/view/edit.phtml:155
+#: ../view/libadmin/view/edit.phtml:162
 msgid "yes"
 msgstr "Ja"
 
-#: ../view/libadmin/view/edit.phtml:163
+#: ../view/libadmin/view/edit.phtml:170
 msgid "no_relations"
 msgstr "Es bestehen noch keine Verbindungen"
 
 #: ../view/libadmin/view/home.phtml:5
 msgid "view"
 msgstr "View"
+
+#~ msgid "no_institutions"
+#~ msgstr "Keine Instution"
 
 #~ msgid "maketopmostitem"
 #~ msgstr "An oberste Position schieben"

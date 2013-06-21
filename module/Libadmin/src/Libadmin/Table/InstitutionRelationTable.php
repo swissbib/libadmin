@@ -41,7 +41,7 @@ class InstitutionRelationTable extends BaseTable
 			'id_group' => $relation->getIdGroup(),
 			'id_view' => $relation->getIdView(),
 			'is_favorite' => $relation->getIsFavorite(),
-			'position' => 0 // @todo implement to append to the lsit
+			'position' => 0 // @todo implement to append to the list
 		)) == 1;
 	}
 

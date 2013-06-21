@@ -103,8 +103,12 @@ class ViewController extends BaseController
 			if ($form->isValid()) {
 				$groupIdsSorted			= $postData->get('groupsortableids');
 				$institutionIdsSorted	= $postData->get('institutionsortableids');
+				$view					= $form->getData();
+				$view->setGroups($postData->get('groups') ?: array()); // Workaround, if all groups are deselected
 
-				$this->getTable()->save($form->getData(), $groupIdsSorted, $institutionIdsSorted);
+				$this->getTable()->save($view, $groupIdsSorted, $institutionIdsSorted);
+
+				$form->bind($view);
 
 				$flashMessenger->addSuccessMessage($this->translate('saved_view'));
 			} else {

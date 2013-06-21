@@ -39,7 +39,7 @@ class GroupFieldset extends BaseFieldset implements InputFilterProviderInterface
 				'label' => 'is_active'
 			)
 		));
-		$this->addText('label_de', 'language_german');
+		$this->addText('label_de', 'language_german', true);
 		$this->addText('label_fr', 'language_french', true);
 		$this->addText('label_it', 'language_italian', true);
 		$this->addText('label_en', 'language_english', true);

@@ -82,7 +82,7 @@ class InstitutionRelationFieldset extends Fieldset
 			return;
 		}
 
-		$viewCheckbox->setCheckedValue($view->getId());
+		$viewCheckbox->setCheckedValue((string)$view->getId());
 		$viewCheckbox->setLabel($view->getLabel());
 
 		/** @var Select $groupSelect */

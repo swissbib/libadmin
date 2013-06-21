@@ -91,10 +91,7 @@ $this->formSelectTwb()->setTranslatorTextDomain('Libadmin');
 			</div>
 
 			<div class="tab-pane" id="views">
-				<?php
-					$views	= $group->get('views');
-				?>
-				<?php if( $views ): ?>
+				<?php if ($group->has('views')): ?>
 					<?= $this->formRowTwb($group->get('views')) ?>
 				<?php else: ?>
 					<p><?= $this->translate('noviews', 'Libadmin') ?></p>
@@ -104,11 +101,26 @@ $this->formSelectTwb()->setTranslatorTextDomain('Libadmin');
 			<div class="tab-pane" id="institutions">
 
 				<div class="row-fluid naviButtons">
-					<div class="btn-group">
-						<?php foreach ($group->get('relations') as $relationFieldset): ?>
-							<button class="btn" type="button" onclick="location.hash='view-<?=$relationFieldset->get('view')->getValue()?>'"><?=$this->escapeHtml($relationFieldset->getLabel())?></button>
-						<?php endforeach; ?>
-					</div>
+					<?php
+							// Break up relations into groups
+						$relations = array();
+						foreach($group->get('relations') as $relation) {
+							$relations[] = array(
+								'id_view'	=> $relation->get('view')->getValue(),
+								'label'		=> $relation->getLabel()
+							);
+						}
+						$relationsGroups = array_chunk($relations, 5);
+					?>
+					<?php foreach ($relationsGroups as $relationGroup): ?>
+						<div class="row-fluid" style="margin-bottom: 10px">
+							<div class="btn-group">
+							<?php foreach($relationGroup as $relation): ?>
+								<button class="btn" type="button" onclick="location.hash='view-<?=$relation['id_view']?>'"><?=$this->escapeHtml($relation['label'])?></button>
+							<?php endforeach; ?>
+							</div>
+						</div>
+					<?php endforeach; ?>
 				</div>
 
 				<div class="row-fluid">

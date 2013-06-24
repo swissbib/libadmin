@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "35a50e0bc386f254b6eb2868fe69a0d5",
+    "hash": "2334c5506fdd9b24e14a7c91b6490ee2",
     "packages": [
         {
             "name": "dlu/dlutwbootstrap",

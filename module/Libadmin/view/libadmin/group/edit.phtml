@@ -91,10 +91,7 @@ $this->formSelectTwb()->setTranslatorTextDomain('Libadmin');
 			</div>
 
 			<div class="tab-pane" id="views">
-				<?php
-					$views	= $group->get('views');
-				?>
-				<?php if( $views ): ?>
+				<?php if ($group->has('views')): ?>
 					<?= $this->formRowTwb($group->get('views')) ?>
 				<?php else: ?>
 					<p><?= $this->translate('noviews', 'Libadmin') ?></p>

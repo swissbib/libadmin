@@ -100,10 +100,11 @@ class Vufind extends System
 	protected function extractInstitutionData(Institution $institution)
 	{
 		return array(
-			'id' => $institution->getId(),
-			'bib_code' => $institution->getBib_code(),
-			'sys_code' => $institution->getSys_code(),
-			'position' => $institution->getPosition(),
+			'id' 		=> $institution->getId(),
+			'bib_code' 	=> $institution->getBib_code(),
+			'sys_code' 	=> $institution->getSys_code(),
+			'position' 	=> $institution->getPosition(),
+			'favoite'	=> $institution->isFavorite(),
 			'label' => array(
 				'de' => $institution->getLabel_de(),
 				'fr' => $institution->getLabel_fr(),

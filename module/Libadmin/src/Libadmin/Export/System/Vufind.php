@@ -100,10 +100,16 @@ class Vufind extends System
 	protected function extractInstitutionData(Institution $institution)
 	{
 		return array(
-			'id' => $institution->getId(),
-			'bib_code' => $institution->getBib_code(),
-			'sys_code' => $institution->getSys_code(),
-			'position' => $institution->getPosition(),
+			'id' 		=> $institution->getId(),
+			'bib_code' 	=> $institution->getBib_code(),
+			'sys_code' 	=> $institution->getSys_code(),
+			'position' 	=> $institution->getPosition(),
+			'favorite'	=> $institution->isFavorite(),
+			'address' => array(
+				'address'	=> $institution->getAddress(),
+				'zip'		=> $institution->getZip(),
+				'city'		=> $institution->getCity()
+			),
 			'label' => array(
 				'de' => $institution->getLabel_de(),
 				'fr' => $institution->getLabel_fr(),
@@ -136,7 +142,8 @@ class Vufind extends System
 	{
 		$idView = $this->getView()->getId();
 
-		return $this->groupTable->getViewGroupsRelatedViaInstitution($idView);
+//		return $this->groupTable->getViewGroupsRelatedViaInstitution($idView, true);
+		return $this->groupTable->getViewGroups($idView);
 	}
 
 

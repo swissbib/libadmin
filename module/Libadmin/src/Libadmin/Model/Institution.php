@@ -434,7 +434,7 @@ class Institution extends BaseModel
 
 
 
-	public function setUrl_dn($url_en)
+	public function setUrl_en($url_en)
 	{
 		$this->url_en = $url_en;
 	}

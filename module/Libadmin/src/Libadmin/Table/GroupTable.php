@@ -149,43 +149,51 @@ class GroupTable extends BaseTable
 
 
 	/**
-		 * Get all groups which are related to a view over an institution
-		 *
-		 * @param   Integer        $idView
-		 * @param   Boolean        $activeOnly
-		 * @param   String         $order
-		 * @return	null|ResultSetInterface
-		 */
-		public function getViewGroupsRelatedViaInstitution($idView, $activeOnly = true, $order = 'group.code')
-		{
-			$select = new Select($this->getTable());
+	 * Get all groups which are related to a view over an institution
+	 *
+	 * @param   Integer        $idView
+	 * @param   Boolean        $activeOnly
+	 * @param   String         $order
+	 * @return	null|ResultSetInterface
+	 */
+	public function getViewGroupsRelatedViaInstitution($idView, $activeOnly = true, $order = 'group.code')
+	{
+		$select = new Select($this->getTable());
 
-			$select->columns(array('*'))
-					->join(array(
-							'mm' => 'mm_institution_group_view'),
-						    'group.id = mm.id_group',
-						  	array(),
-						    $select::JOIN_RIGHT
-					)
-					->where(array(
-						'mm.id_view' => (int)$idView
-					))
-					->order($order)
-					->group('group.id');
+		$select->columns(array('*'))
+				->join(array(
+						'mm' => 'mm_institution_group_view'),
+						'group.id = mm.id_group',
+						array(),
+						$select::JOIN_RIGHT
+				)
+				->where(array(
+					'mm.id_view' => (int)$idView
+				))
+				->order($order)
+				->group('group.id');
 
-			if ($activeOnly) {
-				$select->join(array('i' => 'institution'), 'mm.id_institution = i.id', array());
-				$select->where(array(
-					'group.is_active'	=> 1,
-					'i.is_active'		=> 1
-				));
-			}
+		if ($activeOnly) {
+			$select->join(array('i' => 'institution'), 'mm.id_institution = i.id', array());
+			$select->where(array(
+				'group.is_active'	=> 1,
+				'i.is_active'		=> 1
+			));
 
-	//		$sql = new Sql($this->tableGateway->getAdapter(), $this->getTable());
-	//		var_dump($sql->getSqlStringForSqlObject($select));
-
-			return $this->tableGateway->selectWith($select);
+				// Limit to active linked groups
+			$select->join('mm_group_view', 'group.id = mm_group_view.id_group', array());
+			$select->where(array(
+				'mm_group_view.id_view'	=> $idView
+			));
 		}
+
+//		$sql = new Sql($this->tableGateway->getAdapter(), $this->getTable());
+//		var_dump($sql->getSqlStringForSqlObject($select));
+//		exit();
+
+		return $this->tableGateway->selectWith($select);
+	}
+
 
 
 	/**

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "2334c5506fdd9b24e14a7c91b6490ee2",
+    "hash": "35a50e0bc386f254b6eb2868fe69a0d5",
     "packages": [
         {
             "name": "dlu/dlutwbootstrap",
@@ -110,12 +110,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mwillbanks/ZfcTwitterBootstrap.git",
-                "reference": "95a81c7f6bf087c280d775f997840f889251d9c8"
+                "reference": "8efe4490d3229c4193f6445e9459229238bfa36f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mwillbanks/ZfcTwitterBootstrap/zipball/95a81c7f6bf087c280d775f997840f889251d9c8",
-                "reference": "95a81c7f6bf087c280d775f997840f889251d9c8",
+                "url": "https://api.github.com/repos/mwillbanks/ZfcTwitterBootstrap/zipball/8efe4490d3229c4193f6445e9459229238bfa36f",
+                "reference": "8efe4490d3229c4193f6445e9459229238bfa36f",
                 "shasum": ""
             },
             "require": {
@@ -153,7 +153,7 @@
                 "twitter bootstrap",
                 "zf2"
             ],
-            "time": "2013-06-04 02:34:13"
+            "time": "2013-06-25 02:51:55"
         },
         {
             "name": "zendframework/zend-developer-tools",
@@ -161,16 +161,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/ZendDeveloperTools.git",
-                "reference": "8e04c24099ac4b843d101522fda17457765332ce"
+                "reference": "0.0.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/ZendDeveloperTools/zipball/8e04c24099ac4b843d101522fda17457765332ce",
-                "reference": "8e04c24099ac4b843d101522fda17457765332ce",
+                "url": "https://api.github.com/repos/zendframework/ZendDeveloperTools/zipball/0.0.2",
+                "reference": "0.0.2",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
+                "zendframework/zend-debug": "2.*",
                 "zendframework/zend-eventmanager": "2.*",
                 "zendframework/zend-mvc": "2.*",
                 "zendframework/zend-servicemanager": "2.*",
@@ -178,7 +179,8 @@
                 "zendframework/zend-version": "2.*"
             },
             "suggest": {
-                "bjyoungblood/bjy-profiler": "Version: dev-master, allows the usage of the (Zend) Db collector."
+                "bjyoungblood/bjy-profiler": "Version: dev-master, allows the usage of the (Zend) Db collector.",
+                "ocramius/ocra-service-manager": "OcraServiceManager can help you track dependencies within your application."
             },
             "type": "zf-module",
             "autoload": {
@@ -212,7 +214,7 @@
                 "module",
                 "zf2"
             ],
-            "time": "2013-06-15 07:41:17"
+            "time": "2013-07-08 19:52:34"
         },
         {
             "name": "zendframework/zendframework",

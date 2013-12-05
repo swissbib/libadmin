@@ -170,9 +170,10 @@ class InstitutionTable extends BaseTable
 	 * @param    Integer        $idView
 	 * @param    Integer        $idGroup
 	 * @param    Boolean        $activeOnly
+     * @param    Boolean        $favoriteOnly
 	 * @return    null|ResultSetInterface
 	 */
-	public function getAllGroupViewInstitutions($idView, $idGroup, $activeOnly = true)
+	public function getAllGroupViewInstitutions($idView, $idGroup, $activeOnly = true, $favoriteOnly = false)
 	{
 		$select = new Select($this->getTable());
 
@@ -192,6 +193,12 @@ class InstitutionTable extends BaseTable
 		if ($activeOnly) {
 			$select->where(array(
 				'institution.is_active' => 1
+			));
+		}
+
+		if ($favoriteOnly) {
+			$select->where(array(
+				'mm.is_favorite' => 1
 			));
 		}
 

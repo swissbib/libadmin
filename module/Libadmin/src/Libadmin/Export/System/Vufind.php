@@ -229,7 +229,8 @@ class Vufind extends System
 	{
 		$idView = $this->getView()->getId();
 		$idGroup = $group->getId();
+		$favoriteOnly = $this->getOption('all') == true ? true : false;
 
-		return $this->institutionTable->getAllGroupViewInstitutions($idView, $idGroup);
+		return $this->institutionTable->getAllGroupViewInstitutions($idView, $idGroup, true, $favoriteOnly);
 	}
 }

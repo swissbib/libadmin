@@ -6,6 +6,9 @@ use Zend\Db\ResultSet\ResultSetInterface;
 
 use Libadmin\Model\Group;
 use Libadmin\Model\Institution;
+use Zend\Config\Reader\Ini;
+use Zend\Config\Config;
+
 #use ML\JsonLD\JsonLD;
 
 /**
@@ -17,6 +20,8 @@ class MapPortal extends System
 
 	/** @var InstitutionRelationTable */
 	protected $institutionRelationTable;
+    protected $configHoldings;
+    protected $networks;
 
 	/**
 	 * @override
@@ -31,6 +36,30 @@ class MapPortal extends System
         //http://code.ohloh.net/project?pid=jZRKcGNwZOo&cid=9cCNLmy7F0s&fp=291221&mp=&projSelected=true
 		parent::init();
 		$this->institutionRelationTable = $this->getServiceLocator()->get('Libadmin\Table\InstitutionRelationTable');
+        $config = $this->institutionRelationTable = $this->getServiceLocator()->get('config');
+        $reader = new Ini();
+        $this->configHoldings   =  new Config($reader->fromFile($config['libadmin']['backlinksconfig']));
+
+
+        $networkNames = array('Aleph', 'Virtua');
+
+        foreach ($networkNames as $networkName) {
+            $configName = ucfirst($networkName) . 'Networks';
+
+           //@var Config $networkConfigs
+            $networkConfigs = $this->configHoldings->get($configName);
+
+            foreach ($networkConfigs as $networkCode => $networkConfig) {
+                list($domain, $library) = explode(',', $networkConfig, 2);
+
+                $this->networks[$networkCode] = array(
+                    'domain' => $domain,
+                    'library' => $library,
+                    'type' => $networkName
+                );
+            }
+        }
+
 
 
 
@@ -78,18 +107,25 @@ class MapPortal extends System
 		$extractInstitutionMethod = $this->getOption('all') == true ? 'extractAllInstitutionData' : 'extractInstitutionData';
 
 		foreach ($groups as $group) {
-			$groupData = array(
-				'group' => $this->extractGroupData($group),
-				'institutions' => array()
-			);
 
-			$institutions = $this->getGroupInstitutions($group);
+            $repositoryForExportDefined = $this->configHoldings->MAP_PORTAL_REPOSITORIES->offsetGet($group->code);
+            if (isset($repositoryForExportDefined) && $repositoryForExportDefined ) {
+                $groupData = array(
+                    'group' => $this->extractGroupData($group),
+                    'institutions' => array()
+                );
 
-			foreach ($institutions as $institution) {
-				$groupData['institutions'][] = $this->$extractInstitutionMethod($institution);
-			}
+                $institutions = $this->getGroupInstitutions($group);
 
-			$data[] = $groupData;
+                foreach ($institutions as $institution) {
+                    $groupData['institutions'][] = $this->$extractInstitutionMethod($institution,$group->code);
+                }
+
+                $data[] = $groupData;
+
+            }
+
+
 		}
 
 		return $data;
@@ -125,8 +161,9 @@ class MapPortal extends System
 	 * @param    Institution        $institution
 	 * @return    Array
 	 */
-	protected function extractInstitutionData(Institution $institution)
+	protected function extractInstitutionData(Institution $institution, $groupCode)
 	{
+
 		return array(
 			'id' 		=> $institution->getId(),
 			'bib_code' 	=> $institution->getBib_code(),
@@ -155,7 +192,9 @@ class MapPortal extends System
 				'fr' => $institution->getUrl_fr(),
 				'it' => $institution->getUrl_it(),
 				'en' => $institution->getUrl_en()
-			)
+			),
+            'backlink' => $this->getBackLink($groupCode,$institution->getBib_code(),array())
+
 		);
 	}
 
@@ -167,7 +206,7 @@ class MapPortal extends System
 	 * @param    Institution        $institution
 	 * @return    Array
 	 */
-	protected function extractAllInstitutionData(Institution $institution)
+	protected function extractAllInstitutionData(Institution $institution, $groupCode)
 	{
 		//$relations = $this->institutionRelationTable->getInstitutionRelations($institution->getId());
 		//$institution->setRelations($relations);
@@ -207,6 +246,7 @@ class MapPortal extends System
 			'coordinates'	=> $institution->getCoordinates(),
 			'isil'			=> $institution->getIsil(),
 			'notes'			=> $institution->getNotes(),
+            'backlink'      => $this->getBackLink($groupCode,$institution->getBib_code(),array())
 		);
 	}
 
@@ -240,4 +280,215 @@ class MapPortal extends System
 
 		return $this->institutionTable->getAllGroupViewInstitutions($idView, $idGroup);
 	}
+
+
+    protected function getBackLink($networkCode, $institutionCode, array $item)
+    {
+        //item has url (subfield u)
+        if (!empty($item['holding_url'])) return $item['holding_url'];
+
+        $method = false;
+        $data = array();
+
+        if (isset($this->configHoldings->Backlink->{$networkCode})) { // Has the network its own backlink type
+            $method = 'getBackLink' . ucfirst($networkCode);
+            $data = array(
+                'pattern' => $this->configHoldings->Backlink->{$networkCode}
+            );
+        } else { // no custom type
+            if (isset($this->networks[$networkCode])) { // is network even configured?
+                $networkType = strtoupper($this->networks[$networkCode]['type']);
+                $method = 'getBackLink' . ucfirst($networkType);
+
+                // Has the network type (aleph, virtua, etc) a general link?
+                if (isset($this->configHoldings->Backlink->$networkType)) {
+                    $data = array(
+                        'pattern' => $this->configHoldings->Backlink->$networkType
+                    );
+                }
+            }
+        }
+
+        // Merge in network data if available
+        if (isset($this->networks[$networkCode])) {
+            $data = array_merge($this->networks[$networkCode], $data);
+        }
+
+        // Is a matching method available?
+        if ($method && method_exists($this, $method)) {
+            return $this->{$method}($networkCode, $institutionCode, $item, $data);
+        }
+
+        return "";
+    }
+
+
+    /**
+     * Get back link for aleph
+     *
+     * @param    String $networkCode
+     * @param    String $institutionCode
+     * @param    Array $item
+     * @param    Array $data
+     * @return    String
+     */
+    protected function getBackLinkAleph($networkCode, $institutionCode, $item, array $data)
+    {
+        $values = array(
+            'server' => $data['domain'],
+            'bib-library-code' => $data['library'],
+            //'bib-system-number' => $item['bibsysnumber'],
+            'aleph-sublibrary-code' => $institutionCode
+        );
+
+        return $this->compileString($data['pattern'], $values);
+    }
+
+
+    /**
+     * Get back link for virtua
+     *
+     * @todo    Get user language
+     * @param    String $networkCode
+     * @param    String $institutionCode
+     * @param    Array $item
+     * @param    Array $data
+     * @return    String
+     */
+    protected function getBackLinkVirtua($networkCode, $institutionCode, $item, array $data)
+    {
+        $values = array(
+            'server' => $data['domain'],
+            'language-code' => 'de', // @todo fetch from user
+            //'bib-system-number' => $this->getNumericString($item['bibsysnumber']) // remove characters from number string
+        );
+
+        return $this->compileString($data['pattern'], $values);
+    }
+
+
+    /**
+     * Get back link for alexandria
+     * Currently only a wrapper for virtua
+     *
+     * @param    String $networkCode
+     * @param    String $institutionCode
+     * @param    Array $item
+     * @param    Array $data
+     * @return    String
+     */
+    protected function getBackLinkAlex($networkCode, $institutionCode, array $item, array $data)
+    {
+        return $this->getBackLinkVirtua($networkCode, $institutionCode, $item, $data);
+    }
+
+
+    /**
+     * Get back link for SNL
+     * Currently only a wrapper for virtua
+     *
+     * @param    String $networkCode
+     * @param    String $institutionCode
+     * @param    Array $item
+     * @param    Array $data
+     * @return    String
+     */
+    protected function getBackLinkSNL($networkCode, $institutionCode, $item, array $data)
+    {
+        return $this->getBackLinkVirtua($networkCode, $institutionCode, $item, $data);
+    }
+
+    /**
+     * Get back link for CCSA (poster collection)
+     * Currently only a wrapper for virtua
+     *
+     * @param    String $networkCode
+     * @param    String $institutionCode
+     * @param    Array $item
+     * @param    Array $data
+     * @return    String
+     */
+
+    protected function getBackLinkCCSA($networkCode, $institutionCode, $item, array $data)
+    {
+        return $this->getBackLinkVirtua($networkCode, $institutionCode, $item, $data);
+    }
+
+    /**
+     * Build rero backlink
+     *
+     * @param       $networkCode
+     * @param       $institutionCode
+     * @param       $item
+     * @param array $data
+     * @return mixed
+     */
+    protected function getBackLinkRERO($networkCode, $institutionCode, $item, array $data)
+    {
+        $values = array(
+            'server' => $data['domain'],
+            'language-code' => 'de', // @todo fetch from user,
+            'RERO-network-code' => (int)substr($institutionCode, 2, 2), // third and fourth character
+            //'bib-system-number' => $item['bibsysnumber'], // replaces the incorrect version: 'bib-system-number' => $this->getNumericString($item['bibsysnumber']), // remove characters from number string
+            'sub-library-code' => $this->getNumericString($institutionCode) //removes the RE-characters from the number string
+        );
+
+        return $this->compileString($data['pattern'], $values);
+    }
+
+    /**
+     * Get back link for helvetic archives
+     * Currently only a wrapper for virtua
+     *
+     * @param    String $networkCode
+     * @param    String $institutionCode
+     * @param    Array $item
+     * @param    Array $data
+     * @return    String
+     */
+    protected function getBackLinkCHARCH($networkCode, $institutionCode, array $item, array $data)
+    {
+        return $this->getBackLinkVirtua($networkCode, $institutionCode, $item, $data);
+    }
+
+    protected function getBackLinkIDSSG($networkCode, $institutionCode, array $item, array $data)
+    {
+        return $this->getBackLinkAleph($networkCode, $institutionCode, $item, $data);
+    }
+
+
+    /**
+     * Compile string. Replace {varName} pattern with names and data from array
+     *
+     * @param    String $string
+     * @param    Array $keyValues
+     * @return    String
+     */
+    protected function compileString($string, array $keyValues)
+    {
+        $newKeyValues = array();
+
+        foreach ($keyValues as $key => $value) {
+            $newKeyValues['{' . $key . '}'] = $value;
+        }
+
+        return str_replace(array_keys($newKeyValues), array_values($newKeyValues), $string);
+    }
+
+
+    /**
+     * Remove all not-numeric parts from string
+     *
+     * @param    String $string
+     * @return    String
+     */
+    protected function getNumericString($string)
+    {
+        return preg_replace('[\D]', '', $string);
+    }
+
+
+
 }
+
+

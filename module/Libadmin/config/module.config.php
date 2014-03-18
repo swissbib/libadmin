@@ -152,6 +152,11 @@ return array(
 				'route' => 'admin'
 			)
 		),
-	)
+	),
+    'libadmin' => array(
+
+        'backlinksconfig' => 'local/config/libadmin/MapPortal.ini'
+
+    ),
 
 );

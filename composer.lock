@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://bitbucket.org/dlu/dlutwbootstrap.git",
-                "reference": "release-0.1.4"
+                "reference": "843d123dbb8e2eba65d4ef58f7cdaf7f59b0d51d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://bitbucket.org/dlu/dlutwbootstrap/get/release-0.1.4.zip",
-                "reference": "release-0.1.4",
+                "url": "https://bitbucket.org/dlu/dlutwbootstrap/get/843d123dbb8e2eba65d4ef58f7cdaf7f59b0d51d.zip",
+                "reference": "843d123dbb8e2eba65d4ef58f7cdaf7f59b0d51d",
                 "shasum": ""
             },
             "require": {
@@ -59,12 +59,12 @@
             "source": {
                 "type": "git",
                 "url": "https://bitbucket.org/dlu/dlutwbootstrap-demo.git",
-                "reference": "release-0.1.2"
+                "reference": "ff2aff8631ba67cc97ac0e0f9ec395ebdaffdc73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://bitbucket.org/dlu/dlutwbootstrap-demo/get/release-0.1.2.zip",
-                "reference": "release-0.1.2",
+                "url": "https://bitbucket.org/dlu/dlutwbootstrap-demo/get/ff2aff8631ba67cc97ac0e0f9ec395ebdaffdc73.zip",
+                "reference": "ff2aff8631ba67cc97ac0e0f9ec395ebdaffdc73",
                 "shasum": ""
             },
             "require": {
@@ -110,12 +110,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mwillbanks/ZfcTwitterBootstrap.git",
-                "reference": "8efe4490d3229c4193f6445e9459229238bfa36f"
+                "reference": "e3ee2072dfe6be0b862102a84dc0c26bba655cf4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mwillbanks/ZfcTwitterBootstrap/zipball/8efe4490d3229c4193f6445e9459229238bfa36f",
-                "reference": "8efe4490d3229c4193f6445e9459229238bfa36f",
+                "url": "https://api.github.com/repos/mwillbanks/ZfcTwitterBootstrap/zipball/e3ee2072dfe6be0b862102a84dc0c26bba655cf4",
+                "reference": "e3ee2072dfe6be0b862102a84dc0c26bba655cf4",
                 "shasum": ""
             },
             "require": {
@@ -153,7 +153,7 @@
                 "twitter bootstrap",
                 "zf2"
             ],
-            "time": "2013-06-25 02:51:55"
+            "time": "2013-07-23 19:40:34"
         },
         {
             "name": "zendframework/zend-developer-tools",
@@ -161,12 +161,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/ZendDeveloperTools.git",
-                "reference": "0.0.2"
+                "reference": "3e4fb960030a055ac27a7e214ec2586f7d54ad3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/ZendDeveloperTools/zipball/0.0.2",
-                "reference": "0.0.2",
+                "url": "https://api.github.com/repos/zendframework/ZendDeveloperTools/zipball/3e4fb960030a055ac27a7e214ec2586f7d54ad3d",
+                "reference": "3e4fb960030a055ac27a7e214ec2586f7d54ad3d",
                 "shasum": ""
             },
             "require": {
@@ -214,24 +214,25 @@
                 "module",
                 "zf2"
             ],
-            "time": "2013-07-08 19:52:34"
+            "time": "2014-03-12 00:47:04"
         },
         {
             "name": "zendframework/zendframework",
-            "version": "2.2.1",
+            "version": "2.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zf2.git",
-                "reference": "release-2.2.1"
+                "reference": "5eae447d46b00a280573b94c398b2f46f45a6903"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zf2/zipball/release-2.2.1",
-                "reference": "release-2.2.1",
+                "url": "https://api.github.com/repos/zendframework/zf2/zipball/5eae447d46b00a280573b94c398b2f46f45a6903",
+                "reference": "5eae447d46b00a280573b94c398b2f46f45a6903",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.3.3",
+                "zendframework/zendxml": "~1.0-dev"
             },
             "replace": {
                 "zendframework/zend-authentication": "self.version",
@@ -270,6 +271,7 @@
                 "zendframework/zend-permissions-acl": "self.version",
                 "zendframework/zend-permissions-rbac": "self.version",
                 "zendframework/zend-progressbar": "self.version",
+                "zendframework/zend-resources": "self.version",
                 "zendframework/zend-serializer": "self.version",
                 "zendframework/zend-server": "self.version",
                 "zendframework/zend-servicemanager": "self.version",
@@ -287,9 +289,10 @@
             },
             "require-dev": {
                 "doctrine/annotations": ">=1.0",
+                "fabpot/php-cs-fixer": "*@dev",
                 "ircmaxell/random-lib": "dev-master",
                 "ircmaxell/security-lib": "dev-master",
-                "ocramius/proxy-manager": "0.3.*",
+                "ocramius/proxy-manager": "0.4.*",
                 "phpunit/phpunit": "3.7.*"
             },
             "suggest": {
@@ -301,7 +304,9 @@
                 "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha for rendering ReCaptchas in Zend\\Captcha and/or Zend\\Form"
             },
             "bin": [
-                "bin/classmap_generator.php"
+                "bin/classmap_generator.php",
+                "bin/pluginmap_generator.php",
+                "bin/templatemap_generator.php"
             ],
             "type": "library",
             "extra": {
@@ -312,8 +317,7 @@
             },
             "autoload": {
                 "psr-0": {
-                    "Zend\\": "library/",
-                    "ZendTest\\": "tests/"
+                    "Zend\\": "library/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -326,7 +330,52 @@
                 "framework",
                 "zf2"
             ],
-            "time": "2013-06-12 20:13:34"
+            "time": "2014-03-06 17:27:03"
+        },
+        {
+            "name": "zendframework/zendxml",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/ZendXml.git",
+                "reference": "559b34f426d33a11c3db118e00ce14bb8dc64e5f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/ZendXml/zipball/559b34f426d33a11c3db118e00ce14bb8dc64e5f",
+                "reference": "559b34f426d33a11c3db118e00ce14bb8dc64e5f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "*@dev",
+                "phpunit/phpunit": "~3.7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "ZendXml": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Utility library for XML usage, best practices, and security in PHP",
+            "homepage": "http://packages.zendframework.com/",
+            "keywords": [
+                "security",
+                "xml",
+                "zf2"
+            ],
+            "time": "2014-03-05 22:25:44"
         }
     ],
     "packages-dev": [

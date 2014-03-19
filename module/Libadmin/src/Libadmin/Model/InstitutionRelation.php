@@ -38,6 +38,21 @@ class InstitutionRelation extends BaseModel
 
 
 
+	/**
+	 * @param InstitutionRelation $relation
+	 *
+	 * @return bool
+	 */
+	public function equals(InstitutionRelation $relation) {
+		return 	$relation->getIdView() 			=== $this->getIdView() &&
+				$relation->getIdGroup() 		=== $this->getIdGroup() &&
+				$relation->getIdInstitution() 	=== $this->getIdInstitution() &&
+				$relation->getIsFavorite() 		=== $this->getIsFavorite() &&
+				$relation->getPosition() 		=== $this->getPosition();
+	}
+
+
+
 	public function getListLabel()
 	{
 		return 'Link info here';

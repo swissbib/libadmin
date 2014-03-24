@@ -104,7 +104,10 @@ class MapPortal extends System
 	{
 		$data = array();
 		$groups = $this->getGroups();
-		$extractInstitutionMethod = $this->getOption('all') == true ? 'extractAllInstitutionData' : 'extractInstitutionData';
+		//$extractInstitutionMethod = $this->getOption('all') == true ? 'extractAllInstitutionData' : 'extractInstitutionData';
+        //the whole information should always be delivered to the client
+        $extractInstitutionMethod = 'extractAllInstitutionData';
+
 
 		foreach ($groups as $group) {
 

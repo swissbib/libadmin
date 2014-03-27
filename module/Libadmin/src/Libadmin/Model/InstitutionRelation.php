@@ -53,6 +53,15 @@ class InstitutionRelation extends BaseModel
 
 
 
+	/**
+	 * @return String
+	 */
+	public function getPrimaryKey() {
+		return $this->getIdView() . '-' . $this->getIdGroup() . '-' . $this->getIdInstitution();
+	}
+
+
+
 	public function getListLabel()
 	{
 		return 'Link info here';

@@ -177,16 +177,18 @@ class InstitutionTable extends BaseTable
 		$filteredNewRelations = array();
 
 		//Filter the views that are not checked
-		foreach ($newRelations as $newRelation) {
-			if ( !($newRelation instanceof InstitutionRelation) ) return false;
-			if ( $newRelation->hasView() ) $filteredNewRelations[] = $newRelation;
+		foreach ( $newRelations as $newRelation ) {
+			if ( $newRelation->hasView() ) $filteredNewRelations[$newRelation->getPrimaryKey()] = $newRelation;
 		}
 
-		if (count($oldRelations) !== count($filteredNewRelations)) return true;
+		//Check if the numbers of relations match
+		if ( count($oldRelations) !== count($filteredNewRelations) ) return true;
 
-		for ($i=0; $i < count($oldRelations); $i++) {
-			if ( !($oldRelations[$i] instanceof InstitutionRelation) ) return false;
-			if ( !$oldRelations[$i]->equals($filteredNewRelations[$i]) ) return true;
+		//Check the relations for equality
+		foreach ( $oldRelations as $oldRelation ) {
+			$newRelation = $filteredNewRelations[$oldRelation->getPrimaryKey()];
+
+			if ( !$oldRelation->equals($newRelation) ) return true;
 		}
 
 		return false;

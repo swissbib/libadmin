@@ -186,9 +186,8 @@ class InstitutionTable extends BaseTable
 
 		//Check the relations for equality
 		foreach ( $oldRelations as $oldRelation ) {
-			$newRelation = $filteredNewRelations[$oldRelation->getPrimaryKey()];
-
-			if ( !$oldRelation->equals($newRelation) ) return true;
+			if ( !array_key_exists($oldRelation->getPrimaryKey(), $filteredNewRelations) ) return true;
+			if ( !$oldRelation->equals($filteredNewRelations[$oldRelation->getPrimaryKey()]) ) return true;
 		}
 
 		return false;

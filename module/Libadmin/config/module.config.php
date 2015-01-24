@@ -78,7 +78,7 @@ return array(
 					'constraints' => array(
 						'system' => '[a-zA-Z][a-zA-Z0-9_-]*',
 						'view' => '[a-zA-Z][a-zA-Z0-9_-]*',
-						'format' => '(xml|json|fake)' // add more formats here
+						'format' => '(xml|json|fake|formeta)' // add more formats here
 					),
 					'defaults' => array(
 						'controller' => 'Libadmin\Controller\Api',
@@ -94,17 +94,20 @@ return array(
 			'libadmin' => __DIR__ . '/../view',
 		),
 		'strategies' => array(
-			'ViewJsonStrategy'
+			'ViewJsonStrategy','ViewFormetaStrategy'
 		)
 	),
 
 	'service_manager' => array(
 		'factories' => array(
-			'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory'
+			'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+			'ViewFormetaStrategy' => 'Libadmin\Services\View\ViewFormetaStrategyFactory',
+			'FormetaRenderer'	=>	'Libadmin\Services\View\ViewFormetaRendererFactory'
 		),
 		'invokables' => array(
 			'export_system_vufind' => 'Libadmin\Export\System\Vufind',
             'export_system_mapportal' => 'Libadmin\Export\System\MapPortal',
+			'export_system_formeta' => 'Libadmin\Export\System\Formeta',
 		)
 	),
 

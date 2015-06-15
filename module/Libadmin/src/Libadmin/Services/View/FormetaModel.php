@@ -88,7 +88,8 @@ class FormetaModel extends ViewModel
                 $localString .= '\'' .  $entityKey . '\' : \'' . preg_replace(array('/\'/i','/\\\\V/i','/\\\\E/i','/d\\\\a/i','/d\\\\i/i'),
                         array('\\\'','V','E','d a','d\''),$entityValue) . ' \',';
             } else {
-                $localString .=   ' {'  . $this->serializeEntity($entityKey,$entityValue) . ' }, ';
+                //$localString .=   ' {'  . $this->serializeEntity($entityKey,$entityValue) . ' }, ';
+                $localString .=   ' '  . $this->serializeEntity($entityKey,$entityValue) . ', ';
             }
             //if (!is_array($groupLiteral))
         }

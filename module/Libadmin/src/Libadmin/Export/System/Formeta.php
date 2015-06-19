@@ -54,9 +54,10 @@ class Formeta extends MapPortal
     {
         $test = "";
 
-        return [$institution->getBib_code() => [
+        return ['institution' => [
 
-            'swissbibTableId'		=> $institution->getId(),
+            'id'    => $institution->getBib_code(),
+            'sysDbId'		=> $institution->getId(),
             'sys_code'	=> $institution->getSys_code(),
             'label' => array(
                 'de' => $institution->getLabel_de(),

@@ -158,7 +158,8 @@ return array(
 	),
     'libadmin' => array(
 
-        'backlinksconfig' => 'local/config/libadmin/MapPortal.ini'
+        'backlinksconfig' => 'local/config/libadmin/MapPortal.ini',
+        'linkedswissbibconfig' => 'local/config/libadmin/LinkedSwissbib.ini'
 
     ),
 

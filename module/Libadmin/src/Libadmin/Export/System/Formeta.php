@@ -19,6 +19,10 @@ use Zend\Config\Config;
 class Formeta extends MapPortal
 {
 
+    /**
+     * @var Config
+     */
+    protected $configLinkedRepositories;
 
 	/**
 	 * Get vufind json data
@@ -93,6 +97,64 @@ class Formeta extends MapPortal
             'backlink'      => $this->getBackLink($groupCode,$institution->getBib_code(),array())
 
         ]];
+
+    }
+
+    /**
+     * Get grouped institution data
+     *
+     * @return    Array
+     */
+    protected function getJsonPayloadData()
+    {
+        $data = array();
+        $groups = $this->getGroups();
+        //$extractInstitutionMethod = $this->getOption('all') == true ? 'extractAllInstitutionData' : 'extractInstitutionData';
+        //the whole information should always be delivered to the client
+        $extractInstitutionMethod = 'extractAllInstitutionData';
+
+
+        foreach ($groups as $group) {
+
+            $repositoryForExportDefined = $this->configLinkedRepositories->LINKED_DATA_REPOSITORIES->offsetGet($group->code);
+            if (isset($repositoryForExportDefined) && $repositoryForExportDefined ) {
+                $groupData = array(
+                    'group' => $this->extractGroupData($group),
+                    'institutions' => array()
+                );
+
+                $institutions = $this->getGroupInstitutions($group);
+
+                foreach ($institutions as $institution) {
+                    $groupData['institutions'][] = $this->$extractInstitutionMethod($institution,$group->code);
+                }
+
+                $data[] = $groupData;
+
+            }
+
+
+        }
+
+        return $data;
+    }
+
+    /**
+     * @override
+     * @return void
+     */
+    public function init()
+    {
+
+        //http://localhost/libadmin/api/semanticweb/green.json?option[all]=true
+        //http://www.cambridgesemantics.com/semantic-university/getting-started
+        //documentation
+        //http://code.ohloh.net/project?pid=jZRKcGNwZOo&cid=9cCNLmy7F0s&fp=291221&mp=&projSelected=true
+        parent::init();
+
+        $config =  $this->getServiceLocator()->get('config');
+        $reader = new Ini();
+        $this->configLinkedRepositories   =  new Config($reader->fromFile($config['libadmin']['linkedswissbibconfig']));
 
     }
 

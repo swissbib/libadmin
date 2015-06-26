@@ -58,7 +58,7 @@ class FormetaModel extends ViewModel
 
                         //$groupString .= ' \'' . $instKey . '\' : \'' . preg_replace(array('/\'/i'),array('\\'),$instValue) . ' \',';
                         $groupString .= ' \'' . $instKey . '\' : \'' . preg_replace(array('/\'/i','/\\\\V/i','/\\\\E/i','/d\\\\a/i','/d\\\\i/i'),
-                                array('\\\'','V','E','d a','d\''),$instValue) . ' \',';
+                                array('\\\'','V','E','d a','d\''),$instValue) . '\',';
                     } else {
 
                         $groupString .= ' ' . $this->serializeEntity($instKey, $instValue) ;
@@ -86,7 +86,7 @@ class FormetaModel extends ViewModel
             if (!is_array($entityValue)) {
                 //$localString .= '\'' .  $entityKey . '\' : \'' . preg_replace(array('/\'/i'),array('\\'),$entityValue) . ' \',';
                 $localString .= '\'' .  $entityKey . '\' : \'' . preg_replace(array('/\'/i','/\\\\V/i','/\\\\E/i','/d\\\\a/i','/d\\\\i/i'),
-                        array('\\\'','V','E','d a','d\''),$entityValue) . ' \',';
+                        array('\\\'','V','E','d a','d\''),$entityValue) . '\',';
             } else {
                 //$localString .=   ' {'  . $this->serializeEntity($entityKey,$entityValue) . ' }, ';
                 $localString .=   ' '  . $this->serializeEntity($entityKey,$entityValue) . ', ';

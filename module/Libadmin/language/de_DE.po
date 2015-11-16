@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Libadmin\n"
-"POT-Creation-Date: 2013-06-19 10:30+0100\n"
-"PO-Revision-Date: 2013-06-19 10:30+0100\n"
+"POT-Creation-Date: 2014-03-14 16:05+0100\n"
+"PO-Revision-Date: 2014-03-14 16:06+0100\n"
 "Last-Translator: Fabian Erni <ferni@snowflake.ch>\n"
 "Language-Team: Swissbib <admin@swissbib.ch>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.6.4\n"
 "X-Poedit-KeywordsList: translate\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
@@ -276,7 +276,7 @@ msgid "display"
 msgstr "Anzeige"
 
 #: ../view/libadmin/group/edit.phtml:61
-#: ../view/libadmin/institution/edit.phtml:147
+#: ../view/libadmin/institution/edit.phtml:150
 #: ../view/libadmin/view/home.phtml:6
 msgid "views"
 msgstr "Views"
@@ -297,7 +297,7 @@ msgstr "Display Namen"
 msgid "notes"
 msgstr "Notizen"
 
-#: ../view/libadmin/group/edit.phtml:100
+#: ../view/libadmin/group/edit.phtml:97
 msgid "noviews"
 msgstr "Noch keine Views vorhanden"
 
@@ -306,7 +306,7 @@ msgid "group"
 msgstr "Gruppe"
 
 #: ../view/libadmin/group/home.phtml:6
-#: ../view/libadmin/institution/edit.phtml:150
+#: ../view/libadmin/institution/edit.phtml:153
 msgid "groups"
 msgstr "Gruppen"
 
@@ -334,13 +334,19 @@ msgstr "Bibliotheksnamen (offiziell)"
 msgid "contactdata"
 msgstr "Kontaktdaten"
 
-#: ../view/libadmin/institution/edit.phtml:153
-#: ../view/libadmin/view/edit.phtml:148
+#: ../view/libadmin/institution/edit.phtml:146
+msgid "attention_relations"
+msgstr ""
+"ACHTUNG! Änderungen hier haben zur Folge, dass die Sortierung dieser "
+"Institution verloren geht!"
+
+#: ../view/libadmin/institution/edit.phtml:156
+#: ../view/libadmin/view/edit.phtml:155
 msgid "is_favorite"
 msgstr "Ist Favorit"
 
 #: ../view/libadmin/institution/home.phtml:5
-#: ../view/libadmin/view/edit.phtml:146
+#: ../view/libadmin/view/edit.phtml:153
 msgid "institution"
 msgstr "Institution"
 
@@ -369,23 +375,23 @@ msgstr ""
 msgid "nogroups"
 msgstr "Es wurden noch keine Gruppen erfasst"
 
-#: ../view/libadmin/view/edit.phtml:109
-msgid "sortInstitutions"
-msgstr "Institutionen sortieren (A-Z, deutsch)"
-
-#: ../view/libadmin/view/edit.phtml:129
+#: ../view/libadmin/view/edit.phtml:102 ../view/libadmin/view/edit.phtml:136
 msgid "no_data_available"
 msgstr "Es wurden noch keine Daten erfasst"
 
-#: ../view/libadmin/view/edit.phtml:147
+#: ../view/libadmin/view/edit.phtml:116
+msgid "sortInstitutions"
+msgstr "Institutionen sortieren (A-Z, deutsch)"
+
+#: ../view/libadmin/view/edit.phtml:154
 msgid "bibsyscodes"
 msgstr "Bib-/Sys-Codes"
 
-#: ../view/libadmin/view/edit.phtml:162
+#: ../view/libadmin/view/edit.phtml:169
 msgid "yes"
 msgstr "Ja"
 
-#: ../view/libadmin/view/edit.phtml:170
+#: ../view/libadmin/view/edit.phtml:177
 msgid "no_relations"
 msgstr "Es bestehen noch keine Verbindungen"
 

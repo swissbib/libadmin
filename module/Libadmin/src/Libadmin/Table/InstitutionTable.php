@@ -152,6 +152,9 @@ class InstitutionTable extends BaseTable
 	 */
 	protected function saveRelations($idInstitution, array $relations)
 	{
+		$institutionRelations = $this->relationTable->getInstitutionRelations($idInstitution);
+		if (!$this->relationsChanged($institutionRelations, $relations)) return;
+
 		$this->relationTable->deleteInstitutionRelations($idInstitution);
 
 		foreach ($relations as $relation) {
@@ -160,6 +163,34 @@ class InstitutionTable extends BaseTable
 				$this->relationTable->add($relation);
 			}
 		}
+	}
+
+
+
+	/**
+	 * @param InstitutionRelation[] $oldRelations
+	 * @param InstitutionRelation[] $newRelations
+	 *
+	 * @return bool
+	 */
+	private function relationsChanged(array $oldRelations, array $newRelations) {
+		$filteredNewRelations = array();
+
+		//Filter the views that are not checked
+		foreach ( $newRelations as $newRelation ) {
+			if ( $newRelation->hasView() ) $filteredNewRelations[$newRelation->getPrimaryKey()] = $newRelation;
+		}
+
+		//Check if the numbers of relations match
+		if ( count($oldRelations) !== count($filteredNewRelations) ) return true;
+
+		//Check the relations for equality
+		foreach ( $oldRelations as $oldRelation ) {
+			if ( !array_key_exists($oldRelation->getPrimaryKey(), $filteredNewRelations) ) return true;
+			if ( !$oldRelation->equals($filteredNewRelations[$oldRelation->getPrimaryKey()]) ) return true;
+		}
+
+		return false;
 	}
 
 

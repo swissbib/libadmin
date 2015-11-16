@@ -103,7 +103,8 @@ return array(
 			'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory'
 		),
 		'invokables' => array(
-			'export_system_vufind' => 'Libadmin\Export\System\Vufind'
+			'export_system_vufind' => 'Libadmin\Export\System\Vufind',
+            'export_system_mapportal' => 'Libadmin\Export\System\MapPortal',
 		)
 	),
 
@@ -151,6 +152,11 @@ return array(
 				'route' => 'admin'
 			)
 		),
-	)
+	),
+    'libadmin' => array(
+
+        'backlinksconfig' => 'local/config/libadmin/MapPortal.ini'
+
+    ),
 
 );

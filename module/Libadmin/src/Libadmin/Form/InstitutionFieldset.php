@@ -144,8 +144,15 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
 		$this->addText('coordinates', 'coordinates');
 		$this->addText('isil', 'isil');
 
-		// Relation fieldset (this may be replaced for new records in prepareElement() method)
-		$this->addRelations($views);
+		$this->add(array(
+				'type' => 'Zend\Form\Element\Collection',
+				'name' => 'relations',
+				'options' => array(
+						'target_element' => array(
+								'type' => 'Libadmin\Form\InstitutionRelationFieldset'
+						)
+				)
+		));
 	}
 
 
@@ -198,37 +205,4 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
 			)
 		);
 	}
-
-
-
-	/**
-	 * Add relations based on views
-	 *
-	 * @param    View[]    $views
-	 */
-	protected function addRelations($views)
-	{
-		$this->add(array(
-			'type' => 'Zend\Form\Element\Collection',
-			'name' => 'relations',
-			'options' => array(
-				'count' => sizeof($views),
-				'target_element' => array(
-					'type' => 'Libadmin\Form\InstitutionRelationFieldset'
-				)
-			)
-		));
-
-		/** @var Fieldset[]    $relations */
-		$relations = $this->get('relations')->fieldsets;
-
-		foreach ($relations as $index => $relation) {
-			/** @var NoValidationCheckbox $viewCheckbox */
-			$viewCheckbox = $relation->get('id_view');
-
-			$viewCheckbox->setCheckedValue((string)$views[$index]->getid());
-			$viewCheckbox->setLabel($views[$index]->getLabel());
-		}
-	}
-
 }

@@ -72,7 +72,7 @@ class InstitutionRelationFieldset extends Fieldset
 		parent::prepareElement($form);
 
 		/** @var Checkbox $viewCheckbox */
-		$viewCheckbox = $this->byName['id_view'];
+		$viewCheckbox = $this->get('id_view');
 
 		/** @var View $view */
 		$view = current($form->views);
@@ -83,10 +83,11 @@ class InstitutionRelationFieldset extends Fieldset
 		}
 
 		$viewCheckbox->setCheckedValue((string)$view->getId());
+		$viewCheckbox->setValue($this->object->getIdView());
 		$viewCheckbox->setLabel($view->getLabel());
 
 		/** @var Select $groupSelect */
-		$groupSelect = $this->byName['id_group'];
+		$groupSelect = $this->get('id_group');
 
 		/** @var Group $group */
 		$options = array();

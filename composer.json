@@ -8,11 +8,14 @@
 	],
 	"homepage": "http://framework.zend.com/",
 	"require": {
-		"php": ">=5.3.3",
+		"php": ">=5.4",
 		"zendframework/zendframework": "2.4.*",
 		"dlu/dlutwbootstrap": "dev-master@dev",
 		"dlu/dlutwbootstrapdemo": "dev-master@dev",
-		"mwillbanks/zfc-twitter-bootstrap": "@dev",
+		"mwillbanks/zfc-twitter-bootstrap": "@dev"
+
+	},
+	"require-dev": {
 		"zendframework/zend-developer-tools": "dev-master@dev"
 	}
 }

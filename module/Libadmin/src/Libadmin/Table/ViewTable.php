@@ -9,6 +9,7 @@
 
 namespace Libadmin\Table;
 
+use Libadmin\Model\BaseModel;
 use Zend\Db\ResultSet\ResultSet;
 
 use Libadmin\Helper\DataTransform;
@@ -115,12 +116,12 @@ class ViewTable extends BaseTable
 	 * Save view with group relations
 	 * If given: update sorting of view's groups / institutions
 	 *
-	 * @param	View    	$view
+	 * @param	BaseModel 	$view
 	 * @param	String		[$groupIdsSorted]
 	 * @param	String		[$institutionIdsSorted]
 	 * @return	Integer
 	 */
-	public function save(View $view, $groupIdsSorted = '', $institutionIdsSorted = '')
+	public function save(BaseModel $view, $groupIdsSorted = '', $institutionIdsSorted = '')
 	{
 		$groupIdsSorted			= DataTransform::intExplode($groupIdsSorted);
 		$institutionIdsSorted	= DataTransform::intExplode($institutionIdsSorted);

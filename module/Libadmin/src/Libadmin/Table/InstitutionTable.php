@@ -129,10 +129,10 @@ class InstitutionTable extends BaseTable
 	/**
 	 * Save institution
 	 *
-	 * @param    Institution        $institution
+	 * @param    BaseModel        $institution
 	 * @return    Integer
 	 */
-	public function save(Institution $institution)
+	public function save(BaseModel $institution)
 	{
 		$relations = $institution->getRelations();
 		$idInstitution = parent::save($institution);

@@ -200,16 +200,12 @@ class GroupTable extends BaseTable
 	 * Save group
 	 * Added special array handling to simplify relation management (caused problems, but may be solved clean later)
 	 *
-	 * @param	Array   	$groupData
-	 * @param	Integer		$idGroup
+	 * @param	BaseModel	$group
+	 *
 	 * @return	Integer
 	 */
-	public function save(array $groupData, $idGroup = 0)
+	public function save(BaseModel $group)
 	{
-		$group	= new Group();
-		$group->exchangeArray($groupData['group']);
-		$group->setId($idGroup);
-
 		$idGroup	= parent::save($group);
 		$newViewIDs = $group->getViews();
 		$relations	= $group->getRelatedInstitutionsByView();

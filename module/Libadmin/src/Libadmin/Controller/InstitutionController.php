@@ -33,7 +33,8 @@ class InstitutionController extends BaseController
 	{
 		$form			= $this->getInstitutionForm();
 		$flashMessenger	= $this->flashMessenger();
-		$institution	= new Institution();
+		$institution	= $this->getInstitutionForAdd();
+
 		/** @var Request $request */
 		$request		= $this->getRequest();
 
@@ -146,6 +147,28 @@ class InstitutionController extends BaseController
 					continue 2;
 				}
 			}
+			$relations[] = new InstitutionRelation();
+		}
+
+		$institution->setRelations($relations);
+
+		return $institution;
+	}
+
+
+
+	/**
+	 * Get institution prepared to be bound to the form
+	 *
+	 * @return	Institution
+	 */
+	protected function getInstitutionForAdd()
+	{
+		$views = $this->getAllViews();
+		$institution = new Institution();
+		$relations = array();
+
+		foreach ($views as $view) {
 			$relations[] = new InstitutionRelation();
 		}
 

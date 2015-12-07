@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "17edc73493718d413913fc583de66bc5",
-    "content-hash": "e8ea41eeee7010c6e28774f571f6f53b",
+    "hash": "c4cf8e4f8d528fd27f55d5bb95e2da93",
+    "content-hash": "66eeda4620c22f0bffb68b3b7d74904a",
     "packages": [
         {
             "name": "dlu/dlutwbootstrap",

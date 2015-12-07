@@ -28,6 +28,25 @@ class Module
 	{
 		$translator = $e->getApplication()->getServiceManager()->get('translator');
 		$translator->setLocale('de_DE'); /*->setFallbackLocale('en_US')*/
+
+		$app = $e->getApplication();
+		$em  = $app->getEventManager()->getSharedManager();
+		$sm  = $app->getServiceManager();
+
+		$em->attach(__NAMESPACE__, MvcEvent::EVENT_DISPATCH, function($e) use ($sm) {
+
+			$routeParams = $e->getRouteMatch()->getParams();
+			if (array_key_exists('format',$routeParams) && strcmp($routeParams['format'],'formeta') == 0 ) {
+				$strategy = $sm->get('ViewFormetaStrategy');
+				$view     = $sm->get('ViewManager')->getView();
+				$strategy->attach($view->getEventManager());
+			}
+
+			$t = "";
+
+		});
+
+
 	}
 
 

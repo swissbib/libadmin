@@ -27,7 +27,7 @@ class GroupController extends BaseController
 	 *
 	 * @return ViewModel
 	 */
-	public function searchAction()
+	public function searchAction($limit = 15)
 	{
 		return parent::searchAction(300);
 	}
@@ -57,7 +57,8 @@ class GroupController extends BaseController
 
 				try {
 					$storageData= $form->getData(FormInterface::VALUES_AS_ARRAY);
-					$idGroup	 = $this->getTable()->save($storageData);
+					$group->exchangeArray($storageData['group']);
+					$idGroup = $this->getTable()->save($group);
 
 					$flashMessenger->addSuccessMessage($this->translate('saved_group'));
 
@@ -114,8 +115,12 @@ class GroupController extends BaseController
 			$form->setData($request->getPost());
 
 			if ($form->isValid()) {
-				$storageData	= $form->getData(FormInterface::VALUES_AS_ARRAY);
-				$this->getTable()->save($storageData, $idGroup);
+				$storageData = $form->getData(FormInterface::VALUES_AS_ARRAY);
+				$group = new Group();
+				$group->exchangeArray($storageData['group']);
+				$group->setId($idGroup);
+
+				$this->getTable()->save($group);
 				$flashMessenger->addSuccessMessage($this->translate('saved_group'));
 				$group	= $this->getGroupForEdit($idGroup);
 				$form->bind($group);

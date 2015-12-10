@@ -53,7 +53,6 @@ $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
 			<li class="active"><a href="#display"><?= $this->translate('display', 'Libadmin') ?></a></li>
 			<li><a href="#groups"><?= $this->translate('action_groups_activate', 'Libadmin') ?></a></li>
 			<li><a href="#groupsort"><?= $this->translate('action_groups_sort', 'Libadmin') ?></a></li>
-			<li><a href="#institutionsort"><?= $this->translate('action_institutions_sort', 'Libadmin') ?></a></li>
 			<li><a href="#relations"><?= $this->translate('linking', 'Libadmin') ?></a></li>
 		</ul>
 
@@ -96,40 +95,6 @@ $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
 									</li>
 								<?php endforeach; ?>
 							</ul>
-						</div>
-					<?php else: ?>
-						<div class="span9">
-							<p><?=$this->escapeHtml($this->translate('no_data_available', 'Libadmin'))?></p>
-						</div>
-					<?php endif; ?>
-				</div>
-			</div>
-
-			<!-- ------------------- Tab Pane: Sort Institutions -->
-			<div class="tab-pane" id="institutionsort">
-				<?php /** @var	Libadmin\Model\Institution[] 	$institutions */ ?>
-				<div class="row">
-					<?php if (sizeof($institutions)): ?>
-						<div class="span9">
-							<div class="row" style="margin-bottom: 20px">
-								<div class="span9">
-									<button type="button" class="btn institutionSortButton"><?=$this->translate('sortInstitutions', 'Libadmin');?></button>
-								</div>
-							</div>
-							<div class="row">
-								<div class="span9 vsort-scrollable">
-									<input type="hidden" id="institutionsortableids" name="institutionsortableids" value="" />
-									<ul id="institutionsortable" class="nav nav-tabs nav-stacked">
-										<?php foreach($institutions as $institution): ?>
-											<li id="<?= $institution->getId() ?>" class="ui-state-default" title="<?=$this->escapeHtml($institution->getLabel_de())?>">
-												<a href="javascript:void(0)" class="item-label">
-													<?=$this->escapeHtml($institution->getLabel_de() . ' [' . $institution->getBib_code() . ']')?>
-												</a>
-											</li>
-										<?php endforeach; ?>
-									</ul>
-								</div>
-							</div>
 						</div>
 					<?php else: ?>
 						<div class="span9">

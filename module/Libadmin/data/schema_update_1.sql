@@ -1,0 +1,1 @@
+ALTER TABLE `mm_institution_group_view` DROP COLUMN `position`;

@@ -277,19 +277,6 @@ abstract class BaseTable
 		$this->updateRelationPositions('group', $idView, $groupIdsSorted);
 	}
 
-
-
-	/**
-	 * Update positions of institutions of given view into given sorting order
-	 *
-	 * @param	Integer	$idView
-	 * @param	Array	$groupIdsSorted
-	 */
-	protected function updateInstitutionsPositions($idView, array $groupIdsSorted)
-	{
-		$this->updateRelationPositions('institution', $idView, $groupIdsSorted, '_group');
-	}
-
 	/**
 	 * Update positions of related records of given view into given sorting order
 	 *

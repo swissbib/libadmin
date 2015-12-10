@@ -102,20 +102,18 @@ class InstitutionTable extends BaseTable
 	 * @param   String         $order
 	 * @return	null|ResultSetInterface
 	 */
-	public function getViewInstitutions($idView, $order = 'position')
+	public function getViewInstitutions($idView)
 	{
 		$select = new Select($this->getTable());
 
 		$select->columns(array('*'))
 			->join(array(
 				'mm' => 'mm_institution_group_view'),
-				'institution.id = mm.id_institution',
-				array('position')
+				'institution.id = mm.id_institution'
 			)
 			->where(array(
 				'mm.id_view' => (int)$idView
 			))
-			->order($order)
 			->group('institution.id');
 
 //			$sql = new Sql($this->tableGateway->getAdapter(), $this->getTable());
@@ -212,14 +210,14 @@ class InstitutionTable extends BaseTable
 				->join(array(
 						'mm' => 'mm_institution_group_view'),
 						'institution.id = mm.id_institution',
-						array('is_favorite', 'position'),
+						array('is_favorite'),
 						$select::JOIN_LEFT
 					)
 				->where(array(
 					'mm.id_view' => (int)$idView,
 					'mm.id_group' => (int)$idGroup
 				))
-				->order('mm.position');
+				->order('institution.label_de');
 
 		if ($activeOnly) {
 			$select->where(array(

@@ -170,8 +170,6 @@ class MapPortal extends System
 			'id' 		=> $institution->getId(),
 			'bib_code' 	=> $institution->getBib_code(),
 			'sys_code' 	=> $institution->getSys_code(),
-			//'position' 	=> $institution->getPosition(),
-			//'favorite'	=> $institution->isFavorite(),
 			'address' => array(
 				'address'	=> $institution->getAddress(),
 				'zip'		=> $institution->getZip(),

@@ -119,7 +119,6 @@ class Vufind extends System
 			'id' 		=> $institution->getId(),
 			'bib_code' 	=> $institution->getBib_code(),
 			'sys_code' 	=> $institution->getSys_code(),
-			'position' 	=> $institution->getPosition(),
 			'favorite'	=> $institution->isFavorite(),
 			'address' => array(
 				'address'	=> $institution->getAddress(),
@@ -197,7 +196,6 @@ class Vufind extends System
 			'isil'			=> $institution->getIsil(),
 			'notes'			=> $institution->getNotes(),
 			'is_favorite'	=> $institution->getIs_favorite(),
-			'position'		=> $institution->getPosition(),
 			'relations'		=> $institution->getRelations()
 		);
 	}

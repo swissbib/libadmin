@@ -31,11 +31,6 @@ class InstitutionRelation extends BaseModel
 	 */
 	public $is_favorite;
 
-	/**
-	 * @var    Integer
-	 */
-	public $position;
-
 
 
 	/**
@@ -47,8 +42,7 @@ class InstitutionRelation extends BaseModel
 		return 	$relation->getIdView() 			=== $this->getIdView() &&
 				$relation->getIdGroup() 		=== $this->getIdGroup() &&
 				$relation->getIdInstitution() 	=== $this->getIdInstitution() &&
-				$relation->getIsFavorite() 		=== $this->getIsFavorite() &&
-				$relation->getPosition() 		=== $this->getPosition();
+				$relation->getIsFavorite() 		=== $this->getIsFavorite();
 	}
 
 
@@ -135,19 +129,5 @@ class InstitutionRelation extends BaseModel
 	public function getIsFavorite()
 	{
 		return !!$this->is_favorite;
-	}
-
-
-
-	public function setPosition($position)
-	{
-		$this->position = $position;
-	}
-
-
-
-	public function getPosition()
-	{
-		return $this->position;
 	}
 }

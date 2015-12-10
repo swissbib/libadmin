@@ -136,9 +136,6 @@ class ViewTable extends BaseTable
 		if (count($groupIdsSorted) > 0) {
 			$this->updateGroupsPositions($idView, $groupIdsSorted);
 		}
-		if (count($institutionIdsSorted) > 0) {
-			$this->updateInstitutionsPositions($idView, $institutionIdsSorted);
-		}
 
 		return $idView;
 	}

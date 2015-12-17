@@ -217,7 +217,7 @@ class InstitutionTable extends BaseTable
 					'mm.id_view' => (int)$idView,
 					'mm.id_group' => (int)$idGroup
 				))
-				->order('institution.label_de');
+				->order('institution.label_de ASC');
 
 		if ($activeOnly) {
 			$select->where(array(

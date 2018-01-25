@@ -5,9 +5,7 @@ return array(
     'modules' => array(
         'Application',
 		'Libadmin',
-		'DluTwBootstrap',
-		'DluTwBootstrapDemo',
-		'ZfcTwitterBootstrap'
+        'Zf2Whoops'
     ),
 
     // These are various options for the listeners attached to the ModuleManager

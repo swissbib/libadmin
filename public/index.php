@@ -4,7 +4,9 @@
  * to the application root now.
  */
 chdir(dirname(__DIR__));
-error_reporting(E_STRICT);
+//todo: was E_STRICT but this level doesn't show any errors in log
+//make a more sound decision
+error_reporting(E_ERROR);
 
 // Setup autoloading
 require 'init_autoloader.php';

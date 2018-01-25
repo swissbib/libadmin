@@ -1,7 +1,7 @@
 <?php
 $this->headTitle($title);
 
-$form = $this->form;
+$form = $this->customform;
 $form->prepare();
 
 $idView = (int)$form->get('id')->getValue();
@@ -12,11 +12,11 @@ $saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save', 'L
 $formType = 'horizontal';
 
 // Force Libadmin text domain (@todo cleaner way?)
-$this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
+$this->formLabel()->setTranslatorTextDomain('Libadmin');
 
 ?>
 
-<?= $this->formTwb()->openTag($form, $formType) ?>
+<?= $this->form()->openTag($form, $formType) ?>
 	<!-- ------------------- CRUD buttons: create/save, close, delete  -->
 	<div class="topButtons">
 		<input type="submit" value="<?= $this->escapeHtml($saveButtonLabel) ?>"
@@ -35,15 +35,15 @@ $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
 
 	<h1><?php echo $this->escapeHtml($title); ?></h1>
 
-<?= $this->ztbFlashMessenger()->render() ?>
+<?= $this->flashMessenger()->render() ?>
 
 	<!-- ------------------- General data fieldset: code, label, is active -->
 	<fieldset class="general">
 		<legend><?= $this->translate('general', 'Libadmin') ?></legend>
 		<div class="row-fluid">
-			<div class="span5"><?= $this->formRowTwb($form->get('code')) ?></div>
-			<div class="span5"><?= $this->formRowTwb($form->get('label')) ?></div>
-			<div class="span2"><?= $this->formRowTwb($form->get('is_active')) ?></div>
+			<div class="span5"><?= $this->formRow($form->get('code')) ?></div>
+			<div class="span5"><?= $this->formRow($form->get('label')) ?></div>
+			<div class="span2"><?= $this->formRow($form->get('is_active')) ?></div>
 		</div>
 	</fieldset>
 
@@ -63,7 +63,7 @@ $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
 			<div class="tab-pane active" id="display">
 				<fieldset class="notes">
 					<legend><?= $this->translate('notes', 'Libadmin') ?></legend>
-					<?= $this->formRowTwb($form->get('notes')) ?>
+					<?= $this->formRow($form->get('notes')) ?>
 				</fieldset>
 			</div>
 
@@ -72,7 +72,7 @@ $this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
 				<?php if($form->get('groups')): ?>
 					<p><?= $this->translate('header_active_networkgroups', 'Libadmin') ?></p>
 					<p><?= $this->translate('header_active_networkgroups_info', 'Libadmin') ?></p>
-					<?= $this->formRowTwb($form->get('groups')) ?>
+					<?= $this->formRow($form->get('groups')) ?>
 				<?php else: ?>
 					<p><?= $this->translate('nogroups', 'Libadmin') ?></p>
 				<?php endif; ?>

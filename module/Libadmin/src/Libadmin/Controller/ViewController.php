@@ -60,7 +60,7 @@ class ViewController extends BaseController
 		$form->setAttribute('action', $this->makeUrl('view', 'add'));
 
 		return $this->getAjaxView(array(
-			'form'	=> $form,
+			'customform'	=> $form,
 			'title'	=> $this->translate('view_add', 'Libadmin'),
 		), 'libadmin/view/edit');
 	}
@@ -132,7 +132,7 @@ class ViewController extends BaseController
 //			'institutions'	=> $this->getInstitutions(),
 			'institutions'	=> $institutionTable->getViewInstitutions($idView),
 
-			'form'			=> $form,
+			'customform'			=> $form,
 			'title'			=> $this->translate('view_edit', 'Libadmin'),
 			'relations' 	=> $relationHelper->getData($view)
 		));

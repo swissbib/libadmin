@@ -62,7 +62,7 @@ class InstitutionController extends BaseController
 		$form->setAttribute('action', $this->makeUrl('institution', 'add'));
 
 		return $this->getAjaxView(array(
-			'form' => $form,
+			'customform' => $form,
 			'title' => $this->translate('institution_add', 'Libadmin'),
 		), 'libadmin/institution/edit');
 	}
@@ -116,7 +116,7 @@ class InstitutionController extends BaseController
 		$form->setAttribute('action', $this->makeUrl('institution', 'edit', $idInstitution));
 
 		return $this->getAjaxView(array(
-			'form' => $form,
+			'customform' => $form,
 			'title' => $this->translate('institution_edit', 'Libadmin'),
 		));
 	}

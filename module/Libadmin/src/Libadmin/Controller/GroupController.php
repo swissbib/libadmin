@@ -74,7 +74,7 @@ class GroupController extends BaseController
 		$form->setAttribute('action', $this->makeUrl('group', 'add'));
 
 		return $this->getAjaxView(array(
-			'form' 		=> $form,
+			'customform' 		=> $form,
 			'lockLists'	=> array(),
 			'title'		=> $this->translate('group_add', 'Libadmin'),
 		), 'libadmin/group/edit');
@@ -132,7 +132,7 @@ class GroupController extends BaseController
 		$form->setAttribute('action', $this->makeUrl('group', 'edit', $idGroup));
 
 		return $this->getAjaxView(array(
-			'form'		=> $form,
+			'customform'		=> $form,
 			'lockLists'	=> $this->getInstitutionLockLists(),
 			'title' 	=> $this->translate('group_edit', 'Libadmin'),
 		));

@@ -5,7 +5,21 @@ return array(
     'modules' => array(
         'Application',
 		'Libadmin',
-        'Zf2Whoops'
+        'Zf2Whoops',
+        'Zend\Paginator',
+        'Zend\Navigation',
+        'Zend\Session',
+        'Zend\Router',
+        'Zend\Validator',
+
+        'Zend\I18n',
+        'Zend\Form',
+        'Zend\InputFilter',
+        'Zend\Db',
+        'Zend\Filter',
+        'Zend\Hydrator',
+
+
     ),
 
     // These are various options for the listeners attached to the ModuleManager

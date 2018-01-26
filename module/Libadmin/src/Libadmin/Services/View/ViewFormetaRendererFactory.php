@@ -2,18 +2,16 @@
 
 namespace Libadmin\Services\View;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
+use Interop\Container\Exception\ContainerException;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 class ViewFormetaRendererFactory implements FactoryInterface
 {
-    /**
-     * Create and return the Formeta view renderer
-     *
-     * @param  ServiceLocatorInterface $serviceLocator
-     * @return FormetaRenderer
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $formetaRenderer = new FormetaRenderer();
         return $formetaRenderer;

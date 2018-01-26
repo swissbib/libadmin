@@ -2,27 +2,22 @@
 
 namespace Libadmin\Services\View;;
 
-use Zend\ServiceManager\FactoryInterface;
+
+use Interop\Container\ContainerInterface;
+use Interop\Container\Exception\ContainerException;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\Strategy\JsonStrategy;
 
 class ViewFormetaStrategyFactory implements FactoryInterface
 {
-    /**
-     * Create and return the JSON view strategy
-     *
-     * Retrieves the ViewJsonRenderer service from the service locator, and
-     * injects it into the constructor for the JSON strategy.
-     *
-     * It then attaches the strategy to the View service, at a priority of 100.
-     *
-     * @param  ServiceLocatorInterface $serviceLocator
-     * @return JsonStrategy
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $formetaRenderer = $serviceLocator->get('FormetaRenderer');
+        $formetaRenderer = $container->get('FormetaRenderer');
         $formetastrategy = new FormetaStrategy($formetaRenderer);
-        return $formetastrategy;
+            return $formetastrategy;
     }
 }

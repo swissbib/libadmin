@@ -1,22 +1,43 @@
 <?php
 namespace Libadmin; // Set module namespace
 
+use Libadmin\Controller\AdminControllerFactory;
+use Libadmin\Controller\ApiControllerFactory;
+use Libadmin\Controller\GroupControllerFactory;
+use Libadmin\Controller\HomeControllerFactory;
+use Libadmin\Controller\InstitutionControllerFactory;
+use Libadmin\Controller\ViewControllerFactory;
+use Libadmin\Export\System\FormetaFactory;
+use Libadmin\Export\System\MapPortalFactory;
+use Libadmin\Export\System\VuFindFactory;
+use Zend\Router\Http\Segment;
+use Libadmin\Controller\InstitutionController;
+use Libadmin\Controller\GroupController;
+use Libadmin\Controller\ApiController;
+use Libadmin\Controller\ViewController;
+use Libadmin\Controller\AdminController;
+use Libadmin\Controller\HomeController;
+
+
+
+
+
 return array(
 	'controllers' => array(
-		'invokables' => array(
-			'Libadmin\Controller\Home' => 'Libadmin\Controller\HomeController',
-			'Libadmin\Controller\Institution' => 'Libadmin\Controller\InstitutionController',
-			'Libadmin\Controller\Group' => 'Libadmin\Controller\GroupController',
-			'Libadmin\Controller\View' => 'Libadmin\Controller\ViewController',
-			'Libadmin\Controller\Admin' => 'Libadmin\Controller\AdminController',
-			'Libadmin\Controller\Api' => 'Libadmin\Controller\ApiController'
-		),
+	    'factories' => [
+            HomeController::class   => HomeControllerFactory::class,
+            InstitutionController::class    => InstitutionControllerFactory::class,
+            GroupController::class  =>  GroupControllerFactory::class,
+            ViewController::class   =>  ViewControllerFactory::class,
+            AdminController::class  =>  AdminControllerFactory::class,
+            ApiController::class    =>  ApiControllerFactory::class
+        ]
 	),
 	// The following section is new and should be added to your file
 	'router' => array(
 		'routes' => array(
 			'institution' => array(
-				'type' => 'segment',
+				'type' => Segment::class,
 				'options' => array(
 					'route' => '/institution[/:action][/:id]',
 					'constraints' => array(
@@ -24,13 +45,13 @@ return array(
 						'id' => '[0-9]+',
 					),
 					'defaults' => array(
-						'controller' => 'Libadmin\Controller\Institution',
+						'controller' => InstitutionController::class,
 						'action' => 'index',
 					),
 				),
 			),
 			'group' => array(
-				'type' => 'segment',
+				'type' => Segment::class,
 				'options' => array(
 					'route' => '/group[/:action][/:id]',
 					'constraints' => array(
@@ -38,13 +59,13 @@ return array(
 						'id' => '[0-9]+',
 					),
 					'defaults' => array(
-						'controller' => 'Libadmin\Controller\Group',
+						'controller' => GroupController::class,
 						'action' => 'index',
 					),
 				),
 			),
 			'view' => array(
-				'type' => 'segment',
+				'type' => Segment::class,
 				'options' => array(
 					'route' => '/view[/:action][/:id]',
 					'constraints' => array(
@@ -52,13 +73,13 @@ return array(
 						'id' => '[0-9]+',
 					),
 					'defaults' => array(
-						'controller' => 'Libadmin\Controller\View',
+						'controller' => ViewController::class,
 						'action' => 'index',
 					),
 				),
 			),
 			'admin' => array(
-				'type' => 'segment',
+				'type' => Segment::class,
 				'options' => array(
 					'route' => '/admin[/:action][/:id]',
 					'constraints' => array(
@@ -66,13 +87,13 @@ return array(
 						'id' => '[0-9]+',
 					),
 					'defaults' => array(
-						'controller' => 'Libadmin\Controller\Admin',
+						'controller' => AdminController::class,
 						'action' => 'index',
 					),
 				),
 			),
 			'api' => array(
-				'type' => 'segment',
+				'type' => Segment::class,
 				'options' => array(
 					'route' => '/api/:system/:view:.:format',
 					'constraints' => array(
@@ -81,7 +102,7 @@ return array(
 						'format' => '(xml|json|fake|formeta)' // add more formats here
 					),
 					'defaults' => array(
-						'controller' => 'Libadmin\Controller\Api',
+						'controller' => ApiController::class,
 						'action' => 'index'
 					)
 				)
@@ -99,16 +120,14 @@ return array(
 	),
 
 	'service_manager' => array(
-		'factories' => array(
+		'factories' => [
 			'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
 			'ViewFormetaStrategy' => 'Libadmin\Services\View\ViewFormetaStrategyFactory',
-			'FormetaRenderer'	=>	'Libadmin\Services\View\ViewFormetaRendererFactory'
-		),
-		'invokables' => array(
-			'export_system_vufind' => 'Libadmin\Export\System\Vufind',
-            'export_system_mapportal' => 'Libadmin\Export\System\MapPortal',
-			'export_system_formeta' => 'Libadmin\Export\System\Formeta',
-		)
+			'FormetaRenderer'	=>	'Libadmin\Services\View\ViewFormetaRendererFactory',
+			'export_system_vufind' => VuFindFactory::class,
+            'export_system_mapportal' => MapPortalFactory::class,
+			'export_system_formeta' => FormetaFactory::class,
+		]
 	),
 
 	/**

@@ -7,15 +7,20 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
+use Zend\Router\Http\Literal;
+use Zend\Router\Http\Segment;
+use Libadmin\Controller\HomeController;
+use Application\Controller\IndexController;
+
 return array(
     'router' => array(
         'routes' => array(
             'home' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type' => Literal::class,
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
-                        'controller' => 'Libadmin\Controller\Home',
+                        'controller' => HomeController::class,
                         'action'     => 'index',
                     ),
                 ),
@@ -25,7 +30,7 @@ return array(
             // module. Simply drop new controllers in, and you can access them
             // using the path /application/:controller/:action
             'application' => array(
-                'type'    => 'Literal',
+                'type'    => Literal::class,
                 'options' => array(
                     'route'    => '/application',
                     'defaults' => array(
@@ -37,7 +42,7 @@ return array(
                 'may_terminate' => true,
                 'child_routes' => array(
                     'default' => array(
-                        'type'    => 'Segment',
+                        'type'    => Segment::class,
                         'options' => array(
                             'route'    => '/[:controller[/:action]]',
                             'constraints' => array(
@@ -67,11 +72,11 @@ return array(
             ),
         ),
     ),
-    'controllers' => array(
-        'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
-        ),
-    ),
+    'controllers' => [
+        'factories' =>  [
+            IndexController::class  => IndexController::class
+        ]
+    ],
     'view_manager' => array(
         'display_not_found_reason' => true,
         'display_exceptions'       => true,

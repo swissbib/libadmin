@@ -3,7 +3,7 @@ namespace Libadmin\Form;
 
 use Zend\Form\Element;
 use Zend\Form\Fieldset;
-use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
+use Zend\Hydrator\ClassMethods as ClassMethodsHydrator;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Validator;
 

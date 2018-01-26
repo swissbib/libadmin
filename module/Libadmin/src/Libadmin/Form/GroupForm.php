@@ -3,7 +3,7 @@ namespace Libadmin\Form;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
+use Zend\Hydrator\ClassMethods as ClassMethodsHydrator;
 use Zend\Form\Element;
 
 use Libadmin\Form\BaseForm;

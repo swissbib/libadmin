@@ -10,6 +10,24 @@ use Libadmin\Controller\ViewControllerFactory;
 use Libadmin\Export\System\FormetaFactory;
 use Libadmin\Export\System\MapPortalFactory;
 use Libadmin\Export\System\VuFindFactory;
+use Libadmin\Form\ViewForm;
+use Libadmin\Form\ViewFormFactory;
+use Libadmin\Helper\RelationOverview;
+use Libadmin\Helper\RelationOverviewFactory;
+use Libadmin\Table\GroupRelationTableFactory;
+use Libadmin\Table\GroupRelationTableGatewayFactory;
+use Libadmin\Table\GroupTable;
+use Libadmin\Table\GroupTableFactory;
+use Libadmin\Table\GroupTableGatewayFactory;
+use Libadmin\Table\InstitutionRelationTableFactory;
+use Libadmin\Table\InstitutionRelationTableGatewayFactory;
+use Libadmin\Table\InstitutionTableFactory;
+use Libadmin\Table\InstitutionTableGatewayFactory;
+use Libadmin\Table\TablePluginManager;
+use Libadmin\Table\TablePluginManagerFactory;
+use Libadmin\Table\ViewTable;
+use Libadmin\Table\ViewTableFactory;
+use Libadmin\Table\ViewTableGatewayFactory;
 use Zend\Router\Http\Segment;
 use Libadmin\Controller\InstitutionController;
 use Libadmin\Controller\GroupController;
@@ -17,6 +35,11 @@ use Libadmin\Controller\ApiController;
 use Libadmin\Controller\ViewController;
 use Libadmin\Controller\AdminController;
 use Libadmin\Controller\HomeController;
+
+
+use Libadmin\Table\InstitutionTable;
+use Libadmin\Table\InstitutionRelationTable;
+use Libadmin\Table\GroupRelationTable;
 
 
 
@@ -127,6 +150,8 @@ return array(
 			'export_system_vufind' => VuFindFactory::class,
             'export_system_mapportal' => MapPortalFactory::class,
 			'export_system_formeta' => FormetaFactory::class,
+            TablePluginManager::class   =>  TablePluginManagerFactory::class
+
 		]
 	),
 
@@ -178,8 +203,25 @@ return array(
     'libadmin' => array(
 
         'backlinksconfig' => 'local/config/libadmin/MapPortal.ini',
-        'linkedswissbibconfig' => 'local/config/libadmin/LinkedSwissbib.ini'
+        'linkedswissbibconfig' => 'local/config/libadmin/LinkedSwissbib.ini',
 
+        'tablepluginmanager' => [
+            'factories' => [
+                InstitutionTable::class =>  InstitutionTableFactory::class,
+                'InstitutionTableGateway'   => InstitutionTableGatewayFactory::class,
+                InstitutionRelationTable::class => InstitutionRelationTableFactory::class,
+                'InstitutionRelationTableGateway'   => InstitutionRelationTableGatewayFactory::class,
+                GroupTable::class   => GroupTableFactory::class,
+                'GroupTableGateway' =>  GroupTableGatewayFactory::class,
+                ViewTable::class    =>  ViewTableFactory::class,
+                'ViewTableGateway'  =>  ViewTableGatewayFactory::class,
+                GroupRelationTable::class   => GroupRelationTableFactory::class,
+                'GroupRelationTableGateway' =>  GroupRelationTableGatewayFactory::class,
+                ViewForm::class =>  ViewFormFactory::class,
+                RelationOverview::class =>  RelationOverviewFactory::class
+
+            ]
+        ]
     ),
 
 );

@@ -6,7 +6,7 @@ use Zend\Form\Element\Checkbox;
 use Zend\Form\Element\Select;
 use Zend\Form\Fieldset;
 use Zend\Form\FormInterface;
-use Zend\Stdlib\Hydrator\ObjectProperty as ObjectPropertyHydrator;
+use Zend\Hydrator\ObjectProperty as ObjectPropertyHydrator;
 
 use Libadmin\Model\InstitutionRelation;
 use Libadmin\Model\View;

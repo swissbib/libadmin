@@ -2,12 +2,13 @@
 namespace Libadmin\Model;
 
 use Zend\InputFilter\InputFilter;
+use Zend\Stdlib\ArrayObject;
 
 /**
  * [Description]
  *
  */
-abstract class BaseModel
+abstract class BaseModel extends ArrayObject
 {
 
 	/**
@@ -20,7 +21,7 @@ abstract class BaseModel
 	/**
 	 * Get all object vars as array
 	 *
-	 * @return    Array
+	 * @return array
 	 */
 	public function getArrayCopy()
 	{
@@ -32,7 +33,7 @@ abstract class BaseModel
 	/**
 	 * Get data for record without relations
 	 *
-	 * @return    Array
+	 * @return array
 	 */
 	public function getBaseData()
 	{
@@ -79,7 +80,7 @@ abstract class BaseModel
 	/**
 	 * Initialize local variables if present
 	 *
-	 * @param    Array    $data
+	 * @param  array $data
 	 */
 	protected function initLocalVariables(array $data)
 	{

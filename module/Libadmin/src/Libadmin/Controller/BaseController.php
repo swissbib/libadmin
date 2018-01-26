@@ -1,6 +1,7 @@
 <?php
 namespace Libadmin\Controller;
 
+use Libadmin\Table\TablePluginManager;
 use Zend\Db\ResultSet\ResultSetInterface;
 use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -34,17 +35,28 @@ abstract class BaseController extends AbstractActionController
 	protected $translator;
 
 
+    /**
+     * @var TablePluginManager
+     */
+	protected $tablePluginManager;
 
-	/**
+
+	public function __construct(TablePluginManager $tablePluginManager)
+    {
+        $this->tablePluginManager = $tablePluginManager;
+    }
+
+
+    /**
 	 * Initial view
 	 *
 	 * @return array
 	 */
 	public function indexAction()
 	{
-		return array(
+		return [
 			'listItems' => $this->getTable()->getAll()
-		);
+		];
 	}
 
 
@@ -279,7 +291,7 @@ abstract class BaseController extends AbstractActionController
 
 		if (!$this->table) {
 			$type = $this->getTypeName();
-			$this->table = $this->getServiceLocator()->get('Libadmin\Table\\' . $type . 'Table');
+			$this->table = $this->tablePluginManager->get('Libadmin\Table\\' . $type . 'Table');
 		}
 		return $this->table;
 	}

@@ -7,7 +7,7 @@ use Libadmin\Model\InstitutionRelation;
 use Libadmin\Model\View;
 use Zend\Form\FormInterface;
 use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Stdlib\Hydrator\ArraySerializable;
+use Zend\Hydrator\ArraySerializable;
 use Libadmin\Model\InstitutionRelationList;
 
 /**

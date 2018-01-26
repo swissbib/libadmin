@@ -3,7 +3,7 @@ namespace Libadmin\Form;
 
 use Zend\Db\ResultSet\ResultSet;
 use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
+use Zend\Hydrator\ClassMethods as ClassMethodsHydrator;
 
 use Libadmin\Form\Element\NoValidationMultiCheckbox;
 use Libadmin\Model\View;

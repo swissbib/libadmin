@@ -2,7 +2,7 @@
 namespace Libadmin\Form;
 
 use Zend\Form\Element;
-use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
+use Zend\Hydrator\ClassMethods as ClassMethodsHydrator;
 use Zend\Db\ResultSet\ResultSet;
 
 use Libadmin\Form\BaseForm;

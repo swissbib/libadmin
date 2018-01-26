@@ -18,6 +18,7 @@ return array(
         'Zend\Db',
         'Zend\Filter',
         'Zend\Hydrator',
+        'Zend\Mvc\Plugin\FlashMessenger',
 
 
     ),

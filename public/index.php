@@ -8,6 +8,13 @@ chdir(dirname(__DIR__));
 //make a more sound decision
 error_reporting(E_ERROR);
 
+define(
+    'APPLICATION_ENV', (getenv('APPLICATION_ENV')
+    ? getenv('APPLICATION_ENV')
+    : 'production')
+);
+
+
 // Setup autoloading
 require 'init_autoloader.php';
 

@@ -46,7 +46,8 @@
 
 	},
 	"require-dev": {
-		"zendframework/zend-developer-tools": "^1.1",
+		"zendframework/zend-developer-tools": "1.1.1",
 		"san/san-session-toolbar": "1.0.11"
+
 	}
 }

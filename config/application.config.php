@@ -19,6 +19,9 @@ return array(
         'Zend\Filter',
         'Zend\Hydrator',
         'Zend\Mvc\Plugin\FlashMessenger',
+        'ZendDeveloperTools',
+        'SanSessionToolbar'
+
 
 
     ),

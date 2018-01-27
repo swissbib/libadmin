@@ -7,6 +7,7 @@ use Libadmin\Model\InstitutionRelation;
 use Libadmin\Table\InstitutionRelationTable;
 use Zend\Db\ResultSet\ResultSetInterface;
 use Zend\Http\Request;
+use Zend\Mvc\Plugin\FlashMessenger\FlashMessenger;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
 use Zend\Db\ResultSet\ResultSet;
@@ -77,7 +78,7 @@ class InstitutionController extends BaseController
 	public function editAction()
 	{
 		$idInstitution = (int)$this->params()->fromRoute('id', 0);
-		$flashMessenger = $this->flashMessenger();
+        $flashMessenger = $this->getPluginManager()->get(FlashMessenger::class);
 
 		if (!$idInstitution) {
 			return $this->forwardTo('home');

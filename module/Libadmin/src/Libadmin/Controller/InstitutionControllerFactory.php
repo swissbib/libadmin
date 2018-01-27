@@ -34,10 +34,12 @@ namespace Libadmin\Controller;
 
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
+use Zend\I18n\Translator\Translator;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Libadmin\Table\TablePluginManager;
+use Zend\I18n\Translator\TranslatorInterface;
 
 /**
  * InstitutionControllerFactory
@@ -54,6 +56,7 @@ class InstitutionControllerFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $tablePluginManager =  $container->get(TablePluginManager::class);
-        return new InstitutionController($tablePluginManager);
+        $translator = $container->get(TranslatorInterface::class);
+        return new InstitutionController($tablePluginManager,$translator);
     }
 }

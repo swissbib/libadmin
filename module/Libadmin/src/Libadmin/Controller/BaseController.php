@@ -18,6 +18,7 @@ use Libadmin\Model\View;
 use Libadmin\Model\Institution;
 use Libadmin\Table\GroupRelationTable;
 use Libadmin\Table\InstitutionRelationTable;
+use Zend\I18n\Translator\TranslatorInterface;
 
 /**
  * [Description]
@@ -41,9 +42,11 @@ abstract class BaseController extends AbstractActionController
 	protected $tablePluginManager;
 
 
-	public function __construct(TablePluginManager $tablePluginManager)
+	public function __construct(TablePluginManager $tablePluginManager,
+                                TranslatorInterface $translator)
     {
         $this->tablePluginManager = $tablePluginManager;
+        $this->translator = $translator;
     }
 
 
@@ -286,7 +289,7 @@ abstract class BaseController extends AbstractActionController
 	protected function getTable($type = null)
 	{
 		if (!is_null($type)) {
-			return $this->getServiceLocator()->get('Libadmin\Table\\' . ucfirst($type) . 'Table');
+			return $this->tablePluginManager->get('Libadmin\Table\\' . ucfirst($type) . 'Table');
 		}
 
 		if (!$this->table) {
@@ -307,9 +310,10 @@ abstract class BaseController extends AbstractActionController
 	 */
 	protected function translate($key, $domain = 'Libadmin')
 	{
-		if (null == $this->translator) {
-			$this->translator = $this->getServiceLocator()->get('translator');
-		}
+
+		//if (null == $this->translator) {
+		//	$this->translator = $this->getServiceLocator()->get('translator');
+		//}
 
 		return $this->translator->translate($key, $domain);
 	}
@@ -393,7 +397,7 @@ abstract class BaseController extends AbstractActionController
 	 */
 	protected function getInstitutionRelationTable()
 	{
-		return $this->getServiceLocator()->get('Libadmin\Table\InstitutionRelationTable');
+		return $this->tablePluginManager->get(InstitutionRelationTable::class);
 	}
 
 
@@ -405,6 +409,6 @@ abstract class BaseController extends AbstractActionController
 	 */
 	protected function getGroupRelationTable()
 	{
-		return $this->getServiceLocator()->get('Libadmin\Table\GroupRelationTable');
+		return $this->tablePluginManager->get(GroupRelationTable::class);
 	}
 }

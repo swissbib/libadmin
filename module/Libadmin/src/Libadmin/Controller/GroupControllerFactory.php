@@ -38,6 +38,7 @@ use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Libadmin\Table\TablePluginManager;
+use Zend\I18n\Translator\TranslatorInterface;
 
 /**
  * GroupControllerFactory
@@ -55,6 +56,7 @@ class GroupControllerFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $tablePluginManager =  $container->get(TablePluginManager::class);
-        return new GroupController($tablePluginManager);
+        $translator = $container->get(TranslatorInterface::class);
+        return new GroupController($tablePluginManager,$translator);
     }
 }

@@ -8,7 +8,7 @@ use Zend\Stdlib\ArrayObject;
  * [Description]
  *
  */
-abstract class BaseModel extends ArrayObject
+abstract class BaseModel
 {
 
 	/**

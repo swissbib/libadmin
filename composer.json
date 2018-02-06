@@ -45,9 +45,25 @@
 
 
 	},
+
+	"autoload": {
+		"psr-4": {
+			"Application\\": "module/Application/src/",
+			"Libadmin\\": "module/Libadmin/src/"
+		},
+		"classmap": [
+			"module/Application/src/",
+			"module/Libadmin/src/"
+		]
+
+	},
+
+
+
 	"require-dev": {
 		"zendframework/zend-developer-tools": "1.1.1",
-		"san/san-session-toolbar": "1.0.11"
+		"san/san-session-toolbar": "1.0.11",
+		"phpunit/phpunit": "^6"
 
 	}
 }

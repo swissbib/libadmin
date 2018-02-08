@@ -1,10 +1,14 @@
+<div class="container">
 <form id="search-form" class="searchForm form-search" action="<?= $this->url($route, array('action' => 'search')); ?>">
 	<div class="input-append">
 		<input id="search-query" name="query" type="text" class="search-query" placeholder="Search">
 		<button type="submit" class="btn"><?= $this->translate('action_search ', 'Libadmin') ?></button>
 	</div>
 </form>
+<div class="container"
 <ul id="search-results-list" class="searchResultList nav nav-tabs nav-stacked">
 	<?= $this->render('libadmin/global/search'); ?>
 </ul>
+</div>
+</div>
 

@@ -11,7 +11,7 @@ div.container a.brand {
 
 .searchForm,
 .searchResultList {
-	clear: both;
+	/*clear: both; */
 }
 
 .form-horizontal .general .control-label {

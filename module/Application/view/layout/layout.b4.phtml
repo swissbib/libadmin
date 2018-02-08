@@ -1,0 +1,64 @@
+<?=$this->doctype()?>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('Swissbib Libadmin')->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headMeta()->appendName('viewport', 'content=width=device-width, initial-scale=1.0, shrink-to-fit=no') ?>
+
+        <?php	// Styles
+
+
+			echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/images/favicon.ico'))
+				->prependStylesheet($this->basePath() . '/css/b4/css/bootstrap.css')
+				->prependStylesheet($this->basePath() . '/css/style.css')
+				->appendStylesheet($this->basePath() . '/css/jquery.loadmask.css')
+		?>
+
+        <?php	// Scripts
+			$this->headScript()
+				->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+				->prependFile($this->basePath() . '/css/b4/js/bootstrap.js')
+				->prependFile($this->basePath() . '/js/jquery.js')
+//				->prependFile($this->basePath() . '/js/jquery.min.js');
+				->appendFile($this->basePath() . '/js/jquery-ui.js')
+				->appendFile($this->basePath() . '/js/libadmin.js')
+				->appendFile($this->basePath() . '/js/jquery.form.js')
+				->appendFile($this->basePath() . '/js/jquery.loadmask.js')
+				->appendFile($this->basePath() . '/js/jquery.tinysort.js');
+
+			echo $this->headScript();
+		?>
+    </head>
+    <body>
+
+    <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav-scroll">
+                    <ul class="navbar-nav bd-navbar-nav flex-row">
+                        <?php
+                    /** @var \Zend\View\Helper\Navigation\Menu $mainNav  */
+                    $mainNav	= $this->navigation('Navigation')->menu();
+                    $mainNav->setTranslatorTextDomain('Libadmin');
+                    $mainNav->setUlClass('nav');
+                    echo $mainNav;
+                    ?>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+        <div class=".container-fluid">
+            <?php echo $this->content; ?>
+            <hr>
+            <footer>
+                <p>&copy; <?= date('Y') ?> by Swissbib. <?= $this->translate('All rights reserved.') ?></p>
+            </footer>
+        </div> <!-- /container -->
+        <?= $this->inlineScript() ?>
+    </body>
+</html>

@@ -10,6 +10,7 @@ use Libadmin\Controller\ViewControllerFactory;
 use Libadmin\Export\System\FormetaFactory;
 use Libadmin\Export\System\MapPortalFactory;
 use Libadmin\Export\System\VuFindFactory;
+use Libadmin\Form\InstitutionFieldset;
 use Libadmin\Form\InstitutionForm;
 use Libadmin\Form\InstitutionFormFactory;
 use Libadmin\Form\ViewForm;
@@ -42,6 +43,7 @@ use Libadmin\Controller\HomeController;
 use Libadmin\Table\InstitutionTable;
 use Libadmin\Table\InstitutionRelationTable;
 use Libadmin\Table\GroupRelationTable;
+use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
 	'controllers' => [
@@ -162,6 +164,7 @@ return [
     'form_elements' => [
         'factories' => [
             InstitutionForm::class => InstitutionFormFactory::class,
+			InstitutionFieldset::class => InvokableFactory::class,
         ]
     ],
 

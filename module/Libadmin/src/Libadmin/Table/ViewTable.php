@@ -164,4 +164,10 @@ class ViewTable extends BaseTable
 		}
 	}
 
+	public function getAllViewsOptions()
+	{
+		$results = $this->getAll('id', 0);
+		return $this->toList($results);
+	}
+
 }

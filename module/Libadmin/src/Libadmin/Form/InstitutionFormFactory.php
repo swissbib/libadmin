@@ -33,6 +33,11 @@
 namespace Libadmin\Form;
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
+use Libadmin\Table\GroupTable;
+use Libadmin\Table\InstitutionTable;
+use Libadmin\Table\TablePluginManager;
+use Libadmin\Table\ViewTable;
+use Zend\Hydrator\ClassMethods;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
 use Zend\ServiceManager\Factory\FactoryInterface;
@@ -64,7 +69,18 @@ class InstitutionFormFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $form = new InstitutionForm();
+        $tablePluginManager = $container->get(TablePluginManager::class);
+
+        /** @var ViewTable $viewTable */
+        $viewTable = $tablePluginManager->get(ViewTable::class);
+        $allViews = $viewTable->getAllViewsOptions();
+
+        /** @var GroupTable $groupTable */
+        $groupTable = $tablePluginManager->get(GroupTable::class);
+        $allGroups = $groupTable->getAllGroupsOptions();
+
+        $form = new InstitutionForm($allViews, $allGroups);
+        $form->setHydrator(new ClassMethods(false));
         return $form;
     }
 }

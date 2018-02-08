@@ -1,14 +1,9 @@
 <?php
 namespace Libadmin\Form;
 
-use Zend\Form\Element;
-use Zend\Hydrator\ClassMethods as ClassMethodsHydrator;
-use Zend\Db\ResultSet\ResultSet;
-
-use Libadmin\Form\BaseForm;
-use Libadmin\Form\InstitutionFieldset;
 use Libadmin\Model\Group;
 use Libadmin\Model\View;
+use Zend\Form\Element;
 
 /**
  * Form for institution
@@ -19,33 +14,35 @@ use Libadmin\Model\View;
 class InstitutionForm extends BaseForm
 {
 
-	/**
-	 * @var    Array    Contains views
-	 */
-	public $views = array();
+    /**
+     * @var    Array    Contains views
+     */
+    public $views = array();
 
-	public $groups = array();
+    public $groups = array();
+
+    /**
+     * Initialize
+     *
+     * @param View[] $views
+     * @param Group[] $groups
+     */
+    public function __construct(array $views, array $groups)
+    {
+        parent::__construct('institution');
 
 
 
-	/**
-	 * Initialize
-	 *
-	 * @param	View[]		$views
-	 * @param	Group[]		$groups
-	 */
-	public function __construct(array $views, array $groups)
-	{
-		parent::__construct('institution');
+        $this->views = $views;
+        $this->groups = $groups;
+    }
 
-		$this->setHydrator(new ClassMethodsHydrator(false));
+    public function init()
+    {
+        $fieldset = new InstitutionFieldset($this->views);
+        $fieldset->setUseAsBaseFieldset(true);
 
-		$this->views	= $views;
-		$this->groups	= $groups;
+        $this->add($fieldset);
+    }
 
-		$fieldset = new InstitutionFieldset($views);
-		$fieldset->setUseAsBaseFieldset(true);
-
-		$this->add($fieldset);
-	}
 }

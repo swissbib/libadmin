@@ -383,4 +383,27 @@ abstract class BaseTable
 
 		return $recordIDs;
 	}
+
+	/**
+	 * Extract all result items from a result set to work with a simple list
+	 *
+	 * @param    ResultSetInterface $set
+	 * @param    Boolean $idAsIndex
+	 * @return    BaseModel[]
+	 */
+	protected function toList(ResultSetInterface $set, $idAsIndex = false)
+	{
+		$list = array();
+
+		/** @var BaseModel $item */
+		foreach ($set as $item) {
+			if ($idAsIndex) {
+				$list[$item->getId()] = $item;
+			} else {
+				$list[] = $item;
+			}
+		}
+
+		return $list;
+	}
 }

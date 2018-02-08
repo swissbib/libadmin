@@ -286,4 +286,11 @@ class GroupTable extends BaseTable
 		$relation->setIdInstitution($idInstitution);
 		$this->relationTable->add($relation);
 	}
+
+	public function getAllGroupsOptions()
+	{
+		$results = $this->getAll();
+
+		return $this->toList($results);
+	}
 }

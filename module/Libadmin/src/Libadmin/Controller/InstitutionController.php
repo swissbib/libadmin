@@ -58,13 +58,7 @@ class InstitutionController extends BaseController
         $this->allViews = $allViews;
     }
 
-    /**
-     * @param InstitutionForm $institutionForm
-     */
-    public function setInstitutionForm($institutionForm)
-    {
-        $this->institutionForm = $institutionForm;
-    }
+
 
     /**
      * Add institution
@@ -160,6 +154,12 @@ class InstitutionController extends BaseController
      */
     protected function getInstitutionForEdit($idInstitution)
     {
+        //todo
+        //diese methoe sollte hier gar nicht sein sondern in die InstitutionTable
+        //damit hääten wir hier auch keine Abhängigkeit meir nach InstitutionRelation Table
+
+
+
         $institution = $this->institutionTable->getRecord($idInstitution);
         $views = $this->allViews;
         /** @var InstitutionRelationTable $relationTable */
@@ -192,6 +192,11 @@ class InstitutionController extends BaseController
      */
     protected function getInstitutionForAdd()
     {
+
+        //todo
+        //diese Methode in intsitution staorage auslagern
+        //damit haben wir auch keine Abhängigkeit mehr auf allViews
+
         $views = $this->allViews;
         $institution = new Institution();
         $relations = array();
@@ -222,7 +227,6 @@ class InstitutionController extends BaseController
      */
     public function indexAction()
     {
-        $this->flashMessenger()->addErrorMessage('form_invalid');
         return [
             'listItems' => $this->institutionTable->getAll()
         ];

@@ -46,89 +46,89 @@ use Libadmin\Table\GroupRelationTable;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
-	'controllers' => [
-	    'factories' => [
-            HomeController::class   => HomeControllerFactory::class,
-            InstitutionController::class    => InstitutionControllerFactory::class,
-            GroupController::class  =>  GroupControllerFactory::class,
-            ViewController::class   =>  ViewControllerFactory::class,
-            AdminController::class  =>  AdminControllerFactory::class,
-            ApiController::class    =>  ApiControllerFactory::class
+    'controllers' => [
+        'factories' => [
+            HomeController::class => HomeControllerFactory::class,
+            InstitutionController::class => InstitutionControllerFactory::class,
+            GroupController::class => GroupControllerFactory::class,
+            ViewController::class => ViewControllerFactory::class,
+            AdminController::class => AdminControllerFactory::class,
+            ApiController::class => ApiControllerFactory::class
         ]
     ],
-	// The following section is new and should be added to your file
-	'router' => [
-		'routes' => [
-			'institution' => [
-				'type' => Segment::class,
-				'options' => [
-					'route' => '/institution[/:action][/:id]',
-					'constraints' => [
-					    //Ralf: Namen explizit angeben (striktes routing)
+    // The following section is new and should be added to your file
+    'router' => [
+        'routes' => [
+            'institution' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/institution[/:action][/:id]',
+                    'constraints' => [
+                        //Ralf: Namen explizit angeben (striktes routing)
                         //(add|edit....)
-						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-						'id' => '[0-9]+',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]+',
                     ],
-					'defaults' => [
-						'controller' => InstitutionController::class,
-						'action' => 'index',
-                    ],
-                ],
-            ],
-			'group' => [
-				'type' => Segment::class,
-				'options' => [
-					'route' => '/group[/:action][/:id]',
-					'constraints' => [
-						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-						'id' => '[0-9]+',
-                    ],
-					'defaults' => [
-						'controller' => GroupController::class,
-						'action' => 'index',
+                    'defaults' => [
+                        'controller' => InstitutionController::class,
+                        'action' => 'index',
                     ],
                 ],
             ],
-			'view' => [
-				'type' => Segment::class,
-				'options' => [
-					'route' => '/view[/:action][/:id]',
-					'constraints' => [
-						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-						'id' => '[0-9]+',
+            'group' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/group[/:action][/:id]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]+',
                     ],
-					'defaults' => [
-						'controller' => ViewController::class,
-						'action' => 'index',
-                    ],
-                ],
-            ],
-			'admin' => [
-				'type' => Segment::class,
-				'options' => [
-					'route' => '/admin[/:action][/:id]',
-					'constraints' => [
-						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-						'id' => '[0-9]+',
-                    ],
-					'defaults' => [
-						'controller' => AdminController::class,
-						'action' => 'index',
+                    'defaults' => [
+                        'controller' => GroupController::class,
+                        'action' => 'index',
                     ],
                 ],
             ],
-			'api' => [
-				'type' => Segment::class,
-				'options' => [
-					'route' => '/api/:system/:view:.:format',
-					'constraints' => [
-						'system' => '[a-zA-Z][a-zA-Z0-9_-]*',
-						'view' => '[a-zA-Z][a-zA-Z0-9_-]*',
-						'format' => '(xml|json|fake|formeta)' // add more formats here
+            'view' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/view[/:action][/:id]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]+',
                     ],
-					'defaults' => [
-						'controller' => ApiController::class,
-						'action' => 'index'
+                    'defaults' => [
+                        'controller' => ViewController::class,
+                        'action' => 'index',
+                    ],
+                ],
+            ],
+            'admin' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/admin[/:action][/:id]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' => AdminController::class,
+                        'action' => 'index',
+                    ],
+                ],
+            ],
+            'api' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/api/:system/:view:.:format',
+                    'constraints' => [
+                        'system' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'view' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'format' => '(xml|json|fake|formeta)' // add more formats here
+                    ],
+                    'defaults' => [
+                        'controller' => ApiController::class,
+                        'action' => 'index'
                     ]
                 ]
             ]
@@ -137,53 +137,53 @@ return [
 
 
     //in application config - mehr globale Aspekte
-	'view_manager' => [
-		'template_path_stack' => [
-			'libadmin' => __DIR__ . '/../view',
+    'view_manager' => [
+        'template_path_stack' => [
+            'libadmin' => __DIR__ . '/../view',
         ],
-		'strategies' => [
-			'ViewJsonStrategy','ViewFormetaStrategy'
+        'strategies' => [
+            'ViewJsonStrategy', 'ViewFormetaStrategy'
         ]
     ],
 
-	'service_manager' => [
-		'factories' => [
-		    //hier Klassennmespaces
-			'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
-			'ViewFormetaStrategy' => 'Libadmin\Services\View\ViewFormetaStrategyFactory',
-			'FormetaRenderer'	=>	'Libadmin\Services\View\ViewFormetaRendererFactory',
-			'export_system_vufind' => VuFindFactory::class,
+    'service_manager' => [
+        'factories' => [
+            //hier Klassennmespaces
+            'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+            'ViewFormetaStrategy' => 'Libadmin\Services\View\ViewFormetaStrategyFactory',
+            'FormetaRenderer' => 'Libadmin\Services\View\ViewFormetaRendererFactory',
+            'export_system_vufind' => VuFindFactory::class,
             'export_system_mapportal' => MapPortalFactory::class,
-			'export_system_formeta' => FormetaFactory::class,
-            TablePluginManager::class   =>  TablePluginManagerFactory::class
+            'export_system_formeta' => FormetaFactory::class,
+            TablePluginManager::class => TablePluginManagerFactory::class
 
-		]
+        ]
     ],
 
 
     'form_elements' => [
         'factories' => [
             InstitutionForm::class => InstitutionFormFactory::class,
-			InstitutionFieldset::class => InvokableFactory::class,
+            InstitutionFieldset::class => InvokableFactory::class,
         ]
     ],
 
-	/**
-	 * Configure locale translator
-	 * Note: Each translation file that is loaded needs to have a text_domain added,
-	 *         If no text_domain is added, 'default' will be assumed.
-	 *         To use translations with namespaces the respective view-helper needs to pass
-	 *         the "text_domain", e.g: $this->translate('example', 'Libadmin');
-	 */
+    /**
+     * Configure locale translator
+     * Note: Each translation file that is loaded needs to have a text_domain added,
+     *         If no text_domain is added, 'default' will be assumed.
+     *         To use translations with namespaces the respective view-helper needs to pass
+     *         the "text_domain", e.g: $this->translate('example', 'Libadmin');
+     */
 
-	//im Application Modul abegen
-	'translator' => [
-		'locale' => 'de_DE',
-		'translation_file_patterns' => [
-			[
-				'type' => 'gettext',
-				'base_dir' => __DIR__ . '/../language', // Directory to load gettext files from
-				'pattern' => '%s.mo', // Gettext files naming pattern
+    //im Application Modul abegen
+    'translator' => [
+        'locale' => 'de_DE',
+        'translation_file_patterns' => [
+            [
+                'type' => 'gettext',
+                'base_dir' => __DIR__ . '/../language', // Directory to load gettext files from
+                'pattern' => '%s.mo', // Gettext files naming pattern
 
 
             ]
@@ -191,29 +191,29 @@ return [
     ],
 
     //das könnte man auf Module verteilen wenn ich in einzelne Module aufgeteilt habe
-	'navigation' => [
-		// The DefaultNavigationFactory we configured in (1) uses 'default' as the sitemap key
-		'default' => [
-			// And finally, here is where we define our page hierarchy
-			'home' => [
-				'label' => 'navigation_home',
-				'route' => 'home'
+    'navigation' => [
+        // The DefaultNavigationFactory we configured in (1) uses 'default' as the sitemap key
+        'default' => [
+            // And finally, here is where we define our page hierarchy
+            'home' => [
+                'label' => 'navigation_home',
+                'route' => 'home'
             ],
-			'institution' => [
-				'label' => 'navigation_institutions',
-				'route' => 'institution'
+            'institution' => [
+                'label' => 'navigation_institutions',
+                'route' => 'institution'
             ],
-			'group' => [
-				'label' => 'navigation_groups',
-				'route' => 'group'
+            'group' => [
+                'label' => 'navigation_groups',
+                'route' => 'group'
             ],
-			'view' => [
-				'label' => 'navigation_views',
-				'route' => 'view'
+            'view' => [
+                'label' => 'navigation_views',
+                'route' => 'view'
             ],
-			'admin' => [
-				'label' => 'navigation_admin',
-				'route' => 'admin'
+            'admin' => [
+                'label' => 'navigation_admin',
+                'route' => 'admin'
             ]
         ],
     ],
@@ -225,18 +225,18 @@ return [
         'tablepluginmanager' => [
             'factories' => [
                 //todo strings rausnehmen!!
-                InstitutionTable::class =>  InstitutionTableFactory::class,
-                'InstitutionTableGateway'   => InstitutionTableGatewayFactory::class,
+                InstitutionTable::class => InstitutionTableFactory::class,
+                'InstitutionTableGateway' => InstitutionTableGatewayFactory::class,
                 InstitutionRelationTable::class => InstitutionRelationTableFactory::class,
-                'InstitutionRelationTableGateway'   => InstitutionRelationTableGatewayFactory::class,
-                GroupTable::class   => GroupTableFactory::class,
-                'GroupTableGateway' =>  GroupTableGatewayFactory::class,
-                ViewTable::class    =>  ViewTableFactory::class,
-                'ViewTableGateway'  =>  ViewTableGatewayFactory::class,
-                GroupRelationTable::class   => GroupRelationTableFactory::class,
-                'GroupRelationTableGateway' =>  GroupRelationTableGatewayFactory::class,
-                ViewForm::class =>  ViewFormFactory::class,
-                RelationOverview::class =>  RelationOverviewFactory::class
+                'InstitutionRelationTableGateway' => InstitutionRelationTableGatewayFactory::class,
+                GroupTable::class => GroupTableFactory::class,
+                'GroupTableGateway' => GroupTableGatewayFactory::class,
+                ViewTable::class => ViewTableFactory::class,
+                'ViewTableGateway' => ViewTableGatewayFactory::class,
+                GroupRelationTable::class => GroupRelationTableFactory::class,
+                'GroupRelationTableGateway' => GroupRelationTableGatewayFactory::class,
+                ViewForm::class => ViewFormFactory::class,
+                RelationOverview::class => RelationOverviewFactory::class
 
             ]
         ]

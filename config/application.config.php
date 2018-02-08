@@ -3,6 +3,9 @@
 return [
     // This should be an array of module namespaces used in the application.
     'modules' => [
+        'Zend\Serializer',
+        'Zend\Log',
+        'Zend\Cache',
         'Zend\Mvc\I18n',
         'Zf2Whoops',
         'Zend\Paginator',

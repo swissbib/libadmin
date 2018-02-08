@@ -39,8 +39,13 @@ class InstitutionForm extends BaseForm
 
     public function init()
     {
-        $fieldset = new InstitutionFieldset($this->views);
+        $factory = $this->getFormFactory();
+        $formElementManager = $factory->getFormElementManager();
+
+        /** @var  InstitutionFieldset $fieldset */
+        $fieldset = $formElementManager->get(InstitutionFieldset::class);
         $fieldset->setUseAsBaseFieldset(true);
+        $fieldset->setName('institution');
 
         $this->add($fieldset);
     }

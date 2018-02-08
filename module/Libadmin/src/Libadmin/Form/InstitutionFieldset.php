@@ -20,15 +20,11 @@ use Libadmin\Form\BaseFieldset;
 class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInterface
 {
 
-	/**
-	 * Initialize
-	 *
-	 * @param	View[]	$views
-	 * @param	Array	$options
-	 */
-	public function __construct($views, $options = array())
+	public function init()
 	{
-		parent::__construct('institution', $options);
+
+
+        $this->setName('institution');
 
 		$this->setHydrator(new ClassMethodsHydrator(false))
 				->setObject(new Institution);

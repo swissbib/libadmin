@@ -10,6 +10,8 @@ use Libadmin\Controller\ViewControllerFactory;
 use Libadmin\Export\System\FormetaFactory;
 use Libadmin\Export\System\MapPortalFactory;
 use Libadmin\Export\System\VuFindFactory;
+use Libadmin\Form\InstitutionForm;
+use Libadmin\Form\InstitutionFormFactory;
 use Libadmin\Form\ViewForm;
 use Libadmin\Form\ViewFormFactory;
 use Libadmin\Helper\RelationOverview;
@@ -154,6 +156,13 @@ return [
             TablePluginManager::class   =>  TablePluginManagerFactory::class
 
 		]
+    ],
+
+
+    'form_elements' => [
+        'factories' => [
+            InstitutionForm::class => InstitutionFormFactory::class,
+        ]
     ],
 
 	/**

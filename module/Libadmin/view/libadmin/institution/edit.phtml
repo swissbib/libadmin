@@ -16,6 +16,7 @@ $form->setAttribute('class', 'form-horizontal');
 
 
 ?>
+<div class="container">
 <?= $this->form()->openTag($form) ?>
 	<div class="topButtons">
 		<input type="submit" value="<?= $this->escapeHtml($saveButtonLabel) ?>"
@@ -38,10 +39,10 @@ $form->setAttribute('class', 'form-horizontal');
 
 	<fieldset class="general">
 		<legend><?= $this->translate('general') ?></legend>
-		<div class="row-fluid">
-			<div class="span5"><?= $this->formRow($institution->get('bib_code')) ?></div>
-			<div class="span5"><?= $this->formRow($institution->get('sys_code')) ?></div>
-			<div class="span2"><?= $this->formRow($institution->get('is_active')) ?></div>
+		<div class="row">
+			<div class="col-4"><?= $this->formRow($institution->get('bib_code')) ?></div>
+			<div class="col-4"><?= $this->formRow($institution->get('sys_code')) ?></div>
+			<div class="col-4"><?= $this->formRow($institution->get('is_active')) ?></div>
 		</div>
 	</fieldset>
 
@@ -54,45 +55,47 @@ $form->setAttribute('class', 'form-horizontal');
 
 		<div class="tab-content">
 			<div class="tab-pane active" id="display">
+                <div class="row">
 				<fieldset>
 					<legend><?= $this->translate('displaynames') ?></legend>
-					<div class="row-fluid">
-						<div class="span6"><?= $this->formRow($institution->get('label_de')) ?></div>
-						<div class="span6"><?= $this->formRow($institution->get('label_fr')) ?></div>
+					<div class="row">
+						<div class="col"><?= $this->formRow($institution->get('label_de')) ?></div>
+						<div class="col"><?= $this->formRow($institution->get('label_fr')) ?></div>
 					</div>
-					<div class="row-fluid">
-						<div class="span6"><?= $this->formRow($institution->get('label_it')) ?></div>
-						<div class="span6"><?= $this->formRow($institution->get('label_en')) ?></div>
+					<div class="row">
+						<div class="col"><?= $this->formRow($institution->get('label_it')) ?></div>
+						<div class="col"><?= $this->formRow($institution->get('label_en')) ?></div>
 					</div>
 				</fieldset>
+                </div>
 
 				<fieldset>
 					<legend><?= $this->translate('title_library_names_official') ?></legend>
-					<div class="row-fluid">
-						<div class="span6"><?= $this->formRow($institution->get('name_de')) ?></div>
-						<div class="span6"><?= $this->formRow($institution->get('name_fr')) ?></div>
+					<div class="row">
+						<div class="col"><?= $this->formRow($institution->get('name_de')) ?></div>
+						<div class="col"><?= $this->formRow($institution->get('name_fr')) ?></div>
 					</div>
-					<div class="row-fluid">
-						<div class="span6"><?= $this->formRow($institution->get('name_it')) ?></div>
-						<div class="span6"><?= $this->formRow($institution->get('name_en')) ?></div>
+					<div class="row">
+						<div class="col"><?= $this->formRow($institution->get('name_it')) ?></div>
+						<div class="col"><?= $this->formRow($institution->get('name_en')) ?></div>
 					</div>
 				</fieldset>
 
 				<fieldset>
 					<legend>URL Bibliotheksinformationen</legend>
-					<div class="row-fluid">
-						<div class="span6">
+					<div class="row">
+						<div class="col">
 							<?= $this->formRow($institution->get('url_de')) ?>
 						</div>
-						<div class="span6">
+						<div class="col">
 							<?= $this->formRow($institution->get('url_fr')) ?>
 						</div>
 					</div>
-					<div class="row-fluid">
-						<div class="span6">
+					<div class="row">
+						<div class="col">
 							<?= $this->formRow($institution->get('url_it')) ?>
 						</div>
-						<div class="span6">
+						<div class="col">
 							<?= $this->formRow($institution->get('url_en')) ?>
 						</div>
 					</div>
@@ -100,7 +103,9 @@ $form->setAttribute('class', 'form-horizontal');
 
 				<fieldset class="notes">
 					<legend><?= $this->translate('notes') ?></legend>
+                    <div class="row">
 					<?= $this->formRow($institution->get('notes')) ?>
+                    </div>
 				</fieldset>
 
 			</div>
@@ -169,3 +174,4 @@ $form->setAttribute('class', 'form-horizontal');
 	</div>
 
 <?= $this->form()->closeTag(); ?>
+</div>

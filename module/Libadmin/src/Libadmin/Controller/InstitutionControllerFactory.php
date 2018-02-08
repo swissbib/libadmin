@@ -35,6 +35,9 @@ namespace Libadmin\Controller;
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
 use Libadmin\Form\InstitutionForm;
+use Libadmin\Table\InstitutionRelationTable;
+use Libadmin\Table\InstitutionTable;
+use Libadmin\Table\ViewTable;
 use Zend\Form\FormElementManager\FormElementManagerV3Polyfill;
 use Zend\Form\FormElementManagerFactory;
 use Zend\I18n\Translator\Translator;
@@ -69,7 +72,6 @@ class InstitutionControllerFactory implements FactoryInterface
         ContainerInterface $container, $requestedName, array $options = null
     ) {
         $formElementManager = $container->get('FormElementManager');
-        $institutionForm = $formElementManager->get(InstitutionForm::class);
 
         /**
          * TablePluginManager
@@ -78,17 +80,19 @@ class InstitutionControllerFactory implements FactoryInterface
          */
         $tablePluginManager =  $container->get(TablePluginManager::class);
 
-        /**
-         * Translator
-         *
-         * @var TranslatorInterface $translator translator
-         */
-        $translator = $container->get(TranslatorInterface::class);
+        $institutionForm = $formElementManager->get(InstitutionForm::class);
+        $institutionTable = $tablePluginManager->get(InstitutionTable::class);
+        $institutionRelationTable
+            = $tablePluginManager->get(InstitutionRelationTable::class);
+        /** @var ViewTable $viewTable */
+        $viewTable = $tablePluginManager->get(ViewTable::class);
+        $allViews = $viewTable->getAllViewsOptions();
 
-        $institutionController
-            = new InstitutionController($tablePluginManager, $translator);
-        $institutionController->setInstitutionForm($institutionForm);
-
-        return $institutionController;
+        return new InstitutionController(
+            $institutionForm,
+            $institutionTable,
+            $institutionRelationTable,
+            $allViews
+        );
     }
 }

@@ -42,13 +42,14 @@ abstract class BaseController extends AbstractActionController
 	protected $tablePluginManager;
 
 
+	/*
 	public function __construct(TablePluginManager $tablePluginManager,
                                 TranslatorInterface $translator)
     {
         $this->tablePluginManager = $tablePluginManager;
         $this->translator = $translator;
     }
-
+*/
 
     /**
 	 * Initial view

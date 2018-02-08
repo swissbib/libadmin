@@ -1,5 +1,5 @@
 <?php
-$this->headTitle($title);
+$this->headTitle($this->translate($title));
 
 $form = $this->customform;
 $form->prepare();
@@ -32,9 +32,9 @@ $form->setAttribute('class', 'form-horizontal');
 		<?php endif; ?>
 	</div>
 
-	<h1><?php echo $this->escapeHtml($title); ?></h1>
+	<h1><?php echo $this->escapeHtml($this->translate($title)); ?></h1>
 
-<?= $this->flashMessenger()->render() ?>
+<?= $this->bootstrapFlashMessenger()->render() ?>
 
 	<fieldset class="general">
 		<legend><?= $this->translate('general') ?></legend>

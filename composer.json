@@ -43,7 +43,8 @@
 
 		"ghislainf/zf2-whoops": "dev-master#2649cf7caf400409942ddc3f8fe15b89381fc74e",
 		"zendframework/zend-mvc-i18n": "^1.0",
-		"zendframework/zend-component-installer": "^1.1"
+		"zendframework/zend-component-installer": "^1.1",
+		"ralfeggert/travello-view-helper": "^1.6"
 
 
 	},

@@ -5,6 +5,7 @@ namespace Libadmin\Controller;
 
 use Libadmin\Model\InstitutionRelation;
 use Libadmin\Table\InstitutionRelationTable;
+use Libadmin\Table\InstitutionTable;
 use Zend\Db\ResultSet\ResultSetInterface;
 use Zend\Http\Request;
 use Zend\Mvc\Plugin\FlashMessenger\FlashMessenger;
@@ -25,10 +26,40 @@ use Libadmin\Model\Group;
 class InstitutionController extends BaseController
 {
 
+    /** @var InstitutionForm */
     private $institutionForm;
 
+    /** @var  InstitutionTable */
+    private $institutionTable;
+
+    /** @var  InstitutionRelationTable */
+    private $institutionRelationTable;
+
+    /** @var array  */
+    private $allViews = [];
+
     /**
-     * @param mixed $institutionForm
+     * InstitutionController constructor.
+     *
+     * @param InstitutionForm $institutionForm
+     * @param InstitutionTable $institutionTable
+     * @param InstitutionRelationTable $institutionRelationTable
+     * @param array $allViews
+     */
+    public function __construct(
+        InstitutionForm $institutionForm,
+        InstitutionTable $institutionTable,
+        InstitutionRelationTable $institutionRelationTable,
+        array $allViews
+    ) {
+        $this->institutionForm = $institutionForm;
+        $this->institutionTable = $institutionTable;
+        $this->institutionRelationTable = $institutionRelationTable;
+        $this->allViews = $allViews;
+    }
+
+    /**
+     * @param InstitutionForm $institutionForm
      */
     public function setInstitutionForm($institutionForm)
     {
@@ -43,7 +74,6 @@ class InstitutionController extends BaseController
     public function addAction()
     {
         $form = $this->institutionForm;
-        $flashMessenger = $this->flashMessenger();
         $institution = $this->getInstitutionForAdd();
 
         /** @var Request $request */
@@ -56,17 +86,13 @@ class InstitutionController extends BaseController
 
             if ($form->isValid()) {
                 $institution->exchangeArray($form->getData());
-                $idInstitution = $this->getTable()->save($institution);
+                $idInstitution = $this->institutionTable->save($institution);
 
-                $flashMessenger->addSuccessMessage($this->translate('saved_institution'));
+                $this->flashMessenger()->addSuccessMessage('saved_institution');
 
                 return $this->redirectTo('edit', $idInstitution);
             } else {
-                $flashMessenger->addErrorMessage($this->translate('form_invalid'));
-//				$messages = $form->getMessages();
-//				foreach($form->getMessages() as $message) {
-//					$flashMessenger->addErrorMessage($message);
-//				}
+                $this->flashMessenger()->addErrorMessage('form_invalid');
             }
         }
 
@@ -74,10 +100,9 @@ class InstitutionController extends BaseController
 
         return $this->getAjaxView(array(
             'customform' => $form,
-            'title' => $this->translate('institution_add', 'Libadmin'),
+            'title' => 'institution_add',
         ), 'libadmin/institution/edit');
     }
-
 
     /**
      * Edit institution
@@ -87,7 +112,6 @@ class InstitutionController extends BaseController
     public function editAction()
     {
         $idInstitution = (int)$this->params()->fromRoute('id', 0);
-        $flashMessenger = $this->getPluginManager()->get(FlashMessenger::class);
 
         if (!$idInstitution) {
             return $this->forwardTo('home');
@@ -97,7 +121,7 @@ class InstitutionController extends BaseController
             /** @var InstitutionForm $institution */
             $institution = $this->getInstitutionForEdit($idInstitution);
         } catch (\Exception $ex) {
-            $flashMessenger->addErrorMessage($this->translate('notfound_record'));
+            $this->flashMessenger()->addErrorMessage('notfound_record');
 
             return $this->forwardTo('home');
         }
@@ -111,15 +135,11 @@ class InstitutionController extends BaseController
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
-                $this->getTable()->save($form->getData());
-                $flashMessenger->addSuccessMessage($this->translate('saved_institution'));
+                $this->institutionTable->save($form->getData());
+                $this->flashMessenger()->addSuccessMessage('saved_institution');
                 $form->bind($this->getInstitutionForEdit($idInstitution)); // Reload data
             } else {
-                $flashMessenger->addErrorMessage($this->translate('form_invalid'));
-//				$messages = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($form->getMessages()));
-//				foreach($messages as $message) {
-//					$flashMessenger->addErrorMessage($message);
-//				}
+                $this->flashMessenger()->addErrorMessage('form_invalid');
             }
         }
 
@@ -127,7 +147,7 @@ class InstitutionController extends BaseController
 
         return $this->getAjaxView(array(
             'customform' => $form,
-            'title' => $this->translate('institution_edit', 'Libadmin'),
+            'title' => 'institution_edit'
         ));
     }
 
@@ -140,10 +160,10 @@ class InstitutionController extends BaseController
      */
     protected function getInstitutionForEdit($idInstitution)
     {
-        $institution = $this->getTable()->getRecord($idInstitution);
-        $views = $this->getAllViews();
+        $institution = $this->institutionTable->getRecord($idInstitution);
+        $views = $this->allViews;
         /** @var InstitutionRelationTable $relationTable */
-        $relationTable = $this->getTable('InstitutionRelation');
+        $relationTable = $this->institutionRelationTable;
         /** @var InstitutionRelation[] $existingRelations */
         $existingRelations = $relationTable->getInstitutionRelations($idInstitution);
         $relations = array();
@@ -172,7 +192,7 @@ class InstitutionController extends BaseController
      */
     protected function getInstitutionForAdd()
     {
-        $views = $this->getAllViews();
+        $views = $this->allViews;
         $institution = new Institution();
         $relations = array();
 
@@ -194,4 +214,35 @@ class InstitutionController extends BaseController
     {
         $this->getInstitutionRelationTable()->deleteInstitutionRelations($idView);
     }
+
+    /**
+     * Initial view
+     *
+     * @return array
+     */
+    public function indexAction()
+    {
+        $this->flashMessenger()->addErrorMessage('form_invalid');
+        return [
+            'listItems' => $this->institutionTable->getAll()
+        ];
+    }
+
+    /**
+     * Search matching records
+     *
+     * @param	Integer		$limit        Search result limit
+     * @return	ViewModel
+     **/
+    public function searchAction($limit = 15)
+    {
+        $query = $this->params()->fromQuery('query', '');
+        $data = array(
+            'route' => strtolower($this->getTypeName()),
+            'listItems' => $this->institutionTable->find($query, $limit)
+        );
+
+        return $this->getAjaxView($data, 'libadmin/global/search');
+    }
+
 }

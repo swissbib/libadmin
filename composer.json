@@ -41,7 +41,9 @@
 
 		"zendframework/zend-form": "2.11.0",
 
-		"ghislainf/zf2-whoops": "dev-master#2649cf7caf400409942ddc3f8fe15b89381fc74e"
+		"ghislainf/zf2-whoops": "dev-master#2649cf7caf400409942ddc3f8fe15b89381fc74e",
+		"zendframework/zend-component-installer": "^2.0",
+		"zendframework/zend-mvc-i18n": "^1.0"
 
 
 	},

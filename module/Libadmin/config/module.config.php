@@ -41,12 +41,8 @@ use Libadmin\Table\InstitutionTable;
 use Libadmin\Table\InstitutionRelationTable;
 use Libadmin\Table\GroupRelationTable;
 
-
-
-
-
-return array(
-	'controllers' => array(
+return [
+	'controllers' => [
 	    'factories' => [
             HomeController::class   => HomeControllerFactory::class,
             InstitutionController::class    => InstitutionControllerFactory::class,
@@ -55,95 +51,100 @@ return array(
             AdminController::class  =>  AdminControllerFactory::class,
             ApiController::class    =>  ApiControllerFactory::class
         ]
-	),
+    ],
 	// The following section is new and should be added to your file
-	'router' => array(
-		'routes' => array(
-			'institution' => array(
+	'router' => [
+		'routes' => [
+			'institution' => [
 				'type' => Segment::class,
-				'options' => array(
+				'options' => [
 					'route' => '/institution[/:action][/:id]',
-					'constraints' => array(
+					'constraints' => [
+					    //Ralf: Namen explizit angeben (striktes routing)
+                        //(add|edit....)
 						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
 						'id' => '[0-9]+',
-					),
-					'defaults' => array(
+                    ],
+					'defaults' => [
 						'controller' => InstitutionController::class,
 						'action' => 'index',
-					),
-				),
-			),
-			'group' => array(
+                    ],
+                ],
+            ],
+			'group' => [
 				'type' => Segment::class,
-				'options' => array(
+				'options' => [
 					'route' => '/group[/:action][/:id]',
-					'constraints' => array(
+					'constraints' => [
 						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
 						'id' => '[0-9]+',
-					),
-					'defaults' => array(
+                    ],
+					'defaults' => [
 						'controller' => GroupController::class,
 						'action' => 'index',
-					),
-				),
-			),
-			'view' => array(
+                    ],
+                ],
+            ],
+			'view' => [
 				'type' => Segment::class,
-				'options' => array(
+				'options' => [
 					'route' => '/view[/:action][/:id]',
-					'constraints' => array(
+					'constraints' => [
 						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
 						'id' => '[0-9]+',
-					),
-					'defaults' => array(
+                    ],
+					'defaults' => [
 						'controller' => ViewController::class,
 						'action' => 'index',
-					),
-				),
-			),
-			'admin' => array(
+                    ],
+                ],
+            ],
+			'admin' => [
 				'type' => Segment::class,
-				'options' => array(
+				'options' => [
 					'route' => '/admin[/:action][/:id]',
-					'constraints' => array(
+					'constraints' => [
 						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
 						'id' => '[0-9]+',
-					),
-					'defaults' => array(
+                    ],
+					'defaults' => [
 						'controller' => AdminController::class,
 						'action' => 'index',
-					),
-				),
-			),
-			'api' => array(
+                    ],
+                ],
+            ],
+			'api' => [
 				'type' => Segment::class,
-				'options' => array(
+				'options' => [
 					'route' => '/api/:system/:view:.:format',
-					'constraints' => array(
+					'constraints' => [
 						'system' => '[a-zA-Z][a-zA-Z0-9_-]*',
 						'view' => '[a-zA-Z][a-zA-Z0-9_-]*',
 						'format' => '(xml|json|fake|formeta)' // add more formats here
-					),
-					'defaults' => array(
+                    ],
+					'defaults' => [
 						'controller' => ApiController::class,
 						'action' => 'index'
-					)
-				)
-			)
-		),
-	),
+                    ]
+                ]
+            ]
+        ],
+    ],
 
-	'view_manager' => array(
-		'template_path_stack' => array(
+
+    //in application config - mehr globale Aspekte
+	'view_manager' => [
+		'template_path_stack' => [
 			'libadmin' => __DIR__ . '/../view',
-		),
-		'strategies' => array(
+        ],
+		'strategies' => [
 			'ViewJsonStrategy','ViewFormetaStrategy'
-		)
-	),
+        ]
+    ],
 
-	'service_manager' => array(
+	'service_manager' => [
 		'factories' => [
+		    //hier Klassennmespaces
 			'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
 			'ViewFormetaStrategy' => 'Libadmin\Services\View\ViewFormetaStrategyFactory',
 			'FormetaRenderer'	=>	'Libadmin\Services\View\ViewFormetaRendererFactory',
@@ -153,7 +154,7 @@ return array(
             TablePluginManager::class   =>  TablePluginManagerFactory::class
 
 		]
-	),
+    ],
 
 	/**
 	 * Configure locale translator
@@ -162,51 +163,56 @@ return array(
 	 *         To use translations with namespaces the respective view-helper needs to pass
 	 *         the "text_domain", e.g: $this->translate('example', 'Libadmin');
 	 */
-	'translator' => array(
+
+	//im Application Modul abegen
+	'translator' => [
 		'locale' => 'de_DE',
-		'translation_file_patterns' => array(
-			array(
+		'translation_file_patterns' => [
+			[
 				'type' => 'gettext',
 				'base_dir' => __DIR__ . '/../language', // Directory to load gettext files from
 				'pattern' => '%s.mo', // Gettext files naming pattern
-				'text_domain' => 'Libadmin', // Text-domain of the translation
-			)
-		)
-	),
 
-	'navigation' => array(
+
+            ]
+        ]
+    ],
+
+    //das könnte man auf Module verteilen wenn ich in einzelne Module aufgeteilt habe
+	'navigation' => [
 		// The DefaultNavigationFactory we configured in (1) uses 'default' as the sitemap key
-		'default' => array(
+		'default' => [
 			// And finally, here is where we define our page hierarchy
-			'home' => array(
+			'home' => [
 				'label' => 'navigation_home',
 				'route' => 'home'
-			),
-			'institution' => array(
+            ],
+			'institution' => [
 				'label' => 'navigation_institutions',
 				'route' => 'institution'
-			),
-			'group' => array(
+            ],
+			'group' => [
 				'label' => 'navigation_groups',
 				'route' => 'group'
-			),
-			'view' => array(
+            ],
+			'view' => [
 				'label' => 'navigation_views',
 				'route' => 'view'
-			),
-			'admin' => array(
+            ],
+			'admin' => [
 				'label' => 'navigation_admin',
 				'route' => 'admin'
-			)
-		),
-	),
-    'libadmin' => array(
+            ]
+        ],
+    ],
+    'libadmin' => [
 
         'backlinksconfig' => 'local/config/libadmin/MapPortal.ini',
         'linkedswissbibconfig' => 'local/config/libadmin/LinkedSwissbib.ini',
 
         'tablepluginmanager' => [
             'factories' => [
+                //todo strings rausnehmen!!
                 InstitutionTable::class =>  InstitutionTableFactory::class,
                 'InstitutionTableGateway'   => InstitutionTableGatewayFactory::class,
                 InstitutionRelationTable::class => InstitutionRelationTableFactory::class,
@@ -222,6 +228,6 @@ return array(
 
             ]
         ]
-    ),
+    ],
 
-);
+];

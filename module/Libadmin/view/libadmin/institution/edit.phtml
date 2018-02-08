@@ -9,16 +9,11 @@ $institution = $form->get('institution');
 $idInstitution = (int)$institution->get('id')->getValue();
 $isNew = !$idInstitution;
 
-$saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save', 'Libadmin');
+$saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');
 
 $formType = 'horizontal';
 $form->setAttribute('class', 'form-horizontal');
 
-// Force Libadmin text domain (@todo cleaner way?)
-//todo: find another way for translations
-//$this->formLabelTwb()->setTranslatorTextDomain('Libadmin');
-$this->formLabel()->setTranslatorTextDomain('Libadmin');
-//$this->formSelectTwb()->setTranslatorTextDomain('Libadmin');
 
 ?>
 <?= $this->form()->openTag($form) ?>
@@ -27,12 +22,12 @@ $this->formLabel()->setTranslatorTextDomain('Libadmin');
 			   class="submitButton btn btn-primary btn-medium" id="submitbutton" name="submit">
 		<a href="<?= $this->url('institution', array('action' => 'home')); ?>"
 		   class="ajaxButton closeButton btn btn-medium" id="closebutton">
-			<?= $this->translate('action_close', 'Libadmin') ?>
+			<?= $this->translate('action_close') ?>
 		</a>
 		<?php if (!$isNew): ?>
 			<a href="<?= $this->url('institution', array('action' => 'delete', 'id' => $idInstitution)); ?>"
 			   class="ajaxButton deleteButton btn btn-danger btn-medium" id="deletebutton">
-				<?= $this->translate('action_delete', 'Libadmin') ?>
+				<?= $this->translate('action_delete') ?>
 			</a>
 		<?php endif; ?>
 	</div>
@@ -42,7 +37,7 @@ $this->formLabel()->setTranslatorTextDomain('Libadmin');
 <?= $this->flashMessenger()->render() ?>
 
 	<fieldset class="general">
-		<legend><?= $this->translate('general', 'Libadmin') ?></legend>
+		<legend><?= $this->translate('general') ?></legend>
 		<div class="row-fluid">
 			<div class="span5"><?= $this->formRow($institution->get('bib_code')) ?></div>
 			<div class="span5"><?= $this->formRow($institution->get('sys_code')) ?></div>
@@ -52,15 +47,15 @@ $this->formLabel()->setTranslatorTextDomain('Libadmin');
 
 	<div class="tabbable">
 		<ul class="nav nav-tabs formTabs">
-			<li class="active"><a href="#display"><?= $this->translate('display', 'Libadmin') ?></a></li>
-			<li><a href="#address"><?= $this->translate('address', 'Libadmin') ?></a></li>
-			<li><a href="#relations"><?= $this->translate('groups_and_views', 'Libadmin') ?></a></li>
+			<li class="active"><a href="#display"><?= $this->translate('display') ?></a></li>
+			<li><a href="#address"><?= $this->translate('address') ?></a></li>
+			<li><a href="#relations"><?= $this->translate('groups_and_views') ?></a></li>
 		</ul>
 
 		<div class="tab-content">
 			<div class="tab-pane active" id="display">
 				<fieldset>
-					<legend><?= $this->translate('displaynames', 'Libadmin') ?></legend>
+					<legend><?= $this->translate('displaynames') ?></legend>
 					<div class="row-fluid">
 						<div class="span6"><?= $this->formRow($institution->get('label_de')) ?></div>
 						<div class="span6"><?= $this->formRow($institution->get('label_fr')) ?></div>
@@ -72,7 +67,7 @@ $this->formLabel()->setTranslatorTextDomain('Libadmin');
 				</fieldset>
 
 				<fieldset>
-					<legend><?= $this->translate('title_library_names_official', 'Libadmin') ?></legend>
+					<legend><?= $this->translate('title_library_names_official') ?></legend>
 					<div class="row-fluid">
 						<div class="span6"><?= $this->formRow($institution->get('name_de')) ?></div>
 						<div class="span6"><?= $this->formRow($institution->get('name_fr')) ?></div>
@@ -104,7 +99,7 @@ $this->formLabel()->setTranslatorTextDomain('Libadmin');
 				</fieldset>
 
 				<fieldset class="notes">
-					<legend><?= $this->translate('notes', 'Libadmin') ?></legend>
+					<legend><?= $this->translate('notes') ?></legend>
 					<?= $this->formRow($institution->get('notes')) ?>
 				</fieldset>
 
@@ -126,7 +121,7 @@ $this->formLabel()->setTranslatorTextDomain('Libadmin');
 				</fieldset>
 
 				<fieldset class="contact">
-					<legend><?= $this->translate('contactdata', 'Libadmin') ?></legend>
+					<legend><?= $this->translate('contactdata') ?></legend>
 					<div class="row-fluid">
 						<div class="span6">
 							<?= $this->formRow($institution->get('website')) ?>
@@ -146,13 +141,13 @@ $this->formLabel()->setTranslatorTextDomain('Libadmin');
 			<div class="tab-pane" id="relations">
 				<div class="row">
 					<div class="span3 view">
-						<legend><?= $this->translate('views', 'Libadmin') ?></legend>
+						<legend><?= $this->translate('views') ?></legend>
 					</div>
 					<div class="span4 group">
-						<legend><?= $this->translate('groups', 'Libadmin') ?></legend>
+						<legend><?= $this->translate('groups') ?></legend>
 					</div>
 					<div class="span2 favorite">
-						<legend><?= $this->translate('is_favorite', 'Libadmin') ?>?</legend>
+						<legend><?= $this->translate('is_favorite') ?>?</legend>
 					</div>
 				</div>
 

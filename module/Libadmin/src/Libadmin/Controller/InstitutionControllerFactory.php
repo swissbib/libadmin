@@ -68,7 +68,7 @@ class InstitutionControllerFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container, $requestedName, array $options = null
     ) {
-        $formElementManager = $container->get(FormElementManagerV3Polyfill::class);
+        $formElementManager = $container->get('FormElementManager');
         $institutionForm = $formElementManager->get(InstitutionForm::class);
 
         /**

@@ -102,7 +102,7 @@ class InstitutionController extends BaseController
             return $this->forwardTo('home');
         }
 
-        $form = $this->i§nstitutionForm;
+        $form = $this->institutionForm;
         $form->bind($institution);
 
         /** @var Request $request */

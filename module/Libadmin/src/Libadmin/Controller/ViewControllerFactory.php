@@ -34,6 +34,12 @@ namespace Libadmin\Controller;
 
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
+use Libadmin\Form\ViewForm;
+use Libadmin\Helper\RelationOverview;
+use Libadmin\Table\GroupTable;
+use Libadmin\Table\InstitutionTable;
+use Libadmin\Table\ViewTable;
+use Zend\Form\View\Helper\FormElement;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
 use Zend\ServiceManager\Factory\FactoryInterface;
@@ -53,10 +59,32 @@ use Zend\I18n\Translator\TranslatorInterface;
 class ViewControllerFactory implements FactoryInterface
 {
 
+    /**
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return ViewController|object
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
+
+        $formElementManager =  $container->get('FormElementManager');
+
+        $viewForm = $formElementManager->get(ViewForm::class);
+
         $tablePluginManager =  $container->get(TablePluginManager::class);
-        $translator = $container->get(TranslatorInterface::class);
-        return new ViewController($tablePluginManager,$translator);
+
+        $viewTable = $tablePluginManager->get(ViewTable::class);
+        $groupTable = $tablePluginManager->get(GroupTable::class);
+        $institutionTable = $tablePluginManager->get(InstitutionTable::class);
+        $relationOverview = $tablePluginManager->get(RelationOverview::class);
+
+        return new ViewController($viewForm,
+            $viewTable,
+            $groupTable,
+            $institutionTable,
+            $relationOverview);
     }
 }

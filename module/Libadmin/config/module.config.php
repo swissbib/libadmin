@@ -165,6 +165,7 @@ return [
         'factories' => [
             InstitutionForm::class => InstitutionFormFactory::class,
             InstitutionFieldset::class => InvokableFactory::class,
+            ViewForm::class => ViewFormFactory::class
         ]
     ],
 
@@ -235,7 +236,6 @@ return [
                 'ViewTableGateway' => ViewTableGatewayFactory::class,
                 GroupRelationTable::class => GroupRelationTableFactory::class,
                 'GroupRelationTableGateway' => GroupRelationTableGatewayFactory::class,
-                ViewForm::class => ViewFormFactory::class,
                 RelationOverview::class => RelationOverviewFactory::class
 
             ]

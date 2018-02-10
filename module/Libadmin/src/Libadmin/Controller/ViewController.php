@@ -34,16 +34,15 @@
 
 namespace Libadmin\Controller;
 
-use Zend\Http\Request;
-use Zend\View\Model\ViewModel;
-use Zend\Http\Response;
-
-use Libadmin\Helper\RelationOverview;
 use Libadmin\Form\ViewForm;
+use Libadmin\Helper\RelationOverview;
 use Libadmin\Model\View;
-use Libadmin\Table\GroupRelationTable;
 use Libadmin\Table\GroupTable;
-
+use Libadmin\Table\InstitutionTable;
+use Libadmin\Table\ViewTable;
+use Zend\Http\Request;
+use Zend\Http\Response;
+use Zend\View\Model\ViewModel;
 
 
 /**
@@ -54,135 +53,173 @@ class ViewController extends BaseController
 {
 
 
-	/**
-	 * @return   ViewForm
-	 */
-	protected function getViewForm()
-	{
-		return $this->tablePluginManager->get(ViewForm::class);
-	}
+    /**
+     * @var ViewForm
+     */
+    private $viewForm;
+
+    /**
+     * @var ViewTable
+     */
+    private $viewTable;
+    /**
+     * @var GroupTable
+     */
+    private $groupTable;
+    /**
+     * @var InstitutionTable
+     */
+    private $institutionTable;
+    /**
+     * @var RelationOverview
+     */
+    private $relationOverview;
+
+
+    /**
+     * ViewController constructor.
+     * @param ViewForm $viewForm
+     * @param ViewTable $viewTable
+     */
+    public function __construct(
+        ViewForm $viewForm,
+        ViewTable $viewTable,
+        GroupTable $groupTable,
+        InstitutionTable $institutionTable,
+        RelationOverview $relationOverview
+    )
+    {
+        $this->viewForm = $viewForm;
+        $this->viewTable = $viewTable;
+
+        $this->groupTable = $groupTable;
+        $this->institutionTable = $institutionTable;
+        $this->relationOverview = $relationOverview;
+    }
 
 
 
-	/**
-	 * Add view
-	 *
-	 * @return    Response|ViewModel
-	 */
-	public function addAction()
-	{
-		$form = $this->getViewForm();
-		/** @var Request $request */
-		$request = $this->getRequest();
-		$flashMessenger = $this->flashMessenger();
 
-		if ($request->isPost()) {
-			$view = new View();
-			$form->setData($request->getPost());
+    /**
+     * Add view
+     *
+     * @return    Response|ViewModel
+     */
+    public function addAction()
+    {
+        $form = $this->viewForm;
+        /** @var Request $request */
+        $request = $this->getRequest();
+        $flashMessenger = $this->flashMessenger();
 
-			if ($form->isValid()) {
-				$view->exchangeArray($form->getData());
-				$idView = $this->getTable()->save($view);
+        if ($request->isPost()) {
+            $view = new View();
+            $form->setData($request->getPost());
 
-				$flashMessenger->addSuccessMessage($this->translate('saved_view'));
+            if ($form->isValid()) {
+                $view->exchangeArray($form->getData());
+                $idView = $this->viewTable->save($view);
 
-				return $this->redirectTo('edit', $idView);
-			} else {
-				$flashMessenger->addErrorMessage($this->translate('form_invalid'));
-			}
-		}
+                $this->flashMessenger->addSuccessMessage('saved_view');
 
-		$form->setAttribute('action', $this->makeUrl('view', 'add'));
+                return $this->redirectTo('edit', $idView);
+            } else {
+                $this->flashMessenger->addErrorMessage('form_invalid');
+            }
+        }
 
-		return $this->getAjaxView(array(
-			'customform'	=> $form,
-			'title'	=> $this->translate('view_add', 'Libadmin'),
-		), 'libadmin/view/edit');
-	}
+        $form->setAttribute('action', $this->makeUrl('view', 'add'));
 
-
-
-	/**
-	 * Edit view
-	 *
-	 * @return    ViewModel
-	 */
-	public function editAction()
-	{
-		$idView = (int)$this->params()->fromRoute('id', 0);
-		$flashMessenger = $this->flashMessenger();
-
-		if (!$idView) {
-			return $this->forwardTo('home');
-		}
-
-		try {
-			/** @var View $view */
-			$view = $this->getTable()->getRecord($idView);
-			$view->setGroups($this->getTable()->getGroupIDs($idView));
-		} catch (\Exception $ex) {
-			$flashMessenger->addErrorMessage($this->translate('notfound_record'));
-
-			return $this->forwardTo('home');
-		}
-
-		$form = $this->getViewForm();
-		$form->bind($view);
-
-		/** @var Request $request */
-		$request = $this->getRequest();
-		if ($request->isPost()) {
-			$postData = $request->getPost();
-			$form->setData($postData);
-
-			if ($form->isValid()) {
-				$groupIdsSorted			= $postData->get('groupsortableids');
-				$institutionIdsSorted	= $postData->get('institutionsortableids');
-				$view					= $form->getData();
-				$view->setGroups($postData->get('groups') ?: array()); // Workaround, if all groups are deselected
-
-				$this->getTable()->save($view, $groupIdsSorted, $institutionIdsSorted);
-
-				$form->bind($view);
-
-				$flashMessenger->addSuccessMessage($this->translate('saved_view'));
-			} else {
-				$flashMessenger->addErrorMessage($this->translate('form_invalid'));
-			}
-		}
-
-		$form->setAttribute('action', $this->makeUrl('view', 'edit', $idView));
-
-		/** @var GroupTable $groupTable */
-		$groupTable	= $this->getTable('Group');
-
-		/** @var GroupTable $groupTable */
-		$institutionTable	= $this->getTable('Institution');
-
-		/** @var RelationOverview $relationHelper */
-		$relationHelper = $this->tablePluginManager->get(RelationOverview::class);
-
-		return $this->getAjaxView(array(
-			'groups'		=> $groupTable->getViewGroups($idView),
-//			'institutions'	=> $this->getInstitutions(),
-			'institutions'	=> $institutionTable->getViewInstitutions($idView),
-
-			'customform'			=> $form,
-			'title'			=> $this->translate('view_edit', 'Libadmin'),
-			'relations' 	=> $relationHelper->getData($view)
-		));
-	}
+        return $this->getAjaxView([
+            'customform' => $form,
+            'title' => 'view_add',
+        ], 'libadmin/view/edit');
+    }
 
 
+    /**
+     * Edit view
+     *
+     * @return    ViewModel
+     */
+    public function editAction()
+    {
+        $idView = (int)$this->params()->fromRoute('id', 0);
 
-	/**
-	 * Before view delete, remove all relations
-	 *
-	 * @param    Integer        $idView
-	 */
-	protected function beforeDelete($idView)
-	{
-		$this->getGroupRelationTable()->deleteViewRelations($idView);
-		$this->getInstitutionRelationTable()->deleteViewRelations($idView);
-	}
+        if (!$idView) {
+            return $this->forwardTo('home');
+        }
+
+        try {
+            /** @var View $view */
+            $view = $this->viewTable->getRecord($idView);
+            $view->setGroups($this->viewTable->getGroupIDs($idView));
+        } catch (\Exception $ex) {
+            $this->flashMessenger->addErrorMessage('notfound_record');
+
+            return $this->forwardTo('home');
+        }
+
+        $form = $this->viewForm;
+        $form->bind($view);
+
+        /** @var Request $request */
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $postData = $request->getPost();
+            $form->setData($postData);
+
+            if ($form->isValid()) {
+                $groupIdsSorted = $postData->get('groupsortableids');
+                $institutionIdsSorted = $postData->get('institutionsortableids');
+                $view = $form->getData();
+                $view->setGroups($postData->get('groups') ?: []); // Workaround, if all groups are deselected
+
+                $this->viewTable->save($view, $groupIdsSorted, $institutionIdsSorted);
+
+                $form->bind($view);
+
+                $this->flashMessenger->addSuccessMessage($this->translate('saved_view'));
+            } else {
+                $this->flashMessenger->addErrorMessage($this->translate('form_invalid'));
+            }
+        }
+
+        $form->setAttribute('action', $this->makeUrl('view', 'edit', $idView));
+
+
+        return $this->getAjaxView([
+            'groups' => $this->groupTable->getViewGroups($idView),
+            'institutions' => $this->institutionTable->getViewInstitutions($idView),
+            'customform' => $form,
+            'title' => 'view_edit',
+            'relations' => $this->relationOverview->getData($view)
+        ]);
+    }
+
+
+    /**
+     * Before view delete, remove all relations
+     *
+     * @param    Integer $idView
+     */
+    protected function beforeDelete($idView)
+    {
+        $this->getGroupRelationTable()->deleteViewRelations($idView);
+        $this->getInstitutionRelationTable()->deleteViewRelations($idView);
+    }
+
+
+    /**
+     * Initial view
+     *
+     * @return array
+     */
+    public function indexAction()
+    {
+        return [
+            'listItems' => $this->viewTable->getAll()
+        ];
+    }
+
 }

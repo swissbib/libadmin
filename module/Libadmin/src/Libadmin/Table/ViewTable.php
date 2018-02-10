@@ -60,9 +60,23 @@ class ViewTable extends BaseTable
 		return parent::getAll($order, $limit);
 	}
 
+    /**
+     * Get all vies as array
+     *
+     * @param    String         $order
+     * @param    Integer		$limit
+     * @return   array
+     */
+    public function getAllToList($order = 'label', $limit = 30, bool $idAsIndex = false)
+    {
+        $resultSetInterface = $this->getAll($order, $limit);
+
+        return $this->toList($resultSetInterface,$idAsIndex);
+    }
 
 
-	/**
+
+    /**
 	 * Get view
 	 *
 	 * @param    Integer        $idView
@@ -164,6 +178,9 @@ class ViewTable extends BaseTable
 		}
 	}
 
+    /**
+     * @return array
+     */
 	public function getAllViewsOptions()
 	{
 		$results = $this->getAll('id', 0);

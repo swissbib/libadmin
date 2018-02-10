@@ -3,6 +3,9 @@ namespace Libadmin\Controller;
 
 use Libadmin\Model\InstitutionRelationList;
 use Libadmin\Table\GroupRelationTable;
+use Libadmin\Table\GroupTable;
+use Libadmin\Table\InstitutionTable;
+use Libadmin\Table\ViewTable;
 use Zend\Form\FormInterface;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
@@ -21,193 +24,248 @@ use Libadmin\Model\InstitutionRelation;
 class GroupController extends BaseController
 {
 
-	/**
-	 * Search groups
-	 * Extend limit to always see all items
-	 *
-	 * @return ViewModel
-	 */
-	public function searchAction($limit = 15)
-	{
-		return parent::searchAction(300);
-	}
+
+    /**
+     * @var GroupForm
+     */
+    private $groupForm;
+    /**
+     * @var GroupTable
+     */
+    private $groupTable;
+    /**
+     * @var ViewTable
+     */
+    private $viewTable;
+    /**
+     * @var InstitutionTable
+     */
+    private $institutionTable;
+    /**
+     * @var InstitutionRelationTable
+     */
+    private $institutionRelationTable;
+
+    /**
+     * GroupController constructor.
+     * @param GroupForm $groupForm
+     * @param GroupTable $groupTable
+     * @param ViewTable $viewTable
+     * @param InstitutionTable $institutionTable
+     * @param InstitutionRelationList $institutionRelationList
+     */
+    public function __construct(
+        GroupForm $groupForm,
+        GroupTable $groupTable,
+        ViewTable $viewTable,
+        InstitutionTable $institutionTable,
+        InstitutionRelationTable $institutionRelationTable
+    )
+    {
+        $this->groupForm = $groupForm;
+        $this->groupTable = $groupTable;
+        $this->viewTable = $viewTable;
+        $this->institutionTable = $institutionTable;
+
+        $this->institutionRelationTable = $institutionRelationTable;
+    }
+
+
+    /**
+     * Search groups
+     * Extend limit to always see all items
+     *
+     * @return ViewModel
+     */
+    public function searchAction($limit = 15)
+    {
+        return parent::searchAction(300);
+    }
+
+
+    /**
+     * Initial view
+     *
+     * @return array
+     */
+    public function indexAction()
+    {
+        return [
+            'listItems' => $this->groupTable->getAll()
+        ];
+    }
 
 
 
-	/**
-	 * Show edit form and add data
-	 *
-	 * @return    ViewModel|Response
-	 */
-	public function addAction()
-	{
-		$form	= $this->getGroupForm();
-		$group	= new Group();
-		/** @var Request $request */
-		$request= $this->getRequest();
-		$flashMessenger = $this->flashMessenger();
+    /**
+     * Show edit form and add data
+     *
+     * @return    ViewModel|Response
+     */
+    public function addAction()
+    {
+        $form = $this->groupForm;
+        $group = new Group();
+        /** @var Request $request */
+        $request = $this->getRequest();
 
-		$form->bind($group);
+        $form->bind($group);
 
-		if ($request->isPost()) {
-			$form->setData($request->getPost());
+        if ($request->isPost()) {
+            $form->setData($request->getPost());
 
-			if ($form->isValid()) {
+            if ($form->isValid()) {
 //				$group->exchangeArray($form->getData());
 
-				try {
-					$storageData= $form->getData(FormInterface::VALUES_AS_ARRAY);
-					$group->exchangeArray($storageData['group']);
-					$idGroup = $this->getTable()->save($group);
+                try {
+                    $storageData = $form->getData(FormInterface::VALUES_AS_ARRAY);
+                    $group->exchangeArray($storageData['group']);
+                    $idGroup = $this->groupTable->save($group);
 
-					$flashMessenger->addSuccessMessage($this->translate('saved_group'));
+                    $this->flashMessenger()->addSuccessMessage('saved_group');
 
-					return $this->redirectTo('edit', $idGroup);
-				} catch (\Exception $e) {
-					$flashMessenger->addErrorMessage($e->getMessage());
-				}
-			} else {
-				$flashMessenger->addErrorMessage($this->translate('form_invalid'));
-			}
-		}
+                    return $this->redirectTo('edit', $idGroup);
+                } catch (\Exception $e) {
+                    $this->flashMessenger()->addErrorMessage($e->getMessage());
+                }
+            } else {
+                $this->flashMessenger->addErrorMessage('form_invalid');
+            }
+        }
 
-		$form->setAttribute('action', $this->makeUrl('group', 'add'));
+        $form->setAttribute('action', $this->makeUrl('group', 'add'));
 
-		return $this->getAjaxView(array(
-			'customform' 		=> $form,
-			'lockLists'	=> array(),
-			'title'		=> $this->translate('group_add', 'Libadmin'),
-		), 'libadmin/group/edit');
-	}
-
-
-
-	/**
-	 * Show edit form and update data
-	 *
-	 * @return    ViewModel
-	 */
-	public function editAction()
-	{
-		$idGroup = (int)$this->params()->fromRoute('id', 0);
-		$flashMessenger = $this->flashMessenger();
-
-		if (!$idGroup) {
-			return $this->forwardTo('home');
-		}
-
-		try {
-			/** @var Group $group */
-			$group	= $this->getGroupForEdit($idGroup);
-		} catch (\Exception $ex) {
-			$flashMessenger->addErrorMessage($this->translate('notfound_record'));
-			$flashMessenger->addErrorMessage($ex->getMessage());
-
-			return $this->forwardTo('home');
-		}
-
-		$form = $this->getGroupForm();
-		$form->bind($group);
-
-		/** @var Request $request */
-		$request = $this->getRequest();
-		if ($request->isPost()) {
-			$form->setData($request->getPost());
-
-			if ($form->isValid()) {
-				$storageData = $form->getData(FormInterface::VALUES_AS_ARRAY);
-				$group = new Group();
-				$group->exchangeArray($storageData['group']);
-				$group->setId($idGroup);
-
-				$this->getTable()->save($group);
-				$flashMessenger->addSuccessMessage($this->translate('saved_group'));
-				$group	= $this->getGroupForEdit($idGroup);
-				$form->bind($group);
-			} else {
-				$flashMessenger->addErrorMessage($this->translate('form_invalid'));
-			}
-		}
-
-		$form->setAttribute('action', $this->makeUrl('group', 'edit', $idGroup));
-
-		return $this->getAjaxView(array(
-			'customform'		=> $form,
-			'lockLists'	=> $this->getInstitutionLockLists(),
-			'title' 	=> $this->translate('group_edit', 'Libadmin'),
-		));
-	}
+        return $this->getAjaxView(array(
+            'customform' => $form,
+            'lockLists' => array(),
+            'title' => 'group_add',
+        ), 'libadmin/group/edit');
+    }
 
 
+    /**
+     * Show edit form and update data
+     *
+     * @return    ViewModel
+     */
+    public function editAction()
+    {
+        $idGroup = (int)$this->params()->fromRoute('id', 0);
 
-	/**
-	 * Get list of institutions grouped by their relation to the views
-	 *
-	 * @return	Array[]
-	 */
-	protected function getInstitutionLockLists()
-	{
-		$lockLists	= array();
+        if (!$idGroup) {
+            return $this->forwardTo('home');
+        }
 
-		foreach ($this->getAllViews() as $view) {
-			$lockLists[$view->getId()] = $this->getTable()->getViewInstitutionIDs($view->getId());
-		}
+        try {
+            /** @var Group $group */
+            $group = $this->getGroupForEdit($idGroup);
+        } catch (\Exception $ex) {
+            $this->flashMessenger()->addErrorMessage('notfound_record');
+            $this->flashMessenger()->addErrorMessage($ex->getMessage());
 
-		return $lockLists;
-	}
+            return $this->forwardTo('home');
+        }
 
+        $form = $this->groupForm;
+        $form->bind($group);
 
+        /** @var Request $request */
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form->setData($request->getPost());
 
-	/**
-	 * Get group form
-	 *
-	 * @return    GroupForm
-	 */
-	protected function getGroupForm()
-	{
-		$views			= $this->getAllViews();
-		$institutions	= $this->getInstitutions('bib_code', 0);
+            if ($form->isValid()) {
+                $storageData = $form->getData(FormInterface::VALUES_AS_ARRAY);
+                $group = new Group();
+                $group->exchangeArray($storageData['group']);
+                $group->setId($idGroup);
 
-		return new GroupForm($views, $institutions);
-	}
+                $this->groupTable->save($group);
+                $this->flashMessenger()->addSuccessMessage('saved_group');
+                $group = $this->getGroupForEdit($idGroup);
+                $form->bind($group);
+            } else {
+                $this->flashMessenger()->addErrorMessage('form_invalid');
+            }
+        }
 
+        $form->setAttribute('action', $this->makeUrl('group', 'edit', $idGroup));
 
-
-	/**
-	 *
-	 * @param	Integer		$idGroup
-	 * @return	Group
-	 */
-	protected function getGroupForEdit($idGroup)
-	{
-		$group		= $this->getTable()->getRecord($idGroup);
-		$views		= $this->getAllViews();
-		$relations	= array();
-		/** @var InstitutionRelationTable $relationTable */
-		$relationTable	= $this->getTable('InstitutionRelation');
-		$groupViewIds	= $this->getTable('Group')->getViewIDs($idGroup);
-
-		foreach ($views as $view) {
-			$viewRelations	= $relationTable->getGroupViewRelations($idGroup, $view->getId());
-			$relations[]	= new InstitutionRelationList($view->getId(), $viewRelations);
-		}
-
-		$group->setRelations($relations);
-		$group->setViews($groupViewIds);
-
-		return $group;
-	}
+        return $this->getAjaxView([
+            'customform' => $form,
+            'lockLists' => $this->getInstitutionLockLists(),
+            'title' => 'group_edit',
+        ]);
+    }
 
 
+    /**
+     * Get list of institutions grouped by their relation to the views
+     *
+     * @return    array[]
+     */
+    protected function getInstitutionLockLists()
+    {
+        $lockLists = [];
 
-	/**
-	 * Before group delete, remove all relations
-	 *
-	 * @param	Integer		$idGroup
-	 */
-	protected function beforeDelete($idGroup)
-	{
-		$this->getGroupRelationTable()->deleteGroupRelations($idGroup);
-		$this->getInstitutionRelationTable()->deleteGroupRelations($idGroup);
-	}
+        foreach ($this->viewTable->getAll('id', 0) as $view) {
+            $lockLists[$view->getId()] = $this->viewTable->getViewInstitutionIDs($view->getId());
+        }
+
+        return $lockLists;
+    }
+
+
+    /**
+     * Get group form
+     *
+     * @return    GroupForm
+     */
+    protected function getGroupForm()
+    {
+        $views = $this->getAllViews();
+        $institutions = $this->getInstitutions('bib_code', 0);
+
+        return new GroupForm($views, $institutions);
+    }
+
+
+    /**
+     *
+     * @param    Integer $idGroup
+     * @return    Group
+     */
+    protected function getGroupForEdit($idGroup)
+    {
+        $group = $this->groupTable->getRecord($idGroup);
+        //$views = $this->getAllViews();
+        $views = $this->viewTable->getAllToList("id", 0);
+        $relations = [];
+        /** @var InstitutionRelationTable $relationTable */
+        $relationTable = $this->institutionRelationTable;
+        $groupViewIds = $this->groupTable->getViewIDs($idGroup);
+
+        foreach ($views as $view) {
+            $viewRelations = $relationTable->getGroupViewRelations($idGroup, $view->getId());
+            $relations[] = new InstitutionRelationList($view->getId(), $viewRelations);
+        }
+
+        $group->setRelations($relations);
+        $group->setViews($groupViewIds);
+
+        return $group;
+    }
+
+
+    /**
+     * Before group delete, remove all relations
+     *
+     * @param    Integer $idGroup
+     */
+    protected function beforeDelete($idGroup)
+    {
+        $this->getGroupRelationTable()->deleteGroupRelations($idGroup);
+        $this->getInstitutionRelationTable()->deleteGroupRelations($idGroup);
+    }
+
 }

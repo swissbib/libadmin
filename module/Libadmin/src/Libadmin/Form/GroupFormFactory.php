@@ -1,15 +1,15 @@
 <?php
 
 /**
- * GroupControllerFactory
+ * GroupFormFactory
  *
  * PHP version 5
  *
  * Copyright (C) project swissbib, University Library Basel, Switzerland
  * http://www.swissbib.org  / http://www.swissbib.ch / http://www.ub.unibas.ch
  *
- * Date: 26.01.18
- * Time: 11:40
+ * Date: 10.02.18
+ * Time: 19:32
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2,
  * as published by the Free Software Foundation.
@@ -24,60 +24,66 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * @category Swissbib_VuFind2
- * @package  Libadmin_Controller
+ * @package  Libadmin_Libadmin_Form
  * @author   Günter Hipler <guenter.hipler@unibas.ch>
  * @license  http://opensource.org/licenses/gpl-2.0.php GNU General Public License
  * @link     http://www.swissbib.org
  */
 
-namespace Libadmin\Controller;
-
+namespace Libadmin\Libadmin\Form;
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
 use Libadmin\Form\GroupForm;
-use Libadmin\Model\InstitutionRelationList;
-use Libadmin\Table\GroupTable;
-use Libadmin\Table\InstitutionRelationTable;
 use Libadmin\Table\InstitutionTable;
+use Libadmin\Table\TablePluginManager;
 use Libadmin\Table\ViewTable;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
 use Zend\ServiceManager\Factory\FactoryInterface;
-use Libadmin\Table\TablePluginManager;
-use Zend\I18n\Translator\TranslatorInterface;
 
 /**
- * GroupControllerFactory
+ * GroupFormFactory
  *
  * @category Swissbib_VuFind2
- * @package  Libadmin_Controller
+ * @package  Libadmin_Libadmin_Form
  * @author   Günter Hipler <guenter.hipler@unibas.ch>
  * @license  http://opensource.org/licenses/gpl-2.0.php GNU General Public License
  * @link     http://vufind.org
- * @link     http://www.swissbib.ch
  */
-class GroupControllerFactory implements FactoryInterface
+class GroupFormFactory implements FactoryInterface
 {
 
+    /**
+     * Create an object
+     *
+     * @param  ContainerInterface $container
+     * @param  string $requestedName
+     * @param  null|array $options
+     * @return object
+     * @throws ServiceNotFoundException if unable to resolve the service.
+     * @throws ServiceNotCreatedException if an exception is raised when
+     *     creating a service.
+     * @throws ContainerException if any other error occurs
+     */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
 
-        $formElementManager = $container->get('FormElementManager');
+
+        /** @var TablePluginManager $tablePluginManager */
         $tablePluginManager = $container->get(TablePluginManager::class);
-
-        $groupForm = $formElementManager->get(GroupForm::class);
-        $groupTable = $tablePluginManager->get(GroupTable::class);
+        /** @var ViewTable $viewTable */
         $viewTable = $tablePluginManager->get(ViewTable::class);
+        $viewOptions = $viewTable->getAllViewsOptions();
+
+        /** @var InstitutionTable $institutionTable */
         $institutionTable = $tablePluginManager->get(InstitutionTable::class);
-        $institutionRelationTable = $tablePluginManager->get(InstitutionRelationTable::class);
+
+        $institutions = $institutionTable->getAllToList('bib_code', 0, true);
 
 
-        return new GroupController(
-            $groupForm,
-            $groupTable,
-            $viewTable,
-            $institutionTable,
-            $institutionRelationTable
-        );
+        return new GroupForm($viewOptions,$institutions);
+
+
+
     }
 }

@@ -80,6 +80,19 @@ class InstitutionTable extends BaseTable
 		return parent::getAll($order, $limit);
 	}
 
+    /**
+     * Get all institutions as array
+     *
+     * @param    String         $order
+     * @param    Integer		$limit
+     * @return   array
+     */
+    public function getAllToList($order = 'label', $limit = 30, bool $idAsIndex = false)
+    {
+        $resultSetInterface = $this->getAll($order, $limit);
+
+        return $this->toList($resultSetInterface,$idAsIndex);
+    }
 
 
 	/**

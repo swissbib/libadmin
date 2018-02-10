@@ -5,7 +5,7 @@ use Libadmin\Form\GroupForm;
 /** @var GroupFieldset $group */
 /** @var GroupForm	$form */
 
-$this->headTitle($title);
+$this->headTitle($this->translate($title));
 
 $form = $this->customform;
 $form->prepare();
@@ -15,11 +15,8 @@ $group			= $form->get('group');
 
 $idGroup		= (int)$group->get('id')->getValue();
 $isNew			= !$idGroup;
-$saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save', 'Libadmin');
+$saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');
 
-// Force Libadmin text domain (@todo cleaner way?)
-$this->formLabel()->setTranslatorTextDomain('Libadmin');
-$this->formSelect()->setTranslatorTextDomain('Libadmin');
 
 ?>
 
@@ -27,22 +24,22 @@ $this->formSelect()->setTranslatorTextDomain('Libadmin');
 	<div class="topButtons">
 		<input type="submit" value="<?= $this->escapeHtml($saveButtonLabel) ?>"
 			   class="submitButton btn btn-primary btn-medium" id="submitbutton" name="submit">
-		<a href="<?= $this->url('group', array('action' => 'home')); ?>" class="ajaxButton closeButton btn btn-medium"
-		   id="closebutton"><?= $this->translate('action_close', 'Libadmin') ?></a>
+		<a href="<?= $this->url('group', ['action' => 'home']); ?>" class="ajaxButton closeButton btn btn-medium"
+		   id="closebutton"><?= $this->translate('action_close') ?></a>
 		<?php if (!$isNew): ?>
-			<a href="<?= $this->url('group', array('action' => 'delete', 'id' => $idGroup)); ?>"
+			<a href="<?= $this->url('group', ['action' => 'delete', 'id' => $idGroup]); ?>"
 			   class="ajaxButton deleteButton btn btn-danger btn-medium" id="deletebutton">
-				<?= $this->translate('action_delete', 'Libadmin') ?>
+				<?= $this->translate('action_delete') ?>
 			</a>
 		<?php endif; ?>
 	</div>
 
-	<h1><?php echo $this->escapeHtml($title); ?></h1>
+	<h1><?php echo $this->escapeHtml($this->translate( $title)); ?></h1>
 
 <?= $this->flashMessenger()->render() ?>
 
 	<fieldset class="general">
-		<legend><?= $this->translate('general', 'Libadmin') ?></legend>
+		<legend><?= $this->translate('general') ?></legend>
 		<div class="row-fluid">
 			<div class="span10">
 				<?= $this->formRow($group->get('code')) ?>
@@ -56,16 +53,16 @@ $this->formSelect()->setTranslatorTextDomain('Libadmin');
 	<div class="tabbable">
 		<ul class="nav nav-tabs formTabs">
 			<li class="active">
-				<a href="#display"><?= $this->translate('display', 'Libadmin') ?></a>
+				<a href="#display"><?= $this->translate('display') ?></a>
 			</li>
-			<li><a href="#views"><?= $this->translate('views', 'Libadmin') ?></a></li>
-			<li><a href="#institutions"><?= $this->translate('institutions', 'Libadmin') ?></a></li>
+			<li><a href="#views"><?= $this->translate('views') ?></a></li>
+			<li><a href="#institutions"><?= $this->translate('institutions') ?></a></li>
 		</ul>
 
 		<div class="tab-content">
 			<div class="tab-pane active" id="display">
 				<fieldset>
-					<legend><?= $this->translate('displaynames', 'Libadmin') ?></legend>
+					<legend><?= $this->translate('displaynames') ?></legend>
 					<div class="row-fluid">
 						<div class="span6">
 							<?= $this->formRow($group->get('label_de')) ?>
@@ -85,7 +82,7 @@ $this->formSelect()->setTranslatorTextDomain('Libadmin');
 				</fieldset>
 
 				<fieldset class="notes">
-					<legend><?= $this->translate('notes', 'Libadmin') ?></legend>
+					<legend><?= $this->translate('notes') ?></legend>
 					<?= $this->formRow($group->get('notes')) ?>
 				</fieldset>
 			</div>
@@ -94,7 +91,7 @@ $this->formSelect()->setTranslatorTextDomain('Libadmin');
 				<?php if ($group->has('views')): ?>
 					<?= $this->formRow($group->get('views')) ?>
 				<?php else: ?>
-					<p><?= $this->translate('noviews', 'Libadmin') ?></p>
+					<p><?= $this->translate('noviews') ?></p>
 				<?php endif; ?>
 			</div>
 
@@ -103,12 +100,12 @@ $this->formSelect()->setTranslatorTextDomain('Libadmin');
 				<div class="row-fluid naviButtons">
 					<?php
 							// Break up relations into groups
-						$relations = array();
+						$relations = [];
 						foreach($group->get('relations') as $relation) {
-							$relations[] = array(
+							$relations[] = [
 								'id_view'	=> $relation->get('view')->getValue(),
 								'label'		=> $relation->getLabel()
-							);
+                            ];
 						}
 						$relationsGroups = array_chunk($relations, 5);
 					?>

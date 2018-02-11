@@ -79,7 +79,16 @@ class GroupController extends BaseController
      */
     public function searchAction($limit = 15)
     {
-        return parent::searchAction(300);
+        //return parent::searchAction(300);
+
+        $query = $this->params()->fromQuery('query', '');
+        $data = array(
+            'route' => 'group',
+            'listItems' => $this->groupTable->find($query, $limit)
+        );
+
+        return $this->getAjaxView($data, 'libadmin/global/search');
+
     }
 
 
@@ -197,6 +206,15 @@ class GroupController extends BaseController
             'title' => 'group_edit',
         ]);
     }
+
+    public function homeAction()
+    {
+        return $this->getAjaxView(
+            [
+                'listItems' => $this->groupTable->getAll()
+            ]);
+    }
+
 
 
     /**

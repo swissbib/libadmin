@@ -105,6 +105,9 @@ class InstitutionController extends BaseController
      */
     public function editAction()
     {
+
+
+
         $idInstitution = (int)$this->params()->fromRoute('id', 0);
 
         if (!$idInstitution) {
@@ -143,6 +146,52 @@ class InstitutionController extends BaseController
             'customform' => $form,
             'title' => 'institution_edit'
         ));
+    }
+
+
+    public function deleteAction()
+    {
+        $idRecord = (int)$this->params()->fromRoute('id', 0);
+
+        if (!$idRecord) {
+            $this->flashMessenger()->addErrorMessage('No record defined for deletion. Something went wrong');
+
+            return $this->redirectTo('home');
+        }
+
+        /** @var Request $request */
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $isDeleteRequest = $request->getPost('del') !== null;
+
+            if ($isDeleteRequest) {
+                $idRecord = (int)$request->getPost('id');
+                $this->beforeDelete($idRecord);
+                $this->institutionTable->delete($idRecord);
+                $this->afterDelete($idRecord);
+                // @todo message is shown to late, solve this problem and re-enable message
+                //	$this->flashMessenger()->addSuccessMessage('Record deleted');
+            }
+
+
+            $params['action'] = 'index';
+            return $this->redirect()->toRoute('institution', $params);
+
+        }
+
+        return $this->getAjaxView(array(
+            'id' => $idRecord,
+            'route' => 'institution',
+            'record' => $this->institutionTable->getRecord($idRecord)
+        ), 'libadmin/global/delete');
+    }
+
+    public function homeAction()
+    {
+        return $this->getAjaxView(
+            [
+                'listItems' => $this->institutionTable->getAll()
+            ]);
     }
 
 
@@ -217,7 +266,7 @@ class InstitutionController extends BaseController
      */
     protected function beforeDelete($idView)
     {
-        $this->getInstitutionRelationTable()->deleteInstitutionRelations($idView);
+        $this->institutionRelationTable->deleteInstitutionRelations($idView);
     }
 
     /**
@@ -227,6 +276,7 @@ class InstitutionController extends BaseController
      */
     public function indexAction()
     {
+        $test = "";
         return [
             'listItems' => $this->institutionTable->getAll()
         ];

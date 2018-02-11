@@ -87,7 +87,7 @@ class InstitutionTable extends BaseTable
      * @param    Integer		$limit
      * @return   array
      */
-    public function getAllToList($order = 'label', $limit = 30, bool $idAsIndex = false)
+    public function getAllToList($order = 'bib_code', $limit = 30, bool $idAsIndex = false)
     {
         $resultSetInterface = $this->getAll($order, $limit);
 

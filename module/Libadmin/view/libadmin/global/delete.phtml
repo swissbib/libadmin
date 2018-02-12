@@ -5,7 +5,7 @@ use Libadmin\Model\BaseModel;
 
 $typeLabel = $record->getTypeLabel();
 $itemLabel = $record->getListLabel();
-$title = 'Delete ' . $this->translate($typeLabel, 'Libadmin');
+$title = 'Delete ' . $this->translate($typeLabel);
 
 $this->headTitle($title);
 ?>
@@ -14,17 +14,17 @@ $this->headTitle($title);
 <p>Are you sure that you want to delete '<?= $this->escapeHtml($itemLabel); ?>?</p>
 
 <?php
-$url = $this->url($route, array(
+$url = $this->url($route, [
 	'action' => 'delete',
 	'id' => $id
-));
+]);
 ?>
 <form action="<?= $url ?>" method="post" style="display:inline">
 	<input type="hidden" name="id" value="<?= $id ?>"/>
 	<input type="submit" name="del" value="Yes" class="btn btn-danger btn-medium"/>
 </form>
 
-<a href="<?= $this->url($route, array('action' => 'edit', 'id' => $id)); ?>"
+<a href="<?= $this->url($route, ['action' => 'edit', 'id' => $id]); ?>"
    class="ajaxButton returnButton btn btn-medium">
 	No
 </a>

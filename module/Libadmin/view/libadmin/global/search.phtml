@@ -7,7 +7,7 @@ use Libadmin\Model\BaseModel;
  */
 ?>
 <?php foreach ($listItems as $listItem): ?>
-	<li><a href="<?= $this->url($route, array('action' => 'edit', 'id' => $listItem->getID())); ?>">
+	<li><a href="<?= $this->url($route, ['action' => 'edit', 'id' => $listItem->getID()]); ?>">
 			<?= $this->escapeHtml($listItem->getListLabel()) ?>
 		</a></li>
 <?php endforeach; ?>

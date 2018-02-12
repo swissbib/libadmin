@@ -174,8 +174,8 @@ class InstitutionController extends BaseController
             }
 
 
-            $params['action'] = 'index';
-            return $this->redirect()->toRoute('institution', $params);
+            return $this->redirect()->toRoute('institution', ['action' => 'index']);
+            //return $this->forward()->dispatch(InstitutionController::class,$params);
 
         }
 
@@ -276,7 +276,7 @@ class InstitutionController extends BaseController
      */
     public function indexAction()
     {
-        $test = "";
+
         return [
             'listItems' => $this->institutionTable->getAll()
         ];

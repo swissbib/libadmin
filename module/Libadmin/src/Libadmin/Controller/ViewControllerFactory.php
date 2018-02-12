@@ -36,7 +36,9 @@ use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
 use Libadmin\Form\ViewForm;
 use Libadmin\Helper\RelationOverview;
+use Libadmin\Table\GroupRelationTable;
 use Libadmin\Table\GroupTable;
+use Libadmin\Table\InstitutionRelationTable;
 use Libadmin\Table\InstitutionTable;
 use Libadmin\Table\ViewTable;
 use Zend\Form\View\Helper\FormElement;
@@ -81,10 +83,16 @@ class ViewControllerFactory implements FactoryInterface
         $institutionTable = $tablePluginManager->get(InstitutionTable::class);
         $relationOverview = $tablePluginManager->get(RelationOverview::class);
 
+        $groupRelationTable = $tablePluginManager->get(GroupRelationTable::class);
+        $institutionRelationTable = $tablePluginManager->get(InstitutionRelationTable::class);
+
+
         return new ViewController($viewForm,
             $viewTable,
             $groupTable,
             $institutionTable,
-            $relationOverview);
+            $relationOverview,
+            $groupRelationTable,
+            $institutionRelationTable);
     }
 }

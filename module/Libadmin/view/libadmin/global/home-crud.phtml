@@ -1,7 +1,7 @@
 <div class="topButtons">
 	<a href="<?= $this->url($route, array('action' => 'add')); ?>"
 	   class="ajaxButton addButton btn btn-primary btn-medium" id="add-<?= strtolower($entityName) ?>">
-		<?= $this->translate('add_new_xxx', 'Libadmin') ?> <?= $entityName ?>
+		<?= $this->translate('add_new_xxx') ?> <?= $entityName ?>
 	</a>
 </div>
 <h1><?= $entityNamePlural ?></h1>
@@ -10,9 +10,9 @@
 
 <?php if (is_null($listItems) || $listItems->count() == 0): ?>
 	<?php
-	$baseLabel = $this->translate('home_no_records', 'Libadmin');
+	$baseLabel = $this->translate('home_no_records');
 	echo sprintf($baseLabel, $entityNamePlural);
 	?>
 <?php else: ?>
-	<p><?= $this->translate('home_select_record', 'Libadmin') ?></p>
+	<p><?= $this->translate('home_select_record') ?></p>
 <?php endif ?>

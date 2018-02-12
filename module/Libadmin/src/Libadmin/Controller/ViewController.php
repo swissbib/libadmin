@@ -37,7 +37,9 @@ namespace Libadmin\Controller;
 use Libadmin\Form\ViewForm;
 use Libadmin\Helper\RelationOverview;
 use Libadmin\Model\View;
+use Libadmin\Table\GroupRelationTable;
 use Libadmin\Table\GroupTable;
+use Libadmin\Table\InstitutionRelationTable;
 use Libadmin\Table\InstitutionTable;
 use Libadmin\Table\ViewTable;
 use Zend\Http\Request;
@@ -74,19 +76,34 @@ class ViewController extends BaseController
      * @var RelationOverview
      */
     private $relationOverview;
+    /**
+     * @var GroupRelationTable
+     */
+    private $groupRelationTable;
+    /**
+     * @var InstitutionRelationTable
+     */
+    private $institutionRelationTable;
 
 
     /**
      * ViewController constructor.
      * @param ViewForm $viewForm
      * @param ViewTable $viewTable
+     * @param GroupTable $groupTable
+     * @param InstitutionTable $institutionTable
+     * @param RelationOverview $relationOverview
+     * @param GroupRelationTable $groupRelationTable
+     * @param InstitutionRelationTable $institutionRelationTable
      */
     public function __construct(
         ViewForm $viewForm,
         ViewTable $viewTable,
         GroupTable $groupTable,
         InstitutionTable $institutionTable,
-        RelationOverview $relationOverview
+        RelationOverview $relationOverview,
+        GroupRelationTable $groupRelationTable,
+        InstitutionRelationTable $institutionRelationTable
     )
     {
         $this->viewForm = $viewForm;
@@ -95,6 +112,8 @@ class ViewController extends BaseController
         $this->groupTable = $groupTable;
         $this->institutionTable = $institutionTable;
         $this->relationOverview = $relationOverview;
+        $this->groupRelationTable = $groupRelationTable;
+        $this->institutionRelationTable = $institutionRelationTable;
     }
 
 
@@ -110,7 +129,6 @@ class ViewController extends BaseController
         $form = $this->viewForm;
         /** @var Request $request */
         $request = $this->getRequest();
-        $flashMessenger = $this->flashMessenger();
 
         if ($request->isPost()) {
             $view = new View();
@@ -120,11 +138,11 @@ class ViewController extends BaseController
                 $view->exchangeArray($form->getData());
                 $idView = $this->viewTable->save($view);
 
-                $this->flashMessenger->addSuccessMessage('saved_view');
+                $this->flashMessenger()->addSuccessMessage('saved_view');
 
                 return $this->redirectTo('edit', $idView);
             } else {
-                $this->flashMessenger->addErrorMessage('form_invalid');
+                $this->flashMessenger()->addErrorMessage('form_invalid');
             }
         }
 
@@ -197,6 +215,42 @@ class ViewController extends BaseController
         ]);
     }
 
+    public function deleteAction()
+    {
+        $idRecord = (int)$this->params()->fromRoute('id', 0);
+
+        if (!$idRecord) {
+            $this->flashMessenger()->addErrorMessage('No record defined for deletion. Something went wrong');
+
+            return $this->redirectTo('home');
+        }
+
+        /** @var Request $request */
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $isDeleteRequest = $request->getPost('del') !== null;
+
+            if ($isDeleteRequest) {
+                $idRecord = (int)$request->getPost('id');
+                $this->beforeDelete($idRecord);
+                $this->viewTable->delete($idRecord);
+                $this->afterDelete($idRecord);
+                // @todo message is shown to late, solve this problem and re-enable message
+                //	$this->flashMessenger()->addSuccessMessage('Record deleted');
+            }
+
+
+            return $this->redirect()->toRoute('view', ['action' => 'index']);
+            //return $this->forward()->dispatch(InstitutionController::class,$params);
+
+        }
+
+        return $this->getAjaxView([
+            'id' => $idRecord,
+            'route' => 'view',
+            'record' => $this->viewTable->getRecord($idRecord)
+        ], 'libadmin/global/delete');
+    }
 
     /**
      * Before view delete, remove all relations
@@ -205,8 +259,8 @@ class ViewController extends BaseController
      */
     protected function beforeDelete($idView)
     {
-        $this->getGroupRelationTable()->deleteViewRelations($idView);
-        $this->getInstitutionRelationTable()->deleteViewRelations($idView);
+        $this->groupRelationTable->deleteViewRelations($idView);
+        $this->institutionRelationTable->deleteViewRelations($idView);
     }
 
 
@@ -221,5 +275,17 @@ class ViewController extends BaseController
             'listItems' => $this->viewTable->getAll()
         ];
     }
+
+    public function searchAction($limit = 15)
+    {
+        $query = $this->params()->fromQuery('query', '');
+        $data = array(
+            'route' => 'view',
+            'listItems' => $this->viewTable->find($query, $limit)
+        );
+
+        return $this->getAjaxView($data, 'libadmin/global/search');
+    }
+
 
 }

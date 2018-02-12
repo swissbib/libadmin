@@ -36,6 +36,7 @@ use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
 use Libadmin\Form\GroupForm;
 use Libadmin\Model\InstitutionRelationList;
+use Libadmin\Table\GroupRelationTable;
 use Libadmin\Table\GroupTable;
 use Libadmin\Table\InstitutionRelationTable;
 use Libadmin\Table\InstitutionTable;
@@ -70,6 +71,7 @@ class GroupControllerFactory implements FactoryInterface
         $viewTable = $tablePluginManager->get(ViewTable::class);
         $institutionTable = $tablePluginManager->get(InstitutionTable::class);
         $institutionRelationTable = $tablePluginManager->get(InstitutionRelationTable::class);
+        $groupRelationTable = $tablePluginManager->get(GroupRelationTable::class);
 
 
         return new GroupController(
@@ -77,7 +79,8 @@ class GroupControllerFactory implements FactoryInterface
             $groupTable,
             $viewTable,
             $institutionTable,
-            $institutionRelationTable
+            $institutionRelationTable,
+            $groupRelationTable
         );
     }
 }

@@ -45,6 +45,10 @@ class GroupController extends BaseController
      * @var InstitutionRelationTable
      */
     private $institutionRelationTable;
+    /**
+     * @var GroupRelationTable
+     */
+    private $groupRelationTable;
 
     /**
      * GroupController constructor.
@@ -52,22 +56,24 @@ class GroupController extends BaseController
      * @param GroupTable $groupTable
      * @param ViewTable $viewTable
      * @param InstitutionTable $institutionTable
-     * @param InstitutionRelationList $institutionRelationList
+     * @param InstitutionRelationTable $institutionRelationTable
+     * @param GroupRelationTable $groupRelationTable
      */
     public function __construct(
         GroupForm $groupForm,
         GroupTable $groupTable,
         ViewTable $viewTable,
         InstitutionTable $institutionTable,
-        InstitutionRelationTable $institutionRelationTable
+        InstitutionRelationTable $institutionRelationTable,
+        GroupRelationTable $groupRelationTable
     )
     {
         $this->groupForm = $groupForm;
         $this->groupTable = $groupTable;
         $this->viewTable = $viewTable;
         $this->institutionTable = $institutionTable;
-
         $this->institutionRelationTable = $institutionRelationTable;
+        $this->groupRelationTable = $groupRelationTable;
     }
 
 
@@ -207,6 +213,45 @@ class GroupController extends BaseController
         ]);
     }
 
+
+    public function deleteAction()
+    {
+        $idRecord = (int)$this->params()->fromRoute('id', 0);
+
+        if (!$idRecord) {
+            $this->flashMessenger()->addErrorMessage('No record defined for deletion. Something went wrong');
+
+            return $this->redirectTo('home');
+        }
+
+        /** @var Request $request */
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $isDeleteRequest = $request->getPost('del') !== null;
+
+            if ($isDeleteRequest) {
+                $idRecord = (int)$request->getPost('id');
+                $this->beforeDelete($idRecord);
+                $this->groupTable->delete($idRecord);
+                $this->afterDelete($idRecord);
+                // @todo message is shown to late, solve this problem and re-enable message
+                //	$this->flashMessenger()->addSuccessMessage('Record deleted');
+            }
+
+
+            return $this->redirect()->toRoute('group', ['action' => 'index']);
+            //return $this->forward()->dispatch(InstitutionController::class,$params);
+
+        }
+
+        return $this->getAjaxView(array(
+            'id' => $idRecord,
+            'route' => 'group',
+            'record' => $this->groupTable->getRecord($idRecord)
+        ), 'libadmin/global/delete');
+    }
+
+
     public function homeAction()
     {
         return $this->getAjaxView(
@@ -282,8 +327,8 @@ class GroupController extends BaseController
      */
     protected function beforeDelete($idGroup)
     {
-        $this->getGroupRelationTable()->deleteGroupRelations($idGroup);
-        $this->getInstitutionRelationTable()->deleteGroupRelations($idGroup);
+        $this->groupRelationTable->deleteGroupRelations($idGroup);
+        $this->institutionRelationTable->deleteGroupRelations($idGroup);
     }
 
 }

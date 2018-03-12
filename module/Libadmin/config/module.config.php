@@ -3,6 +3,8 @@ namespace Libadmin; // Set module namespace
 
 use Libadmin\Controller\AdminControllerFactory;
 use Libadmin\Controller\ApiControllerFactory;
+use Libadmin\Controller\AdminInstitutionController;
+use Libadmin\Controller\AdminInstitutionControllerFactory;
 use Libadmin\Controller\GroupControllerFactory;
 use Libadmin\Controller\HomeControllerFactory;
 use Libadmin\Controller\InstitutionControllerFactory;
@@ -51,11 +53,13 @@ return [
     'controllers' => [
         'factories' => [
             HomeController::class => HomeControllerFactory::class,
+            AdminInstitutionController::class => AdminInstitutionControllerFactory::class,
             InstitutionController::class => InstitutionControllerFactory::class,
             GroupController::class => GroupControllerFactory::class,
             ViewController::class => ViewControllerFactory::class,
             AdminController::class => AdminControllerFactory::class,
             ApiController::class => ApiControllerFactory::class
+
         ]
     ],
     // The following section is new and should be added to your file
@@ -115,6 +119,20 @@ return [
                     ],
                     'defaults' => [
                         'controller' => AdminController::class,
+                        'action' => 'index',
+                    ],
+                ],
+            ],
+            'admininstitution' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/admininstitution[/:action][/:id]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' => AdminInstitutionController::class,
                         'action' => 'index',
                     ],
                 ],
@@ -218,6 +236,10 @@ return [
             'admin' => [
                 'label' => 'navigation_admin',
                 'route' => 'admin'
+            ],
+            'admininstitution' => [
+                'label' => 'admininstitution',
+                'route' => 'admininstitution'
             ]
         ],
     ],

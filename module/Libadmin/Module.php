@@ -42,8 +42,6 @@ class Module
 				$strategy->attach($view->getEventManager());
 			}
 
-			$t = "";
-
 		});
 
 

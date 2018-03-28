@@ -33,13 +33,13 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
 
 		$this->addText('bib_code', 'bibcode', true);
 		$this->addText('sys_code', 'syscode', true);
-		$this->add(array(
+		$this->add([
 			'name' => 'is_active',
 			'type' => 'checkbox',
-			'options' => array(
+			'options' => [
 				'label' => 'is_active'
-			)
-		));
+            ]
+        ]);
 		$this->addText('label_de', 'language_german', true);
 		$this->addText('label_fr', 'language_french', true);
 		$this->addText('label_it', 'language_italian', true);
@@ -55,53 +55,83 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
 		$this->addText('url_it', 'language_italian');
 		$this->addText('url_en', 'language_english');
 
-		$this->add(array(
+        $this->addText('twitter', 'twitter');
+        $this->addText('url_web_de', 'url_web_de');
+        $this->addText('url_web_en', 'url_web_en');
+        $this->addText('url_web_it', 'url_web_it');
+        $this->addText('url_web_fr', 'url_web_fr');
+        $this->addText('adresszusatz', 'adresszusatz');
+        $this->addText('notes_public', 'notes_public');
+        $this->addText('id_kontakt', 'id_kontakt');
+        $this->addText('korrespondezsprache', 'korrespondezsprache');
+        $this->addText('bfscode', 'bfscode');
+
+
+        $this->addText('worldcat', 'worldcat');
+        $this->addText('cbslibrarycode', 'cbslibrarycode');
+        $this->addText('verrechnungbeitrag', 'verrechnungbeitrag');
+        $this->addText('zusage_beitrag', 'zusage_beitrag');
+        $this->addText('id_kostenbeitrag', 'id_kostenbeitrag');
+        $this->addText('bemerkung_kostenbeitrag', 'bemerkung_kostenbeitrag');
+        $this->addText('adresse_rechnung_gleich_post', 'adresse_rechnung_gleich_post');
+        $this->addText('id_rechnungsadresse', 'id_rechnungsadresse');
+        $this->addText('id_kontakt_rechnung', 'id_kontakt_rechnung');
+        $this->addText('mwst', 'mwst');
+        $this->addText('grund_mwst_frei', 'grund_mwst_frei');
+
+        $this->addText('e_rechnung', 'e_rechnung');
+        $this->addText('bemerkung_rechnung', 'bemerkung_rechnung');
+        
+
+
+
+        $this->add([
 			'name' => 'notes',
 			'type' => 'textarea',
-			'options' => array(
+			'options' => [
 				'label' => 'internal_notes'
-			),
-			'attributes' => array(
+            ],
+			'attributes' => [
 				'rows' => 10
-			)
-		));
+            ]
+        ]);
 
-		$this->add(array(
+		$this->add([
 			'name' => 'address',
 			'type' => 'textarea',
-			'options' => array(
+			'options' => [
 				'label' => 'address'
-			),
-			'attributes' => array(
+            ],
+			'attributes' => [
 				'rows' => 6
-			)
-		));
+            ]
+        ]);
 
 		$this->addText('zip', 'zip');
 		$this->addText('city', 'city');
 
-		$this->add(array(
+		$this->add([
 			'name' => 'country',
 			'type' => 'select',
-			'options' => array(
+			'options' => [
 				'label' => 'country',
-				'value_options' => array(
+				'value_options' => [
 					'ch' => 'country_ch',
 					'li' => 'country_li',
 					'de' => 'country_de',
 					'it' => 'country_it',
 					'fr' => 'country_fr'
-				)
-			)
-		));
+                ]
+            ]
+        ]);
 
-		$this->add(array(
+		$this->add([
 			'name' => 'canton',
 			'type' => 'select',
-			'options' => array(
+			'options' => [
 				'label' => 'canton',
 				'empty_option' => '- Kein Kanton -',
-				'value_options' => array(
+				'value_options' => [
 					'ag' => 'Aargau',
 					'ai' => 'Appenzell Innerrhoden',
 					'ar' => 'Appenzell Ausserrhoden',
@@ -128,9 +158,9 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
 					'vd' => 'Vaud',
 					'zg' => 'Zug',
 					'zh' => 'Zürich'
-				)
-			)
-		));
+                ]
+            ]
+        ]);
 
 		$this->addText('website', 'webseite');
 		$this->addText('email', 'email');
@@ -140,15 +170,15 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
 		$this->addText('coordinates', 'coordinates');
 		$this->addText('isil', 'isil');
 
-		$this->add(array(
+		$this->add([
 				'type' => 'Zend\Form\Element\Collection',
 				'name' => 'relations',
-				'options' => array(
-						'target_element' => array(
+				'options' => [
+						'target_element' => [
 								'type' => 'Libadmin\Form\InstitutionRelationFieldset'
-						)
-				)
-		));
+                        ]
+                ]
+        ]);
 	}
 
 
@@ -156,49 +186,49 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
 	/**
 	 * Get input filters and validations
 	 *
-	 * @return    Array
+	 * @return    array
 	 */
 	public function getInputFilterSpecification()
 	{
-		return array(
-			'bib_code' => array(
+		return [
+			'bib_code' => [
 				'required' => true,
-				'filters' => array(
-					array('name' => 'StringTrim')
-				)
-			),
-			'sys_code' => array(
+				'filters' => [
+					['name' => 'StringTrim']
+                ]
+            ],
+			'sys_code' => [
 				'required' => true
-			),
-			'label_de' => array(
+            ],
+			'label_de' => [
 				'required' => true
-			),
-			'label_fr' => array(
+            ],
+			'label_fr' => [
 				'required' => true
-			),
-			'label_it' => array(
+            ],
+			'label_it' => [
 				'required' => true
-			),
-			'label_en' => array(
+            ],
+			'label_en' => [
 				'required' => true
-			),
-			'canton' => array(
+            ],
+			'canton' => [
 				'required' => false
-			),
-			'email' => array(
+            ],
+			'email' => [
 				'required' => false,
-				'validators' => array(
-					array(
+				'validators' => [
+					[
 						'name' => 'EmailAddress'
-					)
-				)
-			),
-			'zip' => array(
+                    ]
+                ]
+            ],
+			'zip' => [
 				'required' => false,
-				'filters' => array(
-					array('name' => 'Digits')
-				)
-			)
-		);
+				'filters' => [
+					['name' => 'Digits']
+                ]
+            ]
+        ];
 	}
 }

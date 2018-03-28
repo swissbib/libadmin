@@ -58,21 +58,68 @@ class Institution extends BaseModel
 
 	public $facebook;
 
+	public $twitter;
+
 	public $coordinates;
 
 	public $isil;
 
 	public $notes;
 
-	public $is_favorite; // This is not an actual record field
-	public $relations = array();
+	public $url_web_en;
+
+    public $url_web_de;
+
+    public $url_web_fr;
+
+    public $url_web_it;
+
+    public $adresszusatz;
+
+    public $notes_public;
+
+    public $id_kontakt;
+
+    public $korrespondezsprache;
+
+    public $bfscode;
+
+    public $worldcat;
+
+    public $cbslibrarycode;
+
+    public $verrechnungbeitrag;
+
+    public $zusage_beitrag;
+
+    public $id_kostenbeitrag;
+
+    public $bemerkung_kostenbeitrag;
+
+    public $adresse_rechnung_gleich_post;
+
+    public $id_rechnungsadresse;
+
+    public $id_kontakt_rechnung;
+
+    public $mwst;
+
+    public $grund_mwst_frei;
+
+    public $e_rechnung;
+
+    public $bemerkung_rechnung;
+
+
+    public $is_favorite; // This is not an actual record field
+	public $relations = [];
 
 
 
 	/**
 	 *
 	 * @inheritDoc
-	 * @return Array
+	 * @return array
 	 */
 	public function getBaseData()
 	{
@@ -534,4 +581,445 @@ class Institution extends BaseModel
 	{
 		return $this->getIs_favorite() == 1;
 	}
+
+    /**
+     * @return mixed
+     */
+    public function getBemerkung_rechnung()
+    {
+        return $this->bemerkung_rechnung;
+    }
+
+    /**
+     * @param mixed $bemerkung_rechnung
+     *
+     * @return Institution
+     */
+    public function setBemerkungRechnung($bemerkung_rechnung)
+    {
+        $this->bemerkung_rechnung = $bemerkung_rechnung;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTwitter()
+    {
+        return $this->twitter;
+    }
+
+    /**
+     * @param mixed $twitter
+     *
+     * @return Institution
+     */
+    public function setTwitter($twitter)
+    {
+        $this->twitter = $twitter;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUrl_web_en()
+    {
+        return $this->url_web_en;
+    }
+
+    /**
+     * @param mixed $url_web_en
+     *
+     * @return Institution
+     */
+    public function setUrlWebEn($url_web_en)
+    {
+        $this->url_web_en = $url_web_en;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUrl_web_de()
+    {
+        return $this->url_web_de;
+    }
+
+    /**
+     * @param mixed $url_web_de
+     *
+     * @return Institution
+     */
+    public function setUrlWebDe($url_web_de)
+    {
+        $this->url_web_de = $url_web_de;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUrl_web_fr()
+    {
+        return $this->url_web_fr;
+    }
+
+    /**
+     * @param mixed $url_web_fr
+     *
+     * @return Institution
+     */
+    public function setUrlWebFr($url_web_fr)
+    {
+        $this->url_web_fr = $url_web_fr;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUrl_web_it()
+    {
+        return $this->url_web_it;
+    }
+
+    /**
+     * @param mixed $url_web_it
+     *
+     * @return Institution
+     */
+    public function setUrlWebIt($url_web_it)
+    {
+        $this->url_web_it = $url_web_it;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAdresszusatz()
+    {
+        return $this->adresszusatz;
+    }
+
+    /**
+     * @param mixed $adresszusatz
+     *
+     * @return Institution
+     */
+    public function setAdresszusatz($adresszusatz)
+    {
+        $this->adresszusatz = $adresszusatz;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNotes_public()
+    {
+        return $this->notes_public;
+    }
+
+    /**
+     * @param mixed $notes_public
+     *
+     * @return Institution
+     */
+    public function setNotesPublic($notes_public)
+    {
+        $this->notes_public = $notes_public;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId_kontakt()
+    {
+        return $this->id_kontakt;
+    }
+
+    /**
+     * @param mixed $id_kontakt
+     *
+     * @return Institution
+     */
+    public function setIdKontakt($id_kontakt)
+    {
+        $this->id_kontakt = $id_kontakt;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getKorrespondezsprache()
+    {
+        return $this->korrespondezsprache;
+    }
+
+    /**
+     * @param mixed $korrespondezsprache
+     *
+     * @return Institution
+     */
+    public function setKorrespondezsprache($korrespondezsprache)
+    {
+        $this->korrespondezsprache = $korrespondezsprache;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBfscode()
+    {
+        return $this->bfscode;
+    }
+
+    /**
+     * @param mixed $bfscode
+     *
+     * @return Institution
+     */
+    public function setBfscode($bfscode)
+    {
+        $this->bfscode = $bfscode;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWorldcat()
+    {
+        return $this->worldcat;
+    }
+
+    /**
+     * @param mixed $worldcat
+     *
+     * @return Institution
+     */
+    public function setWorldcat($worldcat)
+    {
+        $this->worldcat = $worldcat;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCbslibrarycode()
+    {
+        return $this->cbslibrarycode;
+    }
+
+    /**
+     * @param mixed $cbslibrarycode
+     *
+     * @return Institution
+     */
+    public function setCbslibrarycode($cbslibrarycode)
+    {
+        $this->cbslibrarycode = $cbslibrarycode;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVerrechnungbeitrag()
+    {
+        return $this->verrechnungbeitrag;
+    }
+
+    /**
+     * @param mixed $verrechnungbeitrag
+     *
+     * @return Institution
+     */
+    public function setVerrechnungbeitrag($verrechnungbeitrag)
+    {
+        $this->verrechnungbeitrag = $verrechnungbeitrag;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getZusage_beitrag()
+    {
+        return $this->zusage_beitrag;
+    }
+
+    /**
+     * @param mixed $zusage_beitrag
+     *
+     * @return Institution
+     */
+    public function setZusageBeitrag($zusage_beitrag)
+    {
+        $this->zusage_beitrag = $zusage_beitrag;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId_kostenbeitrag()
+    {
+        return $this->id_kostenbeitrag;
+    }
+
+    /**
+     * @param mixed $id_kostenbeitrag
+     *
+     * @return Institution
+     */
+    public function setIdKostenbeitrag($id_kostenbeitrag)
+    {
+        $this->id_kostenbeitrag = $id_kostenbeitrag;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBemerkung_kostenbeitrag()
+    {
+        return $this->bemerkung_kostenbeitrag;
+    }
+
+    /**
+     * @param mixed $bemerkung_kostenbeitrag
+     *
+     * @return Institution
+     */
+    public function setBemerkungKostenbeitrag($bemerkung_kostenbeitrag)
+    {
+        $this->bemerkung_kostenbeitrag = $bemerkung_kostenbeitrag;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAdresse_rechnung_gleich_post()
+    {
+        return $this->adresse_rechnung_gleich_post;
+    }
+
+    /**
+     * @param mixed $adresse_rechnung_gleich_post
+     *
+     * @return Institution
+     */
+    public function setAdresseRechnungGleichPost($adresse_rechnung_gleich_post)
+    {
+        $this->adresse_rechnung_gleich_post = $adresse_rechnung_gleich_post;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId_rechnungsadresse()
+    {
+        return $this->id_rechnungsadresse;
+    }
+
+    /**
+     * @param mixed $id_rechnungsadresse
+     *
+     * @return Institution
+     */
+    public function setIdRechnungsadresse($id_rechnungsadresse)
+    {
+        $this->id_rechnungsadresse = $id_rechnungsadresse;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId_kontakt_rechnung()
+    {
+        return $this->id_kontakt_rechnung;
+    }
+
+    /**
+     * @param mixed $id_kontakt_rechnung
+     *
+     * @return Institution
+     */
+    public function setIdKontaktRechnung($id_kontakt_rechnung)
+    {
+        $this->id_kontakt_rechnung = $id_kontakt_rechnung;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMwst()
+    {
+        return $this->mwst;
+    }
+
+    /**
+     * @param mixed $mwst
+     *
+     * @return Institution
+     */
+    public function setMwst($mwst)
+    {
+        $this->mwst = $mwst;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGrund_mwst_frei()
+    {
+        return $this->grund_mwst_frei;
+    }
+
+    /**
+     * @param mixed $grund_mwst_frei
+     *
+     * @return Institution
+     */
+    public function setGrundMwstFrei($grund_mwst_frei)
+    {
+        $this->grund_mwst_frei = $grund_mwst_frei;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getE_rechnung()
+    {
+        return $this->e_rechnung;
+    }
+
+    /**
+     * @param mixed $e_rechnung
+     *
+     * @return Institution
+     */
+    public function setERechnung($e_rechnung)
+    {
+        $this->e_rechnung = $e_rechnung;
+        return $this;
+    }
+
+
+
+
 }

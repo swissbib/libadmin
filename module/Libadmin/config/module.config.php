@@ -26,6 +26,9 @@ use Libadmin\Libadmin\Form\GroupFormFactory;
 use Libadmin\Table\AdminInstitutionTable;
 use Libadmin\Table\AdminInstitutionTableFactory;
 use Libadmin\Table\AdminInstitutionTableGatewayFactory;
+use Libadmin\Table\AdresseTable;
+use Libadmin\Table\AdresseTableFactory;
+use Libadmin\Table\AdresseTableGatewayFactory;
 use Libadmin\Table\GroupRelationTableFactory;
 use Libadmin\Table\GroupRelationTableGatewayFactory;
 use Libadmin\Table\GroupTable;
@@ -35,6 +38,12 @@ use Libadmin\Table\InstitutionRelationTableFactory;
 use Libadmin\Table\InstitutionRelationTableGatewayFactory;
 use Libadmin\Table\InstitutionTableFactory;
 use Libadmin\Table\InstitutionTableGatewayFactory;
+use Libadmin\Table\KontaktTable;
+use Libadmin\Table\KontaktTableFactory;
+use Libadmin\Table\KontaktTableGatewayFactory;
+use Libadmin\Table\KostenbeitragTable;
+use Libadmin\Table\KostenbeitragTableFactory;
+use Libadmin\Table\KostenbeitragTableGatewayFactory;
 use Libadmin\Table\TablePluginManager;
 use Libadmin\Table\TablePluginManagerFactory;
 use Libadmin\Table\ViewTable;
@@ -270,7 +279,13 @@ return [
                 'GroupRelationTableGateway' => GroupRelationTableGatewayFactory::class,
                 RelationOverview::class => RelationOverviewFactory::class,
                 'AdminInstitutionTableGateway' => AdminInstitutionTableGatewayFactory::class,
-                AdminInstitutionTable::class    => AdminInstitutionTableFactory::class
+                AdminInstitutionTable::class    => AdminInstitutionTableFactory::class,
+                'AdresseTableGateway'       => AdresseTableGatewayFactory::class,
+                'KontaktTableGateway'   => KontaktTableGatewayFactory::class,
+                'KostenbeitragTableGateway' => KostenbeitragTableGatewayFactory::class,
+                AdresseTable::class => AdresseTableFactory::class,
+                KontaktTable::class => KontaktTableFactory::class,
+                KostenbeitragTable::class   => KostenbeitragTableFactory::class
 
             ]
         ]

@@ -4,8 +4,11 @@ namespace Libadmin\Controller;
 //use RecursiveIteratorIterator;
 
 use Libadmin\Model\InstitutionRelation;
+use Libadmin\Table\AdresseTable;
 use Libadmin\Table\InstitutionRelationTable;
 use Libadmin\Table\InstitutionTable;
+use Libadmin\Table\KontaktTable;
+use Libadmin\Table\KostenbeitragTable;
 use Zend\Db\ResultSet\ResultSetInterface;
 use Zend\Http\Request;
 use Zend\Mvc\Plugin\FlashMessenger\FlashMessenger;
@@ -37,6 +40,18 @@ class InstitutionController extends BaseController
 
     /** @var array  */
     private $allViews = [];
+    /**
+     * @var KontaktTable
+     */
+    private $kontaktTable;
+    /**
+     * @var AdresseTable
+     */
+    private $adresseTable;
+    /**
+     * @var KostenbeitragTable
+     */
+    private $kostenbeitragTable;
 
     /**
      * InstitutionController constructor.
@@ -44,18 +59,28 @@ class InstitutionController extends BaseController
      * @param InstitutionForm $institutionForm
      * @param InstitutionTable $institutionTable
      * @param InstitutionRelationTable $institutionRelationTable
+     * @param KontaktTable $kontaktTable
+     * @param AdresseTable $adresseTable
+     * @param KostenbeitragTable $kostenbeitragTable
      * @param array $allViews
      */
     public function __construct(
         InstitutionForm $institutionForm,
         InstitutionTable $institutionTable,
         InstitutionRelationTable $institutionRelationTable,
+        KontaktTable $kontaktTable,
+        AdresseTable $adresseTable,
+        KostenbeitragTable $kostenbeitragTable,
         array $allViews
     ) {
         $this->institutionForm = $institutionForm;
         $this->institutionTable = $institutionTable;
         $this->institutionRelationTable = $institutionRelationTable;
+
         $this->allViews = $allViews;
+        $this->kontaktTable = $kontaktTable;
+        $this->adresseTable = $adresseTable;
+        $this->kostenbeitragTable = $kostenbeitragTable;
     }
 
 

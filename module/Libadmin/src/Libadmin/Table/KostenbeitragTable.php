@@ -32,6 +32,9 @@
 
 namespace Libadmin\Table;
 
+use Libadmin\Table\BaseTable;
+use Zend\Db\TableGateway\TableGateway;
+
 /**
  * KostenbeitragTable
  *
@@ -42,7 +45,19 @@ namespace Libadmin\Table;
  * @link     http://vufind.org
  * @link     http://www.swissbib.ch
  */
-class KostenbeitragTable
+class KostenbeitragTable extends BaseTable
 {
+
+    public function __construct(TableGateway $kostenbeitragTableGateway)
+    {
+        parent::__construct($kostenbeitragTableGateway);
+
+    }
+
+
+    public function find($searchString, $limit = 30)
+    {
+        // TODO: Implement find() method.
+    }
 
 }

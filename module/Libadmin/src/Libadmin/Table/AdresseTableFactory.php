@@ -32,6 +32,9 @@
 
 namespace Libadmin\Table;
 
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+
 /**
  * AdresseTableFactory
  *
@@ -42,7 +45,16 @@ namespace Libadmin\Table;
  * @link     http://vufind.org
  * @link     http://www.swissbib.ch
  */
-class AdresseTableFactory
+class AdresseTableFactory implements FactoryInterface
 {
+
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
+        $tablePluginManager = $container->get(TablePluginManager::class);
+        $adresseTableGateway = $tablePluginManager->get('AdresseTableGateway');
+        return new AdresseTable($adresseTableGateway);
+
+    }
+
 
 }

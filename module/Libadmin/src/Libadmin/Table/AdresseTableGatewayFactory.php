@@ -32,6 +32,16 @@
 
 namespace Libadmin\Table;
 
+use Interop\Container\ContainerInterface;
+use Interop\Container\Exception\ContainerException;
+use Libadmin\Model\Adresse;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\Factory\FactoryInterface;
+
 /**
  * AdresseTableGatewayFactory
  *
@@ -42,7 +52,15 @@ namespace Libadmin\Table;
  * @link     http://vufind.org
  * @link     http://www.swissbib.ch
  */
-class AdresseTableGatewayFactory
+class AdresseTableGatewayFactory implements FactoryInterface
 {
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
+        $dbAdapter = $container->get(Adapter::class);
+        $resultSetPrototype = new ResultSet();
+        $resultSetPrototype->setArrayObjectPrototype(new Adresse());
+        return new TableGateway('adresse', $dbAdapter, null, $resultSetPrototype);
+    }
+
 
 }

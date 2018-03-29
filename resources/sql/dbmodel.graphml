@@ -233,7 +233,7 @@ id_group
           <y:Geometry height="204.0" width="280.4873786407768" x="1252.1300970873788" y="-73.22718446601941"/>
           <y:Fill color="#FF6600" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="t" textColor="#000000" verticalTextPosition="bottom" visible="true" width="193.94921875" x="43.26907994538851" y="4.0">mn_institution_admininstitution</y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="t" textColor="#000000" verticalTextPosition="bottom" visible="true" width="193.94921875" x="43.269079945388285" y="4.0">mn_institution_admininstitution</y:NodeLabel>
           <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="45.90625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="top" visible="true" width="251.125" x="2.0" y="29.96875"> `id_institution` int(11) NOT NULL,
   `id_admininstitution` int(11) NOT NULL,
   `relation_type` varchar(30) NOT NULL,
@@ -309,19 +309,19 @@ id_group
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="t" textColor="#000000" verticalTextPosition="bottom" visible="true" width="87.1796875" x="107.43636984223303" y="4.0">kostenbeitrag</y:NodeLabel>
           <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="199.5625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="top" visible="true" width="261.63671875" x="2.0" y="29.96875">  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `2018` decimal(7,2) DEFAULT NULL,
-  `2019` decimal(7,2) DEFAULT NULL,
-  `2020` decimal(7,2) DEFAULT NULL,
-  `2021` decimal(7,2) DEFAULT NULL,
-  `2022` decimal(7,2) DEFAULT NULL,
-  `2023` decimal(7,2) DEFAULT NULL,
-  `2024` decimal(7,2) DEFAULT NULL,
-  `2025` decimal(7,2) DEFAULT NULL,
-  `2026` decimal(7,2) DEFAULT NULL,
-  `2027` decimal(7,2) DEFAULT NULL,
-  `2028` decimal(7,2) DEFAULT NULL,
-  `2029` decimal(7,2) DEFAULT NULL,
-  `2030` decimal(7,2) DEFAULT NULL,
+  `j2018` decimal(7,2) DEFAULT NULL,
+  `j2019` decimal(7,2) DEFAULT NULL,
+  `j2020` decimal(7,2) DEFAULT NULL,
+  `j2021` decimal(7,2) DEFAULT NULL,
+  `j2022` decimal(7,2) DEFAULT NULL,
+  `j2023` decimal(7,2) DEFAULT NULL,
+  `j2024` decimal(7,2) DEFAULT NULL,
+  `j2025` decimal(7,2) DEFAULT NULL,
+  `j2026` decimal(7,2) DEFAULT NULL,
+  `j2027` decimal(7,2) DEFAULT NULL,
+  `j2028` decimal(7,2) DEFAULT NULL,
+  `j2029` decimal(7,2) DEFAULT NULL,
+  `j2030` decimal(7,2) DEFAULT NULL,
 <y:LabelModel>
               <y:ErdAttributesNodeLabelModel/>
             </y:LabelModel>
@@ -387,7 +387,6 @@ id_group
     </edge>
     <edge id="e5" source="n5" target="n6">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="-18.24174757281571" sy="-99.23398058252423" tx="37.86250507147857" ty="15.510679611650474"/>
@@ -399,7 +398,6 @@ id_group
     </edge>
     <edge id="e6" source="n1" target="n6">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="111.44660194174753" sy="-260.22104073560376" tx="-124.5834774194674" ty="-19.233009708737868"/>
@@ -411,7 +409,6 @@ id_group
     </edge>
     <edge id="e7" source="n5" target="n8">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -423,7 +420,6 @@ id_group
     </edge>
     <edge id="e8" source="n5" target="n9">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -435,7 +431,6 @@ id_group
     </edge>
     <edge id="e9" source="n5" target="n7">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -447,7 +442,6 @@ id_group
     </edge>
     <edge id="e10" source="n1" target="n8">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -459,7 +453,6 @@ id_group
     </edge>
     <edge id="e11" source="n1" target="n7">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -471,7 +464,6 @@ id_group
     </edge>
     <edge id="e12" source="n1" target="n9">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>

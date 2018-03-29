@@ -32,6 +32,9 @@
 
 namespace Libadmin\Table;
 
+use Libadmin\Model\BaseModel;
+use Zend\Db\TableGateway\TableGateway;
+
 /**
  * AdresseTable
  *
@@ -42,7 +45,18 @@ namespace Libadmin\Table;
  * @link     http://vufind.org
  * @link     http://www.swissbib.ch
  */
-class AdresseTable
+class AdresseTable extends BaseTable
 {
 
+    public function __construct(TableGateway $adresseTableGateway)
+    {
+        parent::__construct($adresseTableGateway);
+
+    }
+
+
+    public function find($searchString, $limit = 30)
+    {
+        // TODO: Implement find() method.
+    }
 }

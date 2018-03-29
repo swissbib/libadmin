@@ -32,6 +32,9 @@
 
 namespace Libadmin\Table;
 
+use Libadmin\Table\BaseTable;
+use Zend\Db\TableGateway\TableGateway;
+
 /**
  * KontaktTable
  *
@@ -42,7 +45,18 @@ namespace Libadmin\Table;
  * @link     http://vufind.org
  * @link     http://www.swissbib.ch
  */
-class KontaktTable
+class KontaktTable extends BaseTable
 {
 
+    public function __construct(TableGateway $kontaktTableGateway)
+    {
+        parent::__construct($kontaktTableGateway);
+
+    }
+
+
+    public function find($searchString, $limit = 30)
+    {
+        // TODO: Implement find() method.
+    }
 }

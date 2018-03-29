@@ -1,0 +1,124 @@
+<?php
+$this->headTitle($this->translate($title));
+
+$form = $this->customform;
+$form->prepare();
+
+$admininstitution = $form->get('admininstitution');
+$formType = 'horizontal';
+$form->setAttribute('class', 'form-horizontal');
+$saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');
+
+
+?>
+
+
+<?= $this->form()->openTag($form) ?>
+<div class="topButtons">
+    <input type="submit" value="<?= $this->escapeHtml($saveButtonLabel) ?>"
+           class="submitButton btn btn-primary btn-medium" id="submitbutton" name="submit">
+    <a href="<?= $this->url('institution', ['action' => 'home']); ?>"
+       class="ajaxButton closeButton btn btn-medium" id="closebutton">
+        <?= $this->translate('action_close') ?>
+    </a>
+    <?php if (!$isNew): ?>
+        <a href="<?= $this->url('institution', ['action' => 'delete', 'id' => $idInstitution]); ?>"
+           class="ajaxButton deleteButton btn btn-danger btn-medium" id="deletebutton">
+            <?= $this->translate('action_delete') ?>
+        </a>
+    <?php endif; ?>
+</div>
+
+<h1><?php echo $this->escapeHtml($this->translate($title)); ?></h1>
+
+<?= $this->bootstrapFlashMessenger()->render() ?>
+
+<fieldset class="general">
+    <legend><?= $this->translate('general') ?></legend>
+    <div class="row-fluid">
+        <div class="span5"><?= $this->formRow($admininstitution->get('name')) ?></div>
+    </div>
+</fieldset>
+
+
+<div class="tabbable">
+    <ul class="nav nav-tabs formTabs">
+        <li class="active"><a href="#first"><?= $this->translate('first') ?></a></li>
+        <li><a href="#second"><?= $this->translate('second') ?></a></li>
+        <li><a href="#third"><?= $this->translate('third') ?></a></li>
+
+    </ul>
+
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="first">
+            <fieldset>
+                <legend><?= $this->translate('displaynames') ?></legend>
+                <div class="row-fluid">
+                    <div class="span12"><?= $this->formRow($admininstitution->get('name')) ?></div>
+                </div>
+            </fieldset>
+
+        </div>
+
+
+        <div class="tab-pane active" id="second">
+            <fieldset>
+                <legend><?= $this->translate('second') ?></legend>
+                <div class="row-fluid">
+                    <div class="span12"><?= $this->formRow($admininstitution->get('mail')) ?></div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span12"><?= $this->formRow($admininstitution->get('korrespondezsprache')) ?></div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12"><?= $this->formRow($admininstitution->get('bfscode')) ?></div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12"><?= $this->formRow($admininstitution->get('ipadresse')) ?></div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12"><?= $this->formRow($admininstitution->get('zusage_beitrag')) ?></div>
+                </div>
+
+
+            </fieldset>
+
+        </div>
+
+
+        <div class="tab-pane active" id="third">
+            <fieldset>
+                <legend><?= $this->translate('third') ?></legend>
+                <div class="row-fluid">
+                    <div class="span12"><?= $this->formRow($admininstitution->get('bemerkung_kostenbeitrag')) ?></div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span12"><?= $this->formRow($admininstitution->get('adresse_rechnung_gleich_post')) ?></div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12"><?= $this->formRow($admininstitution->get('mwst')) ?></div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12"><?= $this->formRow($admininstitution->get('grund_mwst_frei')) ?></div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12"><?= $this->formRow($admininstitution->get('e_rechnung')) ?></div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span12"><?= $this->formRow($admininstitution->get('bemerkung_rechnung')) ?></div>
+                </div>
+
+            </fieldset>
+
+        </div>
+
+
+
+    </div>
+
+
+<?= $this->form()->closeTag(); ?>

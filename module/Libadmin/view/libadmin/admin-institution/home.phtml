@@ -1,0 +1,8 @@
+<?php
+
+echo $this->render('libadmin/global/home-crud', [
+	'route' => 'admininstitution',
+	'entityName' => $this->translate('admininstitution'),
+	'entityNamePlural' => $this->translate('admininstitutions'),
+	'listItems' => $listItems
+]);

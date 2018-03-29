@@ -12,6 +12,8 @@ use Libadmin\Controller\ViewControllerFactory;
 use Libadmin\Export\System\FormetaFactory;
 use Libadmin\Export\System\MapPortalFactory;
 use Libadmin\Export\System\VuFindFactory;
+use Libadmin\Form\AdminInstitutionFieldset;
+use Libadmin\Form\AdminInstitutionForm;
 use Libadmin\Form\GroupForm;
 use Libadmin\Form\InstitutionFieldset;
 use Libadmin\Form\InstitutionForm;
@@ -21,6 +23,9 @@ use Libadmin\Form\ViewFormFactory;
 use Libadmin\Helper\RelationOverview;
 use Libadmin\Helper\RelationOverviewFactory;
 use Libadmin\Libadmin\Form\GroupFormFactory;
+use Libadmin\Table\AdminInstitutionTable;
+use Libadmin\Table\AdminInstitutionTableFactory;
+use Libadmin\Table\AdminInstitutionTableGatewayFactory;
 use Libadmin\Table\GroupRelationTableFactory;
 use Libadmin\Table\GroupRelationTableGatewayFactory;
 use Libadmin\Table\GroupTable;
@@ -187,6 +192,8 @@ return [
             InstitutionFieldset::class => InvokableFactory::class,
             ViewForm::class => ViewFormFactory::class,
             GroupForm::class => GroupFormFactory::class,
+            AdminInstitutionForm::class => InvokableFactory::class,
+            AdminInstitutionFieldset::class => InvokableFactory::class
         ]
     ],
 
@@ -261,7 +268,9 @@ return [
                 'ViewTableGateway' => ViewTableGatewayFactory::class,
                 GroupRelationTable::class => GroupRelationTableFactory::class,
                 'GroupRelationTableGateway' => GroupRelationTableGatewayFactory::class,
-                RelationOverview::class => RelationOverviewFactory::class
+                RelationOverview::class => RelationOverviewFactory::class,
+                'AdminInstitutionTableGateway' => AdminInstitutionTableGatewayFactory::class,
+                AdminInstitutionTable::class    => AdminInstitutionTableFactory::class
 
             ]
         ]

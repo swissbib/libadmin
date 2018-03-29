@@ -1,15 +1,15 @@
 <?php
 
 /**
- * GroupControllerFactory
+ * AdminInstitutionTableGatewayFactory
  *
  * PHP version 5
  *
  * Copyright (C) project swissbib, University Library Basel, Switzerland
  * http://www.swissbib.org  / http://www.swissbib.ch / http://www.ub.unibas.ch
  *
- * Date: 26.01.18
- * Time: 11:40
+ * Date: 29.03.18
+ * Time: 11:09
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2,
  * as published by the Free Software Foundation.
@@ -24,53 +24,49 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * @category Swissbib_VuFind2
- * @package  Libadmin_Controller
+ * @package  Libadmin_Table
  * @author   Günter Hipler <guenter.hipler@unibas.ch>
  * @license  http://opensource.org/licenses/gpl-2.0.php GNU General Public License
  * @link     http://www.swissbib.org
  */
 
-namespace Libadmin\Controller;
-
+namespace Libadmin\Table;
 use Interop\Container\ContainerInterface;
-use Libadmin\Form\AdminInstitutionForm;
-use Libadmin\Table\AdminInstitutionTable;
-use Libadmin\Table\TablePluginManager;
+use Interop\Container\Exception\ContainerException;
+use Libadmin\Model\AdminInstitution;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
- * AdminInstitutionControllerFactory
+ * AdminInstitutionTableGatewayFactory
  *
  * @category Swissbib_VuFind2
- * @package  Libadmin_Controller
+ * @package  Libadmin_Table
  * @author   Günter Hipler <guenter.hipler@unibas.ch>
  * @license  http://opensource.org/licenses/gpl-2.0.php GNU General Public License
  * @link     http://vufind.org
  * @link     http://www.swissbib.ch
  */
-class AdminInstitutionControllerFactory implements FactoryInterface
+class AdminInstitutionTableGatewayFactory implements FactoryInterface
 {
 
+    /**
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return TableGateway|object
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-
-        $formElementManager = $container->get('FormElementManager');
-
-        /**
-         * TablePluginManager
-         *
-         * @var TablePluginManager $tablePluginManager tablepluginmanager
-         */
-        $tablePluginManager =  $container->get(TablePluginManager::class);
-
-        $institutionForm = $formElementManager->get(AdminInstitutionForm::class);
-        $institutionTable = $tablePluginManager->get(AdminInstitutionTable::class);
-
-        return new AdminInstitutionController(
-            $institutionForm,
-            $institutionTable
-        );
-
-
+        $dbAdapter = $container->get(Adapter::class);
+        $resultSetPrototype = new ResultSet();
+        $resultSetPrototype->setArrayObjectPrototype(new AdminInstitution());
+        return new TableGateway('admininstitution', $dbAdapter, null, $resultSetPrototype);
     }
 }

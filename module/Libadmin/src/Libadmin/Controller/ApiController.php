@@ -5,6 +5,9 @@ use Zend\Http\Response as HttpResponse;
 use Zend\Mvc\Controller\AbstractActionController;
 
 use Libadmin\Export\System\System;
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\ServiceManager;
+use Zend\View\Model\JsonModel;
 
 /**
  * Export api controller
@@ -12,6 +15,24 @@ use Libadmin\Export\System\System;
  */
 class ApiController extends AbstractActionController
 {
+
+    /**
+     * @var ServiceManager
+     */
+    private $serviceManager;
+
+    public function __construct(ContainerInterface $container)
+    {
+        $this->serviceManager = $container;
+
+    }
+
+    private function getServiceLocator()
+    {
+
+        return $this->serviceManager;
+
+    }
 
 	/**
 	 * Handle export request
@@ -41,6 +62,12 @@ class ApiController extends AbstractActionController
 			throw new \Exception('Unknown export service "' . $this->getSystem() . '"');
 		}
 
+            //[
+            //'status' => 'SUCCESS',
+            //'data' => [
+            //    'full_name' => 'John Doe',
+            //    'address' => '51 Middle st.'
+            //]
 		return $result;
 	}
 

@@ -35,7 +35,7 @@ class MapPortal extends System
         //documentation
         //http://code.ohloh.net/project?pid=jZRKcGNwZOo&cid=9cCNLmy7F0s&fp=291221&mp=&projSelected=true
 		parent::init();
-		$this->institutionRelationTable = $this->getServiceLocator()->get('Libadmin\Table\InstitutionRelationTable');
+		$this->institutionRelationTable = $this->tablePluginManager->get('Libadmin\Table\InstitutionRelationTable');
         $config = $this->institutionRelationTable = $this->getServiceLocator()->get('config');
         $reader = new Ini();
         $this->configHoldings   =  new Config($reader->fromFile($config['libadmin']['backlinksconfig']));

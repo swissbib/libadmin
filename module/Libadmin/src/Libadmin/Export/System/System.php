@@ -1,23 +1,24 @@
 <?php
 namespace Libadmin\Export\System;
 
+use Libadmin\Table\TablePluginManager;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\ResponseInterface;
 use Zend\View\Model\JsonModel;
 use Zend\Http\Response as HttpResponse;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 use Libadmin\Model\View;
 use Libadmin\Table\GroupTable;
 use Libadmin\Table\InstitutionTable;
 use Libadmin\Table\ViewTable;
+use Interop\Container\ContainerInterface;
 
 /**
  * [Description]
  *
  */
-class System implements ServiceLocatorAwareInterface
+class System
 {
 
 	/** @var String */
@@ -48,6 +49,10 @@ class System implements ServiceLocatorAwareInterface
 	protected $viewTable;
 
 
+    /**
+     * @var TablePluginManager
+     */
+	protected $tablePluginManager;
 
 	/**
 	 * Set service locator
@@ -60,8 +65,14 @@ class System implements ServiceLocatorAwareInterface
 	}
 
 
+	public function __construct(ContainerInterface $container)
+    {
+        $this->serviceLocator = $container;
+        $this->tablePluginManager = $this->getServiceLocator()->get(TablePluginManager::class);
+    }
 
-	/**
+
+    /**
 	 * Get service locator
 	 *
 	 * @return ServiceLocatorInterface
@@ -75,9 +86,9 @@ class System implements ServiceLocatorAwareInterface
 
 	public function init()
 	{
-		$this->institutionTable = $this->getServiceLocator()->get('Libadmin\Table\InstitutionTable');
-		$this->groupTable = $this->getServiceLocator()->get('Libadmin\Table\GroupTable');
-		$this->viewTable = $this->getServiceLocator()->get('Libadmin\Table\ViewTable');
+		$this->institutionTable = $this->tablePluginManager->get('Libadmin\Table\InstitutionTable');
+		$this->groupTable = $this->tablePluginManager->get('Libadmin\Table\GroupTable');
+		$this->viewTable = $this->tablePluginManager->get('Libadmin\Table\ViewTable');
 	}
 
 

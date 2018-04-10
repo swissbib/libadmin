@@ -24,7 +24,7 @@ class Vufind extends System
 	public function init()
 	{
 		parent::init();
-		$this->institutionRelationTable = $this->getServiceLocator()->get('Libadmin\Table\InstitutionRelationTable');
+		$this->institutionRelationTable = $this->tablePluginManager->get('Libadmin\Table\InstitutionRelationTable');
 	}
 
 

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ImportExportService
+ * ImportExportServiceFactory
  *
  * PHP version 5
  *
@@ -9,7 +9,7 @@
  * http://www.swissbib.org  / http://www.swissbib.ch / http://www.ub.unibas.ch
  *
  * Date: 25.04.18
- * Time: 17:04
+ * Time: 17:19
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2,
  * as published by the Free Software Foundation.
@@ -31,15 +31,21 @@
  */
 
 namespace Administration\Services;
+use Interop\Container\ContainerInterface;
+use Interop\Container\Exception\ContainerException;
 use Libadmin\Table\AdminInstitutionTable;
 use Libadmin\Table\AdresseTable;
 use Libadmin\Table\InstitutionAdminInstitutionRelationTable;
 use Libadmin\Table\InstitutionTable;
 use Libadmin\Table\KontaktTable;
 use Libadmin\Table\KostenbeitragTable;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Libadmin\Table\TablePluginManager;
 
 /**
- * ImportExportService
+ * ImportExportServiceFactory
  *
  * @category Swissbib_VuFind2
  * @package  Administration_Services
@@ -48,66 +54,31 @@ use Libadmin\Table\KostenbeitragTable;
  * @link     http://vufind.org
  * @link     http://www.swissbib.ch
  */
-class ImportExportService
+class ImportExportServiceFactory implements FactoryInterface
 {
 
-
-    /**
-     * @var InstitutionTable
-     */
-    private $institutionTable;
-    /**
-     * @var AdminInstitutionTable
-     */
-    private $adminInstitutionTable;
-    /**
-     * @var InstitutionAdminInstitutionRelationTable
-     */
-    private $institutionAdminInstitutionRelationTable;
-    /**
-     * @var KontaktTable
-     */
-    private $kontaktTable;
-    /**
-     * @var AdresseTable
-     */
-    private $adresseTable;
-    /**
-     * @var KostenbeitragTable
-     */
-    private $kostenbeitragTable;
-    /**
-     * @var array
-     */
-    private $config;
-
-    public function __construct(
-            InstitutionTable $institutionTable,
-            AdminInstitutionTable $adminInstitutionTable,
-            InstitutionAdminInstitutionRelationTable $institutionAdminInstitutionRelationTable,
-            KontaktTable $kontaktTable,
-            AdresseTable $adresseTable,
-            KostenbeitragTable $kostenbeitragTable,
-            array $config
-    )
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
+        $tablePluginManager = $container->get(TablePluginManager::class);
 
+        $institutionTable = $tablePluginManager->get(InstitutionTable::class);
+        $adresseTable = $tablePluginManager->get(AdresseTable::class);
+        $kontaktTable = $tablePluginManager->get(KontaktTable::class);
+        $kostenbeitragTable = $tablePluginManager->get(KostenbeitragTable::class);
+        $admininstitutionTable = $tablePluginManager->get(AdminInstitutionTable::class);
+        $institutionAdminRelationTable =  $tablePluginManager->get(InstitutionAdminInstitutionRelationTable::class);
 
-        $this->institutionTable = $institutionTable;
-        $this->adminInstitutionTable = $adminInstitutionTable;
-        $this->institutionAdminInstitutionRelationTable = $institutionAdminInstitutionRelationTable;
-        $this->kontaktTable = $kontaktTable;
-        $this->adresseTable = $adresseTable;
-        $this->kostenbeitragTable = $kostenbeitragTable;
-        $this->config = $config;
+        $config =  $container->get('config');
+
+        $importExportService = new ImportExportService(
+            $institutionTable,
+            $admininstitutionTable,
+            $institutionAdminRelationTable,
+            $kontaktTable,
+            $adresseTable,
+            $kostenbeitragTable,
+            $config
+        );
+        return $importExportService;
     }
-
-    public function loadExcelData(string $filename)
-    {
-        $loadfile = $filename;
-        //todo: load data
-
-    }
-
-
 }

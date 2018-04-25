@@ -32,6 +32,9 @@
 
 use Administration\Controller\LoadExcelDataController;
 use Administration\Controller\LoadExcelDataControllerFactory;
+use Administration\Services\ImportExportService;
+use Administration\Services\ImportExportServiceFactory;
+
 
 
 return [
@@ -58,5 +61,15 @@ return [
                 ],
             ]
         ]
+    ],
+
+
+    'service_manager' => [
+        'factories' => [
+
+            ImportExportService::class  => ImportExportServiceFactory::class
+
+        ]
     ]
+
 ];

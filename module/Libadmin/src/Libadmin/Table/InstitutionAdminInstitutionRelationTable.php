@@ -1,7 +1,7 @@
 <?php
 
 /**
- * LoadExcelDataControllerFactory
+ * InstitutionAdminInstitutionRelationTable
  *
  * PHP version 5
  *
@@ -9,7 +9,7 @@
  * http://www.swissbib.org  / http://www.swissbib.ch / http://www.ub.unibas.ch
  *
  * Date: 25.04.18
- * Time: 15:57
+ * Time: 17:53
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2,
  * as published by the Free Software Foundation.
@@ -24,37 +24,38 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * @category Swissbib_VuFind2
- * @package  Administration_Controller
+ * @package  Libadmin_Table
  * @author   Günter Hipler <guenter.hipler@unibas.ch>
  * @license  http://opensource.org/licenses/gpl-2.0.php GNU General Public License
  * @link     http://www.swissbib.org
  */
 
-namespace Administration\Controller;
-use Interop\Container\ContainerInterface;
-use Interop\Container\Exception\ContainerException;
-use Zend\ServiceManager\Exception\ServiceNotCreatedException;
-use Zend\ServiceManager\Exception\ServiceNotFoundException;
-use Zend\ServiceManager\Factory\FactoryInterface;
-use Administration\Services\ImportExportService;
+namespace Libadmin\Table;
 
 /**
- * LoadExcelDataControllerFactory
+ * InstitutionAdminInstitutionRelationTable
  *
  * @category Swissbib_VuFind2
- * @package  Administration_Controller
+ * @package  Libadmin_Table
  * @author   Günter Hipler <guenter.hipler@unibas.ch>
  * @license  http://opensource.org/licenses/gpl-2.0.php GNU General Public License
  * @link     http://vufind.org
  * @link     http://www.swissbib.ch
  */
-class LoadExcelDataControllerFactory implements FactoryInterface
+class InstitutionAdminInstitutionRelationTable extends BaseTable
 {
 
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    /**
+     * Does nothing actually
+     *
+     * @param    String        $searchString
+     * @param    Integer        $limit
+     * @return    array
+     */
+    public function find($searchString, $limit = 30)
     {
-
-        $importExportService = $container->get(ImportExportService::class);
-        return new LoadExcelDataController($importExportService);
+        return [];
     }
+
+
 }

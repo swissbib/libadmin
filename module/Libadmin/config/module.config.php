@@ -34,6 +34,9 @@ use Libadmin\Table\GroupRelationTableGatewayFactory;
 use Libadmin\Table\GroupTable;
 use Libadmin\Table\GroupTableFactory;
 use Libadmin\Table\GroupTableGatewayFactory;
+use Libadmin\Table\InstitutionAdminInstitutionRelationTable;
+use Libadmin\Table\InstitutionAdminInstitutionRelationTableFactory;
+use Libadmin\Table\InstitutionAdminInstitutionRelationTableGatewayFactory;
 use Libadmin\Table\InstitutionRelationTableFactory;
 use Libadmin\Table\InstitutionRelationTableGatewayFactory;
 use Libadmin\Table\InstitutionTableFactory;
@@ -263,6 +266,7 @@ return [
 
         'backlinksconfig' => 'local/config/libadmin/MapPortal.ini',
         'linkedswissbibconfig' => 'local/config/libadmin/LinkedSwissbib.ini',
+        'exportimportconfig' => 'local/config/libadmin/ExportImport.ini',
 
         'tablepluginmanager' => [
             'factories' => [
@@ -285,7 +289,10 @@ return [
                 'KostenbeitragTableGateway' => KostenbeitragTableGatewayFactory::class,
                 AdresseTable::class => AdresseTableFactory::class,
                 KontaktTable::class => KontaktTableFactory::class,
-                KostenbeitragTable::class   => KostenbeitragTableFactory::class
+                KostenbeitragTable::class   => KostenbeitragTableFactory::class,
+                InstitutionAdminInstitutionRelationTable::class => InstitutionAdminInstitutionRelationTableFactory::class,
+                'InstitutionAdminInstitutionRelationTableGateway' => InstitutionAdminInstitutionRelationTableGatewayFactory::class
+
 
             ]
         ]

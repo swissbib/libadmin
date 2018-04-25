@@ -31,6 +31,7 @@ namespace Administration\Controller;
  * @license  http://opensource.org/licenses/gpl-2.0.php GNU General Public License
  * @link     http://www.swissbib.org
  */
+use Administration\Services\ImportExportService;
 use Zend\Mvc\Console\Controller\AbstractConsoleController;
 use Zend\Console\Request as ConsoleRequest;
 
@@ -50,6 +51,16 @@ use Zend\Console\Request as ConsoleRequest;
 class LoadExcelDataController extends AbstractConsoleController
 {
 
+    /**
+     * @var ImportExportService
+     */
+    private $importExportService;
+
+    public function __construct(ImportExportService $importExportservice)
+    {
+        $this->importExportService = $importExportservice;
+    }
+
 
     public function loaddataAction ()
     {
@@ -66,7 +77,9 @@ class LoadExcelDataController extends AbstractConsoleController
 
 
         $filename = $this->params("filename");
-        return "das ging noch mal gut\n";
+        $this->importExportService->loadExcelData($filename);
+
+        return "wow - does this work? - tomorrow we will see ....\n";
 
     }
 

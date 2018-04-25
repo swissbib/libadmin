@@ -53,6 +53,6 @@ class FormetaFactory implements FactoryInterface
 
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new Formeta();
+        return new Formeta($container);
     }
 }

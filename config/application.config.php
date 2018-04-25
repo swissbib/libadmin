@@ -1,35 +1,46 @@
 <?php
 
+
+
+
+$modules = [
+    'TravelloViewHelper',
+    'Zend\Serializer',
+    'Zend\Log',
+    'Zend\Cache',
+    'Zend\Mvc\I18n',
+    'Zf2Whoops',
+    'Zend\Paginator',
+    'Zend\Navigation',
+    'Zend\Session',
+    'Zend\Router',
+    'Zend\Validator',
+
+    'Zend\I18n',
+    'Zend\Form',
+    'Zend\InputFilter',
+    'Zend\Db',
+    'Zend\Filter',
+    'Zend\Hydrator',
+    'Zend\Mvc\Plugin\FlashMessenger',
+    'ZendDeveloperTools',
+    'SanSessionToolbar',
+
+    'Administration',
+
+    'Application',
+    'Libadmin'
+
+];
+
+if (PHP_SAPI == 'cli' && !defined('VUFIND_PHPUNIT_RUNNING')) {
+    $modules[] = 'Zend\Mvc\Console';
+}
+
+
+
 return [
-    // This should be an array of module namespaces used in the application.
-    'modules' => [
-        'TravelloViewHelper',
-        'Zend\Serializer',
-        'Zend\Log',
-        'Zend\Cache',
-        'Zend\Mvc\I18n',
-        'Zf2Whoops',
-        'Zend\Paginator',
-        'Zend\Navigation',
-        'Zend\Session',
-        'Zend\Router',
-        'Zend\Validator',
-
-        'Zend\I18n',
-        'Zend\Form',
-        'Zend\InputFilter',
-        'Zend\Db',
-        'Zend\Filter',
-        'Zend\Hydrator',
-        'Zend\Mvc\Plugin\FlashMessenger',
-        'ZendDeveloperTools',
-        'SanSessionToolbar',
-        'Application',
-        'Libadmin',
-
-    ],
-
-    // These are various options for the listeners attached to the ModuleManager
+    'modules' => array_unique($modules),
     'module_listener_options' => [
         // This should be an array of paths in which modules reside.
         // If a string key is provided, the listener will consider that a module
@@ -70,19 +81,5 @@ return [
         // Enabled by default, prevents usage of modules that depend on other modules
         // that weren't loaded.
         // 'check_dependencies' => true,
-    ],
-
-    // Used to create an own service manager. May contain one or more child arrays.
-    //'service_listener_options' => array(
-    //     array(
-    //         'service_manager' => $stringServiceManagerName,
-    //         'config_key'      => $stringConfigKey,
-    //         'interface'       => $stringOptionalInterface,
-    //         'method'          => $stringRequiredMethodName,
-    //     ),
-    // )
-
-   // Initial configuration with which to seed the ServiceManager.
-   // Should be compatible with Zend\ServiceManager\Config.
-   // 'service_manager' => array(),
+    ]
 ];

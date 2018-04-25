@@ -5,7 +5,8 @@
  */
 
 //only test expression to get a better understanding of the executed requests
-var_dump($_SERVER['REQUEST_URI']);
+if (PHP_SAPI != 'cli')
+    var_dump($_SERVER['REQUEST_URI']);
 
 chdir(dirname(__DIR__));
 //todo: was E_STRICT but this level doesn't show any errors in log

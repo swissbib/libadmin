@@ -15,12 +15,14 @@ CREATE TABLE `kontakt` (
 DROP TABLE IF EXISTS `adresse`;
 CREATE TABLE `adresse` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name_organisation_rechnung` varchar(200) DEFAULT NULL,
   `strasse` varchar(150) DEFAULT NULL,
   `nummer` varchar(20) DEFAULT NULL,
   `zusatz` text DEFAULT NULL,
   `plz` mediumint(9) DEFAULT NULL,
   `ort` varchar(150) DEFAULT NULL,
   `country` varchar(10) DEFAULT NULL,
+  `canton` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -60,7 +62,8 @@ ALTER TABLE institution
   ADD COLUMN `url_web_en` varchar(255)  DEFAULT NULL AFTER url_en,
   ADD COLUMN `notes_public` text  DEFAULT NULL AFTER notes,
   ADD COLUMN `bfscode` varchar(50)  DEFAULT NULL,
-  ADD COLUMN `worldcat` tinyint(1)  DEFAULT NULL,
+  ADD COLUMN `worldcat_ja_nein` tinyint(1)  DEFAULT NULL,
+  ADD COLUMN `worldcat_symbol` varchar(30)  DEFAULT NULL,
   ADD COLUMN `cbslibrarycode` varchar(50)  DEFAULT NULL,
 /* Verrechnungsbeitrag: über Institution, über Anzahl Aufnahmen, über BFS Zahlen,
   über recherchierte BFS Zahlen, keine Verrechnung */
@@ -69,6 +72,7 @@ ALTER TABLE institution
   ADD COLUMN `zusage_beitrag` TINYINT(1)  DEFAULT NULL,
   ADD COLUMN `id_kostenbeitrag` int(11)  DEFAULT NULL,
   ADD COLUMN `bemerkung_kostenbeitrag` text  DEFAULT NULL,
+  ADD COLUMN `kostenbeitrag_basiert_auf` varchar(50) DEFAULT NULL;
 /* adresse_rechnung_gleich_post [ja|nein] */
   ADD COLUMN `adresse_rechnung_gleich_post` TINYINT(1)  DEFAULT NULL,
   ADD COLUMN `id_rechnungsadresse` int(11)  DEFAULT NULL,
@@ -103,6 +107,7 @@ CREATE TABLE `admininstitution` (
   `zusage_beitrag` TINYINT(1)  DEFAULT NULL,
   `id_kostenbeitrag` int(11)  DEFAULT NULL,
   `bemerkung_kostenbeitrag` text  DEFAULT NULL,
+  `kostenbeitrag_basiert_auf` varchar(50) DEFAULT NULL,
   `adresse_rechnung_gleich_post` TINYINT(1)  DEFAULT NULL,
   `id_rechnungsadresse` int(11)  DEFAULT NULL,
   `id_kontakt_rechnung` int(11)  DEFAULT NULL,

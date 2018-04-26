@@ -84,7 +84,10 @@ class Institution extends BaseModel
 
     public $bfscode;
 
-    public $worldcat;
+    public $worldcat_ja_nein;
+
+    public $worldcat_symbol;
+
 
     public $cbslibrarycode;
 
@@ -95,6 +98,8 @@ class Institution extends BaseModel
     public $id_kostenbeitrag;
 
     public $bemerkung_kostenbeitrag;
+
+    public $kostenbeitrag_basiert_auf;
 
     public $adresse_rechnung_gleich_post;
 
@@ -791,24 +796,6 @@ class Institution extends BaseModel
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getWorldcat()
-    {
-        return $this->worldcat;
-    }
-
-    /**
-     * @param mixed $worldcat
-     *
-     * @return Institution
-     */
-    public function setWorldcat($worldcat)
-    {
-        $this->worldcat = $worldcat;
-        return $this;
-    }
 
     /**
      * @return mixed
@@ -1016,6 +1003,63 @@ class Institution extends BaseModel
     public function setERechnung($e_rechnung)
     {
         $this->e_rechnung = $e_rechnung;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWorldcatJaNein()
+    {
+        return $this->worldcat_ja_nein;
+    }
+
+    /**
+     * @param mixed $worldcat_ja_nein
+     *
+     * @return Institution
+     */
+    public function setWorldcatJaNein($worldcat_ja_nein)
+    {
+        $this->worldcat_ja_nein = $worldcat_ja_nein;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWorldcatSymbol()
+    {
+        return $this->worldcat_symbol;
+    }
+
+    /**
+     * @param mixed $worldcat_symbol
+     *
+     * @return Institution
+     */
+    public function setWorldcatSymbol($worldcat_symbol)
+    {
+        $this->worldcat_symbol = $worldcat_symbol;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getKostenbeitragBasiertAuf()
+    {
+        return $this->kostenbeitrag_basiert_auf;
+    }
+
+    /**
+     * @param mixed $kostenbeitrag_basiert_auf
+     *
+     * @return Institution
+     */
+    public function setKostenbeitragBasiertAuf($kostenbeitrag_basiert_auf)
+    {
+        $this->kostenbeitrag_basiert_auf = $kostenbeitrag_basiert_auf;
         return $this;
     }
 

@@ -1,6 +1,7 @@
 <?php
 namespace Libadmin\Table;
 
+use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Db\ResultSet\ResultSetInterface;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Predicate\PredicateSet;
@@ -11,6 +12,8 @@ use Libadmin\Model\Institution;
 use Libadmin\Model\InstitutionRelation;
 use Zend\Db\Sql\Sql;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Sql\Where;
+use Zend\Hydrator\Reflection as ReflectionHydrator;
 
 /**
  * Class InstitutionTable
@@ -249,4 +252,37 @@ class InstitutionTable extends BaseTable
 
 		return $this->tableGateway->selectWith($select);
 	}
+
+	public function bibCodeExists($bibcode) :bool
+    {
+
+        $select = new Select($this->getTable());
+        $select->where->equalTo("bib_code",$bibcode);
+
+        return  $this->tableGateway->selectWith($select)->count() > 0;
+
+    }
+
+    public function getInstitutionBasedOnField($value, $field = 'bib_code')
+    {
+
+        $select = new Select($this->getTable());
+        $select->where->equalTo($field,$value);
+        return  $this->tableGateway->selectWith($select)->current();
+        //$bla = $result->
+        //$resultSet = new HydratingResultSet(new ReflectionHydrator, new Institution());
+        //$resultSet->initialize($result);
+
+        //foreach ($resultSet as $institution) {
+        //    $bla = "";
+        //}
+
+        //return  $this->tableGateway->selectWith($select)->count() > 0;
+
+    }
+
+
+
+
+
 }

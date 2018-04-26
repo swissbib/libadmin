@@ -13,12 +13,19 @@ chdir(dirname(__DIR__));
 //make a more sound decision
 error_reporting(E_ERROR);
 
+if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
+    define("DIRECTORY_SEPARATOR", "\\");
+else
+    define("DIRECTORY_SEPARATOR", "/");
+
+
 define(
     'APPLICATION_ENV', (getenv('APPLICATION_ENV')
     ? getenv('APPLICATION_ENV')
     : 'production')
 );
 
+define('APPLICATION_ROOT', dirname(__DIR__));
 
 // Setup autoloading
 require __DIR__ . '/../vendor/autoload.php';

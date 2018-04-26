@@ -68,7 +68,7 @@ class ImportExportServiceFactory implements FactoryInterface
         $admininstitutionTable = $tablePluginManager->get(AdminInstitutionTable::class);
         $institutionAdminRelationTable =  $tablePluginManager->get(InstitutionAdminInstitutionRelationTable::class);
 
-        $config =  $container->get('config');
+        $configLibadmin =  $container->get('config')['libadmin'];
 
         $importExportService = new ImportExportService(
             $institutionTable,
@@ -77,7 +77,7 @@ class ImportExportServiceFactory implements FactoryInterface
             $kontaktTable,
             $adresseTable,
             $kostenbeitragTable,
-            $config
+            $configLibadmin
         );
         return $importExportService;
     }

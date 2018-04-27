@@ -162,6 +162,8 @@ class ImportExportService
             }
 
         }
+        var_dump("processed " . $processed . " lines");
+        var_dump( $count . " lines skipped - something is not correct with content on these lines (too much commas probably)");
 
     }
 

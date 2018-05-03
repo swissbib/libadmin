@@ -83,6 +83,14 @@ class Adresse extends BaseModel
      */
     public $country;
 
+
+    /**
+     * @var ?String
+     */
+    public $canton;
+
+
+
     /**
      * @return mixed
      */
@@ -197,7 +205,48 @@ class Adresse extends BaseModel
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCanton()
+    {
+        return $this->canton;
+    }
 
+    /**
+     * @param mixed $canton
+     *
+     * @return Adresse
+     */
+    public function setCanton($canton)
+    {
+        $this->canton = $canton;
+        return $this;
+    }
+
+
+
+    public function initLocalVariablesFromExcel(array $excelData) {
+
+        $this->setCountry($excelData["country"]);
+        $this->setOrt($excelData["city"]);
+        $this->setPlz($excelData["zip"]);
+        $this->setStrasse($excelData["address_strasse"]);
+        $this->setNummer($excelData["address_nummer"]);
+        $this->setZusatz($excelData["address_zusatz"]);
+
+    }
+
+    public function initLocalVariablesFromExcelRechnungsadresse(array $excelData) {
+
+        $this->setCountry($excelData["rechnungsadresse_country"]);
+        $this->setOrt($excelData["rechnungsadresse_ort"]);
+        $this->setPlz($excelData["rechnungsadresse_plz"]);
+        $this->setStrasse($excelData["rechnungsadresse_strasse"]);
+        $this->setNummer($excelData["rechnungsadresse_nummer"]);
+        $this->setZusatz($excelData["rechnungsadresse_zusatz"]);
+
+    }
 
 
 

@@ -105,6 +105,8 @@ class Institution extends BaseModel
 
     public $id_rechnungsadresse;
 
+    public $id_postadresse;
+
     public $id_kontakt_rechnung;
 
     public $mwst;
@@ -933,6 +935,29 @@ class Institution extends BaseModel
     /**
      * @return mixed
      */
+    public function getId_postadresse()
+    {
+        return $this->id_postadresse;
+    }
+
+    /**
+     * @param mixed $id_postadresse
+     *
+     * @return Institution
+     */
+    public function setIdPostadresse($id_postadresse)
+    {
+        $this->id_postadresse = $id_postadresse;
+        return $this;
+    }
+
+
+
+
+
+    /**
+     * @return mixed
+     */
     public function getId_kontakt_rechnung()
     {
         return $this->id_kontakt_rechnung;
@@ -1062,6 +1087,34 @@ class Institution extends BaseModel
         $this->kostenbeitrag_basiert_auf = $kostenbeitrag_basiert_auf;
         return $this;
     }
+
+    public function initLocalVariablesFromExcel(array $excelData) {
+
+        $this->setBemerkungKostenbeitrag($excelData["bemerkung_kostenbeitrag"]);
+        $this->setBemerkungRechnung($excelData["bemerkung_rechnungsstellung"]);
+        $this->setBfscode($excelData["bfs_code"]);
+        $this->setCbslibrarycode($excelData["cbs_library_code"]);
+        empty($excelData["e_rechnung_ja_nein"]) ? $this->setERechnung(0) : $this->setERechnung(1);
+        empty($excelData["mwst_ja_nein"]) ? $this->setMwst(0) : $this->setMwst(1);
+        $this->getMwst() === true ? $this->setGrundMwstFrei($excelData["grund_mwst_befreiung"]) : $this->setGrundMwstFrei("");
+        $this->setKorrespondezsprache($excelData["korrespondenzsprache"]);
+        empty($excelData["worldcat_ja_nein"]) ? $this->setWorldcatJaNein(0): $this->setWorldcatJaNein(1);
+        //$this->getWorldcatJaNein() === true ? $this->setWorldcatSyMmbol($excelData["worldcat_symbol"]) : $this->setWorldcatSymbol("");
+        //todo: Frage an Silvia
+        //worldcat_symbol ist gesetzt auch wenn worldcat_ja_nein leer ist - richtig?
+        $this->setWorldcatSymbol($excelData["worldcat_symbol"]);
+        $this->setCoordinates($excelData["koordinaten"]);
+        empty($excelData["zusage_kostenbeitrag_ja_nein"]) ? $this->setZusageBeitrag(0) : $this->setZusageBeitrag(1);
+        $this->setEmail($excelData["mail"]);
+        empty($excelData["rechnungsadresse_gleich_postadresse_ja_nein"]) ||
+        strtolower( $excelData["rechnungsadresse_gleich_postadresse_ja_nein"]) === "ja" ? $this->setAdresseRechnungGleichPost(1) :
+            $this->setAdresseRechnungGleichPost(0);
+
+
+
+    }
+
+
 
 
 

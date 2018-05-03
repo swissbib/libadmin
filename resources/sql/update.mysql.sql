@@ -72,10 +72,11 @@ ALTER TABLE institution
   ADD COLUMN `zusage_beitrag` TINYINT(1)  DEFAULT NULL,
   ADD COLUMN `id_kostenbeitrag` int(11)  DEFAULT NULL,
   ADD COLUMN `bemerkung_kostenbeitrag` text  DEFAULT NULL,
-  ADD COLUMN `kostenbeitrag_basiert_auf` varchar(50) DEFAULT NULL;
+  ADD COLUMN `kostenbeitrag_basiert_auf` varchar(50) DEFAULT NULL,
 /* adresse_rechnung_gleich_post [ja|nein] */
   ADD COLUMN `adresse_rechnung_gleich_post` TINYINT(1)  DEFAULT NULL,
   ADD COLUMN `id_rechnungsadresse` int(11)  DEFAULT NULL,
+  ADD COLUMN `id_postadresse` int(11)  DEFAULT NULL AFTER id_rechnungsadresse,
   ADD COLUMN `id_kontakt_rechnung` int(11)  DEFAULT NULL,
 /* mwst: [ja|nein] */
   ADD COLUMN `mwst` TINYINT(1)  DEFAULT NULL,
@@ -88,6 +89,7 @@ ALTER TABLE institution
   ADD CONSTRAINT `fk_kontakt` FOREIGN KEY (`id_kontakt`) REFERENCES `kontakt` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_kostenbeitrag` FOREIGN KEY (`id_kostenbeitrag`) REFERENCES `kostenbeitrag` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_rechnungsadresse` FOREIGN KEY (`id_rechnungsadresse`) REFERENCES `adresse` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_postadresse` FOREIGN KEY (`id_postadresse`) REFERENCES `adresse` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_rechnung_kontakt` FOREIGN KEY (`id_kontakt_rechnung`) REFERENCES `kontakt` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 

@@ -31,6 +31,7 @@
  */
 
 namespace Administration\Services;
+use Libadmin\Model\Adresse;
 use Libadmin\Table\AdminInstitutionTable;
 use Libadmin\Table\AdresseTable;
 use Libadmin\Table\InstitutionAdminInstitutionRelationTable;
@@ -151,7 +152,42 @@ class ImportExportService
             if ($this->isBibCodeAvailable($combinedValuesFromLine)) {
 
 
+                /**
+                 * @var $institution \Libadmin\Model\Institution
+                 */
                 $institution =  $this->getInstitutionWithBibCode($combinedValuesFromLine);
+                $institution->initLocalVariablesFromExcel($combinedValuesFromLine);
+
+                //todo: setze alte Adressbestandteile auf Null
+                //füge Kostenbeiträge hinzu
+                //relation zu admininstitution
+                //sammle skipped lines und logge diese
+                if (empty($institution->getId_postadresse()) ) {
+                    $postAdresse = new Adresse();
+                    $postAdresse->initLocalVariablesFromExcel($combinedValuesFromLine);
+                    //canton is not part of Excel file and we want to remove the adress part from the institution table
+                    //and move it into the adress table
+                    $postAdresse->setCanton($institution->getCanton());
+                    $postAdressID = $this->adresseTable->save($postAdresse);
+
+                    $institution->setIdPostadresse($postAdressID);
+                }
+
+                if (! $institution->getAdresse_rechnung_gleich_post() ) {
+                    $rechnungsAdresse = new Adresse();
+                    $rechnungsAdresse->initLocalVariablesFromExcelRechnungsadresse($combinedValuesFromLine);
+                    //canton is not part of Excel file and we want to remove the adress part from the institution table
+                    //and move it into the adress table
+                    $rechnungsAdresse->setCanton($institution->getCanton());
+                    $rechnungsadressID = $this->adresseTable->save($rechnungsAdresse);
+
+                    $institution->setIdRechnungsadresse($rechnungsadressID);
+
+                }
+
+                $this->institutionTable->saveInstitutionOnly($institution);
+
+
                 $processed++;
                 $test = "";
 

@@ -148,6 +148,9 @@ class InstitutionTable extends BaseTable
 	 */
 	public function save(BaseModel $institution)
 	{
+        /**
+         * @var $institution \Libadmin\Model\Institution
+         */
 		$relations = $institution->getRelations();
 		$idInstitution = parent::save($institution);
 
@@ -155,6 +158,19 @@ class InstitutionTable extends BaseTable
 
 		return $idInstitution;
 	}
+
+    /**
+     * method is only used for the import of excel data because the save method tries
+     * to store group relations which is not useful here
+     * @param Institution $institution
+     * @return int
+     * @throws \Exception
+     * @uses
+     */
+	public function saveInstitutionOnly(Institution $institution) {
+        $idInstitution = parent::save($institution);
+        return $idInstitution;
+    }
 
 
 

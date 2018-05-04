@@ -32,19 +32,19 @@ CREATE TABLE `adresse` (
 DROP TABLE IF EXISTS `kostenbeitrag`;
 CREATE TABLE `kostenbeitrag` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `2018` DECIMAL(7,2)  DEFAULT NULL,
-  `2019` DECIMAL(7,2)  DEFAULT NULL,
-  `2020` DECIMAL(7,2)  DEFAULT NULL,
-  `2021` DECIMAL(7,2)  DEFAULT NULL,
-  `2022` DECIMAL(7,2)  DEFAULT NULL,
-  `2023` DECIMAL(7,2)  DEFAULT NULL,
-  `2024` DECIMAL(7,2)  DEFAULT NULL,
-  `2025` DECIMAL(7,2)  DEFAULT NULL,
-  `2026` DECIMAL(7,2)  DEFAULT NULL,
-  `2027` DECIMAL(7,2)  DEFAULT NULL,
-  `2028` DECIMAL(7,2)  DEFAULT NULL,
-  `2029` DECIMAL(7,2)  DEFAULT NULL,
-  `2030` DECIMAL(7,2)  DEFAULT NULL,
+  `j2018` DECIMAL(7,2)  DEFAULT NULL,
+  `j2019` DECIMAL(7,2)  DEFAULT NULL,
+  `j2020` DECIMAL(7,2)  DEFAULT NULL,
+  `j2021` DECIMAL(7,2)  DEFAULT NULL,
+  `j2022` DECIMAL(7,2)  DEFAULT NULL,
+  `j2023` DECIMAL(7,2)  DEFAULT NULL,
+  `j2024` DECIMAL(7,2)  DEFAULT NULL,
+  `j2025` DECIMAL(7,2)  DEFAULT NULL,
+  `j2026` DECIMAL(7,2)  DEFAULT NULL,
+  `j2027` DECIMAL(7,2)  DEFAULT NULL,
+  `j2028` DECIMAL(7,2)  DEFAULT NULL,
+  `j2029` DECIMAL(7,2)  DEFAULT NULL,
+  `j2030` DECIMAL(7,2)  DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -60,8 +60,10 @@ ALTER TABLE institution
   ADD COLUMN `url_web_fr` varchar(255)  DEFAULT NULL AFTER url_en,
   ADD COLUMN `url_web_it` varchar(255)  DEFAULT NULL AFTER url_en,
   ADD COLUMN `url_web_en` varchar(255)  DEFAULT NULL AFTER url_en,
-  ADD COLUMN `notes_public` text  DEFAULT NULL AFTER notes,
-  ADD COLUMN `bfscode` varchar(50)  DEFAULT NULL,
+  ADD COLUMN `notes_public_de` text  DEFAULT NULL AFTER notes,
+  ADD COLUMN `notes_public_fr` text  DEFAULT NULL AFTER notes,
+  ADD COLUMN `notes_public_en` text  DEFAULT NULL AFTER notes,
+  ADD COLUMN `notes_public_it` text  DEFAULT NULL AFTER notes,  ADD COLUMN `bfscode` varchar(50)  DEFAULT NULL,
   ADD COLUMN `worldcat_ja_nein` tinyint(1)  DEFAULT NULL,
   ADD COLUMN `worldcat_symbol` varchar(30)  DEFAULT NULL,
   ADD COLUMN `cbslibrarycode` varchar(50)  DEFAULT NULL,
@@ -96,6 +98,10 @@ ALTER TABLE institution
 DROP TABLE IF EXISTS `admininstitution`;
 CREATE TABLE `admininstitution` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+
+  /* hier einen Schlüssel legen??*/
+  `idcode` varchar(50)  DEFAULT NULL,
+
   `name` varchar(200)  DEFAULT NULL,
   `id_adresse` INT(11)  DEFAULT NULL,
   /* mail: entspricht institutioneller email adresse */

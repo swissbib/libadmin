@@ -341,6 +341,11 @@ class Kostenbeitrag extends BaseModel
         return $this;
     }
 
+    public function initLocalVariablesFromExcel(array $excelData) {
+        $this->setJ2018($excelData["beitrag_2018"]);
+        $this->setJ2019($excelData["beitrag_2019"]);
+        $this->setJ2020($excelData["beitrag_2020"]);
+    }
 
 
 }

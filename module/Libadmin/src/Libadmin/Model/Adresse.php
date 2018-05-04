@@ -90,6 +90,10 @@ class Adresse extends BaseModel
     public $canton;
 
 
+    /**
+     * @var ?String
+     */
+    public $name_organisation_rechnung;
 
     /**
      * @return mixed
@@ -221,6 +225,25 @@ class Adresse extends BaseModel
     public function setCanton($canton)
     {
         $this->canton = $canton;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName_organisation_rechnung()
+    {
+        return $this->name_organisation_rechnung;
+    }
+
+    /**
+     * @param mixed $name_organisation_rechnung
+     *
+     * @return Adresse
+     */
+    public function setNameOrganisationRechnung($name_organisation_rechnung)
+    {
+        $this->name_organisation_rechnung = $name_organisation_rechnung;
         return $this;
     }
 

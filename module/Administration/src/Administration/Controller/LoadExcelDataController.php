@@ -62,6 +62,12 @@ class LoadExcelDataController extends AbstractConsoleController
     }
 
 
+    public function loadadmindataAction() {
+        $test = "";
+    }
+
+
+
     public function loaddataAction ()
     {
 
@@ -77,7 +83,20 @@ class LoadExcelDataController extends AbstractConsoleController
 
 
         $filename = $this->params("filename");
-        $this->importExportService->loadExcelData($filename);
+
+        $params = $request->getParams()->getArrayCopy();
+
+        if (in_array("institution", $params))
+        {
+            $this->importExportService->loadExcelDataInstitution($filename);
+
+        } elseif (in_array("admininstitution", $params)) {
+            $this->importExportService->loadExceldataAdminInstitution($filename);
+        } else {
+            return "wrong route, no service match";
+        }
+
+
 
         return "wow - does this work? - tomorrow we will see ....\n";
 

@@ -31,7 +31,11 @@
  */
 
 namespace Administration\Services;
+use Libadmin\Model\AdminInstitution;
 use Libadmin\Model\Adresse;
+use Libadmin\Model\Institution;
+use Libadmin\Model\Kontakt;
+use Libadmin\Model\Kostenbeitrag;
 use Libadmin\Table\AdminInstitutionTable;
 use Libadmin\Table\AdresseTable;
 use Libadmin\Table\InstitutionAdminInstitutionRelationTable;
@@ -57,6 +61,8 @@ class ImportExportService
 
     private $firstLineHeaders = 'bibcode;labelDE;name';
 
+    private $firstLineHeadersAdminInstitution = "code;name;adresse";
+
     private $keysInstitution = [
         "bib_code", "label_de", "name_de", "address_strasse", "address_nummer", "address_zusatz",
         "zip", "city", "country", "mail", "kontakt_name", "kontakt_vorname", "kontakt_anrede", "kontakt_email",
@@ -71,6 +77,21 @@ class ImportExportService
         "kostenbeitrag_ueber_uni_fh_uni", "zugehoerigkeit_institution",
         "sap_name_1", "sap_name2", "sap_name3", "sap_name4"
     ];
+
+
+    private $keysAdminInstitution = [
+        "idcode", "name", "address_strasse", "address_nummer", "address_zusatz", "zip",
+        "city", "country", "mail", "kontakt_name", "kontakt_vorname", "kontakt_anrede",
+        "kontakt_email", "korrespondenzsprache", "bfs_code", "ipadresse", "zusage_kostenbeitrag_ja_nein",
+        "kostenbeitrag_basiert_auf", "beitrag_2018", "beitrag_2019", "beitrag_2020", "bemerkung_kostenbeitrag",
+        "rechnungsadresse_gleich_postadresse_ja_nein", "rechnungsadresse_name", "rechnungsadresse_strasse",
+        "rechnungsadresse_nummer", "rechnungsadresse_zusatz", "rechnungsadresse_plz", "rechnungsadresse_ort",
+        "rechnungsadresse_country", "kontakt_rechnung_name", "kontakt_rechnung_vorname", "kontakt_rechnung_anrede",
+        "kontakt_rechnung_mail", "leere_spalte_export","mwst_ja_nein", "grund_mwst_befreiung", "e_rechnung_ja_nein",
+        "bemerkung_rechnungsstellung", "zugehoerige_institutions", "relation_type"
+
+    ];
+
 
 
     /**
@@ -126,10 +147,10 @@ class ImportExportService
 
     }
 
-    public function loadExcelData(string $filename)
+    public function loadExcelDataInstitution(string $filename)
     {
 
-        $count = 0;
+        $wrongMatch = 0;
         $processed = 0;
         foreach ($this->readsingleLines($filename) as $line) {
             //php and utf-8 - really nice.... by the way: iI have to confess: I do not understand
@@ -145,7 +166,7 @@ class ImportExportService
             $combinedValuesFromLine = array_combine($this->keysInstitution,$splittedLine);
 
             if (!is_array($combinedValuesFromLine)) {
-                $count++;
+                $wrongMatch++;
                 continue 1;
             }
 
@@ -163,6 +184,9 @@ class ImportExportService
                 //relation zu admininstitution
                 //sammle skipped lines und logge diese
                 if (empty($institution->getId_postadresse()) ) {
+                    //todo: ich habe noch nicht den Fall abgefangen, bei dem bereits eine Adresse vorhanden ist
+                    //(Datenbankupdate durch Importdaten)
+
                     $postAdresse = new Adresse();
                     $postAdresse->initLocalVariablesFromExcel($combinedValuesFromLine);
                     //canton is not part of Excel file and we want to remove the adress part from the institution table
@@ -185,6 +209,33 @@ class ImportExportService
 
                 }
 
+                if (empty($institution->getId_kontakt()) && !empty ($combinedValuesFromLine["kontakt_name"]))
+                {
+                    $mainContact = new Kontakt();
+                    $mainContact->initLocalVariablesFirstPersonFromExcel($combinedValuesFromLine);
+                    $idMainContact =  $this->kontaktTable->save($mainContact);
+                    $institution->setIdKontakt($idMainContact);
+
+                }
+
+                if (empty($institution->getId_kontakt_rechnung()) && !empty ($combinedValuesFromLine["kontakt_rechnung_name"]))
+                {
+                    $billContact = new Kontakt();
+                    $billContact->initLocalVariablesBillPersonFromExcel($combinedValuesFromLine);
+                    $idBillContact =  $this->kontaktTable->save($mainContact);
+                    $institution->setIdKontaktRechnung($idBillContact);
+
+                }
+
+                if ($this->checkInsertBeitraegeForInstitution($institution,$combinedValuesFromLine)) {
+                    $beitraege = new Kostenbeitrag();
+                    $beitraege->initLocalVariablesFromExcel($combinedValuesFromLine);
+                    $idKostenbeitrag =  $this->kostenbeitragTable->save($beitraege);
+                    $institution->setIdKostenbeitrag($idKostenbeitrag);
+
+                }
+
+
                 $this->institutionTable->saveInstitutionOnly($institution);
 
 
@@ -199,9 +250,70 @@ class ImportExportService
 
         }
         var_dump("processed " . $processed . " lines");
-        var_dump( $count . " lines skipped - something is not correct with content on these lines (too much commas probably)");
+        var_dump( $wrongMatch . " lines skipped - something is not correct with content on these lines (too much commas probably)");
 
     }
+
+
+    public function loadExceldataAdminInstitution(String $filename)
+    {
+        $wrongMatch = 0;
+        $processed = 0;
+        foreach ($this->readsingleLines($filename) as $line) {
+            //php and utf-8 - really nice.... by the way: iI have to confess: I do not understand
+            //how these things are done in PHP...
+            //compare
+            //https://stackoverflow.com/questions/35679900/how-fix-utf-8-characters-in-php-file-get-contents
+            $line = mb_convert_encoding($line, 'UTF-8', mb_detect_encoding($line, 'UTF-8, ISO-8859-1', true));
+            if ($this->checkFirstLineAdminInstitution($line)) {
+                $testsplit = $this->splitLine($line);
+                continue 1;
+            }
+            $splittedLine = $this->splitLine($line);
+
+            $combinedValuesFromLine = array_combine($this->keysAdminInstitution,$splittedLine);
+
+            if (!is_array($combinedValuesFromLine)) {
+                $wrongMatch++;
+                continue 1;
+            }
+
+            $admininstitution =  new AdminInstitution();
+            $admininstitution->initLocalVariablesFromExcel($combinedValuesFromLine);
+
+            if (empty($admininstitution->getIdAdresse()) ) {
+                //todo: ich habe noch nicht den Fall abgefangen, bei dem bereits eine Adresse vorhanden ist
+                //(Datenbankupdate durch Importdaten)
+
+                $postAdresse = new Adresse();
+                $postAdresse->initLocalVariablesFromExcel($combinedValuesFromLine);
+                //canton is not part of Excel file and we want to remove the adress part from the institution table
+                //and move it into the adress table
+                $postAdressID = $this->adresseTable->save($postAdresse);
+
+                $admininstitution->setIdAdresse($postAdressID);
+            }
+
+            if (! $admininstitution->getAdresseRechnungGleichPost() ) {
+                $rechnungsAdresse = new Adresse();
+                $rechnungsAdresse->initLocalVariablesFromExcelRechnungsadresse($combinedValuesFromLine);
+                //canton is not part of Excel file and we want to remove the adress part from the institution table
+                //and move it into the adress table
+                $rechnungsadressID = $this->adresseTable->save($rechnungsAdresse);
+
+                $admininstitution->setIdRechnungsadresse($rechnungsadressID);
+
+            }
+
+
+
+            //todo: relations zu institution
+            //kostenbeitraege
+
+            $this->adminInstitutionTable->save($admininstitution);
+        }
+    }
+
 
 
     private function readsingleLines($filename) {
@@ -228,6 +340,15 @@ class ImportExportService
 
     }
 
+
+    private function checkFirstLineAdminInstitution($line):bool
+    {
+        return strpos($line, $this->firstLineHeadersAdminInstitution) === false ? false : true ;
+
+    }
+
+
+
     private function splitLine($line)
     {
         return explode(";",$line);
@@ -249,6 +370,17 @@ class ImportExportService
         return $this->institutionTable->getInstitutionBasedOnField($combinedValues["bib_code"]);
     }
 
+    private function checkInsertBeitraegeForInstitution(Institution $institution, array $importData) : bool
+    {
+        $insertBeitrage = false;
+        if ($institution->getZusage_beitrag())
+            $insertBeitrage = true;
+        if (!empty($importData["beitrag_2018"]) ||
+            !empty($importData["beitrag_2019"]) ||
+            !empty($importData["beitrag_2010"]))
+            $insertBeitrage = true;
 
+        return $insertBeitrage;
+    }
 
 }

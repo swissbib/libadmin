@@ -148,6 +148,19 @@ class Kontakt extends BaseModel
         return $this;
     }
 
+    public function initLocalVariablesFirstPersonFromExcel(array $excelData) {
+        $this->setName($excelData["kontakt_name"]);
+        $this->setVorname($excelData["kontakt_vorname"]);
+        $this->setAnrede($excelData["kontakt_anrede"]);
+        $this->setEmail($excelData["kontakt_email"]);
+    }
+
+    public function initLocalVariablesBillPersonFromExcel(array $excelData) {
+        $this->setName($excelData["kontakt_rechnung_name"]);
+        $this->setVorname($excelData["kontakt_rechnung_vorname"]);
+        $this->setAnrede($excelData["kontakt_rechnung_anrede"]);
+        $this->setEmail($excelData["kontakt_rechnung_mail"]);
+    }
 
 
 }

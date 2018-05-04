@@ -57,6 +57,15 @@ class AdminInstitution extends BaseModel
      */
     public $name;
 
+
+    /**
+     * todo: Silvia fragen
+     * unique code for admininstitution ???
+     * @var ?String
+     */
+    public $idcode;
+
+
     /**
      * reference to adresse
      * @var ?Integer
@@ -137,6 +146,13 @@ class AdminInstitution extends BaseModel
      * @var ?String
      */
     public $bemerkung_rechnung;
+
+
+    /**
+     * @var ?String
+     */
+    public $kostenbeitrag_basiert_auf;
+
 
     /**
      * @return mixed
@@ -485,7 +501,70 @@ class AdminInstitution extends BaseModel
         return 'admininstitution';
     }
 
+    /**
+     * @return mixed
+     */
+    public function getKostenbeitrag_basiert_auf()
+    {
+        return $this->kostenbeitrag_basiert_auf;
+    }
 
+    /**
+     * @param mixed $kostenbeitrag_basiert_auf
+     *
+     * @return AdminInstitution
+     */
+    public function setKostenbeitragBasiertAuf($kostenbeitrag_basiert_auf)
+    {
+        $this->kostenbeitrag_basiert_auf = $kostenbeitrag_basiert_auf;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdcode()
+    {
+        return $this->idcode;
+    }
+
+    /**
+     * @param mixed $idcode
+     *
+     * @return AdminInstitution
+     */
+    public function setIdcode($idcode)
+    {
+        $this->idcode = $idcode;
+        return $this;
+    }
+
+
+
+
+
+    public function initLocalVariablesFromExcel(array $excelData) {
+
+
+        $this->setBemerkungKostenbeitrag($excelData["bemerkung_kostenbeitrag"]);
+        $this->setBemerkungRechnung($excelData["bemerkung_rechnungsstellung"]);
+        $this->setBfscode($excelData["bfs_code"]);
+        empty($excelData["e_rechnung_ja_nein"]) ? $this->setERechnung(0) : $this->setERechnung(1);
+        empty($excelData["mwst_ja_nein"]) ? $this->setMwst(0) : $this->setMwst(1);
+        $this->setGrundMwstFrei($excelData["grund_mwst_befreiung"]); //habe ich hier keine MWST
+        $this->setKorrespondezsprache($excelData["korrespondenzsprache"]);
+        empty($excelData["zusage_kostenbeitrag_ja_nein"]) ? $this->setZusageBeitrag(0) : $this->setZusageBeitrag(1);
+        empty($excelData["rechnungsadresse_gleich_postadresse_ja_nein"]) ||
+        strtolower( $excelData["rechnungsadresse_gleich_postadresse_ja_nein"]) === "ja" ? $this->setAdresseRechnungGleichPost(1) :
+            $this->setAdresseRechnungGleichPost(0);
+
+        $this->setKostenbeitragBasiertAuf($this->formatKostenbeitragAdminBasiertAuf( $excelData["kostenbeitrag_basiert_auf"]));
+        $this->setIpadresse($excelData["ipadresse"]);
+        $this->setIdcode($excelData["idcode"]);
+        $this->setName($excelData["name"]);
+
+
+    }
 
 
 }

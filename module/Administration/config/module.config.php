@@ -49,16 +49,29 @@ return [
         'router' => [
 
             'routes' => [
-                'load-exceldata' => [
+                'load-exceldata-institution' => [
                     'type'    => 'simple',
                     'options' => [
-                        'route'  => 'loaddata [--verbose|-v] <filename>',
+                        'route'  => 'loaddata institution [--verbose|-v] <filename>',
                         'defaults' => [
                             'controller' => LoadExcelDataController::class,
                             'action' => 'loaddata',
                         ],
                     ],
                 ],
+
+                'load-exceldata-admininstitution' => [
+                    'type'    => 'simple',
+                    'options' => [
+                        'route'  => 'loaddata admininstitution [--verbose|-v] <filename>',
+                        'defaults' => [
+                            'controller' => LoadExcelDataController::class,
+                            'action' => 'loaddata',
+                        ],
+                    ],
+                ],
+
+
             ]
         ]
     ],

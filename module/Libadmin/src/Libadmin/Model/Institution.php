@@ -76,7 +76,13 @@ class Institution extends BaseModel
 
     public $adresszusatz;
 
-    public $notes_public;
+    public $notes_public_de;
+
+    public $notes_public_fr;
+
+    public $notes_public_en;
+
+    public $notes_public_it;
 
     public $id_kontakt;
 
@@ -725,21 +731,75 @@ class Institution extends BaseModel
     /**
      * @return mixed
      */
-    public function getNotes_public()
+    public function getNotes_public_de()
     {
-        return $this->notes_public;
+        return $this->notes_public_de;
     }
 
     /**
-     * @param mixed $notes_public
+     * @param mixed $notes_public_de
      *
-     * @return Institution
+     * @return mixed
      */
-    public function setNotesPublic($notes_public)
+    public function setNotesPublicDe($notes_public_de)
     {
-        $this->notes_public = $notes_public;
-        return $this;
+        $this->notes_public_de = $notes_public_de;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getNotes_public_fr()
+    {
+        return $this->notes_public_fr;
+    }
+
+    /**
+     * @param mixed $notes_public_fr
+     *
+     * @return mixed
+     */
+    public function setNotesPublicFr($notes_public_fr)
+    {
+        $this->notes_public_fr = $notes_public_fr;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNotes_public_en()
+    {
+        return $this->notes_public_en;
+    }
+
+    /**
+     * @param mixed $notes_public_en
+     *
+     * @return mixed
+     */
+    public function setNotesPublicEn($notes_public_en)
+    {
+        $this->notes_public_en = $notes_public_en;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNotes_public_it()
+    {
+        return $this->notes_public_it;
+    }
+
+    /**
+     * @param mixed $notes_public_it
+     *
+     * @return mixed
+     */
+    public function setNotesPublicIt($notes_public_it)
+    {
+        $this->notes_public_it = $notes_public_it;
+    }
+
 
     /**
      * @return mixed
@@ -1090,13 +1150,14 @@ class Institution extends BaseModel
 
     public function initLocalVariablesFromExcel(array $excelData) {
 
+
         $this->setBemerkungKostenbeitrag($excelData["bemerkung_kostenbeitrag"]);
         $this->setBemerkungRechnung($excelData["bemerkung_rechnungsstellung"]);
         $this->setBfscode($excelData["bfs_code"]);
         $this->setCbslibrarycode($excelData["cbs_library_code"]);
         empty($excelData["e_rechnung_ja_nein"]) ? $this->setERechnung(0) : $this->setERechnung(1);
         empty($excelData["mwst_ja_nein"]) ? $this->setMwst(0) : $this->setMwst(1);
-        $this->getMwst() === true ? $this->setGrundMwstFrei($excelData["grund_mwst_befreiung"]) : $this->setGrundMwstFrei("");
+        $this->getMwst() == 0 ? $this->setGrundMwstFrei($excelData["grund_mwst_befreiung"]) : $this->setGrundMwstFrei("");
         $this->setKorrespondezsprache($excelData["korrespondenzsprache"]);
         empty($excelData["worldcat_ja_nein"]) ? $this->setWorldcatJaNein(0): $this->setWorldcatJaNein(1);
         //$this->getWorldcatJaNein() === true ? $this->setWorldcatSyMmbol($excelData["worldcat_symbol"]) : $this->setWorldcatSymbol("");
@@ -1109,10 +1170,13 @@ class Institution extends BaseModel
         empty($excelData["rechnungsadresse_gleich_postadresse_ja_nein"]) ||
         strtolower( $excelData["rechnungsadresse_gleich_postadresse_ja_nein"]) === "ja" ? $this->setAdresseRechnungGleichPost(1) :
             $this->setAdresseRechnungGleichPost(0);
+        $this->setKostenbeitragBasiertAuf($this->formatKostenbeitragBasiertAuf( $excelData["kostenbeitrag_basiert_auf"]));
+        $this->setVerrechnungbeitrag($this->formatVerrechnungsbeitrag( $excelData["verrechnung_kostenbeitrag_auswahl"]));
 
 
 
     }
+
 
 
 

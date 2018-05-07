@@ -31,6 +31,8 @@
  */
 
 namespace Libadmin\Table;
+use Libadmin\Model\AdminInstitution;
+use Libadmin\Model\InstitutionAdminInstitutionRelation;
 
 /**
  * InstitutionAdminInstitutionRelationTable
@@ -56,6 +58,23 @@ class InstitutionAdminInstitutionRelationTable extends BaseTable
     {
         return [];
     }
+
+
+
+    /**
+     * @param    BaseModel    $record
+     * @return    Integer        (New) object ID
+     * @throws    \Exception
+     */
+    public function insertRelation(InstitutionAdminInstitutionRelation $record)
+    {
+        $data = $record->getBaseData();
+
+        $numRows = $this->tableGateway->insert($data);
+
+
+    }
+
 
 
 }

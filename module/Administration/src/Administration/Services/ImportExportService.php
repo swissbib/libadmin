@@ -34,6 +34,7 @@ namespace Administration\Services;
 use Libadmin\Model\AdminInstitution;
 use Libadmin\Model\Adresse;
 use Libadmin\Model\Institution;
+use Libadmin\Model\InstitutionAdminInstitutionRelation;
 use Libadmin\Model\Kontakt;
 use Libadmin\Model\Kostenbeitrag;
 use Libadmin\Table\AdminInstitutionTable;
@@ -176,7 +177,7 @@ class ImportExportService
                 /**
                  * @var $institution \Libadmin\Model\Institution
                  */
-                $institution =  $this->getInstitutionWithBibCode($combinedValuesFromLine);
+                $institution =  $this->getInstitutionWithBibCode($combinedValuesFromLine["bib_code"]);
                 $institution->initLocalVariablesFromExcel($combinedValuesFromLine);
 
                 //todo: setze alte Adressbestandteile auf Null
@@ -306,11 +307,45 @@ class ImportExportService
             }
 
 
+            if (empty($admininstitution->getIdKontakt()) && !empty ($combinedValuesFromLine["kontakt_name"]))
+            {
+                $mainContact = new Kontakt();
+                $mainContact->initLocalVariablesFirstPersonFromExcel($combinedValuesFromLine);
+                $idMainContact =  $this->kontaktTable->save($mainContact);
+                $admininstitution->setIdKontakt($idMainContact);
+
+            }
+
+            if (empty($admininstitution->getIdKontaktRechnung()) && !empty ($combinedValuesFromLine["kontakt_rechnung_name"]))
+            {
+                $billContact = new Kontakt();
+                $billContact->initLocalVariablesBillPersonFromExcel($combinedValuesFromLine);
+                $idBillContact =  $this->kontaktTable->save($mainContact);
+                $admininstitution->setIdKontaktRechnung($idBillContact);
+
+            }
+
+
+
+            if ($this->checkInsertBeitraegeForAdminInstitution($admininstitution,$combinedValuesFromLine)) {
+                $beitraege = new Kostenbeitrag();
+                $beitraege->initLocalVariablesFromExcel($combinedValuesFromLine);
+                $idKostenbeitrag =  $this->kostenbeitragTable->save($beitraege);
+                $admininstitution->setIdKostenbeitrag($idKostenbeitrag);
+
+            }
+
+
+
 
             //todo: relations zu institution
             //kostenbeitraege
 
-            $this->adminInstitutionTable->save($admininstitution);
+            $idadmininstitution = $this->adminInstitutionTable->save($admininstitution);
+            //load the new inserted record to get the automatiquely created primary key
+            $admininstitution = $this->adminInstitutionTable->getRecord($idadmininstitution);
+            $this->insertRelationInstitutionAdminInstititution($admininstitution, $combinedValuesFromLine);
+            $test = "";
         }
     }
 
@@ -365,9 +400,9 @@ class ImportExportService
     }
 
 
-    private function getInstitutionWithBibCode(array $combinedValues)
+    private function getInstitutionWithBibCode(String $bibcode)
     {
-        return $this->institutionTable->getInstitutionBasedOnField($combinedValues["bib_code"]);
+        return $this->institutionTable->getInstitutionBasedOnField($bibcode);
     }
 
     private function checkInsertBeitraegeForInstitution(Institution $institution, array $importData) : bool
@@ -382,5 +417,52 @@ class ImportExportService
 
         return $insertBeitrage;
     }
+
+    private function checkInsertBeitraegeForAdminInstitution(AdminInstitution $institution, array $importData) : bool
+    {
+        $insertBeitrage = false;
+        if ($institution->getZusageBeitrag())
+            $insertBeitrage = true;
+        if (!empty($importData["beitrag_2018"]) ||
+            !empty($importData["beitrag_2019"]) ||
+            !empty($importData["beitrag_2010"]))
+            $insertBeitrage = true;
+
+        return $insertBeitrage;
+    }
+
+    private function insertRelationInstitutionAdminInstititution (AdminInstitution $ai,
+                                                                  array $importdata)
+    {
+        if (!empty($importdata["zugehoerige_institutions"])) {
+            $relatedInstitutions = explode(",",$importdata["zugehoerige_institutions"] );
+
+            foreach ($relatedInstitutions as $bibcode )
+            {
+                /**
+                 * @var  $instituion Institution
+                 */
+                $instituion = $this->getInstitutionWithBibCode($bibcode);
+                $instId =  $instituion->getId();
+                $adminInstId =  $ai->getId();
+                $instAdminInstRelation =  new InstitutionAdminInstitutionRelation();
+                $instAdminInstRelation->setIdAdmininstitution($adminInstId);
+                $instAdminInstRelation->setIdInstitution($instId);
+                //todo: formatiere relation_type
+                //bisher nur Verbund Kostenbeitrag
+                $instAdminInstRelation->setRelationType($importdata["relation_type"]);
+
+
+                $this->institutionAdminInstitutionRelationTable->insertRelation($instAdminInstRelation);
+
+
+
+            }
+
+
+        }
+    }
+
+
 
 }

@@ -4,12 +4,12 @@
 
 
 $modules = [
+    'Zf2Whoops',
     'TravelloViewHelper',
     'Zend\Serializer',
     'Zend\Log',
     'Zend\Cache',
     'Zend\Mvc\I18n',
-    'Zf2Whoops',
     'Zend\Paginator',
     'Zend\Navigation',
     'Zend\Session',
@@ -27,7 +27,6 @@ $modules = [
     'SanSessionToolbar',
 
     'Administration',
-
     'Application',
     'Libadmin'
 

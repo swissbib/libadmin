@@ -434,15 +434,24 @@ class ImportExportService
     private function insertRelationInstitutionAdminInstititution (AdminInstitution $ai,
                                                                   array $importdata)
     {
+
+
+
         if (!empty($importdata["zugehoerige_institutions"])) {
             $relatedInstitutions = explode(",",$importdata["zugehoerige_institutions"] );
+
+            $relation_types = ["keine verrechnung" => "keine_verrechnung",
+                "verbund kostenbeitrag" => "verbund_kostenbeitrag",
+                "admin" => "admin"];
+
+
 
             foreach ($relatedInstitutions as $bibcode )
             {
                 /**
                  * @var  $instituion Institution
                  */
-                $instituion = $this->getInstitutionWithBibCode($bibcode);
+                $instituion = $this->getInstitutionWithBibCode(trim($bibcode));
                 $instId =  $instituion->getId();
                 $adminInstId =  $ai->getId();
                 $instAdminInstRelation =  new InstitutionAdminInstitutionRelation();
@@ -450,7 +459,14 @@ class ImportExportService
                 $instAdminInstRelation->setIdInstitution($instId);
                 //todo: formatiere relation_type
                 //bisher nur Verbund Kostenbeitrag
-                $instAdminInstRelation->setRelationType($importdata["relation_type"]);
+
+                //relation type is going to be delivered with carriage return - we can't use this
+                $relation_type = str_replace(["\n", "\r"], '', $importdata["relation_type"]);
+                $relation_value = array_key_exists(strtolower($relation_type),$relation_types) ?
+                    $relation_types[strtolower($relation_type)] : $relation_type;
+
+
+                $instAdminInstRelation->setRelationType($relation_value);
 
 
                 $this->institutionAdminInstitutionRelationTable->insertRelation($instAdminInstRelation);

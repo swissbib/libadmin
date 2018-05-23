@@ -22,7 +22,7 @@ $saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');
         <?= $this->translate('action_close') ?>
     </a>
     <?php if (!$isNew): ?>
-        <a href="<?= $this->url('institution', ['action' => 'delete', 'id' => $idInstitution]); ?>"
+        <a href="<?= $this->url('institution', ['action' => 'delete', 'id' => $admininstitution->get('id')->getValue()]); ?>"
            class="ajaxButton deleteButton btn btn-danger btn-medium" id="deletebutton">
             <?= $this->translate('action_delete') ?>
         </a>

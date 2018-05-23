@@ -105,9 +105,12 @@ class AdminInstitutionController extends BaseController
 
         $form->setAttribute('action', $this->makeUrl('admininstitution', 'edit', $idInstitution));
 
+        //todo: GH addition of isNew just to avoid Exception in template rendering
+        //we have to look up how this mechanism (differentiation between update and new) is implemented elsewhere
         return $this->getAjaxView([
             'customform' => $form,
-            'title' => 'admininstitution_edit'
+            'title' => 'admininstitution_edit',
+            'isNew' => false
         ]);
     }
 

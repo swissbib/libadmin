@@ -35,6 +35,10 @@ namespace Libadmin\Controller;
 use Interop\Container\ContainerInterface;
 use Libadmin\Form\AdminInstitutionForm;
 use Libadmin\Table\AdminInstitutionTable;
+use Libadmin\Table\AdresseTable;
+use Libadmin\Table\InstitutionAdminInstitutionRelationTable;
+use Libadmin\Table\KontaktTable;
+use Libadmin\Table\KostenbeitragTable;
 use Libadmin\Table\TablePluginManager;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
@@ -66,9 +70,18 @@ class AdminInstitutionControllerFactory implements FactoryInterface
         $institutionForm = $formElementManager->get(AdminInstitutionForm::class);
         $institutionTable = $tablePluginManager->get(AdminInstitutionTable::class);
 
+        $kostenbeitragTable = $tablePluginManager->get(KostenbeitragTable::class);
+        $kontaktTable = $tablePluginManager->get(KontaktTable::class);
+        $adresseTable = $tablePluginManager->get(AdresseTable::class);
+        $relationInstitutionAdminInstTable = $tablePluginManager->get(InstitutionAdminInstitutionRelationTable::class);
+
         return new AdminInstitutionController(
             $institutionForm,
-            $institutionTable
+            $institutionTable,
+            $kostenbeitragTable,
+            $adresseTable,
+            $kontaktTable,
+            $relationInstitutionAdminInstTable
         );
 
 

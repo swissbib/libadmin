@@ -127,6 +127,11 @@ class Institution extends BaseModel
     public $is_favorite; // This is not an actual record field
 	public $relations = [];
 
+	/**
+     * @var Kontakt $kontakt kontakt
+     */
+	public $kontakt;
+
 
 
 	/**
@@ -405,7 +410,6 @@ class Institution extends BaseModel
 	{
 		return $this->name_fr;
 	}
-
 
 
 	public function setName_it($name_it)
@@ -1146,6 +1150,24 @@ class Institution extends BaseModel
     {
         $this->kostenbeitrag_basiert_auf = $kostenbeitrag_basiert_auf;
         return $this;
+    }
+
+    /**
+     * @return Kontakt
+     */
+    public function getKontakt(): Kontakt
+    {
+        return $this->kontakt;
+    }
+
+    /**
+     * @param Kontakt $kontakt
+     *
+     * @return Kontakt
+     */
+    public function setKontakt($kontakt)
+    {
+        $this->kontakt = $kontakt;
     }
 
     public function initLocalVariablesFromExcel(array $excelData) {

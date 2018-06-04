@@ -11,6 +11,7 @@ use Libadmin\Form\Element\NoValidationCheckbox;
 use Libadmin\Model\Institution;
 use Libadmin\Model\View;
 use Libadmin\Form\BaseFieldset;
+use Libadmin\Form\KontaktFieldset;
 
 /**
  * Base fieldset for institution
@@ -169,6 +170,12 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
 		$this->addText('facebook', 'facebook');
 		$this->addText('coordinates', 'coordinates');
 		$this->addText('isil', 'isil');
+
+
+        $this->add([
+            'type' => 'Libadmin\Form\KontaktFieldset',
+            'name' => 'kontakt',
+        ]);
 
 		$this->add([
 				'type' => 'Zend\Form\Element\Collection',

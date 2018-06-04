@@ -4,6 +4,7 @@ namespace Libadmin\Controller;
 //use RecursiveIteratorIterator;
 
 use Libadmin\Model\InstitutionRelation;
+use Libadmin\Model\Kontakt;
 use Libadmin\Table\AdresseTable;
 use Libadmin\Table\InstitutionRelationTable;
 use Libadmin\Table\InstitutionTable;
@@ -140,8 +141,9 @@ class InstitutionController extends BaseController
         }
 
         try {
-            /** @var InstitutionForm $institution */
+            /** @var Institution $institution */
             $institution = $this->getInstitutionForEdit($idInstitution);
+
         } catch (\Exception $ex) {
             $this->flashMessenger()->addErrorMessage('notfound_record');
 
@@ -157,9 +159,13 @@ class InstitutionController extends BaseController
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
-                $this->institutionTable->save($form->getData());
-                $this->flashMessenger()->addSuccessMessage('saved_institution');
-                $form->bind($this->getInstitutionForEdit($idInstitution)); // Reload data
+                try {
+                    $this->institutionTable->save($form->getData());
+                    $this->flashMessenger()->addSuccessMessage('saved_institution');
+                    $form->bind($this->getInstitutionForEdit($idInstitution)); // Reload data
+                } catch (\Exception $ex) {
+                    $this->flashMessenger()->addErrorMessage($ex->getMessage());
+                }
             } else {
                 $this->flashMessenger()->addErrorMessage('form_invalid');
             }
@@ -226,7 +232,7 @@ class InstitutionController extends BaseController
      * @param   Integer $idInstitution
      * @return    Institution
      */
-    protected function getInstitutionForEdit($idInstitution)
+    protected function  getInstitutionForEdit($idInstitution)
     {
         //todo
         //diese methoe sollte hier gar nicht sein sondern in die InstitutionTable
@@ -254,6 +260,14 @@ class InstitutionController extends BaseController
         }
 
         $institution->setRelations($relations);
+
+
+        if (!empty($institution->getId_kontakt())) {
+            $kontakt = $this->getKontaktObjectForEdit($institution->getId_kontakt());
+            $institution->setKontakt($kontakt);
+        }
+
+
 
         return $institution;
     }
@@ -322,6 +336,24 @@ class InstitutionController extends BaseController
         );
 
         return $this->getAjaxView($data, 'libadmin/global/search');
+    }
+
+    /**
+     * @param $idKontakt
+     * @return Kontakt
+     * @throws \Exception
+     */
+    protected function getKontaktObjectForEdit($idKontakt)
+    {
+        //todo
+        //Abhängigkeit wie oben abklären
+
+
+        //todo: wie bei Institutions - lege diese Methode in die table
+        /** @var Kontakt $kontakt */
+        $kontakt = $this->kontaktTable->getRecord($idKontakt);
+
+        return $kontakt;
     }
 
 }

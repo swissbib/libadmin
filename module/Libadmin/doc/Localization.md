@@ -16,6 +16,8 @@ of that respective language.
 Poedit is a cross-plattform editor for gettext catalogs, that allows to conveniently edit
 translations by automatically collecting translatable labels from a module.
 
+Install on Ubuntu : ```sudo apt-get install poedit  ```
+
 
 ## 3. How to create language files with Poedit
 

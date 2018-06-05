@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Libadmin\n"
-"POT-Creation-Date: 2018-05-29 11:30+0200\n"
-"PO-Revision-Date: 2018-05-30 00:02+0200\n"
+"POT-Creation-Date: 2018-06-05 10:33+0200\n"
+"PO-Revision-Date: 2018-06-05 10:34+0200\n"
 "Last-Translator: Fabian Erni <ferni@snowflake.ch>\n"
 "Language-Team: Swissbib <admin@swissbib.ch>\n"
 "Language: de_DE\n"
@@ -261,7 +261,7 @@ msgid "display"
 msgstr "Anzeige"
 
 #: ../view/libadmin/group/edit.phtml:62
-#: ../view/libadmin/institution/edit.phtml:156
+#: ../view/libadmin/institution/edit.phtml:168
 #: ../view/libadmin/view/home.phtml:6
 msgid "views"
 msgstr "Views"
@@ -286,7 +286,7 @@ msgid "group"
 msgstr "Gruppe"
 
 #: ../view/libadmin/group/home.phtml:6
-#: ../view/libadmin/institution/edit.phtml:159
+#: ../view/libadmin/institution/edit.phtml:171
 msgid "groups"
 msgstr "Gruppen"
 
@@ -326,7 +326,11 @@ msgstr "Bibliotheksnamen (offiziell)"
 msgid "contactdata"
 msgstr "Kontaktdaten"
 
-#: ../view/libadmin/institution/edit.phtml:162
+#: ../view/libadmin/institution/edit.phtml:152
+msgid "contactPerson"
+msgstr ""
+
+#: ../view/libadmin/institution/edit.phtml:174
 #: ../view/libadmin/view/edit.phtml:118
 msgid "is_favorite"
 msgstr "Ist Favorit"

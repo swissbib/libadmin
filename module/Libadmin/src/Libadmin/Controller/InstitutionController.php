@@ -3,6 +3,7 @@ namespace Libadmin\Controller;
 
 //use RecursiveIteratorIterator;
 
+use Libadmin\Form\KontaktFieldset;
 use Libadmin\Model\InstitutionRelation;
 use Libadmin\Model\Kontakt;
 use Libadmin\Table\AdresseTable;
@@ -264,6 +265,9 @@ class InstitutionController extends BaseController
 
         if (!empty($institution->getId_kontakt())) {
             $kontakt = $this->getKontaktObjectForEdit($institution->getId_kontakt());
+            $institution->setKontakt($kontakt);
+        } else {
+            $kontakt = new Kontakt();
             $institution->setKontakt($kontakt);
         }
 

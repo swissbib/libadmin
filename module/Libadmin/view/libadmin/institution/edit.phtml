@@ -194,28 +194,17 @@ $form->setAttribute('class', 'form-horizontal');
                 <fieldset class="test">
                     <legend>test</legend>
                 </fieldset>
-                <div class="row-fluid">
-                    <div class="span12"><?= $this->formRow($institution->get('cbslibrarycode')) ?></div>
-                </div>
             </div>
 
             <div class="tab-pane" id="costs">
-                <fieldset class="test">
-                    <legend>test</legend>
-                </fieldset>
-                <div class="row-fluid">
-                    <div class="span12"><?= $this->formRow($institution->get('cbslibrarycode')) ?></div>
-                </div>
-            </div>
+                <fieldset>
+                    <legend>Kostenbeitrag</legend>
 
-            <div class="tab-pane" id="extensions">
-                <fieldset class="extensions">
-                    <legend>extensions</legend>
-                    <div class="row-fluid">
-                        <div class="span12"><?= $this->formRow($institution->get('cbslibrarycode')) ?></div>
-                    </div>
                     <div class="row-fluid">
                         <div class="span12"><?= $this->formRow($institution->get('verrechnungbeitrag')) ?></div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12"><?= $this->formRow($institution->get('kostenbeitrag_basiert_auf')) ?></div>
                     </div>
                     <div class="row-fluid">
                         <div class="span12"><?= $this->formRow($institution->get('zusage_beitrag')) ?></div>
@@ -223,6 +212,13 @@ $form->setAttribute('class', 'form-horizontal');
                     <div class="row-fluid">
                         <div class="span12"><?= $this->formRow($institution->get('bemerkung_kostenbeitrag')) ?></div>
                     </div>
+
+
+                </fieldset>
+
+                <fieldset>
+                    <legend>Rechnung</legend>
+
                     <div class="row-fluid">
                         <div class="span12"><?= $this->formRow($institution->get('adresse_rechnung_gleich_post')) ?></div>
                     </div>
@@ -236,11 +232,20 @@ $form->setAttribute('class', 'form-horizontal');
                     <div class="row-fluid">
                         <div class="span12"><?= $this->formRow($institution->get('e_rechnung')) ?></div>
                     </div>
-
-
                     <div class="row-fluid">
                         <div class="span12"><?= $this->formRow($institution->get('bemerkung_rechnung')) ?></div>
                     </div>
+                </fieldset>
+
+            </div>
+
+            <div class="tab-pane" id="extensions">
+                <fieldset class="extensions">
+                    <legend>extensions</legend>
+                    <div class="row-fluid">
+                        <div class="span12"><?= $this->formRow($institution->get('cbslibrarycode')) ?></div>
+                    </div>
+
                     <div class="row-fluid">
                         <div class="span12"><?= $this->formRow($institution->get('url_web_de')) ?></div>
                     </div>
@@ -259,6 +264,10 @@ $form->setAttribute('class', 'form-horizontal');
                     </div>
                     <div class="row-fluid">
                         <div class="span12"><?= $this->formRow($institution->get('worldcat')) ?></div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span12"><?= $this->formRow($institution->get('cbslibrarycode')) ?></div>
                     </div>
 
 

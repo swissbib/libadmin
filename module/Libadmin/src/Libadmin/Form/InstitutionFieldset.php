@@ -82,6 +82,8 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
 
         $this->addText('e_rechnung', 'e_rechnung');
         $this->addText('bemerkung_rechnung', 'bemerkung_rechnung');
+
+        $this->addText('kostenbeitrag_basiert_auf', 'kostenbeitrag_basiert_auf');
         
 
 

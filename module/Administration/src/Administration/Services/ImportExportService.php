@@ -195,7 +195,7 @@ class ImportExportService
                     $postAdresse->setCanton($institution->getCanton());
                     $postAdressID = $this->adresseTable->save($postAdresse);
 
-                    $institution->setIdPostadresse($postAdressID);
+                    $institution->setId_postadresse($postAdressID);
                 }
 
                 if (! $institution->getAdresse_rechnung_gleich_post() ) {
@@ -206,7 +206,7 @@ class ImportExportService
                     $rechnungsAdresse->setCanton($institution->getCanton());
                     $rechnungsadressID = $this->adresseTable->save($rechnungsAdresse);
 
-                    $institution->setIdRechnungsadresse($rechnungsadressID);
+                    $institution->setId_rechnungsadresse($rechnungsadressID);
 
                 }
 
@@ -215,7 +215,7 @@ class ImportExportService
                     $mainContact = new Kontakt();
                     $mainContact->initLocalVariablesFirstPersonFromExcel($combinedValuesFromLine);
                     $idMainContact =  $this->kontaktTable->save($mainContact);
-                    $institution->setIdKontakt($idMainContact);
+                    $institution->setId_kontakt($idMainContact);
 
                 }
 
@@ -224,7 +224,7 @@ class ImportExportService
                     $billContact = new Kontakt();
                     $billContact->initLocalVariablesBillPersonFromExcel($combinedValuesFromLine);
                     $idBillContact =  $this->kontaktTable->save($mainContact);
-                    $institution->setIdKontaktRechnung($idBillContact);
+                    $institution->setId_kontakt_rechnung($idBillContact);
 
                 }
 
@@ -232,7 +232,7 @@ class ImportExportService
                     $beitraege = new Kostenbeitrag();
                     $beitraege->initLocalVariablesFromExcel($combinedValuesFromLine);
                     $idKostenbeitrag =  $this->kostenbeitragTable->save($beitraege);
-                    $institution->setIdKostenbeitrag($idKostenbeitrag);
+                    $institution->setId_kostenbeitrag($idKostenbeitrag);
 
                 }
 

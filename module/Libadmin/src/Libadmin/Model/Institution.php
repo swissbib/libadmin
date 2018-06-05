@@ -612,7 +612,7 @@ class Institution extends BaseModel
      *
      * @return Institution
      */
-    public function setBemerkungRechnung($bemerkung_rechnung)
+    public function setBemerkung_rechnung($bemerkung_rechnung)
     {
         $this->bemerkung_rechnung = $bemerkung_rechnung;
         return $this;
@@ -650,7 +650,7 @@ class Institution extends BaseModel
      *
      * @return Institution
      */
-    public function setUrlWebEn($url_web_en)
+    public function setUrl_web_en($url_web_en)
     {
         $this->url_web_en = $url_web_en;
         return $this;
@@ -669,7 +669,7 @@ class Institution extends BaseModel
      *
      * @return Institution
      */
-    public function setUrlWebDe($url_web_de)
+    public function setUrl_web_de($url_web_de)
     {
         $this->url_web_de = $url_web_de;
         return $this;
@@ -688,7 +688,7 @@ class Institution extends BaseModel
      *
      * @return Institution
      */
-    public function setUrlWebFr($url_web_fr)
+    public function setUrl_web_fr($url_web_fr)
     {
         $this->url_web_fr = $url_web_fr;
         return $this;
@@ -707,7 +707,7 @@ class Institution extends BaseModel
      *
      * @return Institution
      */
-    public function setUrlWebIt($url_web_it)
+    public function setUrl_web_it($url_web_it)
     {
         $this->url_web_it = $url_web_it;
         return $this;
@@ -745,7 +745,7 @@ class Institution extends BaseModel
      *
      * @return mixed
      */
-    public function setNotesPublicDe($notes_public_de)
+    public function setNotes_public_de($notes_public_de)
     {
         $this->notes_public_de = $notes_public_de;
     }
@@ -763,7 +763,7 @@ class Institution extends BaseModel
      *
      * @return mixed
      */
-    public function setNotesPublicFr($notes_public_fr)
+    public function setNotes_public_fr($notes_public_fr)
     {
         $this->notes_public_fr = $notes_public_fr;
     }
@@ -781,7 +781,7 @@ class Institution extends BaseModel
      *
      * @return mixed
      */
-    public function setNotesPublicEn($notes_public_en)
+    public function setNotes_public_en($notes_public_en)
     {
         $this->notes_public_en = $notes_public_en;
     }
@@ -799,7 +799,7 @@ class Institution extends BaseModel
      *
      * @return mixed
      */
-    public function setNotesPublicIt($notes_public_it)
+    public function setNotes_public_it($notes_public_it)
     {
         $this->notes_public_it = $notes_public_it;
     }
@@ -818,7 +818,7 @@ class Institution extends BaseModel
      *
      * @return Institution
      */
-    public function setIdKontakt($id_kontakt)
+    public function setId_kontakt($id_kontakt)
     {
         $this->id_kontakt = $id_kontakt;
         return $this;
@@ -914,7 +914,7 @@ class Institution extends BaseModel
      *
      * @return Institution
      */
-    public function setZusageBeitrag($zusage_beitrag)
+    public function setZusage_beitrag($zusage_beitrag)
     {
         $this->zusage_beitrag = $zusage_beitrag;
         return $this;
@@ -933,7 +933,7 @@ class Institution extends BaseModel
      *
      * @return Institution
      */
-    public function setIdKostenbeitrag($id_kostenbeitrag)
+    public function setId_kostenbeitrag($id_kostenbeitrag)
     {
         $this->id_kostenbeitrag = $id_kostenbeitrag;
         return $this;
@@ -952,7 +952,7 @@ class Institution extends BaseModel
      *
      * @return Institution
      */
-    public function setBemerkungKostenbeitrag($bemerkung_kostenbeitrag)
+    public function setBemerkung_kostenbeitrag($bemerkung_kostenbeitrag)
     {
         $this->bemerkung_kostenbeitrag = $bemerkung_kostenbeitrag;
         return $this;
@@ -971,7 +971,7 @@ class Institution extends BaseModel
      *
      * @return Institution
      */
-    public function setAdresseRechnungGleichPost($adresse_rechnung_gleich_post)
+    public function setAdresse_rechnung_gleich_post($adresse_rechnung_gleich_post)
     {
         $this->adresse_rechnung_gleich_post = $adresse_rechnung_gleich_post;
         return $this;
@@ -990,7 +990,7 @@ class Institution extends BaseModel
      *
      * @return Institution
      */
-    public function setIdRechnungsadresse($id_rechnungsadresse)
+    public function setId_rechnungsadresse($id_rechnungsadresse)
     {
         $this->id_rechnungsadresse = $id_rechnungsadresse;
         return $this;
@@ -1009,7 +1009,7 @@ class Institution extends BaseModel
      *
      * @return Institution
      */
-    public function setIdPostadresse($id_postadresse)
+    public function setId_postadresse($id_postadresse)
     {
         $this->id_postadresse = $id_postadresse;
         return $this;
@@ -1032,7 +1032,7 @@ class Institution extends BaseModel
      *
      * @return Institution
      */
-    public function setIdKontaktRechnung($id_kontakt_rechnung)
+    public function setId_kontakt_rechnung($id_kontakt_rechnung)
     {
         $this->id_kontakt_rechnung = $id_kontakt_rechnung;
         return $this;
@@ -1070,7 +1070,7 @@ class Institution extends BaseModel
      *
      * @return Institution
      */
-    public function setGrundMwstFrei($grund_mwst_frei)
+    public function setGrund_mwst_frei($grund_mwst_frei)
     {
         $this->grund_mwst_frei = $grund_mwst_frei;
         return $this;
@@ -1089,7 +1089,7 @@ class Institution extends BaseModel
      *
      * @return Institution
      */
-    public function setERechnung($e_rechnung)
+    public function setE_rechnung($e_rechnung)
     {
         $this->e_rechnung = $e_rechnung;
         return $this;
@@ -1098,7 +1098,7 @@ class Institution extends BaseModel
     /**
      * @return mixed
      */
-    public function getWorldcatJaNein()
+    public function getWorldcat_ja_nein()
     {
         return $this->worldcat_ja_nein;
     }
@@ -1108,7 +1108,7 @@ class Institution extends BaseModel
      *
      * @return Institution
      */
-    public function setWorldcatJaNein($worldcat_ja_nein)
+    public function setWorldcat_ja_nein($worldcat_ja_nein)
     {
         $this->worldcat_ja_nein = $worldcat_ja_nein;
         return $this;
@@ -1117,7 +1117,7 @@ class Institution extends BaseModel
     /**
      * @return mixed
      */
-    public function getWorldcatSymbol()
+    public function getWorldcat_symbol()
     {
         return $this->worldcat_symbol;
     }
@@ -1127,7 +1127,7 @@ class Institution extends BaseModel
      *
      * @return Institution
      */
-    public function setWorldcatSymbol($worldcat_symbol)
+    public function setWorldcat_symbol($worldcat_symbol)
     {
         $this->worldcat_symbol = $worldcat_symbol;
         return $this;
@@ -1136,7 +1136,7 @@ class Institution extends BaseModel
     /**
      * @return mixed
      */
-    public function getKostenbeitragBasiertAuf()
+    public function getKostenbeitrag_basiert_auf()
     {
         return $this->kostenbeitrag_basiert_auf;
     }
@@ -1144,13 +1144,14 @@ class Institution extends BaseModel
     /**
      * @param mixed $kostenbeitrag_basiert_auf
      *
-     * @return Institution
+     * @return mixed
      */
-    public function setKostenbeitragBasiertAuf($kostenbeitrag_basiert_auf)
+    public function setKostenbeitrag_basiert_auf($kostenbeitrag_basiert_auf)
     {
         $this->kostenbeitrag_basiert_auf = $kostenbeitrag_basiert_auf;
-        return $this;
     }
+
+
 
     /**
      * @return Kontakt
@@ -1173,26 +1174,26 @@ class Institution extends BaseModel
     public function initLocalVariablesFromExcel(array $excelData) {
 
 
-        $this->setBemerkungKostenbeitrag($excelData["bemerkung_kostenbeitrag"]);
-        $this->setBemerkungRechnung($excelData["bemerkung_rechnungsstellung"]);
+        $this->setBemerkung_kostenbeitrag($excelData["bemerkung_kostenbeitrag"]);
+        $this->setBemerkung_rechnung($excelData["bemerkung_rechnungsstellung"]);
         $this->setBfscode($excelData["bfs_code"]);
         $this->setCbslibrarycode($excelData["cbs_library_code"]);
-        empty($excelData["e_rechnung_ja_nein"]) ? $this->setERechnung(0) : $this->setERechnung(1);
+        empty($excelData["e_rechnung_ja_nein"]) ? $this->setE_rechnung(0) : $this->setE_rechnung(1);
         empty($excelData["mwst_ja_nein"]) ? $this->setMwst(0) : $this->setMwst(1);
-        $this->getMwst() == 0 ? $this->setGrundMwstFrei($excelData["grund_mwst_befreiung"]) : $this->setGrundMwstFrei("");
+        $this->getMwst() == 0 ? $this->setGrund_mwst_frei($excelData["grund_mwst_befreiung"]) : $this->setGrund_mwst_frei("");
         $this->setKorrespondezsprache($excelData["korrespondenzsprache"]);
-        empty($excelData["worldcat_ja_nein"]) ? $this->setWorldcatJaNein(0): $this->setWorldcatJaNein(1);
-        //$this->getWorldcatJaNein() === true ? $this->setWorldcatSyMmbol($excelData["worldcat_symbol"]) : $this->setWorldcatSymbol("");
+        empty($excelData["worldcat_ja_nein"]) ? $this->setWorldcat_ja_nein(0): $this->setWorldcat_ja_nein(1);
+        //$this->getWorldcat_ja_nein() === true ? $this->setWorldcatSyMmbol($excelData["worldcat_symbol"]) : $this->setWorldcat_symbol("");
         //todo: Frage an Silvia
         //worldcat_symbol ist gesetzt auch wenn worldcat_ja_nein leer ist - richtig?
-        $this->setWorldcatSymbol($excelData["worldcat_symbol"]);
+        $this->setWorldcat_symbol($excelData["worldcat_symbol"]);
         $this->setCoordinates($excelData["koordinaten"]);
-        empty($excelData["zusage_kostenbeitrag_ja_nein"]) ? $this->setZusageBeitrag(0) : $this->setZusageBeitrag(1);
+        empty($excelData["zusage_kostenbeitrag_ja_nein"]) ? $this->setZusage_beitrag(0) : $this->setZusage_beitrag(1);
         $this->setEmail($excelData["mail"]);
         empty($excelData["rechnungsadresse_gleich_postadresse_ja_nein"]) ||
-        strtolower( $excelData["rechnungsadresse_gleich_postadresse_ja_nein"]) === "ja" ? $this->setAdresseRechnungGleichPost(1) :
-            $this->setAdresseRechnungGleichPost(0);
-        $this->setKostenbeitragBasiertAuf($this->formatKostenbeitragBasiertAuf( $excelData["kostenbeitrag_basiert_auf"]));
+        strtolower( $excelData["rechnungsadresse_gleich_postadresse_ja_nein"]) === "ja" ? $this->setAdresse_rechnung_gleich_post(1) :
+            $this->setAdresse_rechnung_gleich_post(0);
+        $this->setKostenbeitrag_basiert_auf($this->formatKostenbeitragBasiertAuf( $excelData["kostenbeitrag_basiert_auf"]));
         $this->setVerrechnungbeitrag($this->formatVerrechnungsbeitrag( $excelData["verrechnung_kostenbeitrag_auswahl"]));
 
 

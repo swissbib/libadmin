@@ -4,6 +4,7 @@ namespace Libadmin\Controller;
 //use RecursiveIteratorIterator;
 
 use Libadmin\Form\KontaktFieldset;
+use Libadmin\Model\Adresse;
 use Libadmin\Model\InstitutionRelation;
 use Libadmin\Model\Kontakt;
 use Libadmin\Table\AdresseTable;
@@ -160,13 +161,34 @@ class InstitutionController extends BaseController
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
-                try {
-                    $this->institutionTable->save($form->getData());
+                //try {
+                    /** @var Institution $data */
+                    $data = $form->getData();
+                    $kontakt = $data->getKontakt();
+                    //todo if kontakt has been edited
+                    $idKontakt=$this->kontaktTable->save($kontakt);
+                    $data->setId_kontakt($idKontakt);
+
+                    $rechnungsadresse = $data->getRechnungsadresse();
+                    $idRechnungsadresse=$this->adresseTable->save($rechnungsadresse);
+                    $data->setId_rechnungsadresse($idRechnungsadresse);
+
+
+                    $postadresse = $data->getpostadresse();
+                    $idpostadresse=$this->adresseTable->save($postadresse);
+                    $data->setId_postadresse($idpostadresse);
+
+
+
+
+
+
+                    $this->institutionTable->save($data);
                     $this->flashMessenger()->addSuccessMessage('saved_institution');
                     $form->bind($this->getInstitutionForEdit($idInstitution)); // Reload data
-                } catch (\Exception $ex) {
-                    $this->flashMessenger()->addErrorMessage($ex->getMessage());
-                }
+                //} catch (\Exception $ex) {
+                //    $this->flashMessenger()->addErrorMessage($ex->getMessage());
+                //}
             } else {
                 $this->flashMessenger()->addErrorMessage('form_invalid');
             }
@@ -271,6 +293,22 @@ class InstitutionController extends BaseController
             $institution->setKontakt($kontakt);
         }
 
+        if (!empty($institution->getId_rechnungsadresse())) {
+            $rechnungsadresse = $this->getAdresseObjectForEdit($institution->getId_rechnungsadresse());
+            $institution->setRechnungsadresse($rechnungsadresse);
+        } else {
+            $rechnungsadresse = new Adresse();
+            $institution->setRechnungsadresse($rechnungsadresse);
+        }
+
+        if (!empty($institution->getId_postadresse())) {
+            $postadresse = $this->getAdresseObjectForEdit($institution->getId_postadresse());
+            $institution->setPostadresse($postadresse);
+        } else {
+            $postadresse = new Adresse();
+            $institution->setPostadresse($postadresse);
+        }
+
 
 
         return $institution;
@@ -358,6 +396,24 @@ class InstitutionController extends BaseController
         $kontakt = $this->kontaktTable->getRecord($idKontakt);
 
         return $kontakt;
+    }
+
+    /**
+     * @param $idRechnungsadresse
+     * @return Adresse
+     * @throws \Exception
+     */
+    protected function getAdresseObjectForEdit($idAdresse)
+    {
+        //todo
+        //Abhängigkeit wie oben abklären
+
+
+        //todo: wie bei Institutions - lege diese Methode in die table
+        /** @var Adresse $adresse */
+        $adresse = $this->adresseTable->getRecord($idAdresse);
+
+        return $adresse;
     }
 
 }

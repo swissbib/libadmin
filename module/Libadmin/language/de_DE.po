@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Libadmin\n"
-"POT-Creation-Date: 2018-06-05 10:33+0200\n"
-"PO-Revision-Date: 2018-06-05 10:34+0200\n"
+"POT-Creation-Date: 2018-06-11 15:40+0200\n"
+"PO-Revision-Date: 2018-06-11 15:40+0200\n"
 "Last-Translator: Fabian Erni <ferni@snowflake.ch>\n"
 "Language-Team: Swissbib <admin@swissbib.ch>\n"
 "Language: de_DE\n"
@@ -72,11 +72,11 @@ msgstr "Display Namen"
 
 #: ../view/libadmin/admin-institution/home.phtml:5
 msgid "admininstitution"
-msgstr ""
+msgstr "Administrative Institution"
 
 #: ../view/libadmin/admin-institution/home.phtml:6
 msgid "admininstitutions"
-msgstr ""
+msgstr "Administrative Institutionen"
 
 #: ../view/libadmin/admin/home.phtml:1
 msgid "administrationtitle"
@@ -261,7 +261,7 @@ msgid "display"
 msgstr "Anzeige"
 
 #: ../view/libadmin/group/edit.phtml:62
-#: ../view/libadmin/institution/edit.phtml:168
+#: ../view/libadmin/institution/edit.phtml:184
 #: ../view/libadmin/view/home.phtml:6
 msgid "views"
 msgstr "Views"
@@ -286,7 +286,7 @@ msgid "group"
 msgstr "Gruppe"
 
 #: ../view/libadmin/group/home.phtml:6
-#: ../view/libadmin/institution/edit.phtml:171
+#: ../view/libadmin/institution/edit.phtml:187
 msgid "groups"
 msgstr "Gruppen"
 
@@ -316,24 +316,32 @@ msgstr "Kostenbeitrag"
 
 #: ../view/libadmin/institution/edit.phtml:56
 msgid "extensions"
-msgstr ""
+msgstr "Extensions"
 
 #: ../view/libadmin/institution/edit.phtml:74
 msgid "title_library_names_official"
 msgstr "Bibliotheksnamen (offiziell)"
 
 #: ../view/libadmin/institution/edit.phtml:130
+msgid "postAdresse"
+msgstr "Postadresse"
+
+#: ../view/libadmin/institution/edit.phtml:146
 msgid "contactdata"
 msgstr "Kontaktdaten"
 
-#: ../view/libadmin/institution/edit.phtml:152
+#: ../view/libadmin/institution/edit.phtml:168
 msgid "contactPerson"
-msgstr ""
+msgstr "Kontakt Person"
 
-#: ../view/libadmin/institution/edit.phtml:174
+#: ../view/libadmin/institution/edit.phtml:190
 #: ../view/libadmin/view/edit.phtml:118
 msgid "is_favorite"
 msgstr "Ist Favorit"
+
+#: ../view/libadmin/institution/edit.phtml:257
+msgid "rechnungsAdresse"
+msgstr "Rechnungsadresse"
 
 #: ../view/libadmin/institution/home.phtml:5
 #: ../view/libadmin/view/edit.phtml:116

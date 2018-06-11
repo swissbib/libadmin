@@ -99,6 +99,11 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
             ]
         ]);
 
+        $this->add([
+            'type' => 'Libadmin\Form\AdresseFieldset',
+            'name' => 'postadresse',
+        ]);
+
 		$this->add([
 			'name' => 'address',
 			'type' => 'textarea',
@@ -177,6 +182,11 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
         $this->add([
             'type' => 'Libadmin\Form\KontaktFieldset',
             'name' => 'kontakt',
+        ]);
+
+        $this->add([
+            'type' => 'Libadmin\Form\AdresseFieldset',
+            'name' => 'rechnungsadresse',
         ]);
 
 		$this->add([

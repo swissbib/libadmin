@@ -132,6 +132,16 @@ class Institution extends BaseModel
      */
 	public $kontakt;
 
+    /**
+     * @var Adresse $rechnungsadresse rechnungsadresse
+     */
+    public $rechnungsadresse;
+
+    /**
+     * @var Adresse $postadresse postadresse
+     */
+    public $postadresse;
+
 
 
 	/**
@@ -145,6 +155,9 @@ class Institution extends BaseModel
 
 		unset($data['relations']);
 		unset($data['is_favorite']);
+        unset($data['kontakt']);
+        unset($data['rechnungsadresse']);
+        unset($data['postadresse']);
 
 		return $data;
 	}
@@ -1169,6 +1182,42 @@ class Institution extends BaseModel
     public function setKontakt($kontakt)
     {
         $this->kontakt = $kontakt;
+    }
+
+    /**
+     * @return Adresse
+     */
+    public function getRechnungsadresse(): Adresse
+    {
+        return $this->rechnungsadresse;
+    }
+
+    /**
+     * @param Adresse $rechnungsadresse
+     *
+     * @return Adresse
+     */
+    public function setRechnungsadresse($rechnungsadresse)
+    {
+        $this->rechnungsadresse = $rechnungsadresse;
+    }
+
+    /**
+     * @return Adresse
+     */
+    public function getPostadresse(): Adresse
+    {
+        return $this->postadresse;
+    }
+
+    /**
+     * @param Adresse $postadresse
+     *
+     * @return Adresse
+     */
+    public function setPostadresse($postadresse)
+    {
+        $this->postadresse = $postadresse;
     }
 
     public function initLocalVariablesFromExcel(array $excelData) {

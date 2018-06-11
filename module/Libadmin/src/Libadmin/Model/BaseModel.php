@@ -34,7 +34,7 @@ abstract class BaseModel
 
 
 	/**
-	 * Get data for record without relations
+	 * Get data for record without related tables (relations, kontakt, adresse)
 	 *
 	 * @return array
 	 */
@@ -44,6 +44,7 @@ abstract class BaseModel
 
 		unset($data['id']);
 		unset($data['inputFilter']);
+
 
 		return $data;
 	}

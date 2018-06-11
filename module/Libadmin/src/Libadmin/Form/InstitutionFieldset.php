@@ -73,6 +73,12 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
         $this->addText('verrechnungbeitrag', 'verrechnungbeitrag');
         $this->addText('zusage_beitrag', 'zusage_beitrag');
         $this->addText('id_kostenbeitrag', 'id_kostenbeitrag');
+
+        $this->add([
+            'type' => 'Libadmin\Form\KostenbeitragFieldset',
+            'name' => 'kostenbeitrag',
+        ]);
+
         $this->addText('bemerkung_kostenbeitrag', 'bemerkung_kostenbeitrag');
         $this->addText('adresse_rechnung_gleich_post', 'adresse_rechnung_gleich_post');
         $this->addText('id_rechnungsadresse', 'id_rechnungsadresse');
@@ -188,6 +194,8 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
             'type' => 'Libadmin\Form\AdresseFieldset',
             'name' => 'rechnungsadresse',
         ]);
+
+
 
 		$this->add([
 				'type' => 'Zend\Form\Element\Collection',

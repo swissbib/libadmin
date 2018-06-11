@@ -1,7 +1,7 @@
 <?php
 namespace Libadmin\Form;
 
-use Libadmin\Model\Kostenbeitrag;
+use Libadmin\Model\Kontakt;
 use Zend\Form\Element;
 use Zend\Form\Fieldset;
 use Zend\Hydrator\ClassMethods as ClassMethodsHydrator;
@@ -20,28 +20,30 @@ use Zend\Hydrator\ObjectProperty as ObjectPropertyHydrator;
  * Base fieldset for Kontakt
  *
  */
-class KostenbeitragFieldset extends BaseFieldset implements InputFilterProviderInterface
+class KontaktFieldset extends BaseFieldset implements InputFilterProviderInterface
 {
 
     public function __construct()
     {
-        parent::__construct('kostenbeitrag');
+        parent::__construct('kontakt');
     }
 
     public function init()
 	{
 
 
-        $this->setName('kostenbeitrag');
+        $this->setName('kontakt');
 
 		$this->setHydrator(new ClassMethodsHydrator(false))
-				->setObject(new Kostenbeitrag());
+				->setObject(new Kontakt());
 
 		$this->addHidden('id');
 
-        $this->addText('j2018', 'j2018');
-        $this->addText('j2019', 'j2019');
-        $this->addText('j2020', 'j2020');
+        $this->addText('name', 'name');
+        $this->addText('vorname', 'vorname');
+        $this->addText('anrede', 'anrede');
+        $this->addText('email', 'email');
+
 	}
 
 

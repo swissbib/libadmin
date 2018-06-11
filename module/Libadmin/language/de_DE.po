@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Libadmin\n"
-"POT-Creation-Date: 2018-06-11 15:40+0200\n"
-"PO-Revision-Date: 2018-06-11 15:40+0200\n"
+"POT-Creation-Date: 2018-06-11 18:56+0200\n"
+"PO-Revision-Date: 2018-06-11 18:57+0200\n"
 "Last-Translator: Fabian Erni <ferni@snowflake.ch>\n"
 "Language-Team: Swissbib <admin@swissbib.ch>\n"
 "Language: de_DE\n"
@@ -238,6 +238,80 @@ msgstr "Webseite"
 msgid "zip"
 msgstr "PLZ"
 
+#: ../view/libadmin/global/gettext-labels.phtml:45
+msgid "group_add"
+msgstr "Gruppe erstellen"
+
+#: ../view/libadmin/global/gettext-labels.phtml:46
+msgid "notfound_record"
+msgstr "Datensatz wurde nicht gefunden"
+
+#: ../view/libadmin/global/gettext-labels.phtml:47
+msgid "group_edit"
+msgstr "Gruppe bearbeiten"
+
+#: ../view/libadmin/global/gettext-labels.phtml:48
+msgid "saved_institution"
+msgstr "Institution gespeichert"
+
+#: ../view/libadmin/global/gettext-labels.phtml:49
+msgid "institution_add"
+msgstr "Institution erstellen"
+
+#: ../view/libadmin/global/gettext-labels.phtml:50
+msgid "institution_edit"
+msgstr "Institution bearbeiten"
+
+#: ../view/libadmin/global/gettext-labels.phtml:51
+msgid "view_add"
+msgstr "View erstellen"
+
+#: ../view/libadmin/global/gettext-labels.phtml:52
+msgid "view_edit"
+msgstr "View bearbeiten"
+
+#: ../view/libadmin/global/gettext-labels.phtml:53
+msgid "twitter"
+msgstr "Twitter"
+
+#: ../view/libadmin/global/gettext-labels.phtml:54
+msgid "attention_relations"
+msgstr ""
+"ACHTUNG! Änderungen hier haben zur Folge, dass die Sortierung dieser "
+"Institution verloren geht!"
+
+#: ../view/libadmin/global/gettext-labels.phtml:55
+msgid "sortInstitutions"
+msgstr "Institutionen sortieren (A-Z, deutsch)"
+
+#: ../view/libadmin/global/gettext-labels.phtml:56
+msgid "no_institutions"
+msgstr "Keine Instution"
+
+#: ../view/libadmin/global/gettext-labels.phtml:57
+msgid "maketopmostitem"
+msgstr "An oberste Position schieben"
+
+#: ../view/libadmin/global/gettext-labels.phtml:58
+msgid "makebottommostitem"
+msgstr "An untersterste Position schieben"
+
+#: ../view/libadmin/global/gettext-labels.phtml:59
+msgid "action_groups_sort_for_view"
+msgstr "Gruppen für View sortieren"
+
+#: ../view/libadmin/global/gettext-labels.phtml:60
+msgid "views "
+msgstr "Views"
+
+#: ../view/libadmin/global/gettext-labels.phtml:61
+msgid "edit_view"
+msgstr "View Editieren"
+
+#: ../view/libadmin/global/gettext-labels.phtml:62
+msgid "navigation_view"
+msgstr "View"
+
 #: ../view/libadmin/global/home-crud.phtml:4
 msgid "add_new_xxx"
 msgstr "Hinzufügen:"
@@ -339,7 +413,7 @@ msgstr "Kontakt Person"
 msgid "is_favorite"
 msgstr "Ist Favorit"
 
-#: ../view/libadmin/institution/edit.phtml:257
+#: ../view/libadmin/institution/edit.phtml:265
 msgid "rechnungsAdresse"
 msgstr "Rechnungsadresse"
 
@@ -366,7 +440,8 @@ msgstr "Folgende Gruppen sind in diesem Netzwerk aktiv"
 
 #: ../view/libadmin/view/edit.phtml:72
 msgid "header_active_networkgroups_info"
-msgstr "(Zuerst speichern, damit die Gruppen in den anderen Tabs vorhanden sind)"
+msgstr ""
+"(Zuerst speichern, damit die Gruppen in den anderen Tabs vorhanden sind)"
 
 #: ../view/libadmin/view/edit.phtml:75
 msgid "nogroups"
@@ -394,57 +469,3 @@ msgstr "View"
 
 #~ msgid "saved_group"
 #~ msgstr "Gruppe gespeichert"
-
-#~ msgid "group_add"
-#~ msgstr "Gruppe erstellen"
-
-#~ msgid "notfound_record"
-#~ msgstr "Datensatz wurde nicht gefunden"
-
-#~ msgid "group_edit"
-#~ msgstr "Gruppe bearbeiten"
-
-#~ msgid "saved_institution"
-#~ msgstr "Institution gespeichert"
-
-#~ msgid "institution_add"
-#~ msgstr "Institution erstellen"
-
-#~ msgid "institution_edit"
-#~ msgstr "Institution bearbeiten"
-
-#~ msgid "view_add"
-#~ msgstr "View erstellen"
-
-#~ msgid "view_edit"
-#~ msgstr "View bearbeiten"
-
-#~ msgid "twitter"
-#~ msgstr "Twitter"
-
-#~ msgid "attention_relations"
-#~ msgstr "ACHTUNG! Änderungen hier haben zur Folge, dass die Sortierung dieser Institution verloren geht!"
-
-#~ msgid "sortInstitutions"
-#~ msgstr "Institutionen sortieren (A-Z, deutsch)"
-
-#~ msgid "no_institutions"
-#~ msgstr "Keine Instution"
-
-#~ msgid "maketopmostitem"
-#~ msgstr "An oberste Position schieben"
-
-#~ msgid "makebottommostitem"
-#~ msgstr "An untersterste Position schieben"
-
-#~ msgid "action_groups_sort_for_view"
-#~ msgstr "Gruppen für View sortieren"
-
-#~ msgid "views "
-#~ msgstr "Views"
-
-#~ msgid "edit_view"
-#~ msgstr "View Editieren"
-
-#~ msgid "navigation_view"
-#~ msgstr "View"

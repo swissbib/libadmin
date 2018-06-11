@@ -142,9 +142,15 @@ class Institution extends BaseModel
      */
     public $postadresse;
 
+    /**
+     * @var Kostenbeitrag $kostenbeitrag kostenbeiträge
+     */
+    public $kostenbeitrag;
 
 
 	/**
+     * These are all the fields which are directly stored
+     * in the institution table
 	 *
 	 * @inheritDoc
 	 * @return array
@@ -158,6 +164,7 @@ class Institution extends BaseModel
         unset($data['kontakt']);
         unset($data['rechnungsadresse']);
         unset($data['postadresse']);
+        unset($data['kostenbeitrag']);
 
 		return $data;
 	}
@@ -1218,6 +1225,24 @@ class Institution extends BaseModel
     public function setPostadresse($postadresse)
     {
         $this->postadresse = $postadresse;
+    }
+
+    /**
+     * @return Kostenbeitrag
+     */
+    public function getKostenbeitrag(): Kostenbeitrag
+    {
+        return $this->kostenbeitrag;
+    }
+
+    /**
+     * @param Kostenbeitrag $kostenbeitrag
+     *
+     * @return Kostenbeitrag
+     */
+    public function setKostenbeitrag($kostenbeitrag)
+    {
+        $this->kostenbeitrag = $kostenbeitrag;
     }
 
     public function initLocalVariablesFromExcel(array $excelData) {

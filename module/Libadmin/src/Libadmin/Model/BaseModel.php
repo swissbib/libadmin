@@ -169,6 +169,21 @@ abstract class BaseModel
             $formatVerrechnungsbeitrag[strtolower($inputValue)] : "";
     }
 
+    /**
+     * Check if the object is empty
+     *
+     * @return bool
+     */
+    public function isEmpty()
+    {
+        $result = true;
+        foreach ($this as $key => $value) {
+            if (!empty($value)) {
+                return false;
+            }
+        }
+        return $result;
+    }
 
 
 }

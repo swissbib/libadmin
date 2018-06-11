@@ -3,15 +3,9 @@ namespace Libadmin\Controller;
 
 //use RecursiveIteratorIterator;
 
-use Libadmin\Form\KontaktFieldset;
-use Libadmin\Model\Adresse;
 use Libadmin\Model\InstitutionRelation;
-use Libadmin\Model\Kontakt;
-use Libadmin\Table\AdresseTable;
 use Libadmin\Table\InstitutionRelationTable;
 use Libadmin\Table\InstitutionTable;
-use Libadmin\Table\KontaktTable;
-use Libadmin\Table\KostenbeitragTable;
 use Zend\Db\ResultSet\ResultSetInterface;
 use Zend\Http\Request;
 use Zend\Mvc\Plugin\FlashMessenger\FlashMessenger;
@@ -43,18 +37,7 @@ class InstitutionController extends BaseController
 
     /** @var array  */
     private $allViews = [];
-    /**
-     * @var KontaktTable
-     */
-    private $kontaktTable;
-    /**
-     * @var AdresseTable
-     */
-    private $adresseTable;
-    /**
-     * @var KostenbeitragTable
-     */
-    private $kostenbeitragTable;
+
 
     /**
      * InstitutionController constructor.
@@ -62,28 +45,19 @@ class InstitutionController extends BaseController
      * @param InstitutionForm $institutionForm
      * @param InstitutionTable $institutionTable
      * @param InstitutionRelationTable $institutionRelationTable
-     * @param KontaktTable $kontaktTable
-     * @param AdresseTable $adresseTable
-     * @param KostenbeitragTable $kostenbeitragTable
+
      * @param array $allViews
      */
     public function __construct(
         InstitutionForm $institutionForm,
         InstitutionTable $institutionTable,
         InstitutionRelationTable $institutionRelationTable,
-        KontaktTable $kontaktTable,
-        AdresseTable $adresseTable,
-        KostenbeitragTable $kostenbeitragTable,
         array $allViews
     ) {
         $this->institutionForm = $institutionForm;
         $this->institutionTable = $institutionTable;
         $this->institutionRelationTable = $institutionRelationTable;
-
         $this->allViews = $allViews;
-        $this->kontaktTable = $kontaktTable;
-        $this->adresseTable = $adresseTable;
-        $this->kostenbeitragTable = $kostenbeitragTable;
     }
 
 
@@ -164,19 +138,7 @@ class InstitutionController extends BaseController
                 //try {
                     /** @var Institution $data */
                     $data = $form->getData();
-                    $kontakt = $data->getKontakt();
-                    //todo if kontakt has been edited
-                    $idKontakt=$this->kontaktTable->save($kontakt);
-                    $data->setId_kontakt($idKontakt);
 
-                    $rechnungsadresse = $data->getRechnungsadresse();
-                    $idRechnungsadresse=$this->adresseTable->save($rechnungsadresse);
-                    $data->setId_rechnungsadresse($idRechnungsadresse);
-
-
-                    $postadresse = $data->getpostadresse();
-                    $idpostadresse=$this->adresseTable->save($postadresse);
-                    $data->setId_postadresse($idpostadresse);
 
 
 
@@ -285,29 +247,7 @@ class InstitutionController extends BaseController
         $institution->setRelations($relations);
 
 
-        if (!empty($institution->getId_kontakt())) {
-            $kontakt = $this->getKontaktObjectForEdit($institution->getId_kontakt());
-            $institution->setKontakt($kontakt);
-        } else {
-            $kontakt = new Kontakt();
-            $institution->setKontakt($kontakt);
-        }
 
-        if (!empty($institution->getId_rechnungsadresse())) {
-            $rechnungsadresse = $this->getAdresseObjectForEdit($institution->getId_rechnungsadresse());
-            $institution->setRechnungsadresse($rechnungsadresse);
-        } else {
-            $rechnungsadresse = new Adresse();
-            $institution->setRechnungsadresse($rechnungsadresse);
-        }
-
-        if (!empty($institution->getId_postadresse())) {
-            $postadresse = $this->getAdresseObjectForEdit($institution->getId_postadresse());
-            $institution->setPostadresse($postadresse);
-        } else {
-            $postadresse = new Adresse();
-            $institution->setPostadresse($postadresse);
-        }
 
 
 
@@ -380,40 +320,6 @@ class InstitutionController extends BaseController
         return $this->getAjaxView($data, 'libadmin/global/search');
     }
 
-    /**
-     * @param $idKontakt
-     * @return Kontakt
-     * @throws \Exception
-     */
-    protected function getKontaktObjectForEdit($idKontakt)
-    {
-        //todo
-        //Abhängigkeit wie oben abklären
 
-
-        //todo: wie bei Institutions - lege diese Methode in die table
-        /** @var Kontakt $kontakt */
-        $kontakt = $this->kontaktTable->getRecord($idKontakt);
-
-        return $kontakt;
-    }
-
-    /**
-     * @param $idRechnungsadresse
-     * @return Adresse
-     * @throws \Exception
-     */
-    protected function getAdresseObjectForEdit($idAdresse)
-    {
-        //todo
-        //Abhängigkeit wie oben abklären
-
-
-        //todo: wie bei Institutions - lege diese Methode in die table
-        /** @var Adresse $adresse */
-        $adresse = $this->adresseTable->getRecord($idAdresse);
-
-        return $adresse;
-    }
 
 }

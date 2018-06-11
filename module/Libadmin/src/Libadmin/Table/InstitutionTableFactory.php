@@ -56,7 +56,14 @@ class InstitutionTableFactory implements FactoryInterface
         $tablePluginManager = $container->get(TablePluginManager::class);
         $institutionTableGateway = $tablePluginManager->get('InstitutionTableGateway');
         $institutionRelationTable = $tablePluginManager->get('Libadmin\Table\InstitutionRelationTable');
-        return new InstitutionTable($institutionTableGateway, $institutionRelationTable);
+
+
+        $adresseTable = $tablePluginManager->get(AdresseTable::class);
+        $kontaktTable = $tablePluginManager->get(KontaktTable::class);
+        $kostenbeitragTable = $tablePluginManager->get(KostenbeitragTable::class);
+
+
+        return new InstitutionTable($institutionTableGateway, $institutionRelationTable, $adresseTable, $kontaktTable, $kostenbeitragTable);
 
 
     }

@@ -35,11 +35,8 @@ namespace Libadmin\Controller;
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
 use Libadmin\Form\InstitutionForm;
-use Libadmin\Table\AdresseTable;
 use Libadmin\Table\InstitutionRelationTable;
 use Libadmin\Table\InstitutionTable;
-use Libadmin\Table\KontaktTable;
-use Libadmin\Table\KostenbeitragTable;
 use Libadmin\Table\ViewTable;
 use Zend\Form\FormElementManager\FormElementManagerV3Polyfill;
 use Zend\Form\FormElementManagerFactory;
@@ -91,19 +88,10 @@ class InstitutionControllerFactory implements FactoryInterface
         $viewTable = $tablePluginManager->get(ViewTable::class);
         $allViews = $viewTable->getAllViewsOptions();
 
-        $adresseTable = $tablePluginManager->get(AdresseTable::class);
-        $kontaktTable = $tablePluginManager->get(KontaktTable::class);
-        $kostenbeitragTable = $tablePluginManager->get(KostenbeitragTable::class);
-
-        //todo: provide the new dependencies InstitutionController
-
         return new InstitutionController(
             $institutionForm,
             $institutionTable,
             $institutionRelationTable,
-            $kontaktTable,
-            $adresseTable,
-            $kostenbeitragTable,
             $allViews
         );
     }

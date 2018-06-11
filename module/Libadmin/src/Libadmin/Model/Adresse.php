@@ -270,7 +270,4 @@ class Adresse extends BaseModel
         $this->setZusatz($excelData["rechnungsadresse_zusatz"]);
         $this->setNameOrganisationRechnung($excelData["rechnungsadresse_name"]);
     }
-
-
-
 }

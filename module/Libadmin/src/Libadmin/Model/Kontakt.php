@@ -161,6 +161,4 @@ class Kontakt extends BaseModel
         $this->setAnrede($excelData["kontakt_rechnung_anrede"]);
         $this->setEmail($excelData["kontakt_rechnung_mail"]);
     }
-
-
 }

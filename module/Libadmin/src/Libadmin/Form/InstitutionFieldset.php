@@ -68,7 +68,8 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
         $this->addText('bfscode', 'bfscode');
 
 
-        $this->addText('worldcat', 'worldcat');
+        $this->addText('worldcat_symbol', 'worldcat_symbol');
+        $this->addText('worldcat_ja_nein', 'worldcat_ja_nein');
         $this->addText('cbslibrarycode', 'cbslibrarycode');
         $this->addText('verrechnungbeitrag', 'verrechnungbeitrag');
         $this->addText('zusage_beitrag', 'zusage_beitrag');

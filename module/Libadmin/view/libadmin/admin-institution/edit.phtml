@@ -44,15 +44,15 @@ $saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');
 
 <div class="tabbable">
     <ul class="nav nav-tabs formTabs">
-        <li class="active"><a href="#first"><?= $this->translate('first') ?></a></li>
-        <li><a href="#second"><?= $this->translate('second') ?></a></li>
-        <li><a href="#third"><?= $this->translate('third') ?></a></li>
+        <li class="active"><a href="#address"><?= $this->translate('address') ?></a></li>
+        <li><a href="#admin"><?= $this->translate('admin') ?></a></li>
+        <li><a href="#costs"><?= $this->translate('costs_participation') ?></a></li>
 
     </ul>
 
 
     <div class="tab-content">
-        <div class="tab-pane active" id="first">
+        <div class="tab-pane active" id="address">
             <fieldset>
                 <legend><?= $this->translate('displaynames') ?></legend>
                 <div class="row-fluid">
@@ -63,9 +63,9 @@ $saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');
         </div>
 
 
-        <div class="tab-pane active" id="second">
+        <div class="tab-pane active" id="admin">
             <fieldset>
-                <legend><?= $this->translate('second') ?></legend>
+                <legend><?= $this->translate('admin') ?></legend>
                 <div class="row-fluid">
                     <div class="span12"><?= $this->formRow($admininstitution->get('mail')) ?></div>
                 </div>
@@ -89,9 +89,9 @@ $saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');
         </div>
 
 
-        <div class="tab-pane active" id="third">
+        <div class="tab-pane active" id="costs">
             <fieldset>
-                <legend><?= $this->translate('third') ?></legend>
+                <legend><?= $this->translate('kostenbeitrag') ?></legend>
                 <div class="row-fluid">
                     <div class="span12"><?= $this->formRow($admininstitution->get('bemerkung_kostenbeitrag')) ?></div>
                 </div>

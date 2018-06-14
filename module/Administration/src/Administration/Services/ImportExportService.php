@@ -168,6 +168,7 @@ class ImportExportService
 
             if (!is_array($combinedValuesFromLine)) {
                 $wrongMatch++;
+                print_r($splittedLine);
                 continue 1;
             }
 
@@ -452,6 +453,8 @@ class ImportExportService
                  * @var  $instituion Institution
                  */
                 $instituion = $this->getInstitutionWithBibCode(trim($bibcode));
+                //echo $bibcode;
+                //echo "\n\n\n";
                 $instId =  $instituion->getId();
                 $adminInstId =  $ai->getId();
                 $instAdminInstRelation =  new InstitutionAdminInstitutionRelation();

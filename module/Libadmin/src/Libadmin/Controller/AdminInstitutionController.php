@@ -115,8 +115,8 @@ class AdminInstitutionController extends BaseController
             //todo: lookup documentation if empty is the correct method in PHP to check the value of object properties
             //we have to fetch several objects (Adresse, Kontakt, ....) if there is a foreign key value in the
             // admininstitution object
-            if (!empty($admininstitution->getIdAdresse())) {
-                $adresse = $this->getAdressObjectForEdit($admininstitution->getIdAdresse());
+            if (!empty($admininstitution->getIdPostadresse())) {
+                $adresse = $this->getAdressObjectForEdit($admininstitution->getIdPostadresse());
             }
 
             //weitere Möglichkeit zur Abfrage: adresse_rechnung_gleich_post

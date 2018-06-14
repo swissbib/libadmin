@@ -224,7 +224,7 @@ class ImportExportService
                 {
                     $billContact = new Kontakt();
                     $billContact->initLocalVariablesBillPersonFromExcel($combinedValuesFromLine);
-                    $idBillContact =  $this->kontaktTable->save($mainContact);
+                    $idBillContact =  $this->kontaktTable->save($billContact);
                     $institution->setId_kontakt_rechnung($idBillContact);
 
                 }
@@ -283,7 +283,7 @@ class ImportExportService
             $admininstitution =  new AdminInstitution();
             $admininstitution->initLocalVariablesFromExcel($combinedValuesFromLine);
 
-            if (empty($admininstitution->getIdAdresse()) ) {
+            if (empty($admininstitution->getIdPostadresse()) ) {
                 //todo: ich habe noch nicht den Fall abgefangen, bei dem bereits eine Adresse vorhanden ist
                 //(Datenbankupdate durch Importdaten)
 
@@ -293,7 +293,7 @@ class ImportExportService
                 //and move it into the adress table
                 $postAdressID = $this->adresseTable->save($postAdresse);
 
-                $admininstitution->setIdAdresse($postAdressID);
+                $admininstitution->setIdPostadresse($postAdressID);
             }
 
             if (! $admininstitution->getAdresseRechnungGleichPost() ) {
@@ -321,7 +321,7 @@ class ImportExportService
             {
                 $billContact = new Kontakt();
                 $billContact->initLocalVariablesBillPersonFromExcel($combinedValuesFromLine);
-                $idBillContact =  $this->kontaktTable->save($mainContact);
+                $idBillContact =  $this->kontaktTable->save($billContact);
                 $admininstitution->setIdKontaktRechnung($idBillContact);
 
             }

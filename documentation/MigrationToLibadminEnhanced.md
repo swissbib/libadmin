@@ -69,5 +69,13 @@ php public/index.php loaddata admininstitution ../documentation/database/data/ad
 
 The address might have been updated in libadmin and not in the excel. Be careful with this step.
 
+## In one step 
+```
+sudo mysql < ./documentation/database/libadminenhanced.schema.sql
+sudo mysql libadminenhanced < ~/Documents/mycloud/swissbib/libadmin/libadmin-dump-20180614.sql
+php public/index.php loaddata institution ../documentation/database/data/libadmin.institutions.new.csv
+php public/index.php loaddata admininstitution ../documentation/database/data/admininstitution.new.csv
+```
+
 
 

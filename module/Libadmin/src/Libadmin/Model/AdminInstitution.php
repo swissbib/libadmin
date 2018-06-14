@@ -67,15 +67,15 @@ class AdminInstitution extends BaseModel
 
 
     /**
-     * reference to adresse
+     * reference to postadresse
      * @var ?Integer
      */
-    public $id_adresse;
+    public $id_postadresse;
 
     /**
      * @var ?String
      */
-    public $mail;
+    public $email;
 
     /**
      * @var ?Integer
@@ -176,28 +176,28 @@ class AdminInstitution extends BaseModel
     /**
      * @return mixed
      */
-    public function getIdAdresse()
+    public function getIdPostadresse()
     {
-        return $this->id_adresse;
+        return $this->id_postadresse;
     }
 
     /**
-     * @param mixed $id_adresse
+     * @param mixed $id_postadresse
      *
      * @return AdminInstitution
      */
-    public function setIdAdresse($id_adresse)
+    public function setIdPostadresse($id_postadresse)
     {
-        $this->id_adresse = $id_adresse;
+        $this->id_postadresse = $id_postadresse;
         return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getMail()
+    public function getEmail()
     {
-        return $this->mail;
+        return $this->email;
     }
 
     /**
@@ -205,9 +205,9 @@ class AdminInstitution extends BaseModel
      *
      * @return AdminInstitution
      */
-    public function setMail($mail)
+    public function setEmail($email)
     {
-        $this->mail = $mail;
+        $this->email = $email;
         return $this;
     }
 
@@ -562,6 +562,7 @@ class AdminInstitution extends BaseModel
         $this->setIpadresse($excelData["ipadresse"]);
         $this->setIdcode($excelData["idcode"]);
         $this->setName($excelData["name"]);
+        $this->setEmail($excelData["mail"]);
 
 
     }

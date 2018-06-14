@@ -39,9 +39,9 @@ CREATE TABLE `admininstitution` (
   `idcode` varchar(50)  DEFAULT NULL,
 
   `name` varchar(200)  DEFAULT NULL,
-  `id_adresse` INT(11)  DEFAULT NULL,
-  /* mail: entspricht institutioneller email adresse */
-  `mail` INT(11)  DEFAULT NULL,
+  `id_postadresse` INT(11)  DEFAULT NULL,
+  /* email: entspricht institutioneller email adresse */
+  `email` varchar(100) DEFAULT NULL,
   `id_kontakt` INT(11)  DEFAULT NULL,
   /*korrespondenzsprache: [deutsch|französisch|italienisch] */
   `korrespondezsprache` varchar(10)  DEFAULT NULL,
@@ -64,15 +64,17 @@ CREATE TABLE `admininstitution` (
   `bemerkung_rechnung` text  DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_kontakt` (`id_kontakt`),
-  KEY `fk_adresse` (`id_adresse`),
+  KEY `fk_postadresse` (`id_postadresse`),
   KEY `fk_adresse_rechnung` (`id_rechnungsadresse`),
   KEY `fk_kontakt_rechnung` (`id_kontakt_rechnung`),
+  KEY `fk_kostenbeitrag` (`id_kostenbeitrag`),
 
 
   CONSTRAINT `fk_kontakt1` FOREIGN KEY (`id_kontakt`) REFERENCES `kontakt` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_adresse1` FOREIGN KEY (`id_adresse`) REFERENCES `adresse` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_adresse1` FOREIGN KEY (`id_postadresse`) REFERENCES `adresse` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_adresse_rechnung1` FOREIGN KEY (`id_rechnungsadresse`) REFERENCES `adresse` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_kontakt_rechnung1` FOREIGN KEY (`id_kontakt_rechnung`) REFERENCES `kontakt` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_kontakt_rechnung1` FOREIGN KEY (`id_kontakt_rechnung`) REFERENCES `kontakt` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_kostenbeitrag1` FOREIGN KEY (`id_kostenbeitrag`) REFERENCES `kostenbeitrag` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

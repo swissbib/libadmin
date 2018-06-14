@@ -56,14 +56,9 @@ class AdminInstitutionFieldset extends BaseFieldset implements InputFilterProvid
             ->setObject(new AdminInstitution());
 
         $this->addHidden('id');
-        $this->addHidden('id_adresse');
-        $this->addHidden('id_kontakt');
-        $this->addHidden('id_kostenbeitrag');
-
-
 
         $this->addText('name', 'name', true);
-        $this->addText('mail', 'mail', true);
+        $this->addText('email', 'email', true);
         $this->addText('korrespondezsprache', 'korrespondezsprache', true);
         $this->addText('bfscode', 'bfscode', true);
         $this->addText('ipadresse', 'ipadresse', true);

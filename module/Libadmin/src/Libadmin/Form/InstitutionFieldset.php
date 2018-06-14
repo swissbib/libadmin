@@ -91,6 +91,11 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
         $this->addText('bemerkung_rechnung', 'bemerkung_rechnung');
 
         $this->addText('kostenbeitrag_basiert_auf', 'kostenbeitrag_basiert_auf');
+
+        $this->add([
+            'type' => 'Libadmin\Form\KontaktFieldset',
+            'name' => 'kontakt_rechnung',
+        ]);
         
 
 

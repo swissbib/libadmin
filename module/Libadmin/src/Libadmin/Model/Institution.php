@@ -133,6 +133,13 @@ class Institution extends BaseModel
 	public $kontakt;
 
     /**
+     * @var Kontakt $kontakt_rechung kontakt für rechnung
+     */
+    public $kontakt_rechnung;
+
+
+
+    /**
      * @var Adresse $rechnungsadresse rechnungsadresse
      */
     public $rechnungsadresse;
@@ -162,6 +169,7 @@ class Institution extends BaseModel
 		unset($data['relations']);
 		unset($data['is_favorite']);
         unset($data['kontakt']);
+        unset($data['kontakt_rechnung']);
         unset($data['rechnungsadresse']);
         unset($data['postadresse']);
         unset($data['kostenbeitrag']);
@@ -1243,6 +1251,24 @@ class Institution extends BaseModel
     public function setKostenbeitrag($kostenbeitrag)
     {
         $this->kostenbeitrag = $kostenbeitrag;
+    }
+
+    /**
+     * @return Kontakt
+     */
+    public function getKontakt_rechnung(): Kontakt
+    {
+        return $this->kontakt_rechnung;
+    }
+
+    /**
+     * @param Kontakt $kontakt_rechnung
+     *
+     * @return Kontakt
+     */
+    public function setKontakt_rechnung($kontakt_rechnung)
+    {
+        $this->kontakt_rechnung = $kontakt_rechnung;
     }
 
     public function initLocalVariablesFromExcel(array $excelData) {

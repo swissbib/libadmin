@@ -139,6 +139,9 @@ class InstitutionTable extends BaseTable
         $kontakt = $this->loadKontaktFromKontaktTable($institution->getId_kontakt());
         $institution->setKontakt($kontakt);
 
+        $kontakt_rechnung = $this->loadKontaktFromKontaktTable($institution->getId_kontakt_rechnung());
+        $institution->setKontakt_rechnung($kontakt_rechnung);
+
         $rechnungsadresse = $this->loadAdresseFromAdresseTable($institution->getId_rechnungsadresse());
         $institution->setRechnungsadresse($rechnungsadresse);
 
@@ -199,6 +202,11 @@ class InstitutionTable extends BaseTable
             $institution->getKontakt()
         );
         $institution->setId_kontakt($idKontakt);
+
+        $idKontakt_rechnung=$this->saveKontaktToKontaktTable(
+            $institution->getKontakt_rechnung()
+        );
+        $institution->setId_kontakt($idKontakt_rechnung);
 
         $idRechnungsadresse=$this->saveAdresseToAdresseTable(
             $institution->getRechnungsadresse()

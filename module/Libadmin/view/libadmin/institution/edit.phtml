@@ -297,6 +297,19 @@ $form->setAttribute('class', 'form-horizontal');
                     </div>
                 </fieldset>
 
+                <fieldset class="contactRechnung">
+                    <legend><?= $this->translate('contactPersonInvoice') ?></legend>
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <?php $kontaktRechnungFieldset = $institution->get('kontakt_rechnung') ?>
+                            <?= $this->formRow($kontaktRechnungFieldset->get('name')) ?>
+                            <?= $this->formRow($kontaktRechnungFieldset->get('vorname')) ?>
+                            <?= $this->formRow($kontaktRechnungFieldset->get('anrede')) ?>
+                            <?= $this->formRow($kontaktRechnungFieldset->get('email')) ?>
+                        </div>
+                    </div>
+                </fieldset>
+
             </div>
 
 

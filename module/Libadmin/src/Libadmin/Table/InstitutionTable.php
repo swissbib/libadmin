@@ -22,7 +22,7 @@ use Zend\Hydrator\Reflection as ReflectionHydrator;
  * Class InstitutionTable
  * @package Libadmin\Table
  */
-class InstitutionTable extends BaseTable
+class InstitutionTable extends InstitutionBaseTable
 {
 
     /**
@@ -114,45 +114,9 @@ class InstitutionTable extends BaseTable
         KontaktTable $kontaktTable,
         KostenbeitragTable $kostenbeitragTable
     ) {
-        parent::__construct($institutionTableGateway);
+        parent::__construct($institutionTableGateway, $adresseTable, $kontaktTable, $kostenbeitragTable);
 
         $this->relationTable = $relationTable;
-        $this->kontaktTable = $kontaktTable;
-        $this->adresseTable = $adresseTable;
-        $this->kostenbeitragTable = $kostenbeitragTable;
-    }
-
-
-    /**
-     * Get institution
-     *
-     * @param    Integer        $idInstitution
-     * @return    Institution
-     */
-    public function getRecord($idInstitution)
-    {
-        /**
-         * @var $institution \Libadmin\Model\Institution
-         */
-        $institution = parent::getRecord($idInstitution);
-
-        $kontakt = $this->loadKontaktFromKontaktTable($institution->getId_kontakt());
-        $institution->setKontakt($kontakt);
-
-        $kontakt_rechnung = $this->loadKontaktFromKontaktTable($institution->getId_kontakt_rechnung());
-        $institution->setKontakt_rechnung($kontakt_rechnung);
-
-        $rechnungsadresse = $this->loadAdresseFromAdresseTable($institution->getId_rechnungsadresse());
-        $institution->setRechnungsadresse($rechnungsadresse);
-
-        $postadresse = $this->loadAdresseFromAdresseTable($institution->getId_postadresse());
-        $institution->setPostadresse($postadresse);
-
-        $kostenbeitrag = $this->loadKostenbeitragFromKostenbeitragTable($institution->getId_kostenbeitrag());
-        $institution->setKostenbeitrag($kostenbeitrag);
-
-        return $institution;
-
     }
 
 
@@ -197,31 +161,6 @@ class InstitutionTable extends BaseTable
         /**
          * @var $institution \Libadmin\Model\Institution
          */
-
-        $idKontakt=$this->saveKontaktToKontaktTable(
-            $institution->getKontakt()
-        );
-        $institution->setId_kontakt($idKontakt);
-
-        $idKontakt_rechnung=$this->saveKontaktToKontaktTable(
-            $institution->getKontakt_rechnung()
-        );
-        $institution->setId_kontakt($idKontakt_rechnung);
-
-        $idRechnungsadresse=$this->saveAdresseToAdresseTable(
-            $institution->getRechnungsadresse()
-        );
-        $institution->setId_rechnungsadresse($idRechnungsadresse);
-
-        $idPostadresse=$this->saveAdresseToAdresseTable(
-            $institution->getPostadresse()
-        );
-        $institution->setId_postadresse($idPostadresse);
-
-        $idKostenbeitrag=$this->saveKostenbeitragToKostenbeitragTable(
-            $institution->getKostenbeitrag()
-        );
-        $institution->setId_kostenbeitrag($idKostenbeitrag);
 
         $idInstitution = parent::save($institution);
 
@@ -367,102 +306,5 @@ class InstitutionTable extends BaseTable
 
         //return  $this->tableGateway->selectWith($select)->count() > 0;
 
-    }
-
-    /**
-     * @param $idKontakt
-     * @return Kontakt
-     * @throws \Exception
-     */
-    protected function loadKontaktFromKontaktTable($idKontakt)
-    {
-        /** @var Kontakt $kontakt */
-        if (!empty($idKontakt))
-        {
-            $kontakt = $this->kontaktTable->getRecord($idKontakt);
-
-        } else {
-            $kontakt = new Kontakt();
-        }
-
-        return $kontakt;
-    }
-
-    /**
-     * @param $idRechnungsadresse
-     * @return Adresse
-     * @throws \Exception
-     */
-    protected function loadAdresseFromAdresseTable($idAdresse)
-    {
-        /** @var Adresse $adresse */
-        if (!empty($idAdresse))
-        {
-            $adresse = $this->adresseTable->getRecord($idAdresse);
-
-        } else {
-            $adresse = new Adresse();
-        }
-
-        return $adresse;
-    }
-
-    /**
-     * @param int $idKostenbeitrag Id from kostenbeitrag
-     * @return BaseModel|Kostenbeitrag
-     * @throws \Exception
-     */
-    protected function loadKostenbeitragFromKostenbeitragTable($idKostenbeitrag)
-    {
-        /** @var Kostenbeitrag $kostenbeitrag */
-        if (!empty($idKostenbeitrag))
-        {
-            $kostenbeitrag = $this->kostenbeitragTable->getRecord($idKostenbeitrag);
-
-        } else {
-            $kostenbeitrag = new Kostenbeitrag();
-        }
-
-        return $kostenbeitrag;
-    }
-
-    /**
-     * @param Kontakt $kontakt kontakt
-     *
-     * @return int kontaktid
-     * @throws \Exception
-     */
-    protected function saveKontaktToKontaktTable(Kontakt $kontakt)
-    {
-        //we always update the table if the kontakt has an id
-        //we don't update the table if the kontakt is empty
-        if(!$kontakt->isEmpty()) {
-            $idKontakt = $this->kontaktTable->save($kontakt);
-            return $idKontakt;
-        } else {
-            return null;
-        }
-    }
-
-    protected function saveAdresseToAdresseTable(Adresse $adresse)
-    {
-        //we always update the table if the adresse has an id
-        //we don't update the table if the adresse is empty
-        if(!$adresse->isEmpty()) {
-            $idAdresse = $this->adresseTable->save($adresse);
-            return $idAdresse;
-        } else {
-            return null;
-        }
-    }
-
-    protected function saveKostenbeitragToKostenbeitragTable(Kostenbeitrag $kostenbeitrag)
-    {
-        if(!$kostenbeitrag->isEmpty()) {
-            $idKostenbeitrag = $this->kostenbeitragTable->save($kostenbeitrag);
-            return $idKostenbeitrag;
-        } else {
-            return null;
-        }
     }
 }

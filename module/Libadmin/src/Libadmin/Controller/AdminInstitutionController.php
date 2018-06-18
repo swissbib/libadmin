@@ -45,36 +45,17 @@ class AdminInstitutionController extends BaseController
      */
     private $adminInstitutionTable;
     /**
-     * @var KostenbeitragTable
-     */
-    private $kostenbeitragTable;
-    /**
-     * @var AdresseTable
-     */
-    private $adresseTable;
-    /**
-     * @var KontaktTable
-     */
-    private $kontaktTable;
-    /**
      * @var InstitutionAdminInstitutionRelationTable
      */
     private $institutionAdminInstitutionRelationTable;
 
     public function __construct(AdminInstitutionForm $adminInstitutionForm,
-                                AdminInstitutionTable $adminInstitutionTable,
-                                KostenbeitragTable $kostenbeitragTable,
-                                AdresseTable $adresseTable,
-                                KontaktTable $kontaktTable,
-                                InstitutionAdminInstitutionRelationTable $institutionAdminInstitutionRelationTable){
+                                AdminInstitutionTable $adminInstitutionTable, InstitutionAdminInstitutionRelationTable $institutionAdminInstitutionRelationTable){
 
 
 
         $this->adminInstitutionForm = $adminInstitutionForm;
         $this->adminInstitutionTable = $adminInstitutionTable;
-        $this->kostenbeitragTable = $kostenbeitragTable;
-        $this->adresseTable = $adresseTable;
-        $this->kontaktTable = $kontaktTable;
         $this->institutionAdminInstitutionRelationTable = $institutionAdminInstitutionRelationTable;
     }
 
@@ -112,42 +93,10 @@ class AdminInstitutionController extends BaseController
         try {
             /** @var AdminInstitution $admininstitution */
             $admininstitution = $this->getAdminInstitutionForEdit($idInstitution);
-            //todo: lookup documentation if empty is the correct method in PHP to check the value of object properties
-            //we have to fetch several objects (Adresse, Kontakt, ....) if there is a foreign key value in the
-            // admininstitution object
-            if (!empty($admininstitution->getIdPostadresse())) {
-                $adresse = $this->getAdressObjectForEdit($admininstitution->getIdPostadresse());
-            }
-
-            //weitere Möglichkeit zur Abfrage: adresse_rechnung_gleich_post
-            if (!empty($admininstitution->getIdRechnungsadresse())) {
-                $adresse = $this->getAdressObjectForEdit($admininstitution->getIdRechnungsadresse());
-            }
-
-
-            if (!empty($admininstitution->getIdKontakt())) {
-                $kontakt = $this->getKontaktObjectForEdit($admininstitution->getIdKontakt());
-            }
-
-
-            if (!empty($admininstitution->getIdKontaktRechnung())) {
-                $kontaktRechnung = $this->getKontaktObjectForEdit($admininstitution->getIdKontaktRechnung());
-            }
-
-            if (!empty($admininstitution->getIdKostenbeitrag())) {
-                $kostenbeitrag = $this->getKostenbeitragObjectForEdit($admininstitution->getIdKostenbeitrag());
-            }
-
-
         } catch (\Exception $ex) {
             $this->flashMessenger()->addErrorMessage('notfound_record');
             return $this->forwardTo('home');
         }
-
-        //jetzt haben wir die einzelnen Objekte
-        //wie können wir sie an die Form binden - todo: Beschäftigung Aufbau Formkomponente
-        //was machen wir, wenn einzelne Objekte keinen Wert haben (z.B keinen Kontakt Rechnug etc.
-        //todo wie binden wir solche empty values??
 
         $form = $this->adminInstitutionForm;
         $form->bind($admininstitution);
@@ -186,67 +135,27 @@ class AdminInstitutionController extends BaseController
      */
     protected function getAdminInstitutionForEdit($idInstitution)
     {
-        //todo
-        //diese methoe sollte hier gar nicht sein sondern in die InstitutionTable
-        //damit hätten wir hier auch keine Abhängigkeit meir nach InstitutionRelation Table
-
-
-        //todo: wie bei Institutions - lege diese Methode in die table
         /** @var AdminInstitution $admininstitution */
         $admininstitution = $this->adminInstitutionTable->getRecord($idInstitution);
 
         return $admininstitution;
     }
 
-
     /**
-     * @param $idAdress
-     * @return Adresse
-     * @throws \Exception
-     */
-    protected function getAdressObjectForEdit($idAdress)
+     * Search matching records
+     *
+     * @param	Integer		$limit        Search result limit
+     * @return	ViewModel
+     **/
+    public function searchAction($limit = 50)
     {
-        //todo
-        //Abhängigkeit wie oben abklären
+        $query = $this->params()->fromQuery('query', '');
+        $data = array(
+            'route' => strtolower($this->getTypeName()),
+            'listItems' => $this->adminInstitutionTable->find($query, $limit)
+        );
 
-
-        //todo: wie bei Institutions - lege diese Methode in die table
-        /** @var Adresse $adress */
-        $adress = $this->adresseTable->getRecord($idAdress);
-
-        return $adress;
-    }
-
-
-    /**
-     * @param $idKontakt
-     * @return Kontakt
-     * @throws \Exception
-     */
-    protected function getKontaktObjectForEdit($idKontakt)
-    {
-        //todo
-        //Abhängigkeit wie oben abklären
-
-
-        //todo: wie bei Institutions - lege diese Methode in die table
-        /** @var Kontakt $kontakt */
-        $kontakt = $this->kontaktTable->getRecord($idKontakt);
-
-        return $kontakt;
-    }
-
-    protected function getKostenbeitragObjectForEdit($idKostenbeitrag)
-    {
-        //todo
-        //Abhängigkeit wie oben abklären
-
-
-        //todo: wie bei Institutions - lege diese Methode in die table
-        /** @var Kostenbeitrag kostenbeitrag */
-        $kostenbeitrag = $this->kostenbeitragTable->getRecord($idKostenbeitrag);
-
-        return $kostenbeitrag;
+        return $this->getAjaxView($data, 'libadmin/global/search');
     }
 
 

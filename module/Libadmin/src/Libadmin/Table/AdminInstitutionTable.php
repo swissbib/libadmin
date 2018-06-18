@@ -44,7 +44,7 @@ use Zend\Db\TableGateway\TableGateway;
  * @link     http://vufind.org
  * @link     http://www.swissbib.ch
  */
-class AdminInstitutionTable extends BaseTable
+class AdminInstitutionTable extends InstitutionBaseTable
 {
 
 
@@ -56,12 +56,22 @@ class AdminInstitutionTable extends BaseTable
     ];
 
 
-    public function __construct(TableGateway $institutionTableGateway)
-    {
-        parent::__construct($institutionTableGateway);
-
+    /**
+     * Initialize with base and relation table
+     *
+     * @param TableGateway       $adminInstitutionTableGateway adminInstitutionTableGateway
+     * @param AdresseTable       $adresseTable                 adresseTable
+     * @param KontaktTable       $kontaktTable                 kontaktTable
+     * @param KostenbeitragTable $kostenbeitragTable           kostenbeitragTable
+     */
+    public function __construct(
+        TableGateway $adminInstitutionTableGateway,
+        AdresseTable $adresseTable,
+        KontaktTable $kontaktTable,
+        KostenbeitragTable $kostenbeitragTable
+    ) {
+        parent::__construct($adminInstitutionTableGateway, $adresseTable, $kontaktTable, $kostenbeitragTable);
     }
-
 
 
     //todo: $order parameter is not part of the parent signature

@@ -57,18 +57,46 @@ class AdminInstitutionFieldset extends BaseFieldset implements InputFilterProvid
 
         $this->addHidden('id');
 
+        $this->addText('idcode', 'idcode', true);
+
         $this->addText('name', 'name', true);
-        $this->addText('email', 'email', true);
-        $this->addText('korrespondezsprache', 'korrespondezsprache', true);
-        $this->addText('bfscode', 'bfscode', true);
-        $this->addText('ipadresse', 'ipadresse', true);
-        $this->addText('zusage_beitrag', 'zusage_beitrag', true);
-        $this->addText('bemerkung_kostenbeitrag', 'bemerkung_kostenbeitrag', true);
-        $this->addText('adresse_rechnung_gleich_post', 'adresse_rechnung_gleich_post', true);
-        $this->addText('mwst', 'mwst', true);
-        $this->addText('grund_mwst_frei', 'grund_mwst_frei', true);
-        $this->addText('e_rechnung', 'e_rechnung', true);
-        $this->addText('bemerkung_rechnung', 'bemerkung_rechnung', true);
+        $this->addText('email', 'email');
+        $this->addText('korrespondezsprache', 'korrespondezsprache');
+        $this->addText('bfscode', 'bfscode');
+        $this->addText('ipadresse', 'ipadresse');
+        $this->addText('zusage_beitrag', 'zusage_beitrag');
+        $this->addText('bemerkung_kostenbeitrag', 'bemerkung_kostenbeitrag');
+        $this->addText('adresse_rechnung_gleich_post', 'adresse_rechnung_gleich_post');
+        $this->addText('mwst', 'mwst');
+        $this->addText('grund_mwst_frei', 'grund_mwst_frei');
+        $this->addText('e_rechnung', 'e_rechnung');
+        $this->addText('bemerkung_rechnung', 'bemerkung_rechnung');
+        $this->addText('kostenbeitrag_basiert_auf', 'kostenbeitrag_basiert_auf');
+
+        $this->add([
+            'type' => 'Libadmin\Form\KostenbeitragFieldset',
+            'name' => 'kostenbeitrag',
+        ]);
+
+        $this->add([
+            'type' => 'Libadmin\Form\KontaktFieldset',
+            'name' => 'kontakt_rechnung',
+        ]);
+
+        $this->add([
+            'type' => 'Libadmin\Form\AdresseFieldset',
+            'name' => 'postadresse',
+        ]);
+
+        $this->add([
+            'type' => 'Libadmin\Form\KontaktFieldset',
+            'name' => 'kontakt',
+        ]);
+
+        $this->add([
+            'type' => 'Libadmin\Form\AdresseFieldset',
+            'name' => 'rechnungsadresse',
+        ]);
 
 
 
@@ -81,6 +109,15 @@ class AdminInstitutionFieldset extends BaseFieldset implements InputFilterProvid
      */
     public function getInputFilterSpecification()
     {
-        return [];
+        return [
+            'email' => [
+                'required' => false,
+                'validators' => [
+                    [
+                        'name' => 'EmailAddress'
+                    ]
+                ]
+            ],
+        ];
     }
 }

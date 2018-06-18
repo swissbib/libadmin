@@ -37,7 +37,7 @@ $saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');
 <fieldset class="general">
     <legend><?= $this->translate('general') ?></legend>
     <div class="row-fluid">
-        <div class="span5"><?= $this->formRow($admininstitution->get('name')) ?></div>
+        <div class="span5"><?= $this->formRow($admininstitution->get('idcode')) ?></div>
     </div>
 </fieldset>
 
@@ -60,19 +60,53 @@ $saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');
                 </div>
             </fieldset>
 
+            <div class="row-fluid">
+                <div class="span12"><?= $this->formRow($admininstitution->get('email')) ?></div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span12"><?= $this->formRow($admininstitution->get('korrespondezsprache')) ?></div>
+            </div>
+
+            <fieldset class="postAdresse">
+                <legend><?= $this->translate('postAdresse') ?></legend>
+                <div class="row-fluid">
+                    <div class="span6">
+                        <?php $postAdresseFieldset = $admininstitution->get('postadresse') ?>
+                        <?= $this->formRow($postAdresseFieldset->get('strasse')) ?>
+                        <?= $this->formRow($postAdresseFieldset->get('nummer')) ?>
+                        <?= $this->formRow($postAdresseFieldset->get('zusatz')) ?>
+                        <?= $this->formRow($postAdresseFieldset->get('plz')) ?>
+                        <?= $this->formRow($postAdresseFieldset->get('ort')) ?>
+                        <?= $this->formRow($postAdresseFieldset->get('country')) ?>
+                        <?= $this->formRow($postAdresseFieldset->get('canton')) ?>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="contactPerson">
+                <legend><?= $this->translate('contactPerson') ?></legend>
+                <div class="row-fluid">
+                    <div class="span6">
+                        <?php $kontaktFieldset = $admininstitution->get('kontakt') ?>
+                        <?= $this->formRow($kontaktFieldset->get('name')) ?>
+                        <?= $this->formRow($kontaktFieldset->get('vorname')) ?>
+                        <?= $this->formRow($kontaktFieldset->get('anrede')) ?>
+                        <?= $this->formRow($kontaktFieldset->get('email')) ?>
+                    </div>
+                </div>
+            </fieldset>
+
+
         </div>
 
 
         <div class="tab-pane" id="admin">
             <fieldset>
                 <legend><?= $this->translate('admin') ?></legend>
-                <div class="row-fluid">
-                    <div class="span12"><?= $this->formRow($admininstitution->get('email')) ?></div>
-                </div>
 
-                <div class="row-fluid">
-                    <div class="span12"><?= $this->formRow($admininstitution->get('korrespondezsprache')) ?></div>
-                </div>
+
+
                 <div class="row-fluid">
                     <div class="span12"><?= $this->formRow($admininstitution->get('bfscode')) ?></div>
                 </div>
@@ -90,30 +124,79 @@ $saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');
 
 
         <div class="tab-pane" id="costs">
-            <fieldset>
-                <legend><?= $this->translate('kostenbeitrag') ?></legend>
-                <div class="row-fluid">
-                    <div class="span12"><?= $this->formRow($admininstitution->get('bemerkung_kostenbeitrag')) ?></div>
-                </div>
+            <div class="tab-pane" id="costs">
+                <fieldset>
+                    <legend>Kostenbeitrag</legend>
 
-                <div class="row-fluid">
-                    <div class="span12"><?= $this->formRow($admininstitution->get('adresse_rechnung_gleich_post')) ?></div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span12"><?= $this->formRow($admininstitution->get('mwst')) ?></div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span12"><?= $this->formRow($admininstitution->get('grund_mwst_frei')) ?></div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span12"><?= $this->formRow($admininstitution->get('e_rechnung')) ?></div>
-                </div>
+                    <div class="row-fluid">
+                        <div class="span12"><?= $this->formRow($admininstitution->get('kostenbeitrag_basiert_auf')) ?></div>
+                    </div>
 
-                <div class="row-fluid">
-                    <div class="span12"><?= $this->formRow($admininstitution->get('bemerkung_rechnung')) ?></div>
-                </div>
+                    <div class="span6">
+                        <?php $kostenbeitragFieldset = $admininstitution->get('kostenbeitrag') ?>
+                        <?= $this->formRow($kostenbeitragFieldset->get('j2018')) ?>
+                        <?= $this->formRow($kostenbeitragFieldset->get('j2019')) ?>
+                        <?= $this->formRow($kostenbeitragFieldset->get('j2020')) ?>
+                    </div>
 
-            </fieldset>
+                    <div class="row-fluid">
+                        <div class="span12"><?= $this->formRow($admininstitution->get('bemerkung_kostenbeitrag')) ?></div>
+                    </div>
+
+
+                </fieldset>
+
+                <fieldset>
+                    <legend>Rechnung</legend>
+
+                    <div class="row-fluid">
+                        <div class="span12"><?= $this->formRow($admininstitution->get('adresse_rechnung_gleich_post')) ?></div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12"><?= $this->formRow($admininstitution->get('mwst')) ?></div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12"><?= $this->formRow($admininstitution->get('grund_mwst_frei')) ?></div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span12"><?= $this->formRow($admininstitution->get('e_rechnung')) ?></div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12"><?= $this->formRow($admininstitution->get('bemerkung_rechnung')) ?></div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="rechnungsAdresse">
+                    <legend><?= $this->translate('rechnungsAdresse') ?></legend>
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <?php $rechnungsAdresseFieldset = $admininstitution->get('rechnungsadresse') ?>
+                            <?= $this->formRow($rechnungsAdresseFieldset->get('name_organisation_rechnung')) ?>
+                            <?= $this->formRow($rechnungsAdresseFieldset->get('strasse')) ?>
+                            <?= $this->formRow($rechnungsAdresseFieldset->get('nummer')) ?>
+                            <?= $this->formRow($rechnungsAdresseFieldset->get('zusatz')) ?>
+                            <?= $this->formRow($rechnungsAdresseFieldset->get('plz')) ?>
+                            <?= $this->formRow($rechnungsAdresseFieldset->get('ort')) ?>
+                            <?= $this->formRow($rechnungsAdresseFieldset->get('country')) ?>
+                            <?= $this->formRow($rechnungsAdresseFieldset->get('canton')) ?>
+
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="contactRechnung">
+                    <legend><?= $this->translate('contactPersonInvoice') ?></legend>
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <?php $kontaktRechnungFieldset = $admininstitution->get('kontakt_rechnung') ?>
+                            <?= $this->formRow($kontaktRechnungFieldset->get('name')) ?>
+                            <?= $this->formRow($kontaktRechnungFieldset->get('vorname')) ?>
+                            <?= $this->formRow($kontaktRechnungFieldset->get('anrede')) ?>
+                            <?= $this->formRow($kontaktRechnungFieldset->get('email')) ?>
+                        </div>
+                    </div>
+                </fieldset>
 
         </div>
 

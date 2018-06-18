@@ -219,12 +219,6 @@ class InstitutionController extends BaseController
      */
     protected function  getInstitutionForEdit($idInstitution)
     {
-        //todo
-        //diese methoe sollte hier gar nicht sein sondern in die InstitutionTable
-        //damit hääten wir hier auch keine Abhängigkeit meir nach InstitutionRelation Table
-
-
-
         $institution = $this->institutionTable->getRecord($idInstitution);
         $views = $this->allViews;
         /** @var InstitutionRelationTable $relationTable */

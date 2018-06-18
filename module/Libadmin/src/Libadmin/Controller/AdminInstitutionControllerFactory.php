@@ -70,17 +70,11 @@ class AdminInstitutionControllerFactory implements FactoryInterface
         $institutionForm = $formElementManager->get(AdminInstitutionForm::class);
         $institutionTable = $tablePluginManager->get(AdminInstitutionTable::class);
 
-        $kostenbeitragTable = $tablePluginManager->get(KostenbeitragTable::class);
-        $kontaktTable = $tablePluginManager->get(KontaktTable::class);
-        $adresseTable = $tablePluginManager->get(AdresseTable::class);
         $relationInstitutionAdminInstTable = $tablePluginManager->get(InstitutionAdminInstitutionRelationTable::class);
 
         return new AdminInstitutionController(
             $institutionForm,
             $institutionTable,
-            $kostenbeitragTable,
-            $adresseTable,
-            $kontaktTable,
             $relationInstitutionAdminInstTable
         );
 

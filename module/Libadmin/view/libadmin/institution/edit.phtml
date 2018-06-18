@@ -129,14 +129,14 @@ $form->setAttribute('class', 'form-horizontal');
                     <legend><?= $this->translate('postAdresse') ?></legend>
                     <div class="row-fluid">
                         <div class="span6">
-                            <?php $rechnungsAdresseFieldset = $institution->get('postadresse') ?>
-                            <?= $this->formRow($rechnungsAdresseFieldset->get('strasse')) ?>
-                            <?= $this->formRow($rechnungsAdresseFieldset->get('nummer')) ?>
-                            <?= $this->formRow($rechnungsAdresseFieldset->get('zusatz')) ?>
-                            <?= $this->formRow($rechnungsAdresseFieldset->get('plz')) ?>
-                            <?= $this->formRow($rechnungsAdresseFieldset->get('ort')) ?>
-                            <?= $this->formRow($rechnungsAdresseFieldset->get('country')) ?>
-                            <?= $this->formRow($rechnungsAdresseFieldset->get('canton')) ?>
+                            <?php $postAdresseFieldset = $institution->get('postadresse') ?>
+                            <?= $this->formRow($postAdresseFieldset->get('strasse')) ?>
+                            <?= $this->formRow($postAdresseFieldset->get('nummer')) ?>
+                            <?= $this->formRow($postAdresseFieldset->get('zusatz')) ?>
+                            <?= $this->formRow($postAdresseFieldset->get('plz')) ?>
+                            <?= $this->formRow($postAdresseFieldset->get('ort')) ?>
+                            <?= $this->formRow($postAdresseFieldset->get('country')) ?>
+                            <?= $this->formRow($postAdresseFieldset->get('canton')) ?>
                         </div>
                     </div>
                 </fieldset>
@@ -284,6 +284,8 @@ $form->setAttribute('class', 'form-horizontal');
                     <div class="row-fluid">
                         <div class="span6">
                             <?php $rechnungsAdresseFieldset = $institution->get('rechnungsadresse') ?>
+                            <?= $this->formRow($rechnungsAdresseFieldset->get('name_organisation_rechnung')) ?>
+
                             <?= $this->formRow($rechnungsAdresseFieldset->get('strasse')) ?>
                             <?= $this->formRow($rechnungsAdresseFieldset->get('nummer')) ?>
                             <?= $this->formRow($rechnungsAdresseFieldset->get('zusatz')) ?>
@@ -291,7 +293,6 @@ $form->setAttribute('class', 'form-horizontal');
                             <?= $this->formRow($rechnungsAdresseFieldset->get('ort')) ?>
                             <?= $this->formRow($rechnungsAdresseFieldset->get('country')) ?>
                             <?= $this->formRow($rechnungsAdresseFieldset->get('canton')) ?>
-                            <?= $this->formRow($rechnungsAdresseFieldset->get('name_organisation_rechnung')) ?>
 
                         </div>
                     </div>

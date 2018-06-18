@@ -53,8 +53,13 @@ class AdminInstitutionTableFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $tablePluginManager = $container->get(TablePluginManager::class);
-        $institutionTableGateway = $tablePluginManager->get('AdminInstitutionTableGateway');
-        //$institutionRelationTable = $tablePluginManager->get('Libadmin\Table\InstitutionRelationTable');
-        return new AdminInstitutionTable($institutionTableGateway);
+
+        $adminInstitutionTable = $tablePluginManager->get('AdminInstitutionTableGateway');
+        $adresseTable = $tablePluginManager->get(AdresseTable::class);
+        $kontaktTable = $tablePluginManager->get(KontaktTable::class);
+        $kostenbeitragTable = $tablePluginManager->get(KostenbeitragTable::class);
+
+
+        return new AdminInstitutionTable($adminInstitutionTable, $adresseTable, $kontaktTable, $kostenbeitragTable);
     }
 }

@@ -4,6 +4,9 @@
  * to the application root now.
  */
 
+use Zend\Mvc\Application;
+use Zend\Stdlib\ArrayUtils;
+
 //only test expression to get a better understanding of the executed requests
 if (PHP_SAPI != 'cli')
     //var_dump($_SERVER['REQUEST_URI']);
@@ -30,5 +33,14 @@ define('APPLICATION_ROOT', dirname(__DIR__));
 // Setup autoloading
 require __DIR__ . '/../vendor/autoload.php';
 
+// read application configuration
+$appConfig = require APPLICATION_ROOT . '/config/application.config.php';
+
+// add additional configuration for current environment
+$configFile = APPLICATION_ROOT . '/config/' . APPLICATION_ENV . '.config.php';
+if (file_exists($configFile)) {
+    $appConfig = ArrayUtils::merge($appConfig, require $configFile);
+}
+
 // Run the application!
-Zend\Mvc\Application::init(require 'config/application.config.php')->run();
+Application::init($appConfig)->run();

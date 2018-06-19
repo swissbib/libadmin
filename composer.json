@@ -38,11 +38,7 @@
 		"zendframework/zend-hydrator": "^2.3.1",
 		"zendframework/zend-inputfilter": "^2.8.1",
 		"zendframework/zend-mvc-plugin-flashmessenger":"1.1.0",
-
-
 		"zendframework/zend-form": "^2.11.0",
-
-		"ghislainf/zf2-whoops": "dev-master#2649cf7caf400409942ddc3f8fe15b89381fc74e",
 		"zendframework/zend-mvc-i18n": "^1.0",
 		"zendframework/zend-component-installer": "^1.1",
 		"ralfeggert/travello-view-helper": "^1.6"
@@ -70,7 +66,7 @@
 	"require-dev": {
 		"zendframework/zend-developer-tools": "1.1.1",
 		"san/san-session-toolbar": "1.0.11",
-		"phpunit/phpunit": "^6"
-
+		"phpunit/phpunit": "^6",
+		"ghislainf/zf2-whoops": "dev-master#2649cf7caf400409942ddc3f8fe15b89381fc74e"
 	}
 }

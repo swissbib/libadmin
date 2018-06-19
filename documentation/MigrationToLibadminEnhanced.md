@@ -31,17 +31,17 @@ Be careful :
 
 ## Create new Database
 
-This will create an empty libadminenhanced database with the new structure
+This will update the structure of the db libadmintest with the new one and remove the content of the tables
 
 ```
-sudo mysql < ./documentation/database/libadminenhanced.schema.sql
+sudo mysql libadmintest < ./documentation/database/libadminenhanced.schema.sql
 ```
 
 
 ## Import old Information from Libadmin
 
 ```
-sudo mysql libadminenhanced < ~/Documents/mycloud/swissbib/libadmin/libadmin-dump-20180614.sql
+sudo mysql libadmintest < ~/Documents/mycloud/swissbib/libadmin/libadmin-dump-20180614.sql
 ```
 
 
@@ -55,7 +55,7 @@ To use the database libadminenhanced instead of libadmin
 
 Does that overwrite some fields of the previous step ? It should only add new info !!!
 
-This will import in the db forom config/autoload/local.php
+This will import in the db from config/autoload/local.php
 
 ```
 cd libadmin

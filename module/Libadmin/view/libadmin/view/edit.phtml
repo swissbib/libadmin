@@ -39,9 +39,9 @@ $formType = 'horizontal';
     <fieldset class="general">
         <legend><?= $this->translate('general') ?></legend>
         <div class="row-fluid">
-            <div class="span5"><?= $this->formRow($form->get('code')) ?></div>
-            <div class="span5"><?= $this->formRow($form->get('label')) ?></div>
-            <div class="span2"><?= $this->formRow($form->get('is_active')) ?></div>
+            <div class="span5"><?= $this->formBootstrapRow($form,'code') ?></div>
+            <div class="span5"><?= $this->formBootstrapRow($form,'label') ?></div>
+            <div class="span2"><?= $this->formBootstrapRow($form,'is_active') ?></div>
         </div>
     </fieldset>
 
@@ -61,7 +61,7 @@ $formType = 'horizontal';
             <div class="tab-pane active" id="display">
                 <fieldset class="notes">
                     <legend><?= $this->translate('notes') ?></legend>
-                    <?= $this->formRow($form->get('notes')) ?>
+                    <?= $this->formBootstrapRow($form,'notes') ?>
                 </fieldset>
             </div>
 

@@ -116,7 +116,7 @@ $form->setAttribute('class', 'form-horizontal');
 			<div class="tab-pane" id="address">
 
 				<fieldset class="address">
-					<legend>Adresse</legend>
+					<legend>Alte Adresse : will be replace by the Postadresse below</legend>
 					<div class="row-fluid">
 						<div class="span6">
                             <?= $this->formBootstrapRow($institution, 'address') ?></div>
@@ -249,11 +249,15 @@ $form->setAttribute('class', 'form-horizontal');
                         <div class="span12"><?= $this->formBootstrapRow($institution, 'zusage_beitrag') ?></div>
                     </div>
 
-                    <div class="span6">
-                        <?php $kostenbeitragFieldset = $institution->get('kostenbeitrag') ?>
-                        <?= $this->formBootstrapRow($kostenbeitragFieldset,'j2018') ?>
-                        <?= $this->formBootstrapRow($kostenbeitragFieldset,'j2019') ?>
-                        <?= $this->formBootstrapRow($kostenbeitragFieldset,'j2020') ?>
+                    <?php $kostenbeitragFieldset = $institution->get('kostenbeitrag') ?>
+                    <div class="row-fluid">
+                        <div class="span12"><?= $this->formBootstrapRow($kostenbeitragFieldset,'j2018') ?></div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12"><?= $this->formBootstrapRow($kostenbeitragFieldset,'j2019') ?></div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12"><?= $this->formBootstrapRow($kostenbeitragFieldset,'j2020') ?></div>
                     </div>
 
                     <div class="row-fluid">

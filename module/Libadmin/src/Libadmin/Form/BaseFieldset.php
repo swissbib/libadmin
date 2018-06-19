@@ -42,10 +42,13 @@ class BaseFieldset extends Fieldset
 			'name' => $name,
 			'attributes' => array(
 				'type' => 'text',
-				'required' => !!$required
+				'required' => !!$required,
 			),
 			'options' => array(
-				'label' => $label
+				'label' => $label,
+                'label_attributes' => [
+                    'class' => 'control-label',
+                ],
 			),
 		));
 	}

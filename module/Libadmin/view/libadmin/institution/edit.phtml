@@ -1,5 +1,10 @@
 <?php
+
+/**
+ * @var \Zend\View\Renderer\PhpRenderer $this
+ */
 $this->headTitle($this->translate($title));
+
 
 $form = $this->customform;
 $form->prepare();
@@ -40,9 +45,9 @@ $form->setAttribute('class', 'form-horizontal');
 	<fieldset class="general">
 		<legend><?= $this->translate('general') ?></legend>
 		<div class="row-fluid">
-			<div class="span5"><?= $this->formRow($institution->get('bib_code')) ?></div>
-			<div class="span5"><?= $this->formRow($institution->get('sys_code')) ?></div>
-			<div class="span2"><?= $this->formRow($institution->get('is_active')) ?></div>
+			<div class="span5"><?= $this->formBootstrapRow($institution, 'bib_code') ?></div>
+			<div class="span5"><?= $this->formBootstrapRow($institution, 'sys_code') ?></div>
+			<div class="span2"><?= $this->formBootstrapRow($institution, 'is_active') ?></div>
 		</div>
 	</fieldset>
 
@@ -60,24 +65,24 @@ $form->setAttribute('class', 'form-horizontal');
 				<fieldset>
 					<legend><?= $this->translate('displaynames') ?></legend>
 					<div class="row-fluid">
-						<div class="span6"><?= $this->formRow($institution->get('label_de')) ?></div>
-						<div class="span6"><?= $this->formRow($institution->get('label_fr')) ?></div>
+						<div class="span6"><?= $this->formBootstrapRow($institution, 'label_de') ?></div>
+						<div class="span6"><?= $this->formBootstrapRow($institution, 'label_fr') ?></div>
 					</div>
 					<div class="row-fluid">
-						<div class="span6"><?= $this->formRow($institution->get('label_it')) ?></div>
-						<div class="span6"><?= $this->formRow($institution->get('label_en')) ?></div>
+						<div class="span6"><?= $this->formBootstrapRow($institution, 'label_it') ?></div>
+						<div class="span6"><?= $this->formBootstrapRow($institution, 'label_en') ?></div>
 					</div>
 				</fieldset>
 
 				<fieldset>
 					<legend><?= $this->translate('title_library_names_official') ?></legend>
 					<div class="row-fluid">
-						<div class="span6"><?= $this->formRow($institution->get('name_de')) ?></div>
-						<div class="span6"><?= $this->formRow($institution->get('name_fr')) ?></div>
+						<div class="span6"><?= $this->formBootstrapRow($institution, 'name_de') ?></div>
+						<div class="span6"><?= $this->formBootstrapRow($institution, 'name_fr') ?></div>
 					</div>
 					<div class="row-fluid">
-						<div class="span6"><?= $this->formRow($institution->get('name_it')) ?></div>
-						<div class="span6"><?= $this->formRow($institution->get('name_en')) ?></div>
+						<div class="span6"><?= $this->formBootstrapRow($institution, 'name_it') ?></div>
+						<div class="span6"><?= $this->formBootstrapRow($institution, 'name_en') ?></div>
 					</div>
 				</fieldset>
 
@@ -85,25 +90,25 @@ $form->setAttribute('class', 'form-horizontal');
 					<legend>URL Bibliotheksinformationen</legend>
 					<div class="row-fluid">
 						<div class="span6">
-							<?= $this->formRow($institution->get('url_de')) ?>
+							<?= $this->formBootstrapRow($institution, 'url_de') ?>
 						</div>
 						<div class="span6">
-							<?= $this->formRow($institution->get('url_fr')) ?>
+							<?= $this->formBootstrapRow($institution, 'url_fr') ?>
 						</div>
 					</div>
 					<div class="row-fluid">
 						<div class="span6">
-							<?= $this->formRow($institution->get('url_it')) ?>
+							<?= $this->formBootstrapRow($institution, 'url_it') ?>
 						</div>
 						<div class="span6">
-							<?= $this->formRow($institution->get('url_en')) ?>
+							<?= $this->formBootstrapRow($institution, 'url_en') ?>
 						</div>
 					</div>
 				</fieldset>
 
 				<fieldset class="notes">
 					<legend><?= $this->translate('notes') ?></legend>
-					<?= $this->formRow($institution->get('notes')) ?>
+					<?= $this->formBootstrapRow($institution, 'notes') ?>
 				</fieldset>
 
 			</div>
@@ -114,13 +119,13 @@ $form->setAttribute('class', 'form-horizontal');
 					<legend>Adresse</legend>
 					<div class="row-fluid">
 						<div class="span6">
-                            <?= $this->formRow($institution->get('address')) ?></div>
+                            <?= $this->formBootstrapRow($institution, 'address') ?></div>
 						<div class="span6">
 
-							<?= $this->formRow($institution->get('zip')) ?>
-							<?= $this->formRow($institution->get('city')) ?>
-							<?= $this->formRow($institution->get('country')) ?>
-							<?= $this->formRow($institution->get('canton')) ?>
+							<?= $this->formBootstrapRow($institution, 'zip') ?>
+							<?= $this->formBootstrapRow($institution, 'city') ?>
+							<?= $this->formBootstrapRow($institution, 'country') ?>
+							<?= $this->formBootstrapRow($institution, 'canton') ?>
 						</div>
 					</div>
 				</fieldset>
@@ -130,13 +135,13 @@ $form->setAttribute('class', 'form-horizontal');
                     <div class="row-fluid">
                         <div class="span6">
                             <?php $postAdresseFieldset = $institution->get('postadresse') ?>
-                            <?= $this->formRow($postAdresseFieldset->get('strasse')) ?>
-                            <?= $this->formRow($postAdresseFieldset->get('nummer')) ?>
-                            <?= $this->formRow($postAdresseFieldset->get('zusatz')) ?>
-                            <?= $this->formRow($postAdresseFieldset->get('plz')) ?>
-                            <?= $this->formRow($postAdresseFieldset->get('ort')) ?>
-                            <?= $this->formRow($postAdresseFieldset->get('country')) ?>
-                            <?= $this->formRow($postAdresseFieldset->get('canton')) ?>
+                            <?= $this->formBootstrapRow($postAdresseFieldset,'strasse') ?>
+                            <?= $this->formBootstrapRow($postAdresseFieldset,'nummer') ?>
+                            <?= $this->formBootstrapRow($postAdresseFieldset,'zusatz') ?>
+                            <?= $this->formBootstrapRow($postAdresseFieldset,'plz') ?>
+                            <?= $this->formBootstrapRow($postAdresseFieldset,'ort') ?>
+                            <?= $this->formBootstrapRow($postAdresseFieldset,'country') ?>
+                            <?= $this->formBootstrapRow($postAdresseFieldset,'canton') ?>
                         </div>
                     </div>
                 </fieldset>
@@ -145,20 +150,20 @@ $form->setAttribute('class', 'form-horizontal');
 					<legend><?= $this->translate('contactdata') ?></legend>
 					<div class="row-fluid">
 						<div class="span6">
-							<?= $this->formRow($institution->get('website')) ?>
-                            <?= $this->formRow($institution->get('url_web_en')) ?>
-                            <?= $this->formRow($institution->get('url_web_fr')) ?>
-                            <?= $this->formRow($institution->get('url_web_de')) ?>
-                            <?= $this->formRow($institution->get('url_web_it')) ?>
-							<?= $this->formRow($institution->get('email')) ?>
-							<?= $this->formRow($institution->get('phone')) ?>
-                            <?= $this->formRow($institution->get('korrespondezsprache')) ?>
+							<?= $this->formBootstrapRow($institution, 'website') ?>
+                            <?= $this->formBootstrapRow($institution, 'url_web_en') ?>
+                            <?= $this->formBootstrapRow($institution, 'url_web_fr') ?>
+                            <?= $this->formBootstrapRow($institution, 'url_web_de') ?>
+                            <?= $this->formBootstrapRow($institution, 'url_web_it') ?>
+							<?= $this->formBootstrapRow($institution, 'email') ?>
+							<?= $this->formBootstrapRow($institution, 'phone') ?>
+                            <?= $this->formBootstrapRow($institution, 'korrespondezsprache') ?>
 						</div>
 						<div class="span6">
-							<?= $this->formRow($institution->get('skype')) ?>
-							<?= $this->formRow($institution->get('facebook')) ?>
-                            <?= $this->formRow($institution->get('twitter')) ?>
-							<?= $this->formRow($institution->get('coordinates')) ?>
+							<?= $this->formBootstrapRow($institution, 'skype') ?>
+							<?= $this->formBootstrapRow($institution, 'facebook') ?>
+                            <?= $this->formBootstrapRow($institution, 'twitter') ?>
+							<?= $this->formBootstrapRow($institution, 'coordinates') ?>
 
 						</div>
 					</div>
@@ -168,10 +173,10 @@ $form->setAttribute('class', 'form-horizontal');
                     <div class="row-fluid">
                         <div class="span6">
                             <?php $kontaktFieldset = $institution->get('kontakt') ?>
-                            <?= $this->formRow($kontaktFieldset->get('name')) ?>
-                            <?= $this->formRow($kontaktFieldset->get('vorname')) ?>
-                            <?= $this->formRow($kontaktFieldset->get('anrede')) ?>
-                            <?= $this->formRow($kontaktFieldset->get('email')) ?>
+                            <?= $this->formBootstrapRow($kontaktFieldset,'name') ?>
+                            <?= $this->formBootstrapRow($kontaktFieldset,'vorname') ?>
+                            <?= $this->formBootstrapRow($kontaktFieldset,'anrede') ?>
+                            <?= $this->formBootstrapRow($kontaktFieldset,'email') ?>
                         </div>
                     </div>
                 </fieldset>
@@ -209,23 +214,23 @@ $form->setAttribute('class', 'form-horizontal');
                 <fieldset>
                     <legend>Admin</legend>
                     <div class="row-fluid">
-                        <div class="span12"><?= $this->formRow($institution->get('bfscode')) ?></div>
+                        <div class="span12"><?= $this->formBootstrapRow($institution, 'bfscode') ?></div>
                     </div>
 
                     <div class="row-fluid">
-                        <div class="span12"><?= $this->formRow($institution->get('isil')) ?></div>
+                        <div class="span12"><?= $this->formBootstrapRow($institution, 'isil') ?></div>
                     </div>
 
                     <div class="row-fluid">
-                        <div class="span12"><?= $this->formRow($institution->get('worldcat_ja_nein')) ?></div>
+                        <div class="span12"><?= $this->formBootstrapRow($institution, 'worldcat_ja_nein') ?></div>
                     </div>
 
                     <div class="row-fluid">
-                        <div class="span12"><?= $this->formRow($institution->get('worldcat_symbol')) ?></div>
+                        <div class="span12"><?= $this->formBootstrapRow($institution, 'worldcat_symbol') ?></div>
                     </div>
 
                     <div class="row-fluid">
-                        <div class="span12"><?= $this->formRow($institution->get('cbslibrarycode')) ?></div>
+                        <div class="span12"><?= $this->formBootstrapRow($institution, 'cbslibrarycode') ?></div>
                     </div>
                 </fieldset>
             </div>
@@ -235,24 +240,24 @@ $form->setAttribute('class', 'form-horizontal');
                     <legend>Kostenbeitrag</legend>
 
                     <div class="row-fluid">
-                        <div class="span12"><?= $this->formRow($institution->get('verrechnungbeitrag')) ?></div>
+                        <div class="span12"><?= $this->formBootstrapRow($institution, 'verrechnungbeitrag') ?></div>
                     </div>
                     <div class="row-fluid">
-                        <div class="span12"><?= $this->formRow($institution->get('kostenbeitrag_basiert_auf')) ?></div>
+                        <div class="span12"><?= $this->formBootstrapRow($institution, 'kostenbeitrag_basiert_auf') ?></div>
                     </div>
                     <div class="row-fluid">
-                        <div class="span12"><?= $this->formRow($institution->get('zusage_beitrag')) ?></div>
+                        <div class="span12"><?= $this->formBootstrapRow($institution, 'zusage_beitrag') ?></div>
                     </div>
 
                     <div class="span6">
                         <?php $kostenbeitragFieldset = $institution->get('kostenbeitrag') ?>
-                        <?= $this->formRow($kostenbeitragFieldset->get('j2018')) ?>
-                        <?= $this->formRow($kostenbeitragFieldset->get('j2019')) ?>
-                        <?= $this->formRow($kostenbeitragFieldset->get('j2020')) ?>
+                        <?= $this->formBootstrapRow($kostenbeitragFieldset,'j2018') ?>
+                        <?= $this->formBootstrapRow($kostenbeitragFieldset,'j2019') ?>
+                        <?= $this->formBootstrapRow($kostenbeitragFieldset,'j2020') ?>
                     </div>
 
                     <div class="row-fluid">
-                        <div class="span12"><?= $this->formRow($institution->get('bemerkung_kostenbeitrag')) ?></div>
+                        <div class="span12"><?= $this->formBootstrapRow($institution, 'bemerkung_kostenbeitrag') ?></div>
                     </div>
 
 
@@ -262,20 +267,20 @@ $form->setAttribute('class', 'form-horizontal');
                     <legend>Rechnung</legend>
 
                     <div class="row-fluid">
-                        <div class="span12"><?= $this->formRow($institution->get('adresse_rechnung_gleich_post')) ?></div>
+                        <div class="span12"><?= $this->formBootstrapRow($institution, 'adresse_rechnung_gleich_post') ?></div>
                     </div>
                     <div class="row-fluid">
-                        <div class="span12"><?= $this->formRow($institution->get('mwst')) ?></div>
+                        <div class="span12"><?= $this->formBootstrapRow($institution, 'mwst') ?></div>
                     </div>
                     <div class="row-fluid">
-                        <div class="span12"><?= $this->formRow($institution->get('grund_mwst_frei')) ?></div>
+                        <div class="span12"><?= $this->formBootstrapRow($institution, 'grund_mwst_frei') ?></div>
                     </div>
 
                     <div class="row-fluid">
-                        <div class="span12"><?= $this->formRow($institution->get('e_rechnung')) ?></div>
+                        <div class="span12"><?= $this->formBootstrapRow($institution, 'e_rechnung') ?></div>
                     </div>
                     <div class="row-fluid">
-                        <div class="span12"><?= $this->formRow($institution->get('bemerkung_rechnung')) ?></div>
+                        <div class="span12"><?= $this->formBootstrapRow($institution, 'bemerkung_rechnung') ?></div>
                     </div>
                 </fieldset>
 
@@ -284,15 +289,15 @@ $form->setAttribute('class', 'form-horizontal');
                     <div class="row-fluid">
                         <div class="span6">
                             <?php $rechnungsAdresseFieldset = $institution->get('rechnungsadresse') ?>
-                            <?= $this->formRow($rechnungsAdresseFieldset->get('name_organisation_rechnung')) ?>
+                            <?= $this->formBootstrapRow($rechnungsAdresseFieldset,'name_organisation_rechnung') ?>
 
-                            <?= $this->formRow($rechnungsAdresseFieldset->get('strasse')) ?>
-                            <?= $this->formRow($rechnungsAdresseFieldset->get('nummer')) ?>
-                            <?= $this->formRow($rechnungsAdresseFieldset->get('zusatz')) ?>
-                            <?= $this->formRow($rechnungsAdresseFieldset->get('plz')) ?>
-                            <?= $this->formRow($rechnungsAdresseFieldset->get('ort')) ?>
-                            <?= $this->formRow($rechnungsAdresseFieldset->get('country')) ?>
-                            <?= $this->formRow($rechnungsAdresseFieldset->get('canton')) ?>
+                            <?= $this->formBootstrapRow($rechnungsAdresseFieldset,'strasse') ?>
+                            <?= $this->formBootstrapRow($rechnungsAdresseFieldset,'nummer') ?>
+                            <?= $this->formBootstrapRow($rechnungsAdresseFieldset,'zusatz') ?>
+                            <?= $this->formBootstrapRow($rechnungsAdresseFieldset,'plz') ?>
+                            <?= $this->formBootstrapRow($rechnungsAdresseFieldset,'ort') ?>
+                            <?= $this->formBootstrapRow($rechnungsAdresseFieldset,'country') ?>
+                            <?= $this->formBootstrapRow($rechnungsAdresseFieldset,'canton') ?>
 
                         </div>
                     </div>
@@ -303,10 +308,10 @@ $form->setAttribute('class', 'form-horizontal');
                     <div class="row-fluid">
                         <div class="span6">
                             <?php $kontaktRechnungFieldset = $institution->get('kontakt_rechnung') ?>
-                            <?= $this->formRow($kontaktRechnungFieldset->get('name')) ?>
-                            <?= $this->formRow($kontaktRechnungFieldset->get('vorname')) ?>
-                            <?= $this->formRow($kontaktRechnungFieldset->get('anrede')) ?>
-                            <?= $this->formRow($kontaktRechnungFieldset->get('email')) ?>
+                            <?= $this->formBootstrapRow($kontaktRechnungFieldset,'name') ?>
+                            <?= $this->formBootstrapRow($kontaktRechnungFieldset,'vorname') ?>
+                            <?= $this->formBootstrapRow($kontaktRechnungFieldset,'anrede') ?>
+                            <?= $this->formBootstrapRow($kontaktRechnungFieldset,'email') ?>
                         </div>
                     </div>
                 </fieldset>

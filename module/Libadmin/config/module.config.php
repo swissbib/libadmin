@@ -23,6 +23,8 @@ use Libadmin\Form\ViewFormFactory;
 use Libadmin\Helper\RelationOverview;
 use Libadmin\Helper\RelationOverviewFactory;
 use Libadmin\Libadmin\Form\GroupFormFactory;
+use Libadmin\View\Helper\FormBootstrapRow;
+use Libadmin\View\Helper\FormBootstrapRowFactory;
 use Libadmin\Table\AdminInstitutionTable;
 use Libadmin\Table\AdminInstitutionTableFactory;
 use Libadmin\Table\AdminInstitutionTableGatewayFactory;
@@ -261,6 +263,11 @@ return [
                 'route' => 'admininstitution'
             ]
         ],
+    ],
+    'view_helpers' => [
+        'invokables' => [
+            'formBootstrapRow'                        => FormBootstrapRow::class,
+        ]
     ],
     'libadmin' => [
 

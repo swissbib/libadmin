@@ -1,0 +1,11 @@
+<?php
+    $fieldset = $this->fieldset;
+    $field = $this->field;
+?>
+
+<div class="control-group">
+    <?= $this->formLabel($fieldset->get($field)) ?>
+    <div class="controls">
+        <?= $this->formElement($fieldset->get($field)) ?>
+    </div>
+</div>

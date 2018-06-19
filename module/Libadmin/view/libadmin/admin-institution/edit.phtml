@@ -38,6 +38,7 @@ $saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');
     <legend><?= $this->translate('general') ?></legend>
     <div class="row-fluid">
         <div class="span5"><?= $this->formBootstrapRow($admininstitution,'idcode') ?></div>
+        <div class="span5"><?= $this->formBootstrapRow($admininstitution,'name') ?></div>
     </div>
 </fieldset>
 
@@ -54,19 +55,15 @@ $saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');
     <div class="tab-content">
         <div class="tab-pane active" id="address">
             <fieldset>
-                <legend><?= $this->translate('displaynames') ?></legend>
                 <div class="row-fluid">
-                    <div class="span12"><?= $this->formBootstrapRow($admininstitution,'name') ?></div>
+                    <div class="span12"><?= $this->formBootstrapRow($admininstitution,'email') ?></div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12"><?= $this->formBootstrapRow($admininstitution,'korrespondezsprache') ?></div>
                 </div>
             </fieldset>
 
-            <div class="row-fluid">
-                <div class="span12"><?= $this->formBootstrapRow($admininstitution,'email') ?></div>
-            </div>
 
-            <div class="row-fluid">
-                <div class="span12"><?= $this->formBootstrapRow($admininstitution,'korrespondezsprache') ?></div>
-            </div>
 
             <fieldset class="postAdresse">
                 <legend><?= $this->translate('postAdresse') ?></legend>
@@ -89,9 +86,9 @@ $saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');
                 <div class="row-fluid">
                     <div class="span6">
                         <?php $kontaktFieldset = $admininstitution->get('kontakt') ?>
-                        <?= $this->formBootstrapRow($kontaktFieldset,'name') ?>
-                        <?= $this->formBootstrapRow($kontaktFieldset,'vorname') ?>
                         <?= $this->formBootstrapRow($kontaktFieldset,'anrede') ?>
+                        <?= $this->formBootstrapRow($kontaktFieldset,'vorname') ?>
+                        <?= $this->formBootstrapRow($kontaktFieldset,'name') ?>
                         <?= $this->formBootstrapRow($kontaktFieldset,'email') ?>
                     </div>
                 </div>
@@ -113,9 +110,6 @@ $saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');
                 <div class="row-fluid">
                     <div class="span12"><?= $this->formBootstrapRow($admininstitution,'ipadresse') ?></div>
                 </div>
-                <div class="row-fluid">
-                    <div class="span12"><?= $this->formBootstrapRow($admininstitution,'zusage_beitrag') ?></div>
-                </div>
 
 
             </fieldset>
@@ -130,6 +124,10 @@ $saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');
 
                     <div class="row-fluid">
                         <div class="span12"><?= $this->formBootstrapRow($admininstitution,'kostenbeitrag_basiert_auf') ?></div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span12"><?= $this->formBootstrapRow($admininstitution, 'zusage_beitrag') ?></div>
                     </div>
 
                     <?php $kostenbeitragFieldset = $admininstitution->get('kostenbeitrag') ?>
@@ -194,9 +192,9 @@ $saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');
                     <div class="row-fluid">
                         <div class="span6">
                             <?php $kontaktRechnungFieldset = $admininstitution->get('kontakt_rechnung') ?>
-                            <?= $this->formBootstrapRow($kontaktRechnungFieldset,'name') ?>
-                            <?= $this->formBootstrapRow($kontaktRechnungFieldset,'vorname') ?>
                             <?= $this->formBootstrapRow($kontaktRechnungFieldset,'anrede') ?>
+                            <?= $this->formBootstrapRow($kontaktRechnungFieldset,'vorname') ?>
+                            <?= $this->formBootstrapRow($kontaktRechnungFieldset,'name') ?>
                             <?= $this->formBootstrapRow($kontaktRechnungFieldset,'email') ?>
                         </div>
                     </div>

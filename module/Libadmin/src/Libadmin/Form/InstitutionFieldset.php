@@ -62,7 +62,6 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
         $this->addText('url_web_it', 'url_web_it');
         $this->addText('url_web_fr', 'url_web_fr');
         $this->addText('adresszusatz', 'adresszusatz');
-        $this->addText('notes_public', 'notes_public');
         $this->addText('id_kontakt', 'id_kontakt');
         $this->addText('korrespondezsprache', 'korrespondezsprache');
         $this->addText('bfscode', 'bfscode');
@@ -110,6 +109,56 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
 				'rows' => 10
             ]
         ]);
+
+        $this->add([
+            'name' => 'notes_public_de',
+            'type' => 'textarea',
+            'options' => [
+                'label' => 'notes_public_de'
+            ],
+            'attributes' => [
+                'rows' => 3
+            ]
+        ]);
+
+        $this->add([
+            'name' => 'notes_public_fr',
+            'type' => 'textarea',
+            'options' => [
+                'label' => 'notes_public_fr'
+            ],
+            'attributes' => [
+                'rows' => 3
+            ]
+        ]);
+
+        $this->add([
+            'name' => 'notes_public_it',
+            'type' => 'textarea',
+            'options' => [
+                'label' => 'notes_public_it'
+            ],
+            'attributes' => [
+                'rows' => 3
+            ]
+        ]);
+
+        $this->add([
+            'name' => 'notes_public_en',
+            'type' => 'textarea',
+            'options' => [
+                'label' => 'notes_public_en'
+            ],
+            'attributes' => [
+                'rows' => 3
+            ]
+        ]);
+
+
+
+
+
+
 
         $this->add([
             'type' => 'Libadmin\Form\AdresseFieldset',

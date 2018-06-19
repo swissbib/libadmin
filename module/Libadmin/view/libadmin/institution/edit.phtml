@@ -108,7 +108,11 @@ $form->setAttribute('class', 'form-horizontal');
 
 				<fieldset class="notes">
 					<legend><?= $this->translate('notes') ?></legend>
-					<?= $this->formBootstrapRow($institution, 'notes') ?>
+                    <?= $this->formBootstrapRow($institution, 'notes_public_de') ?>
+                    <?= $this->formBootstrapRow($institution, 'notes_public_fr') ?>
+                    <?= $this->formBootstrapRow($institution, 'notes_public_it') ?>
+                    <?= $this->formBootstrapRow($institution, 'notes_public_en') ?>
+                    <?= $this->formBootstrapRow($institution, 'notes') ?>
 				</fieldset>
 
 			</div>
@@ -173,9 +177,9 @@ $form->setAttribute('class', 'form-horizontal');
                     <div class="row-fluid">
                         <div class="span6">
                             <?php $kontaktFieldset = $institution->get('kontakt') ?>
-                            <?= $this->formBootstrapRow($kontaktFieldset,'name') ?>
-                            <?= $this->formBootstrapRow($kontaktFieldset,'vorname') ?>
                             <?= $this->formBootstrapRow($kontaktFieldset,'anrede') ?>
+                            <?= $this->formBootstrapRow($kontaktFieldset,'vorname') ?>
+                            <?= $this->formBootstrapRow($kontaktFieldset,'name') ?>
                             <?= $this->formBootstrapRow($kontaktFieldset,'email') ?>
                         </div>
                     </div>
@@ -269,9 +273,8 @@ $form->setAttribute('class', 'form-horizontal');
 
                 <fieldset>
                     <legend>Rechnung</legend>
-
                     <div class="row-fluid">
-                        <div class="span12"><?= $this->formBootstrapRow($institution, 'adresse_rechnung_gleich_post') ?></div>
+                        <div class="span12"><?= $this->formBootstrapRow($institution, 'e_rechnung') ?></div>
                     </div>
                     <div class="row-fluid">
                         <div class="span12"><?= $this->formBootstrapRow($institution, 'mwst') ?></div>
@@ -279,10 +282,10 @@ $form->setAttribute('class', 'form-horizontal');
                     <div class="row-fluid">
                         <div class="span12"><?= $this->formBootstrapRow($institution, 'grund_mwst_frei') ?></div>
                     </div>
-
                     <div class="row-fluid">
-                        <div class="span12"><?= $this->formBootstrapRow($institution, 'e_rechnung') ?></div>
+                        <div class="span12"><?= $this->formBootstrapRow($institution, 'adresse_rechnung_gleich_post') ?></div>
                     </div>
+
                     <div class="row-fluid">
                         <div class="span12"><?= $this->formBootstrapRow($institution, 'bemerkung_rechnung') ?></div>
                     </div>
@@ -312,9 +315,9 @@ $form->setAttribute('class', 'form-horizontal');
                     <div class="row-fluid">
                         <div class="span6">
                             <?php $kontaktRechnungFieldset = $institution->get('kontakt_rechnung') ?>
+                            <?= $this->formBootstrapRow($kontaktRechnungFieldset,'anrede') ?>
                             <?= $this->formBootstrapRow($kontaktRechnungFieldset,'name') ?>
                             <?= $this->formBootstrapRow($kontaktRechnungFieldset,'vorname') ?>
-                            <?= $this->formBootstrapRow($kontaktRechnungFieldset,'anrede') ?>
                             <?= $this->formBootstrapRow($kontaktRechnungFieldset,'email') ?>
                         </div>
                     </div>

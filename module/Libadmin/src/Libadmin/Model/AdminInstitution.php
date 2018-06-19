@@ -167,19 +167,19 @@ class AdminInstitution extends InstitutionBase
     public function initLocalVariablesFromExcel(array $excelData) {
 
 
-        $this->setBemerkungKostenbeitrag($excelData["bemerkung_kostenbeitrag"]);
-        $this->setBemerkungRechnung($excelData["bemerkung_rechnungsstellung"]);
+        $this->setBemerkung_kostenbeitrag($excelData["bemerkung_kostenbeitrag"]);
+        $this->setBemerkung_rechnung($excelData["bemerkung_rechnungsstellung"]);
         $this->setBfscode($excelData["bfs_code"]);
-        empty($excelData["e_rechnung_ja_nein"]) ? $this->setERechnung(0) : $this->setERechnung(1);
+        empty($excelData["e_rechnung_ja_nein"]) ? $this->setE_Rechnung(0) : $this->setE_Rechnung(1);
         empty($excelData["mwst_ja_nein"]) ? $this->setMwst(0) : $this->setMwst(1);
-        $this->setGrundMwstFrei($excelData["grund_mwst_befreiung"]); //habe ich hier keine MWST
+        $this->setGrund_mwst_frei($excelData["grund_mwst_befreiung"]); //habe ich hier keine MWST
         $this->setKorrespondezsprache($excelData["korrespondenzsprache"]);
-        empty($excelData["zusage_kostenbeitrag_ja_nein"]) ? $this->setZusageBeitrag(0) : $this->setZusageBeitrag(1);
+        empty($excelData["zusage_kostenbeitrag_ja_nein"]) ? $this->setZusageBeitrag(0) : $this->setZusage_beitrag(1);
         empty($excelData["rechnungsadresse_gleich_postadresse_ja_nein"]) ||
-        strtolower( $excelData["rechnungsadresse_gleich_postadresse_ja_nein"]) === "ja" ? $this->setAdresseRechnungGleichPost(1) :
-            $this->setAdresseRechnungGleichPost(0);
+        strtolower( $excelData["rechnungsadresse_gleich_postadresse_ja_nein"]) === "ja" ? $this->setAdresse_rechnung_gleich_post(1) :
+            $this->setAdresse_rechnung_gleich_post(0);
 
-        $this->setKostenbeitragBasiertAuf($this->formatKostenbeitragAdminBasiertAuf( $excelData["kostenbeitrag_basiert_auf"]));
+        $this->setKostenbeitrag_basiert_auf($this->formatKostenbeitragAdminBasiertAuf( $excelData["kostenbeitrag_basiert_auf"]));
         $this->setIpadresse($excelData["ipadresse"]);
         $this->setIdcode($excelData["idcode"]);
         $this->setName($excelData["name"]);

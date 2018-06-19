@@ -31,6 +31,7 @@
  */
 
 namespace Libadmin\Table;
+use Libadmin\Model\AdminInstitution;
 use Zend\Db\TableGateway\TableGateway;
 
 
@@ -92,6 +93,19 @@ class AdminInstitutionTable extends InstitutionBaseTable
     public function getAll($order = 'name', $limit = 30)
     {
         return parent::getAll($order, $limit);
+    }
+
+    /**
+     * only save what needs to go to the adminInstitution table, not the rest
+     *
+     * @param AdminInstitution $adminInstitution
+     * @return int
+     * @throws \Exception
+     * @uses
+     */
+    public function saveAdminInstitutionOnly(AdminInstitution $adminInstitution) {
+        $idInstitution = BaseTable::save($adminInstitution);
+        return $idInstitution;
     }
 
 }

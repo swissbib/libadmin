@@ -171,15 +171,15 @@ class InstitutionTable extends InstitutionBaseTable
     }
 
     /**
-     * method is only used for the import of excel data because the save method tries
-     * to store group relations which is not useful here
+     * only save what needs to go to the institution table, not the rest
+     *
      * @param Institution $institution
      * @return int
      * @throws \Exception
      * @uses
      */
     public function saveInstitutionOnly(Institution $institution) {
-        $idInstitution = parent::save($institution);
+        $idInstitution = BaseTable::save($institution);
         return $idInstitution;
     }
 

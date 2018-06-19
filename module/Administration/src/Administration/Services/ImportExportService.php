@@ -283,7 +283,7 @@ class ImportExportService
             $admininstitution =  new AdminInstitution();
             $admininstitution->initLocalVariablesFromExcel($combinedValuesFromLine);
 
-            if (empty($admininstitution->getIdPostadresse()) ) {
+            if (empty($admininstitution->getId_postadresse()) ) {
                 //todo: ich habe noch nicht den Fall abgefangen, bei dem bereits eine Adresse vorhanden ist
                 //(Datenbankupdate durch Importdaten)
 
@@ -293,36 +293,36 @@ class ImportExportService
                 //and move it into the adress table
                 $postAdressID = $this->adresseTable->save($postAdresse);
 
-                $admininstitution->setIdPostadresse($postAdressID);
+                $admininstitution->setId_postadresse($postAdressID);
             }
 
-            if (! $admininstitution->getAdresseRechnungGleichPost() ) {
+            if (! $admininstitution->getAdresse_rechnung_gleich_post() ) {
                 $rechnungsAdresse = new Adresse();
                 $rechnungsAdresse->initLocalVariablesFromExcelRechnungsadresse($combinedValuesFromLine);
                 //canton is not part of Excel file and we want to remove the adress part from the institution table
                 //and move it into the adress table
                 $rechnungsadressID = $this->adresseTable->save($rechnungsAdresse);
 
-                $admininstitution->setIdRechnungsadresse($rechnungsadressID);
+                $admininstitution->setId_rechnungsadresse($rechnungsadressID);
 
             }
 
 
-            if (empty($admininstitution->getIdKontakt()) && !empty ($combinedValuesFromLine["kontakt_name"]))
+            if (empty($admininstitution->getId_kontakt()) && !empty ($combinedValuesFromLine["kontakt_name"]))
             {
                 $mainContact = new Kontakt();
                 $mainContact->initLocalVariablesFirstPersonFromExcel($combinedValuesFromLine);
                 $idMainContact =  $this->kontaktTable->save($mainContact);
-                $admininstitution->setIdKontakt($idMainContact);
+                $admininstitution->setId_kontakt($idMainContact);
 
             }
 
-            if (empty($admininstitution->getIdKontaktRechnung()) && !empty ($combinedValuesFromLine["kontakt_rechnung_name"]))
+            if (empty($admininstitution->getId_kontakt_rechnung()) && !empty ($combinedValuesFromLine["kontakt_rechnung_name"]))
             {
                 $billContact = new Kontakt();
                 $billContact->initLocalVariablesBillPersonFromExcel($combinedValuesFromLine);
                 $idBillContact =  $this->kontaktTable->save($billContact);
-                $admininstitution->setIdKontaktRechnung($idBillContact);
+                $admininstitution->setId_kontakt_rechnung($idBillContact);
 
             }
 
@@ -332,7 +332,7 @@ class ImportExportService
                 $beitraege = new Kostenbeitrag();
                 $beitraege->initLocalVariablesFromExcel($combinedValuesFromLine);
                 $idKostenbeitrag =  $this->kostenbeitragTable->save($beitraege);
-                $admininstitution->setIdKostenbeitrag($idKostenbeitrag);
+                $admininstitution->setId_kostenbeitrag($idKostenbeitrag);
 
             }
 
@@ -342,7 +342,7 @@ class ImportExportService
             //todo: relations zu institution
             //kostenbeitraege
 
-            $idadmininstitution = $this->adminInstitutionTable->save($admininstitution);
+            $idadmininstitution = $this->adminInstitutionTable->saveAdminInstitutionOnly($admininstitution);
             //load the new inserted record to get the automatiquely created primary key
             $admininstitution = $this->adminInstitutionTable->getRecord($idadmininstitution);
             $this->insertRelationInstitutionAdminInstititution($admininstitution, $combinedValuesFromLine);
@@ -422,7 +422,7 @@ class ImportExportService
     private function checkInsertBeitraegeForAdminInstitution(AdminInstitution $institution, array $importData) : bool
     {
         $insertBeitrage = false;
-        if ($institution->getZusageBeitrag())
+        if ($institution->getZusage_beitrag())
             $insertBeitrage = true;
         if (!empty($importData["beitrag_2018"]) ||
             !empty($importData["beitrag_2019"]) ||

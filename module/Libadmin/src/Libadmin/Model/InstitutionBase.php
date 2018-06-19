@@ -484,4 +484,22 @@ abstract class InstitutionBase extends BaseModel
         $this->kontakt_rechnung = $kontakt_rechnung;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getBfscode()
+    {
+        return $this->bfscode;
+    }
+
+    /**
+     * @param mixed $bfscode
+     *
+     * @return mixed
+     */
+    public function setBfscode($bfscode)
+    {
+        $this->bfscode = $bfscode;
+    }
+
 }

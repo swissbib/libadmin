@@ -17,7 +17,7 @@ use Zend\Hydrator\ObjectProperty as ObjectPropertyHydrator;
 
 
 /**
- * Base fieldset for Kontakt
+ * Base fieldset for Kostenbeitrag
  *
  */
 class KostenbeitragFieldset extends BaseFieldset implements InputFilterProviderInterface

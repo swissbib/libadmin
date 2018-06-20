@@ -11,7 +11,6 @@ use Libadmin\Form\Element\NoValidationCheckbox;
 use Libadmin\Model\Institution;
 use Libadmin\Model\View;
 use Libadmin\Form\BaseFieldset;
-use Libadmin\Form\KontaktFieldset;
 
 /**
  * Base fieldset for institution

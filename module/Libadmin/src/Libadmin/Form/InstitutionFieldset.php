@@ -78,7 +78,17 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
             'name' => 'kostenbeitrag',
         ]);
 
-        $this->addText('bemerkung_kostenbeitrag', 'bemerkung_kostenbeitrag');
+        $this->add([
+            'name' => 'bemerkung_kostenbeitrag',
+            'type' => 'textarea',
+            'options' => [
+                'label' => 'bemerkung_kostenbeitrag'
+            ],
+            'attributes' => [
+                'rows' => 3
+            ]
+        ]);
+
         $this->addText('adresse_rechnung_gleich_post', 'adresse_rechnung_gleich_post');
         $this->addText('id_rechnungsadresse', 'id_rechnungsadresse');
         $this->addText('id_kontakt_rechnung', 'id_kontakt_rechnung');

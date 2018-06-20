@@ -65,7 +65,16 @@ class AdminInstitutionFieldset extends BaseFieldset implements InputFilterProvid
         $this->addText('bfscode', 'bfscode');
         $this->addText('ipadresse', 'ipadresse');
         $this->addText('zusage_beitrag', 'zusage_beitrag');
-        $this->addText('bemerkung_kostenbeitrag', 'bemerkung_kostenbeitrag');
+        $this->add([
+            'name' => 'bemerkung_kostenbeitrag',
+            'type' => 'textarea',
+            'options' => [
+                'label' => 'bemerkung_kostenbeitrag'
+            ],
+            'attributes' => [
+                'rows' => 3
+            ]
+        ]);
         $this->addText('adresse_rechnung_gleich_post', 'adresse_rechnung_gleich_post');
         $this->addText('mwst', 'mwst');
         $this->addText('grund_mwst_frei', 'grund_mwst_frei');

@@ -828,7 +828,7 @@ class Institution extends InstitutionBase
         $this->setCbslibrarycode($excelData["cbs_library_code"]);
         empty($excelData["e_rechnung_ja_nein"]) ? $this->setE_rechnung(0) : $this->setE_rechnung(1);
         empty($excelData["mwst_ja_nein"]) ? $this->setMwst(0) : $this->setMwst(1);
-        $this->getMwst() == 0 ? $this->setGrund_mwst_frei($excelData["grund_mwst_befreiung"]) : $this->setGrund_mwst_frei("");
+        $this->setGrund_mwst_frei($excelData["grund_mwst_befreiung"]); //habe ich hier keine MWST
         $this->setKorrespondezsprache($excelData["korrespondenzsprache"]);
         empty($excelData["worldcat_ja_nein"]) ? $this->setWorldcat_ja_nein(0): $this->setWorldcat_ja_nein(1);
         //$this->getWorldcat_ja_nein() === true ? $this->setWorldcatSyMmbol($excelData["worldcat_symbol"]) : $this->setWorldcat_symbol("");

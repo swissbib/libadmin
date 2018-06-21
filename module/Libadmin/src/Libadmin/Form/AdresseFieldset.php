@@ -44,57 +44,54 @@ class AdresseFieldset extends BaseFieldset implements InputFilterProviderInterfa
         $this->addText('zusatz', 'zusatz');
         $this->addText('plz', 'plz');
         $this->addText('ort', 'ort');
-        $this->add([
-            'name' => 'country',
-            'type' => 'select',
-            'options' => [
-                'label' => 'country',
-                'value_options' => [
-                    'ch' => 'country_ch',
-                    'li' => 'country_li',
-                    'de' => 'country_de',
-                    'it' => 'country_it',
-                    'fr' => 'country_fr'
-                ]
-            ]
-        ]);
 
-        $this->add([
-            'name' => 'canton',
-            'type' => 'select',
-            'options' => [
-                'label' => 'canton',
-                'empty_option' => '- Kein Kanton -',
-                'value_options' => [
-                    'ag' => 'Aargau',
-                    'ai' => 'Appenzell Innerrhoden',
-                    'ar' => 'Appenzell Ausserrhoden',
-                    'be' => 'Bern',
-                    'bl' => 'Basel-Land',
-                    'bs' => 'Basel-Stadt',
-                    'fr' => 'Fribourg',
-                    'ge' => 'Genève',
-                    'gl' => 'Glarus',
-                    'gr' => 'Graubünden ',
-                    'ju' => 'Jura',
-                    'lu' => 'Luzern',
-                    'ne' => 'Neuchâtel',
-                    'nw' => 'Nidwalden',
-                    'ow' => 'Obwalden',
-                    'sg' => 'Sankt Gallen',
-                    'sh' => 'Schaffhausen',
-                    'so' => 'Solothurn',
-                    'sz' => 'Schwyz',
-                    'tg' => 'Thurgau',
-                    'ti' => 'Ticino',
-                    'ur' => 'Uri',
-                    'vs' => 'Valais',
-                    'vd' => 'Vaud',
-                    'zg' => 'Zug',
-                    'zh' => 'Zürich'
-                ]
+
+        $this->addSelect(
+            'country',
+            'country',
+            [
+                'ch' => 'country_ch',
+                'li' => 'country_li',
+                'de' => 'country_de',
+                'it' => 'country_it',
+                'fr' => 'country_fr'
             ]
-        ]);
+        );
+
+        $this->addSelect(
+            'canton',
+            'canton',
+            [
+                ''   => '- Kein Kanton -',
+                'ag' => 'Aargau',
+                'ai' => 'Appenzell Innerrhoden',
+                'ar' => 'Appenzell Ausserrhoden',
+                'be' => 'Bern',
+                'bl' => 'Basel-Land',
+                'bs' => 'Basel-Stadt',
+                'fr' => 'Fribourg',
+                'ge' => 'Genève',
+                'gl' => 'Glarus',
+                'gr' => 'Graubünden ',
+                'ju' => 'Jura',
+                'lu' => 'Luzern',
+                'ne' => 'Neuchâtel',
+                'nw' => 'Nidwalden',
+                'ow' => 'Obwalden',
+                'sg' => 'Sankt Gallen',
+                'sh' => 'Schaffhausen',
+                'so' => 'Solothurn',
+                'sz' => 'Schwyz',
+                'tg' => 'Thurgau',
+                'ti' => 'Ticino',
+                'ur' => 'Uri',
+                'vs' => 'Valais',
+                'vd' => 'Vaud',
+                'zg' => 'Zug',
+                'zh' => 'Zürich'
+            ]
+        );
+
         $this->addText('name_organisation_rechnung', 'name_organisation_rechnung');
 	}
 

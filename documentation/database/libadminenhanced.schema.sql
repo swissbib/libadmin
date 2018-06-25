@@ -36,7 +36,7 @@ CREATE TABLE `admininstitution` (
   `email` varchar(100) DEFAULT NULL,
   `id_kontakt` INT(11)  DEFAULT NULL,
   /*korrespondenzsprache: [deutsch|französisch|italienisch] */
-  `korrespondezsprache` enum('g', 'f', 'i')  DEFAULT NULL,
+  `korrespondenzsprache` enum('g', 'f', 'i')  DEFAULT NULL,
   `bfscode` varchar(50)  DEFAULT NULL,
   `ipadresse` VARCHAR(30) DEFAULT NULL,
   /* zusage_beitrag: [ja|nein] */
@@ -161,7 +161,7 @@ CREATE TABLE `institution` (
   `notes_public_de` text,
   `id_kontakt` int(11) DEFAULT NULL,
   /*korrespondenzsprache: [deutsch|französisch|italienisch] */
-  `korrespondezsprache` enum('g', 'f', 'i')  DEFAULT NULL,
+  `korrespondenzsprache` enum('g', 'f', 'i')  DEFAULT NULL,
   `bfscode` varchar(50) DEFAULT NULL,
   `worldcat_ja_nein` enum('ja', 'nein') DEFAULT NULL,
   `worldcat_symbol` varchar(30) DEFAULT NULL,

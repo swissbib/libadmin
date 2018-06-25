@@ -177,7 +177,7 @@ class AdminInstitution extends InstitutionBase
             $this->setGrund_mwst_frei($excelData["mwst_ja_nein"]);
         }
         $this->setGrund_mwst_frei($excelData["grund_mwst_befreiung"]); //habe ich hier keine MWST
-        $this->setKorrespondezsprache($excelData["korrespondenzsprache"]);
+        $this->setKorrespondenzsprache($excelData["korrespondenzsprache"]);
         $this->setZusage_beitrag($excelData["zusage_kostenbeitrag_ja_nein"]);
         $this->setAdresse_rechnung_gleich_post($excelData["rechnungsadresse_gleich_postadresse_ja_nein"]);
 

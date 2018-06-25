@@ -62,7 +62,7 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
         $this->addText('url_web_fr', 'url_web_fr');
         $this->addText('adresszusatz', 'adresszusatz');
         $this->addText('id_kontakt', 'id_kontakt');
-        $this->addText('korrespondezsprache', 'korrespondezsprache');
+        $this->addText('korrespondenzsprache', 'korrespondenzsprache');
         $this->addText('bfscode', 'bfscode');
 
 

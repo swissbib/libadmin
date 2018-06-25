@@ -61,7 +61,7 @@ class AdminInstitutionFieldset extends BaseFieldset implements InputFilterProvid
 
         $this->addText('name', 'name', true);
         $this->addText('email', 'email');
-        $this->addText('korrespondezsprache', 'korrespondezsprache');
+        $this->addText('korrespondenzsprache', 'korrespondenzsprache');
         $this->addText('bfscode', 'bfscode');
         $this->addText('ipadresse', 'ipadresse');
         $this->addText('zusage_beitrag', 'zusage_beitrag');

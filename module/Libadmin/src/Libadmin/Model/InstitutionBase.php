@@ -20,7 +20,7 @@ abstract class InstitutionBase extends BaseModel
 
     public $id_kontakt;
 
-    public $korrespondezsprache;
+    public $korrespondenzsprache;
 
     public $bfscode;
 
@@ -160,19 +160,19 @@ abstract class InstitutionBase extends BaseModel
     /**
      * @return mixed
      */
-    public function getKorrespondezsprache()
+    public function getKorrespondenzsprache()
     {
-        return $this->korrespondezsprache;
+        return $this->korrespondenzsprache;
     }
 
     /**
-     * @param mixed $korrespondezsprache
+     * @param mixed $korrespondenzsprache
      *
      * @return Institution
      */
-    public function setKorrespondezsprache($korrespondezsprache)
+    public function setKorrespondenzsprache($korrespondenzsprache)
     {
-        $this->korrespondezsprache = $korrespondezsprache;
+        $this->korrespondenzsprache = $korrespondenzsprache;
         return $this;
     }
 

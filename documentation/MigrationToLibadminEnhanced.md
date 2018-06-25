@@ -15,8 +15,8 @@ sudo mysqldump --no-create-info --complete-insert libadmin > libadmin-dump-20180
 Separator ;. No "" around text.
 
 Save this to :
-documentation/database/data/libadmin.institutions.csv
-documentation/database/data/admininstitution.csv
+documentation/database/data/libadmin.institutions.new.csv
+documentation/database/data/admininstitution.new.csv
 
 Be careful : 
 - A256 has a ";" in column AB (rechnungadresse)

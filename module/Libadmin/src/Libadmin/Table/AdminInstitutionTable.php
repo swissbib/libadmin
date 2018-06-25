@@ -53,7 +53,8 @@ class AdminInstitutionTable extends InstitutionBaseTable
      * @var    String[]    Fulltext search fields
      */
     protected $searchFields = [
-        'name'
+        'name',
+        'idcode'
     ];
 
 

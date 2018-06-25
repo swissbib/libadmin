@@ -254,14 +254,14 @@ return [
                 'label' => 'navigation_views',
                 'route' => 'view'
             ],
+            'admininstitution' => [
+                'label' => 'admininstitution',
+                'route' => 'admininstitution'
+            ],
             'admin' => [
                 'label' => 'navigation_admin',
                 'route' => 'admin'
             ],
-            'admininstitution' => [
-                'label' => 'admininstitution',
-                'route' => 'admininstitution'
-            ]
         ],
     ],
     'view_helpers' => [

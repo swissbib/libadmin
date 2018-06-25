@@ -241,7 +241,7 @@ class Adresse extends BaseModel
      *
      * @return Adresse
      */
-    public function setNameOrganisationRechnung($name_organisation_rechnung)
+    public function setName_organisation_rechnung($name_organisation_rechnung)
     {
         $this->name_organisation_rechnung = $name_organisation_rechnung;
         return $this;

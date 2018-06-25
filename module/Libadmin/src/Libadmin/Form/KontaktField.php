@@ -58,7 +58,15 @@ class KontaktFieldset extends BaseFieldset implements InputFilterProviderInterfa
 		return [
 			'name' => [
 				'required' => false
-            ]
+            ],
+            'email' => [
+                'required' => false,
+                'validators' => [
+                    [
+                        'name' => 'EmailAddress'
+                    ]
+                ]
+            ],
         ];
 	}
 }

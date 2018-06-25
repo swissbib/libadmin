@@ -826,21 +826,28 @@ class Institution extends InstitutionBase
         $this->setBemerkung_rechnung($excelData["bemerkung_rechnungsstellung"]);
         $this->setBfscode($excelData["bfs_code"]);
         $this->setCbslibrarycode($excelData["cbs_library_code"]);
-        empty($excelData["e_rechnung_ja_nein"]) ? $this->setE_rechnung(0) : $this->setE_rechnung(1);
-        empty($excelData["mwst_ja_nein"]) ? $this->setMwst(0) : $this->setMwst(1);
+
         $this->setGrund_mwst_frei($excelData["grund_mwst_befreiung"]); //habe ich hier keine MWST
         $this->setKorrespondezsprache($excelData["korrespondenzsprache"]);
+
         empty($excelData["worldcat_ja_nein"]) ? $this->setWorldcat_ja_nein(0): $this->setWorldcat_ja_nein(1);
         //$this->getWorldcat_ja_nein() === true ? $this->setWorldcatSyMmbol($excelData["worldcat_symbol"]) : $this->setWorldcat_symbol("");
         //todo: Frage an Silvia
         //worldcat_symbol ist gesetzt auch wenn worldcat_ja_nein leer ist - richtig?
+
+
+        if (!empty($excelData["e_rechnung_ja_nein"])) {
+            $this->setE_Rechnung($excelData["e_rechnung_ja_nein"]);
+        }
+        if (!empty($excelData["mwst_ja_nein"])) {
+            $this->setGrund_mwst_frei($excelData["mwst_ja_nein"]);
+        }
+
         $this->setWorldcat_symbol($excelData["worldcat_symbol"]);
         $this->setCoordinates($excelData["koordinaten"]);
-        empty($excelData["zusage_kostenbeitrag_ja_nein"]) ? $this->setZusage_beitrag(0) : $this->setZusage_beitrag(1);
+        $this->setZusage_beitrag($excelData["zusage_kostenbeitrag_ja_nein"]);
+        $this->setAdresse_rechnung_gleich_post($excelData["rechnungsadresse_gleich_postadresse_ja_nein"]);
         $this->setEmail($excelData["mail"]);
-        empty($excelData["rechnungsadresse_gleich_postadresse_ja_nein"]) ||
-        strtolower( $excelData["rechnungsadresse_gleich_postadresse_ja_nein"]) === "ja" ? $this->setAdresse_rechnung_gleich_post(1) :
-            $this->setAdresse_rechnung_gleich_post(0);
         $this->setKostenbeitrag_basiert_auf($this->formatKostenbeitragBasiertAuf( $excelData["kostenbeitrag_basiert_auf"]));
         $this->setVerrechnungbeitrag($this->formatVerrechnungsbeitrag( $excelData["verrechnung_kostenbeitrag_auswahl"]));
 

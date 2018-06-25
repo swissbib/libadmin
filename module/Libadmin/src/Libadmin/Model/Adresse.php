@@ -268,6 +268,6 @@ class Adresse extends BaseModel
         $this->setStrasse($excelData["rechnungsadresse_strasse"]);
         $this->setNummer($excelData["rechnungsadresse_nummer"]);
         $this->setZusatz($excelData["rechnungsadresse_zusatz"]);
-        $this->setNameOrganisationRechnung($excelData["rechnungsadresse_name"]);
+        $this->setName_organisation_rechnung($excelData["rechnungsadresse_name"]);
     }
 }

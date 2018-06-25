@@ -170,14 +170,16 @@ class AdminInstitution extends InstitutionBase
         $this->setBemerkung_kostenbeitrag($excelData["bemerkung_kostenbeitrag"]);
         $this->setBemerkung_rechnung($excelData["bemerkung_rechnungsstellung"]);
         $this->setBfscode($excelData["bfs_code"]);
-        empty($excelData["e_rechnung_ja_nein"]) ? $this->setE_Rechnung(0) : $this->setE_Rechnung(1);
-        empty($excelData["mwst_ja_nein"]) ? $this->setMwst(0) : $this->setMwst(1);
+        if (!empty($excelData["e_rechnung_ja_nein"])) {
+            $this->setE_Rechnung($excelData["e_rechnung_ja_nein"]);
+        }
+        if (!empty($excelData["mwst_ja_nein"])) {
+            $this->setGrund_mwst_frei($excelData["mwst_ja_nein"]);
+        }
         $this->setGrund_mwst_frei($excelData["grund_mwst_befreiung"]); //habe ich hier keine MWST
         $this->setKorrespondezsprache($excelData["korrespondenzsprache"]);
-        empty($excelData["zusage_kostenbeitrag_ja_nein"]) ? $this->setZusageBeitrag(0) : $this->setZusage_beitrag(1);
-        empty($excelData["rechnungsadresse_gleich_postadresse_ja_nein"]) ||
-        strtolower( $excelData["rechnungsadresse_gleich_postadresse_ja_nein"]) === "ja" ? $this->setAdresse_rechnung_gleich_post(1) :
-            $this->setAdresse_rechnung_gleich_post(0);
+        $this->setZusage_beitrag($excelData["zusage_kostenbeitrag_ja_nein"]);
+        $this->setAdresse_rechnung_gleich_post($excelData["rechnungsadresse_gleich_postadresse_ja_nein"]);
 
         $this->setKostenbeitrag_basiert_auf($this->formatKostenbeitragAdminBasiertAuf( $excelData["kostenbeitrag_basiert_auf"]));
         $this->setIpadresse($excelData["ipadresse"]);

@@ -7,5 +7,6 @@
     <?= $this->formLabel($fieldset->get($field)) ?>
     <div class="controls">
         <?= $this->formElement($fieldset->get($field)) ?>
+        <?= $this->formElementErrors($fieldset->get($field), ['class' => 'errors']); ?>
     </div>
 </div>

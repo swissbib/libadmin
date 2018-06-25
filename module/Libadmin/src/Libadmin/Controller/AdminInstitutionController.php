@@ -90,6 +90,15 @@ class AdminInstitutionController extends BaseController
             return $this->forwardTo('home');
         }
 
+        /** @var FlashMessenger $flashMessenger */
+        $flashMessenger = $this->flashMessenger();
+
+        $flashMessenger->clearMessages('success');
+        $flashMessenger->clearCurrentMessages('success');
+
+        $flashMessenger->clearMessages('error');
+        $flashMessenger->clearCurrentMessages('error');
+
         try {
             /** @var AdminInstitution $admininstitution */
             $admininstitution = $this->getAdminInstitutionForEdit($idInstitution);

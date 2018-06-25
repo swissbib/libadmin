@@ -6,8 +6,6 @@
 </div>
 <h1><?= $entityNamePlural ?></h1>
 
-<?= $this->flashMessenger()->render(); ?>
-
 <?php if (is_null($listItems) || $listItems->count() == 0): ?>
 	<?php
 	$baseLabel = $this->translate('home_no_records');

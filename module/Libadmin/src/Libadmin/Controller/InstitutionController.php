@@ -107,21 +107,29 @@ class InstitutionController extends BaseController
      */
     public function editAction()
     {
-
-
-
         $idInstitution = (int)$this->params()->fromRoute('id', 0);
+
+
 
         if (!$idInstitution) {
             return $this->forwardTo('home');
         }
+
+        /** @var FlashMessenger $flashMessenger */
+        $flashMessenger = $this->flashMessenger();
+
+        $flashMessenger->clearMessages('success');
+        $flashMessenger->clearCurrentMessages('success');
+
+        $flashMessenger->clearMessages('error');
+        $flashMessenger->clearCurrentMessages('error');
 
         try {
             /** @var Institution $institution */
             $institution = $this->getInstitutionForEdit($idInstitution);
 
         } catch (\Exception $ex) {
-            $this->flashMessenger()->addErrorMessage('notfound_record');
+            $flashMessenger->addErrorMessage('notfound_record');
 
             return $this->forwardTo('home');
         }
@@ -131,6 +139,8 @@ class InstitutionController extends BaseController
 
         /** @var Request $request */
         $request = $this->getRequest();
+
+
         if ($request->isPost()) {
             $form->setData($request->getPost());
 
@@ -139,20 +149,14 @@ class InstitutionController extends BaseController
                     /** @var Institution $data */
                     $data = $form->getData();
 
-
-
-
-
-
-
                     $this->institutionTable->save($data);
-                    $this->flashMessenger()->addSuccessMessage('saved_institution');
+                    $flashMessenger->addSuccessMessage('saved_institution');
                     $form->bind($this->getInstitutionForEdit($idInstitution)); // Reload data
                 //} catch (\Exception $ex) {
                 //    $this->flashMessenger()->addErrorMessage($ex->getMessage());
                 //}
             } else {
-                $this->flashMessenger()->addErrorMessage('form_invalid');
+                $flashMessenger->addErrorMessage('form_invalid');
             }
         }
 

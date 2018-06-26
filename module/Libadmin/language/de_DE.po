@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Libadmin\n"
-"POT-Creation-Date: 2018-06-11 18:56+0200\n"
-"PO-Revision-Date: 2018-06-11 18:57+0200\n"
+"POT-Creation-Date: 2018-06-26 08:50+0200\n"
+"PO-Revision-Date: 2018-06-26 08:51+0200\n"
 "Last-Translator: Fabian Erni <ferni@snowflake.ch>\n"
 "Language-Team: Swissbib <admin@swissbib.ch>\n"
 "Language: de_DE\n"
@@ -14,61 +14,77 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/Libadmin/Controller/ViewController.php:200
+#: ../src/Libadmin/Controller/ViewController.php:209
 msgid "saved_view"
 msgstr "View gespeichert"
 
-#: ../src/Libadmin/Controller/ViewController.php:202
+#: ../src/Libadmin/Controller/ViewController.php:211
 msgid "form_invalid"
 msgstr "Die Eingegebenen Daten sind nicht korrekt!"
 
 #: ../view/libadmin/admin-institution/edit.phtml:10
 #: ../view/libadmin/group/edit.phtml:18
-#: ../view/libadmin/institution/edit.phtml:12
+#: ../view/libadmin/institution/edit.phtml:17
 #: ../view/libadmin/view/edit.phtml:10
 msgid "action_create"
 msgstr "Anlegen"
 
 #: ../view/libadmin/admin-institution/edit.phtml:22
 #: ../view/libadmin/group/edit.phtml:28
-#: ../view/libadmin/institution/edit.phtml:25
+#: ../view/libadmin/institution/edit.phtml:30
 #: ../view/libadmin/view/edit.phtml:24
 msgid "action_close"
 msgstr "Schliessen"
 
 #: ../view/libadmin/admin-institution/edit.phtml:27
 #: ../view/libadmin/group/edit.phtml:32
-#: ../view/libadmin/institution/edit.phtml:30
+#: ../view/libadmin/institution/edit.phtml:35
 #: ../view/libadmin/view/edit.phtml:29
 msgid "action_delete"
 msgstr "Löschen"
 
-#: ../view/libadmin/admin-institution/edit.phtml:38
-#: ../view/libadmin/group/edit.phtml:46
-#: ../view/libadmin/institution/edit.phtml:41
-#: ../view/libadmin/view/edit.phtml:40
+#: ../view/libadmin/admin-institution/edit.phtml:41
+#: ../view/libadmin/group/edit.phtml:49
+#: ../view/libadmin/institution/edit.phtml:49
+#: ../view/libadmin/view/edit.phtml:44
 msgid "general"
 msgstr "Allgemein"
 
-#: ../view/libadmin/admin-institution/edit.phtml:47
-msgid "first"
-msgstr ""
+#: ../view/libadmin/admin-institution/edit.phtml:51
+#: ../view/libadmin/institution/edit.phtml:60
+msgid "address"
+msgstr "Kontakt"
 
-#: ../view/libadmin/admin-institution/edit.phtml:48
-#: ../view/libadmin/admin-institution/edit.phtml:68
-msgid "second"
-msgstr ""
-
-#: ../view/libadmin/admin-institution/edit.phtml:49
-#: ../view/libadmin/admin-institution/edit.phtml:94
-msgid "third"
-msgstr ""
-
-#: ../view/libadmin/admin-institution/edit.phtml:57
-#: ../view/libadmin/group/edit.phtml:69
+#: ../view/libadmin/admin-institution/edit.phtml:52
+#: ../view/libadmin/admin-institution/edit.phtml:107
 #: ../view/libadmin/institution/edit.phtml:62
-msgid "displaynames"
-msgstr "Display Namen"
+msgid "admin"
+msgstr "Admin"
+
+#: ../view/libadmin/admin-institution/edit.phtml:53
+#: ../view/libadmin/institution/edit.phtml:63
+msgid "costs_participation"
+msgstr "Kostenbeitrag"
+
+#: ../view/libadmin/admin-institution/edit.phtml:72
+#: ../view/libadmin/institution/edit.phtml:141
+msgid "postAdresse"
+msgstr "Postadresse"
+
+#: ../view/libadmin/admin-institution/edit.phtml:89
+#: ../view/libadmin/institution/edit.phtml:179
+msgid "contactPerson"
+msgstr "Kontakt Person"
+
+#: ../view/libadmin/admin-institution/edit.phtml:177
+#: ../view/libadmin/institution/edit.phtml:298
+msgid "rechnungsAdresse"
+msgstr "Rechnungsadresse"
+
+#: ../view/libadmin/admin-institution/edit.phtml:195
+#: ../view/libadmin/institution/edit.phtml:317
+msgid "contactPersonInvoice"
+msgstr ""
 
 #: ../view/libadmin/admin-institution/home.phtml:5
 msgid "admininstitution"
@@ -316,11 +332,11 @@ msgstr "View"
 msgid "add_new_xxx"
 msgstr "Hinzufügen:"
 
-#: ../view/libadmin/global/home-crud.phtml:13
+#: ../view/libadmin/global/home-crud.phtml:11
 msgid "home_no_records"
 msgstr "Es wurden noch keine %s erstellt"
 
-#: ../view/libadmin/global/home-crud.phtml:17
+#: ../view/libadmin/global/home-crud.phtml:15
 msgid "home_select_record"
 msgstr "Wählen Sie links aus der Navigation einen Datensatz"
 
@@ -328,30 +344,35 @@ msgstr "Wählen Sie links aus der Navigation einen Datensatz"
 msgid "action_search "
 msgstr "Suchen"
 
-#: ../view/libadmin/group/edit.phtml:60
-#: ../view/libadmin/institution/edit.phtml:51
-#: ../view/libadmin/view/edit.phtml:51
+#: ../view/libadmin/group/edit.phtml:63
+#: ../view/libadmin/institution/edit.phtml:59
+#: ../view/libadmin/view/edit.phtml:55
 msgid "display"
 msgstr "Anzeige"
 
-#: ../view/libadmin/group/edit.phtml:62
-#: ../view/libadmin/institution/edit.phtml:184
+#: ../view/libadmin/group/edit.phtml:65
+#: ../view/libadmin/institution/edit.phtml:195
 #: ../view/libadmin/view/home.phtml:6
 msgid "views"
 msgstr "Views"
 
-#: ../view/libadmin/group/edit.phtml:63
+#: ../view/libadmin/group/edit.phtml:66
 #: ../view/libadmin/institution/home.phtml:6
 msgid "institutions"
 msgstr "Institutionen"
 
-#: ../view/libadmin/group/edit.phtml:89
-#: ../view/libadmin/institution/edit.phtml:106
-#: ../view/libadmin/view/edit.phtml:63
+#: ../view/libadmin/group/edit.phtml:72
+#: ../view/libadmin/institution/edit.phtml:69
+msgid "displaynames"
+msgstr "Display Namen"
+
+#: ../view/libadmin/group/edit.phtml:92
+#: ../view/libadmin/institution/edit.phtml:113
+#: ../view/libadmin/view/edit.phtml:67
 msgid "notes"
 msgstr "Notizen"
 
-#: ../view/libadmin/group/edit.phtml:98
+#: ../view/libadmin/group/edit.phtml:101
 msgid "noviews"
 msgstr "Noch keine Views vorhanden"
 
@@ -360,7 +381,7 @@ msgid "group"
 msgstr "Gruppe"
 
 #: ../view/libadmin/group/home.phtml:6
-#: ../view/libadmin/institution/edit.phtml:187
+#: ../view/libadmin/institution/edit.phtml:198
 msgid "groups"
 msgstr "Gruppen"
 
@@ -372,100 +393,75 @@ msgstr "Library Administration"
 msgid "subtitle_module"
 msgstr "Administration von Bibliotheken"
 
-#: ../view/libadmin/institution/edit.phtml:52
-msgid "address"
-msgstr "Kontakt"
-
-#: ../view/libadmin/institution/edit.phtml:53
+#: ../view/libadmin/institution/edit.phtml:61
 msgid "groups_and_views"
 msgstr "Gruppen & Views"
 
-#: ../view/libadmin/institution/edit.phtml:54
-msgid "admin"
-msgstr "Admin"
-
-#: ../view/libadmin/institution/edit.phtml:55
-msgid "costs_participation"
-msgstr "Kostenbeitrag"
-
-#: ../view/libadmin/institution/edit.phtml:56
-msgid "extensions"
-msgstr "Extensions"
-
-#: ../view/libadmin/institution/edit.phtml:74
+#: ../view/libadmin/institution/edit.phtml:81
 msgid "title_library_names_official"
 msgstr "Bibliotheksnamen (offiziell)"
 
-#: ../view/libadmin/institution/edit.phtml:130
-msgid "postAdresse"
-msgstr "Postadresse"
-
-#: ../view/libadmin/institution/edit.phtml:146
+#: ../view/libadmin/institution/edit.phtml:157
 msgid "contactdata"
 msgstr "Kontaktdaten"
 
-#: ../view/libadmin/institution/edit.phtml:168
-msgid "contactPerson"
-msgstr "Kontakt Person"
-
-#: ../view/libadmin/institution/edit.phtml:190
-#: ../view/libadmin/view/edit.phtml:118
+#: ../view/libadmin/institution/edit.phtml:201
+#: ../view/libadmin/view/edit.phtml:122
 msgid "is_favorite"
 msgstr "Ist Favorit"
 
-#: ../view/libadmin/institution/edit.phtml:265
-msgid "rechnungsAdresse"
-msgstr "Rechnungsadresse"
-
 #: ../view/libadmin/institution/home.phtml:5
-#: ../view/libadmin/view/edit.phtml:116
+#: ../view/libadmin/view/edit.phtml:120
 msgid "institution"
 msgstr "Institution"
 
-#: ../view/libadmin/view/edit.phtml:52
+#: ../view/libadmin/view/edit.phtml:56
 msgid "action_groups_activate"
 msgstr "Gruppen aktivieren"
 
-#: ../view/libadmin/view/edit.phtml:53
+#: ../view/libadmin/view/edit.phtml:57
 msgid "action_groups_sort"
 msgstr "Gruppen sortieren"
 
-#: ../view/libadmin/view/edit.phtml:54
+#: ../view/libadmin/view/edit.phtml:58
 msgid "linking"
 msgstr "Verknüpfung"
 
-#: ../view/libadmin/view/edit.phtml:71
+#: ../view/libadmin/view/edit.phtml:75
 msgid "header_active_networkgroups"
 msgstr "Folgende Gruppen sind in diesem Netzwerk aktiv"
 
-#: ../view/libadmin/view/edit.phtml:72
+#: ../view/libadmin/view/edit.phtml:76
 msgid "header_active_networkgroups_info"
 msgstr ""
 "(Zuerst speichern, damit die Gruppen in den anderen Tabs vorhanden sind)"
 
-#: ../view/libadmin/view/edit.phtml:75
+#: ../view/libadmin/view/edit.phtml:79
 msgid "nogroups"
 msgstr "Es wurden noch keine Gruppen erfasst"
 
-#: ../view/libadmin/view/edit.phtml:99
+#: ../view/libadmin/view/edit.phtml:103
 msgid "no_data_available"
 msgstr "Es wurden noch keine Daten erfasst"
 
-#: ../view/libadmin/view/edit.phtml:117
+#: ../view/libadmin/view/edit.phtml:121
 msgid "bibsyscodes"
 msgstr "Bib-/Sys-Codes"
 
-#: ../view/libadmin/view/edit.phtml:132
+#: ../view/libadmin/view/edit.phtml:136
 msgid "yes"
 msgstr "Ja"
 
-#: ../view/libadmin/view/edit.phtml:140
+#: ../view/libadmin/view/edit.phtml:144
 msgid "no_relations"
 msgstr "Es bestehen noch keine Verbindungen"
 
 #: ../view/libadmin/view/home.phtml:5
 msgid "view"
 msgstr "View"
+
+#~ msgid "extensions"
+#~ msgstr "Extensions"
 
 #~ msgid "saved_group"
 #~ msgstr "Gruppe gespeichert"

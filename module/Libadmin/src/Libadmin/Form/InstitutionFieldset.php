@@ -75,7 +75,18 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
         $this->addText('worldcat_symbol', 'worldcat_symbol');
         $this->addCheckbox('worldcat_ja_nein', 'worldcat_ja_nein', 'ja', 'nein');
         $this->addText('cbslibrarycode', 'cbslibrarycode');
-        $this->addText('verrechnungbeitrag', 'verrechnungbeitrag');
+
+        $this->addSelect(
+            'verrechnungbeitrag',
+            'verrechnungbeitrag',
+            [
+                ''   => '-',
+                'direkt' => 'Direkt',
+                'keine_verrechnung' => 'Keine Verrechnung',
+                'ueber_institution' => 'Ueber Institution',
+                'ueber_leitbibliothek' => 'Ueber Leitbibliothek',
+            ]
+        );
         $this->addSelect(
             'zusage_beitrag',
             'zusage_beitrag',
@@ -293,6 +304,9 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
                 'required' => false
             ],
             'korrespondenzsprache' => [
+                'required' => false
+            ],
+            'verrechnungbeitrag' => [
                 'required' => false
             ],
             'kostenbeitrag_basiert_auf' => [

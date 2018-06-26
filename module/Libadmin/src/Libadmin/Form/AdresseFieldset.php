@@ -50,6 +50,7 @@ class AdresseFieldset extends BaseFieldset implements InputFilterProviderInterfa
             'country',
             'country',
             [
+                '' => '-',
                 'ch' => 'country_ch',
                 'li' => 'country_li',
                 'de' => 'country_de',
@@ -106,6 +107,9 @@ class AdresseFieldset extends BaseFieldset implements InputFilterProviderInterfa
 	{
 		return [
             'canton' => [
+                'required' => false
+            ],
+            'country' => [
                 'required' => false
             ],
         ];

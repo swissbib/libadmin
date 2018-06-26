@@ -3,7 +3,9 @@ namespace Libadmin\Controller;
 
 //use RecursiveIteratorIterator;
 
+use Libadmin\Model\Adresse;
 use Libadmin\Model\InstitutionRelation;
+use Libadmin\Model\Kostenbeitrag;
 use Libadmin\Table\InstitutionRelationTable;
 use Libadmin\Table\InstitutionTable;
 use Zend\Db\ResultSet\ResultSetInterface;
@@ -18,6 +20,7 @@ use Libadmin\Model\Institution;
 use Libadmin\Controller\BaseController;
 use Libadmin\Model\View;
 use Libadmin\Model\Group;
+use Libadmin\Model\Kontakt;
 
 /**
  * [Description]
@@ -260,13 +263,24 @@ class InstitutionController extends BaseController
      */
     protected function getInstitutionForAdd()
     {
-
-        //todo
-        //diese Methode in intsitution staorage auslagern
-        //damit haben wir auch keine Abhängigkeit mehr auf allViews
-
         $views = $this->allViews;
         $institution = new Institution();
+
+        $kontakt = new Kontakt();
+        $institution->setKontakt($kontakt);
+
+        $kontakt_rechnung = new Kontakt();
+        $institution->setKontakt_rechnung($kontakt_rechnung);
+
+        $rechnungsadresse = new Adresse();
+        $institution->setRechnungsadresse($rechnungsadresse);
+
+        $postadresse = new Adresse();
+        $institution->setPostadresse($postadresse);
+
+        $kostenbeitrag = new Kostenbeitrag();
+        $institution->setKostenbeitrag($kostenbeitrag);
+
         $relations = array();
 
         foreach ($views as $view) {

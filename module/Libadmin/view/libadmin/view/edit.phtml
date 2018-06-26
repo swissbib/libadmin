@@ -71,7 +71,7 @@ $formType = 'horizontal';
 
             <!-- ------------------- Tab Pane: Activate Groups -->
             <div class="tab-pane" id="groups">
-                <?php if ($form->get('groups')): ?>
+                <?php if($form->get('groups')): ?>
                     <p><?= $this->translate('header_active_networkgroups') ?></p>
                     <p><?= $this->translate('header_active_networkgroups_info') ?></p>
                     <?= $this->formBootstrapRow($form, 'groups') ?>
@@ -84,7 +84,7 @@ $formType = 'horizontal';
             <div class="tab-pane" id="groupsort">
                 <div class="row">
                     <?php /** @var    Libadmin\Model\Group[] $groups */ ?>
-                    <?php if (sizeof($groups)): ?>
+                    <?php if (isset($groups)): ?>
                         <div class="span9 vsort-scrollable">
                             <input type="hidden" id="groupsortableids" name="groupsortableids" value=""/>
                             <ul id="groupsortable" class="nav nav-tabs nav-stacked">

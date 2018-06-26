@@ -168,6 +168,12 @@ class AdminInstitutionFieldset extends BaseFieldset implements InputFilterProvid
             'zusage_beitrag' => [
                 'required' => false
             ],
+            'korrespondenzsprache' => [
+                'required' => false
+            ],
+            'kostenbeitrag_basiert_auf' => [
+                'required' => false
+            ],
             'grund_mwst_frei' => [
                 'required' => false
             ],

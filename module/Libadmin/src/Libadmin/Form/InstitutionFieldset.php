@@ -57,7 +57,6 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
         $this->addText('url_web_fr', 'url_web_fr');
         $this->addText('adresszusatz', 'adresszusatz');
         $this->addText('id_kontakt', 'id_kontakt');
-        $this->addText('korrespondenzsprache', 'korrespondenzsprache');
 
         $this->addSelect(
             'korrespondenzsprache',
@@ -291,6 +290,12 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
                 ]
             ],
             'grund_mwst_frei' => [
+                'required' => false
+            ],
+            'korrespondenzsprache' => [
+                'required' => false
+            ],
+            'kostenbeitrag_basiert_auf' => [
                 'required' => false
             ],
         ];

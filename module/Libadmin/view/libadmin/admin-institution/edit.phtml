@@ -5,6 +5,12 @@ $form = $this->customform;
 $form->prepare();
 
 $admininstitution = $form->get('admininstitution');
+
+$idAdminInstitution = (int)$admininstitution->get('id')->getValue();
+$isNew = !$idAdminInstitution;
+
+$saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');
+
 $formType = 'horizontal';
 $form->setAttribute('class', 'form-horizontal');
 $saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');

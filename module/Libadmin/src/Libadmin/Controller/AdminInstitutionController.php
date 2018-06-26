@@ -117,7 +117,7 @@ class AdminInstitutionController extends BaseController
 
             if ($form->isValid()) {
                 $this->adminInstitutionTable->save($form->getData());
-                $this->flashMessenger()->addSuccessMessage('saved_institution');
+                $this->flashMessenger()->addSuccessMessage('saved_admin_institution');
                 $form->bind($this->getAdminInstitutionForEdit($idInstitution)); // Reload data
             } else {
                 $this->flashMessenger()->addErrorMessage('form_invalid');
@@ -126,13 +126,49 @@ class AdminInstitutionController extends BaseController
 
         $form->setAttribute('action', $this->makeUrl('admininstitution', 'edit', $idInstitution));
 
-        //todo: GH addition of isNew just to avoid Exception in template rendering
-        //we have to look up how this mechanism (differentiation between update and new) is implemented elsewhere
         return $this->getAjaxView([
             'customform' => $form,
             'title' => 'admininstitution_edit',
             'isNew' => false
         ]);
+    }
+
+    /**
+     * Add admin institution
+     *
+     * @return Response|ViewModel
+     */
+    public function addAction()
+    {
+        $form = $this->adminInstitutionForm;
+        $adminInstitution = $this->getAdminInstitutionForAdd();
+
+        /** @var Request $request */
+        $request = $this->getRequest();
+
+        $form->bind($adminInstitution);
+
+        if ($request->isPost()) {
+            $form->setData($request->getPost());
+
+            if ($form->isValid()) {
+                $adminInstitution->exchangeArray($form->getData());
+                $idAdminInstitution = $this->adminInstitutionTable->save($adminInstitution);
+
+                $this->flashMessenger()->addSuccessMessage('saved_admin_institution');
+
+                return $this->redirectTo('edit', $idAdminInstitution);
+            } else {
+                $this->flashMessenger()->addErrorMessage('form_invalid');
+            }
+        }
+
+        $form->setAttribute('action', $this->makeUrl('admininstitution', 'add'));
+
+        return $this->getAjaxView(array(
+            'customform' => $form,
+            'title' => 'admininstitution_add',
+        ), 'libadmin/admin-institution/edit');
     }
 
 
@@ -148,6 +184,33 @@ class AdminInstitutionController extends BaseController
         $admininstitution = $this->adminInstitutionTable->getRecord($idInstitution);
 
         return $admininstitution;
+    }
+
+    /**
+     * Get admin institution prepared to be bound to the form
+     *
+     * @return    AdminInstitution
+     */
+    protected function getAdminInstitutionForAdd()
+    {
+        $adminInstitution = new AdminInstitution();
+
+        $kontakt = new Kontakt();
+        $adminInstitution->setKontakt($kontakt);
+
+        $kontakt_rechnung = new Kontakt();
+        $adminInstitution->setKontakt_rechnung($kontakt_rechnung);
+
+        $rechnungsadresse = new Adresse();
+        $adminInstitution->setRechnungsadresse($rechnungsadresse);
+
+        $postadresse = new Adresse();
+        $adminInstitution->setPostadresse($postadresse);
+
+        $kostenbeitrag = new Kostenbeitrag();
+        $adminInstitution->setKostenbeitrag($kostenbeitrag);
+
+        return $adminInstitution;
     }
 
     /**

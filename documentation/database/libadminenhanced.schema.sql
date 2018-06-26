@@ -80,6 +80,7 @@ DROP TABLE IF EXISTS `adresse`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `adresse` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name_organisation` varchar(200) DEFAULT NULL,
   `strasse` varchar(150) DEFAULT NULL,
   `nummer` varchar(20) DEFAULT NULL,
   `zusatz` text,
@@ -87,7 +88,6 @@ CREATE TABLE `adresse` (
   `ort` varchar(150) DEFAULT NULL,
   `country` varchar(10) DEFAULT NULL,
   `canton` varchar(10) DEFAULT NULL,
-  `name_organisation` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1342 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

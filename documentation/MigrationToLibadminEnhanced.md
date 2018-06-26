@@ -6,7 +6,7 @@
 Only data no structure :
 
 ```
-sudo mysqldump --no-create-info --complete-insert libadmin > libadmin-dump-20180614.sql
+sudo mysqldump --no-create-info --complete-insert libadmin > libadmin-dump-20180626.sql
 ```
 
 
@@ -15,19 +15,14 @@ sudo mysqldump --no-create-info --complete-insert libadmin > libadmin-dump-20180
 Separator ;. No "" around text.
 
 Save this to :
-documentation/database/data/libadmin.institutions.new.csv
-documentation/database/data/admininstitution.new.csv
+documentation/database/data/libadmin.institutions.csv
+documentation/database/data/admininstitution.csv
 
 Be careful : 
-- A256 has a ";" in column AB (rechnungadresse)
-- N06 as well
-- N07 as well
-- RE31050 has a ; in colum email
-- LUMH1 have HSLUMU ; IDSLUKB in column AU
-- LUMH3 idem
-- LUMHS idem
-- The institutions A353, sbi, E89 doesn't exist any more in libadmin
-
+- for museum geneve : ayer is in the wrong column
+- for admin ABNKB, columns C and AB are on two lines
+- The institutions A353, sbi, E89 doesn't exist any more in libadmin. They should be removed from the "zugehörige institutionen" of the admininstitution table
+- in admin : kreditoren@ twice in the wrong column
 
 ## Create new Database
 
@@ -41,7 +36,7 @@ sudo mysql libadmintest < ./documentation/database/libadminenhanced.schema.sql
 ## Import old Information from Libadmin
 
 ```
-sudo mysql libadmintest < ~/Documents/mycloud/swissbib/libadmin/libadmin-dump-20180614.sql
+sudo mysql libadmintest < ~/Documents/mycloud/swissbib/libadmin/libadmin-dump-20180626.sql
 ```
 
 
@@ -59,8 +54,8 @@ This will import in the db from config/autoload/local.php
 
 ```
 cd libadmin
-php public/index.php loaddata institution ../documentation/database/data/libadmin.institutions.new.csv
-php public/index.php loaddata admininstitution ../documentation/database/data/admininstitution.new.csv
+php public/index.php loaddata institution ../documentation/database/data/libadmin.institutions.csv
+php public/index.php loaddata admininstitution ../documentation/database/data/admininstitution.csv
 ```
 
 
@@ -72,9 +67,9 @@ The address might have been updated in libadmin and not in the excel. Be careful
 ## In one step 
 ```
 sudo mysql < ./documentation/database/libadminenhanced.schema.sql
-sudo mysql libadminenhanced < ~/Documents/mycloud/swissbib/libadmin/libadmin-dump-20180614.sql
-php public/index.php loaddata institution ../documentation/database/data/libadmin.institutions.new.csv
-php public/index.php loaddata admininstitution ../documentation/database/data/admininstitution.new.csv
+sudo mysql libadminenhanced < ~/Documents/mycloud/swissbib/libadmin/libadmin-dump-20180626.sql
+php public/index.php loaddata institution ../documentation/database/data/libadmin.institutions.csv
+php public/index.php loaddata admininstitution ../documentation/database/data/admininstitution.csv
 ```
 
 

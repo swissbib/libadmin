@@ -73,6 +73,7 @@ $saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');
                 <div class="row-fluid">
                     <div class="span6">
                         <?php $postAdresseFieldset = $admininstitution->get('postadresse') ?>
+                        <?= $this->formBootstrapRow($postAdresseFieldset,'name_organisation_rechnung') ?>
                         <?= $this->formBootstrapRow($postAdresseFieldset,'strasse') ?>
                         <?= $this->formBootstrapRow($postAdresseFieldset,'nummer') ?>
                         <?= $this->formBootstrapRow($postAdresseFieldset,'zusatz') ?>

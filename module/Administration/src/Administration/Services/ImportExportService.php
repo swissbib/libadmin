@@ -74,14 +74,12 @@ class ImportExportService
         "rechnungsadresse_plz", "rechnungsadresse_ort", "rechnungsadresse_country",
         "kontakt_rechnung_name", "kontakt_rechnung_vorname", "kontakt_rechnung_anrede", "kontakt_rechnung_mail",
         "mwst_ja_nein", "grund_mwst_befreiung", "e_rechnung_ja_nein", "bemerkung_rechnungsstellung",
-        "koordinaten", "admininstitution_bfs_code", "kostenbeitrag_ueber_verbund_zugehoerigkeit",
-        "kostenbeitrag_ueber_uni_fh_uni", "zugehoerigkeit_institution",
-        "sap_name_1", "sap_name2", "sap_name3", "sap_name4"
+        "koordinaten"
     ];
 
 
     private $keysAdminInstitution = [
-        "idcode", "name", "address_strasse", "address_nummer", "address_zusatz", "zip",
+        "idcode", "name", "address_name", "address_strasse", "address_nummer", "address_zusatz", "zip",
         "city", "country", "mail", "kontakt_name", "kontakt_vorname", "kontakt_anrede",
         "kontakt_email", "korrespondenzsprache", "bfs_code", "ipadresse", "zusage_kostenbeitrag_ja_nein",
         "kostenbeitrag_basiert_auf", "beitrag_2018", "beitrag_2019", "beitrag_2020", "bemerkung_kostenbeitrag",
@@ -199,7 +197,7 @@ class ImportExportService
                     $institution->setId_postadresse($postAdressID);
                 }
 
-                if (! $institution->getAdresse_rechnung_gleich_post() ) {
+                if ($institution->getAdresse_rechnung_gleich_post()=='nein') {
                     $rechnungsAdresse = new Adresse();
                     $rechnungsAdresse->initLocalVariablesFromExcelRechnungsadresse($combinedValuesFromLine);
                     //canton is not part of Excel file and we want to remove the adress part from the institution table
@@ -277,8 +275,10 @@ class ImportExportService
 
             if (!is_array($combinedValuesFromLine)) {
                 $wrongMatch++;
+                print_r([$splittedLine,$this->keysAdminInstitution]);
                 continue 1;
             }
+            
 
             $admininstitution =  new AdminInstitution();
             $admininstitution->initLocalVariablesFromExcel($combinedValuesFromLine);
@@ -296,7 +296,7 @@ class ImportExportService
                 $admininstitution->setId_postadresse($postAdressID);
             }
 
-            if (! $admininstitution->getAdresse_rechnung_gleich_post() ) {
+            if ($admininstitution->getAdresse_rechnung_gleich_post()=='nein') {
                 $rechnungsAdresse = new Adresse();
                 $rechnungsAdresse->initLocalVariablesFromExcelRechnungsadresse($combinedValuesFromLine);
                 //canton is not part of Excel file and we want to remove the adress part from the institution table

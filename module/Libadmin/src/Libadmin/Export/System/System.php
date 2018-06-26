@@ -13,6 +13,7 @@ use Libadmin\Table\GroupTable;
 use Libadmin\Table\InstitutionTable;
 use Libadmin\Table\ViewTable;
 use Interop\Container\ContainerInterface;
+use Libadmin\Model\Institution;
 
 /**
  * [Description]
@@ -234,4 +235,74 @@ class System
 	{
 		throw new \Exception('Xml export is not supported for system "' . get_class($this) . '"');
 	}
+
+    /**
+     * Extract address information from institution
+     * If no address is available, return empty values
+     *
+     * @param    Institution        $institution
+     * @return   array
+     */
+    protected function extractAddressData(Institution $institution)
+    {
+        //todo : not really efficient, would be better to make a join in the initial query
+        $institutionWithAddress = $this->institutionTable->getRecord($institution->getId());
+        if($institutionWithAddress->getId_postadresse()) {
+            $postAdresse = $institutionWithAddress->getPostadresse();
+            $addressAndNumber = $postAdresse->getStrasse();
+            if ($postAdresse->getNummer())
+            {
+                $addressAndNumber .= ' ' . $postAdresse->getNummer();
+            }
+            return [
+                'address'	        => $addressAndNumber,
+                'zip'       		=> $postAdresse->getPlz(),
+                'city'		        => $postAdresse->getOrt(),
+            ];
+        } else {
+            return [
+                'address'	        => '',
+                'zip'		        => '',
+                'city'		        => '',
+            ];
+        }
+    }
+
+    /**
+     * Extract full address information from institution
+     * With Canton and Country
+     * If no address is available, return empty values
+     *
+     * @param    Institution        $institution
+     * @return   array
+     */
+    protected function extractFullAddressData(Institution $institution)
+    {
+        //todo : not really efficient, would be better to make a join in the initial query
+        $institutionWithAddress = $this->institutionTable->getRecord($institution->getId());
+        if($institutionWithAddress->getId_postadresse()) {
+            $postAdresse = $institutionWithAddress->getPostadresse();
+
+            $addressAndNumber = $postAdresse->getStrasse();
+            if ($postAdresse->getNummer())
+            {
+                $addressAndNumber .= ' ' . $postAdresse->getNummer();
+            }
+            return [
+                'address'	        => $addressAndNumber,
+                'zip'       		=> $postAdresse->getPlz(),
+                'city'		        => $postAdresse->getOrt(),
+                'canton'	        => $postAdresse->getCanton(),
+                'country'	        => $postAdresse->getCountry(),
+            ];
+        } else {
+            return [
+                'address'	        => '',
+                'zip'		        => '',
+                'city'		        => '',
+                'canton'	        => '',
+                'country'	        => '',
+            ];
+        }
+    }
 }

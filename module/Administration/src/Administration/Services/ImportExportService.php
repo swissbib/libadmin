@@ -183,7 +183,8 @@ class ImportExportService
                 //füge Kostenbeiträge hinzu
                 //relation zu admininstitution
                 //sammle skipped lines und logge diese
-                if (empty($institution->getId_postadresse()) ) {
+                //we don't create empty adresses (based on zip)
+                if (empty($institution->getId_postadresse()) && !empty($combinedValuesFromLine['zip']) ) {
                     //todo: ich habe noch nicht den Fall abgefangen, bei dem bereits eine Adresse vorhanden ist
                     //(Datenbankupdate durch Importdaten)
 

@@ -251,26 +251,26 @@ class Adresse extends BaseModel
 
     public function initLocalVariablesFromExcel(array $excelData) {
 
-        $this->setCountry($excelData["country"]);
-        $this->setOrt($excelData["city"]);
-        $this->setPlz($excelData["zip"]);
-        $this->setStrasse($excelData["address_strasse"]);
-        $this->setNummer($excelData["address_nummer"]);
-        $this->setZusatz($excelData["address_zusatz"]);
+        $this->setCountry(trim($excelData["country"]));
+        $this->setOrt(trim($excelData["city"]));
+        $this->setPlz(trim($excelData["zip"]));
+        $this->setStrasse(trim($excelData["address_strasse"]));
+        $this->setNummer(trim($excelData["address_nummer"]));
+        $this->setZusatz(trim($excelData["address_zusatz"]));
         if (isset($excelData["address_name"])) {
-            $this->setName_organisation($excelData["address_name"]);
+            $this->setName_organisation(trim($excelData["address_name"]));
         }
 
     }
 
     public function initLocalVariablesFromExcelRechnungsadresse(array $excelData) {
 
-        $this->setCountry($excelData["rechnungsadresse_country"]);
-        $this->setOrt($excelData["rechnungsadresse_ort"]);
-        $this->setPlz($excelData["rechnungsadresse_plz"]);
-        $this->setStrasse($excelData["rechnungsadresse_strasse"]);
-        $this->setNummer($excelData["rechnungsadresse_nummer"]);
-        $this->setZusatz($excelData["rechnungsadresse_zusatz"]);
-        $this->setName_organisation($excelData["rechnungsadresse_name"]);
+        $this->setCountry(trim($excelData["rechnungsadresse_country"]));
+        $this->setOrt(trim($excelData["rechnungsadresse_ort"]));
+        $this->setPlz(trim($excelData["rechnungsadresse_plz"]));
+        $this->setStrasse(trim($excelData["rechnungsadresse_strasse"]));
+        $this->setNummer(trim($excelData["rechnungsadresse_nummer"]));
+        $this->setZusatz(trim($excelData["rechnungsadresse_zusatz"]));
+        $this->setName_organisation(trim($excelData["rechnungsadresse_name"]));
     }
 }

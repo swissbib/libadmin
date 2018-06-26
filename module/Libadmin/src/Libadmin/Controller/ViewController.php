@@ -182,7 +182,7 @@ class ViewController extends BaseController
             $view = $this->viewTable->getRecord($idView);
             $view->setGroups($this->viewTable->getGroupIDs($idView));
         } catch (\Exception $ex) {
-            $this->flashMessenger->addErrorMessage('notfound_record');
+            $flashMessenger->addErrorMessage('notfound_record');
 
             return $this->forwardTo('home');
         }
@@ -206,9 +206,9 @@ class ViewController extends BaseController
 
                 $form->bind($view);
 
-                $this->flashMessenger->addSuccessMessage($this->translate('saved_view'));
+                $flashMessenger->addSuccessMessage('saved_view');
             } else {
-                $this->flashMessenger->addErrorMessage($this->translate('form_invalid'));
+                $flashMessenger->addErrorMessage('form_invalid');
             }
         }
 

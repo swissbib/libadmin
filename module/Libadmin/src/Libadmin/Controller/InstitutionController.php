@@ -6,6 +6,7 @@ namespace Libadmin\Controller;
 use Libadmin\Model\Adresse;
 use Libadmin\Model\InstitutionRelation;
 use Libadmin\Model\Kostenbeitrag;
+use Libadmin\Table\InstitutionAdminInstitutionRelationTable;
 use Libadmin\Table\InstitutionRelationTable;
 use Libadmin\Table\InstitutionTable;
 use Zend\Db\ResultSet\ResultSetInterface;
@@ -41,6 +42,11 @@ class InstitutionController extends BaseController
     /** @var array  */
     private $allViews = [];
 
+    /**
+     * @var InstitutionAdminInstitutionRelationTable
+     */
+    private $institutionAdminInstitutionRelationTable;
+
 
     /**
      * InstitutionController constructor.
@@ -48,19 +54,22 @@ class InstitutionController extends BaseController
      * @param InstitutionForm $institutionForm
      * @param InstitutionTable $institutionTable
      * @param InstitutionRelationTable $institutionRelationTable
-
+     * @param InstitutionAdminInstitutionRelationTable $institutionAdminInstitutionRelationTable
      * @param array $allViews
      */
     public function __construct(
         InstitutionForm $institutionForm,
         InstitutionTable $institutionTable,
         InstitutionRelationTable $institutionRelationTable,
+        InstitutionAdminInstitutionRelationTable $institutionAdminInstitutionRelationTable,
         array $allViews
     ) {
         $this->institutionForm = $institutionForm;
         $this->institutionTable = $institutionTable;
         $this->institutionRelationTable = $institutionRelationTable;
         $this->allViews = $allViews;
+
+        $this->institutionAdminInstitutionRelationTable = $institutionAdminInstitutionRelationTable;
     }
 
 
@@ -189,9 +198,15 @@ class InstitutionController extends BaseController
 
             if ($isDeleteRequest) {
                 $idRecord = (int)$request->getPost('id');
+
+                /**
+                 * @var Institution $institution
+                 */
+                $institution = $this->institutionTable->getRecord($idRecord);
                 $this->beforeDelete($idRecord);
                 $this->institutionTable->delete($idRecord);
-                $this->afterDelete($idRecord);
+                $this->afterDeleteInstitution($institution);
+                #$this->afterDelete($idRecord);
                 // @todo message is shown to late, solve this problem and re-enable message
                 //	$this->flashMessenger()->addSuccessMessage('Record deleted');
             }
@@ -232,7 +247,7 @@ class InstitutionController extends BaseController
         $relationTable = $this->institutionRelationTable;
         /** @var InstitutionRelation[] $existingRelations */
         $existingRelations = $relationTable->getInstitutionRelations($idInstitution);
-        $relations = array();
+        $relations = [];
 
         foreach ($views as $view) {
             foreach ($existingRelations as $index => $existingRelation) {
@@ -246,11 +261,6 @@ class InstitutionController extends BaseController
         }
 
         $institution->setRelations($relations);
-
-
-
-
-
 
         return $institution;
     }
@@ -281,7 +291,7 @@ class InstitutionController extends BaseController
         $kostenbeitrag = new Kostenbeitrag();
         $institution->setKostenbeitrag($kostenbeitrag);
 
-        $relations = array();
+        $relations = [];
 
         foreach ($views as $view) {
             $relations[] = new InstitutionRelation();
@@ -297,9 +307,11 @@ class InstitutionController extends BaseController
      *
      * @param    Integer $idView
      */
-    protected function beforeDelete($idView)
+    protected function beforeDelete($idInstitution)
     {
-        $this->institutionRelationTable->deleteInstitutionRelations($idView);
+        $this->institutionRelationTable->deleteInstitutionRelations($idInstitution);
+        $this->institutionAdminInstitutionRelationTable->delete($idInstitution);
+
     }
 
     /**
@@ -330,6 +342,41 @@ class InstitutionController extends BaseController
         );
 
         return $this->getAjaxView($data, 'libadmin/global/search');
+    }
+
+    /**
+     * Template method which is run after record delete
+     *
+     * @param    Integer $idRecord
+     */
+    protected function afterDeleteInstitution(Institution $institution)
+    {
+        //todo: is empty the correct PHP funtion to validate if there are defined values?
+        $kontakt = $institution->getKontakt();
+        if (!empty($kontakt->getId()))
+            $this->institutionTable->deleteKontakt($kontakt->getId());
+
+        $kostenbeitrag = $institution->getKostenbeitrag();
+        if (!empty($kostenbeitrag->getId())) {
+            $this->institutionTable->deleteKostenbeitrag($kostenbeitrag->getId());
+        }
+
+        $kontaktRechnung = $institution->getKontakt_rechnung();
+        if (!empty($kontaktRechnung->getId())) {
+            $this->institutionTable->deleteKontakt($kontaktRechnung->getId());
+        }
+
+        $postadresse = $institution->getPostadresse();
+        if (!empty($postadresse->getId())) {
+            $this->institutionTable->deleteAdresse($postadresse->getId());
+        }
+
+        $rechnungsadresse = $institution->getRechnungsadresse();
+        if (!empty($rechnungsadresse->getId())) {
+            $this->institutionTable->deleteAdresse($rechnungsadresse->getId());
+        }
+
+
     }
 
 

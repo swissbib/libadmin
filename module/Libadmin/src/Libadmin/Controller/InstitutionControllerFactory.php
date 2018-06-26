@@ -35,6 +35,7 @@ namespace Libadmin\Controller;
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
 use Libadmin\Form\InstitutionForm;
+use Libadmin\Table\InstitutionAdminInstitutionRelationTable;
 use Libadmin\Table\InstitutionRelationTable;
 use Libadmin\Table\InstitutionTable;
 use Libadmin\Table\ViewTable;
@@ -88,10 +89,13 @@ class InstitutionControllerFactory implements FactoryInterface
         $viewTable = $tablePluginManager->get(ViewTable::class);
         $allViews = $viewTable->getAllViewsOptions();
 
+        $relationInstitutionAdminInstTable = $tablePluginManager->get(InstitutionAdminInstitutionRelationTable::class);
+
         return new InstitutionController(
             $institutionForm,
             $institutionTable,
             $institutionRelationTable,
+            $relationInstitutionAdminInstTable,
             $allViews
         );
     }

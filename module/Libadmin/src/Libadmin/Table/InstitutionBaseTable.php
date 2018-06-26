@@ -234,4 +234,18 @@ abstract class InstitutionBaseTable extends BaseTable
             return null;
         }
     }
+
+    public function deleteKontakt($idKontakt) {
+        $this->kontaktTable->delete($idKontakt);
+    }
+
+
+    public function deleteKostenbeitrag($idKostenbeitrag) {
+        $this->kostenbeitragTable->delete($idKostenbeitrag);
+    }
+
+    public function deleteAdresse($idAdresse) {
+        $this->adresseTable->delete($idAdresse);
+    }
+
 }

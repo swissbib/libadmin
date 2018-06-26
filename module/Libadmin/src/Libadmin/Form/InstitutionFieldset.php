@@ -33,13 +33,8 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
 
 		$this->addText('bib_code', 'bibcode', true);
 		$this->addText('sys_code', 'syscode', true);
-		$this->add([
-			'name' => 'is_active',
-			'type' => 'checkbox',
-			'options' => [
-				'label' => 'is_active'
-            ]
-        ]);
+		$this->addCheckbox('is_active', 'is_active');
+
 		$this->addText('label_de', 'language_german', true);
 		$this->addText('label_fr', 'language_french', true);
 		$this->addText('label_it', 'language_italian', true);
@@ -63,14 +58,35 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
         $this->addText('adresszusatz', 'adresszusatz');
         $this->addText('id_kontakt', 'id_kontakt');
         $this->addText('korrespondenzsprache', 'korrespondenzsprache');
+
+        $this->addSelect(
+            'korrespondenzsprache',
+            'korrespondenzsprache',
+            [
+                ''   => '-',
+                'g' => 'german',
+                'f' => 'french',
+                'i' => 'italian',
+            ]
+        );
+
         $this->addText('bfscode', 'bfscode');
 
 
         $this->addText('worldcat_symbol', 'worldcat_symbol');
-        $this->addText('worldcat_ja_nein', 'worldcat_ja_nein');
+        $this->addCheckbox('worldcat_ja_nein', 'worldcat_ja_nein', 'ja', 'nein');
         $this->addText('cbslibrarycode', 'cbslibrarycode');
         $this->addText('verrechnungbeitrag', 'verrechnungbeitrag');
-        $this->addText('zusage_beitrag', 'zusage_beitrag');
+        $this->addSelect(
+            'zusage_beitrag',
+            'zusage_beitrag',
+            [
+                ''   => '-',
+                'ja' => 'yes',
+                'nein' => 'no',
+                'offen' => 'open',
+            ]
+        );
         $this->addText('id_kostenbeitrag', 'id_kostenbeitrag');
 
         $this->add([
@@ -89,16 +105,36 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
             ]
         ]);
 
-        $this->addText('adresse_rechnung_gleich_post', 'adresse_rechnung_gleich_post');
+        $this->addCheckbox('adresse_rechnung_gleich_post', 'adresse_rechnung_gleich_post', 'ja', 'nein');
         $this->addText('id_rechnungsadresse', 'id_rechnungsadresse');
         $this->addText('id_kontakt_rechnung', 'id_kontakt_rechnung');
-        $this->addText('mwst', 'mwst');
-        $this->addText('grund_mwst_frei', 'grund_mwst_frei');
+        $this->addCheckbox('mwst', 'mwst', 'ja', 'nein');
 
-        $this->addText('e_rechnung', 'e_rechnung');
+        $this->addSelect(
+            'grund_mwst_frei',
+            'grund_mwst_frei',
+            [
+                ''   => '-',
+                'bfk' => 'bfk_regelung',
+                'gemeinwesen' => 'eigenes_gemeinwesen',
+            ]
+        );
+
+        $this->addCheckbox('e_rechnung', 'e_rechnung', 'ja', 'nein');
         $this->addText('bemerkung_rechnung', 'bemerkung_rechnung');
 
         $this->addText('kostenbeitrag_basiert_auf', 'kostenbeitrag_basiert_auf');
+        $this->addSelect(
+            'kostenbeitrag_basiert_auf',
+            'kostenbeitrag_basiert_auf',
+            [
+                ''   => '-',
+                'bfs_zahlen' => 'bfs_zahlen',
+                'anzahl_aufnahmen' => 'anzahl_aufnahmen',
+                'freiwilliger_beitrag' => 'freiwilliger_beitrag',
+                'recherchierte_bfs_zahlen' => 'recherchierte_bfs_zahlen',
+            ]
+        );
 
         $this->add([
             'type' => 'Libadmin\Form\KontaktFieldset',
@@ -165,80 +201,11 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
 
 
 
-
-
-
-
         $this->add([
             'type' => 'Libadmin\Form\AdresseFieldset',
             'name' => 'postadresse',
         ]);
 
-		$this->add([
-			'name' => 'address',
-			'type' => 'textarea',
-			'options' => [
-				'label' => 'address'
-            ],
-			'attributes' => [
-				'rows' => 6
-            ]
-        ]);
-
-		$this->addText('zip', 'zip');
-		$this->addText('city', 'city');
-
-		$this->add([
-			'name' => 'country',
-			'type' => 'select',
-			'options' => [
-				'label' => 'country',
-				'value_options' => [
-					'ch' => 'country_ch',
-					'li' => 'country_li',
-					'de' => 'country_de',
-					'it' => 'country_it',
-					'fr' => 'country_fr'
-                ]
-            ]
-        ]);
-
-		$this->add([
-			'name' => 'canton',
-			'type' => 'select',
-			'options' => [
-				'label' => 'canton',
-				'empty_option' => '- Kein Kanton -',
-				'value_options' => [
-					'ag' => 'Aargau',
-					'ai' => 'Appenzell Innerrhoden',
-					'ar' => 'Appenzell Ausserrhoden',
-					'be' => 'Bern',
-					'bl' => 'Basel-Land',
-					'bs' => 'Basel-Stadt',
-					'fr' => 'Fribourg',
-					'ge' => 'Genève',
-					'gl' => 'Glarus',
-					'gr' => 'Graubünden ',
-					'ju' => 'Jura',
-					'lu' => 'Luzern',
-					'ne' => 'Neuchâtel',
-					'nw' => 'Nidwalden',
-					'ow' => 'Obwalden',
-					'sg' => 'Sankt Gallen',
-					'sh' => 'Schaffhausen',
-					'so' => 'Solothurn',
-					'sz' => 'Schwyz',
-					'tg' => 'Thurgau',
-					'ti' => 'Ticino',
-					'ur' => 'Uri',
-					'vs' => 'Valais',
-					'vd' => 'Vaud',
-					'zg' => 'Zug',
-					'zh' => 'Zürich'
-                ]
-            ]
-        ]);
 
 		$this->addText('website', 'webseite');
 		$this->addText('email', 'email');
@@ -306,6 +273,9 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
 			'canton' => [
 				'required' => false
             ],
+            'zusage_beitrag' => [
+                'required' => false
+            ],
 			'email' => [
 				'required' => false,
 				'validators' => [
@@ -319,7 +289,10 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
 				'filters' => [
 					['name' => 'Digits']
                 ]
-            ]
+            ],
+            'grund_mwst_frei' => [
+                'required' => false
+            ],
         ];
 	}
 }

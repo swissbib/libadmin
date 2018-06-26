@@ -48,11 +48,11 @@ CREATE TABLE `admininstitution` (
   `id_rechnungsadresse` int(11)  DEFAULT NULL,
   `id_kontakt_rechnung` int(11)  DEFAULT NULL,
   /* mwst: [ja|nein] */
-  `mwst` enum('ja', 'nein') DEFAULT NULL,
+  `mwst` enum('ja', 'nein') DEFAULT 'ja',
   /*grund_mwst_frei: [bfk|gemeinwesen] */
   `grund_mwst_frei` enum('bfk', 'gemeinwesen')  DEFAULT NULL,
   /* e_rechnung: [ja|nein] */
-  `e_rechnung` enum('ja', 'nein')  DEFAULT NULL,
+  `e_rechnung` enum('ja', 'nein')  DEFAULT 'nein',
   `bemerkung_rechnung` text  DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_kontakt` (`id_kontakt`),
@@ -175,9 +175,9 @@ CREATE TABLE `institution` (
   `id_rechnungsadresse` int(11) DEFAULT NULL,
   `id_postadresse` int(11) DEFAULT NULL,
   `id_kontakt_rechnung` int(11) DEFAULT NULL,
-  `mwst` enum('ja', 'nein') DEFAULT NULL,
+  `mwst` enum('ja', 'nein') DEFAULT 'ja',
   `grund_mwst_frei` enum('bfk', 'gemeinwesen')  DEFAULT NULL,
-  `e_rechnung` enum('ja', 'nein')  DEFAULT NULL,
+  `e_rechnung` enum('ja', 'nein')  DEFAULT 'nein',
   `bemerkung_rechnung` text,
   PRIMARY KEY (`id`),
   KEY `fk_kontakt` (`id_kontakt`),

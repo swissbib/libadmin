@@ -54,11 +54,11 @@ class BaseFieldset extends Fieldset
 	}
 
     /**
-     * Add text field
+     * Add Select
      *
      * @param    String        $name
      * @param    String        $label
-     * @param    Boolean        $required
+     * @param    array         $value_options
      */
     protected function addSelect($name, $label, $value_options, $required = false)
     {
@@ -76,5 +76,28 @@ class BaseFieldset extends Fieldset
                 ],
             ),
         ));
+    }
+
+    /**
+     * Add Checkbox
+     *
+     * @param    String        $name
+     * @param    String        $label
+     * @param    Boolean        $required
+     */
+    protected function addCheckbox($name, $label, $checkedValue=1, $uncheckedValue=0)
+    {
+        $this->add([
+            'name' => $name,
+            'type' => 'checkbox',
+            'options' => [
+                'label' => $label,
+                'label_attributes' => [
+                    'class' => 'control-label',
+                ],
+                'checked_value' => $checkedValue,
+                'unchecked_value' => $uncheckedValue,
+            ]
+        ]);
     }
 }

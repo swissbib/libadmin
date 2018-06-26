@@ -41,7 +41,15 @@ class KontaktFieldset extends BaseFieldset implements InputFilterProviderInterfa
 
         $this->addText('name', 'name');
         $this->addText('vorname', 'vorname');
-        $this->addText('anrede', 'anrede');
+        $this->addSelect(
+            'anrede',
+            'anrede',
+            [
+                ''   => '-',
+                'm' => 'herr',
+                'f' => 'frau',
+            ]
+        );
         $this->addText('email', 'email');
 
 	}
@@ -58,6 +66,9 @@ class KontaktFieldset extends BaseFieldset implements InputFilterProviderInterfa
 		return [
 			'name' => [
 				'required' => false
+            ],
+            'anrede' => [
+                'required' => false
             ],
             'email' => [
                 'required' => false,

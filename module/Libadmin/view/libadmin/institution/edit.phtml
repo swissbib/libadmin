@@ -122,13 +122,14 @@ $form->setAttribute('class', 'form-horizontal');
 
 			<div class="tab-pane" id="address">
 
-				
+
 
                 <fieldset class="postAdresse">
                     <legend><?= $this->translate('postAdresse') ?></legend>
                     <div class="row-fluid">
                         <div class="span6">
                             <?php $postAdresseFieldset = $institution->get('postadresse') ?>
+                            <?= $this->formBootstrapRow($postAdresseFieldset,'name_organisation') ?>
                             <?= $this->formBootstrapRow($postAdresseFieldset,'strasse') ?>
                             <?= $this->formBootstrapRow($postAdresseFieldset,'nummer') ?>
                             <?= $this->formBootstrapRow($postAdresseFieldset,'zusatz') ?>
@@ -192,13 +193,13 @@ $form->setAttribute('class', 'form-horizontal');
 				<?php foreach ($institution->get('relations') as $relationFieldset): ?>
 					<div class="row">
 						<div class="span3 view">
-							<?= $this->formRow($relationFieldset->get('id_view')) ?>
+							<?= $this->formBootstrapRow($relationFieldset, 'id_view') ?>
 						</div>
 						<div class="span4 group">
-							<?= $this->formRow($relationFieldset->get('id_group')) ?>
+							<?= $this->formBootstrapRow($relationFieldset, 'id_group') ?>
 						</div>
 						<div class="span2 favorite">
-							<?= $this->formRow($relationFieldset->get('is_favorite')) ?>
+							<?= $this->formBootstrapRow($relationFieldset, 'is_favorite') ?>
 						</div>
 					</div>
 				<?php endforeach; ?>

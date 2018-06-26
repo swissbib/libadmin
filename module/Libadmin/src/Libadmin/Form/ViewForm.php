@@ -41,13 +41,7 @@ class ViewForm extends BaseForm implements InputFilterProviderInterface
 		$this->addText('code', 'Code', true);
 		$this->addText('label', 'Name', true);
 
-		$this->add(array(
-			'name' => 'is_active',
-			'type' => 'checkbox',
-			'options' => array(
-				'label' => 'is_active'
-			)
-		));
+        $this->addCheckbox('is_active', 'is_active');
 
 		$this->add(array(
 			'name' => 'notes',
@@ -71,6 +65,7 @@ class ViewForm extends BaseForm implements InputFilterProviderInterface
 			}
 			$groupCheckboxes = new NoValidationMultiCheckbox('groups');
 			$groupCheckboxes->setValueOptions($groupOptions);
+			$groupCheckboxes->setLabel('groups');
 			$this->add($groupCheckboxes);
 		}
 	}

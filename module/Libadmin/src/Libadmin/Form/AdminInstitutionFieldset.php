@@ -61,10 +61,29 @@ class AdminInstitutionFieldset extends BaseFieldset implements InputFilterProvid
 
         $this->addText('name', 'name', true);
         $this->addText('email', 'email');
-        $this->addText('korrespondenzsprache', 'korrespondenzsprache');
+        $this->addSelect(
+            'korrespondenzsprache',
+            'korrespondenzsprache',
+            [
+                ''   => '-',
+                'g' => 'german',
+                'f' => 'french',
+                'i' => 'italian',
+            ]
+        );
+
         $this->addText('bfscode', 'bfscode');
         $this->addText('ipadresse', 'ipadresse');
-        $this->addText('zusage_beitrag', 'zusage_beitrag');
+        $this->addSelect(
+            'zusage_beitrag',
+            'zusage_beitrag',
+            [
+                ''   => '-',
+                'ja' => 'yes',
+                'nein' => 'no',
+                'offen' => 'open',
+            ]
+        );
         $this->add([
             'name' => 'bemerkung_kostenbeitrag',
             'type' => 'textarea',
@@ -75,12 +94,31 @@ class AdminInstitutionFieldset extends BaseFieldset implements InputFilterProvid
                 'rows' => 3
             ]
         ]);
-        $this->addText('adresse_rechnung_gleich_post', 'adresse_rechnung_gleich_post');
-        $this->addText('mwst', 'mwst');
-        $this->addText('grund_mwst_frei', 'grund_mwst_frei');
-        $this->addText('e_rechnung', 'e_rechnung');
+        $this->addCheckbox('adresse_rechnung_gleich_post', 'adresse_rechnung_gleich_post', 'ja', 'nein');
+        $this->addCheckbox('mwst', 'mwst', 'ja', 'nein');
+        $this->addSelect(
+            'grund_mwst_frei',
+            'grund_mwst_frei',
+            [
+                ''   => '-',
+                'bfk' => 'bfk_regelung',
+                'gemeinwesen' => 'eigenes_gemeinwesen',
+            ]
+        );
+        $this->addCheckbox('e_rechnung', 'e_rechnung', 'ja', 'nein');
         $this->addText('bemerkung_rechnung', 'bemerkung_rechnung');
-        $this->addText('kostenbeitrag_basiert_auf', 'kostenbeitrag_basiert_auf');
+        $this->addSelect(
+            'kostenbeitrag_basiert_auf',
+            'kostenbeitrag_basiert_auf',
+            [
+                ''   => '-',
+                'summe_verbundbibliotheken' => 'summe_verbundbibliotheken',
+                'bfs_zahlen' => 'bfs_zahlen',
+                'anzahl_aufnahmen' => 'anzahl_aufnahmen',
+                'freiwilliger_beitrag' => 'freiwilliger_beitrag',
+                'recherchierte_bfs_zahlen' => 'recherchierte_bfs_zahlen',
+            ]
+        );
 
         $this->add([
             'type' => 'Libadmin\Form\KostenbeitragFieldset',
@@ -126,6 +164,12 @@ class AdminInstitutionFieldset extends BaseFieldset implements InputFilterProvid
                         'name' => 'EmailAddress'
                     ]
                 ]
+            ],
+            'zusage_beitrag' => [
+                'required' => false
+            ],
+            'grund_mwst_frei' => [
+                'required' => false
             ],
         ];
     }

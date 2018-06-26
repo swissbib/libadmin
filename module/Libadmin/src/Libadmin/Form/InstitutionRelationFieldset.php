@@ -34,15 +34,23 @@ class InstitutionRelationFieldset extends Fieldset
 			'type' => 'Libadmin\Form\Element\NoValidationCheckbox',
 			'options' => array(
 				'label' => 'This label will be changed (by the app)',
-				'unchecked_value' => '0'
+				'unchecked_value' => '0',
+                'label_attributes' => [
+                    'class' => 'control-label',
+                ],
 			),
-			'required' => false
+			'required' => false,
+
 		));
 
 		$this->add(array(
 			'name' => 'id_group',
 			'type' => 'Libadmin\Form\Element\NoValidationSelect',
 			'options' => array( //				'label' => 'Gruppe'
+                'label' => 'This label will be changed (by the app)',
+                'label_attributes' => [
+                    'class' => 'control-label',
+                ],
 			)
 		));
 
@@ -52,7 +60,10 @@ class InstitutionRelationFieldset extends Fieldset
 			'options' => array(
 				'label' => 'is_favorite',
 				'checked_value' => '1',
-				'unchecked_value' => '0'
+				'unchecked_value' => '0',
+                'label_attributes' => [
+                    'class' => 'control-label',
+                ],
 			),
 			'required' => false
 		));

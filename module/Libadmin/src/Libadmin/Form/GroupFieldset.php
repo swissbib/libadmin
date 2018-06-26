@@ -32,13 +32,7 @@ class GroupFieldset extends BaseFieldset implements InputFilterProviderInterface
 
 		$this->addHidden('id');
 		$this->addText('code', 'Code', true);
-		$this->add(array(
-			'name' => 'is_active',
-			'type' => 'checkbox',
-			'options' => array(
-				'label' => 'is_active'
-			)
-		));
+		$this->addCheckbox('is_active', 'is_active');
 		$this->addText('label_de', 'language_german', true);
 		$this->addText('label_fr', 'language_french', true);
 		$this->addText('label_it', 'language_italian', true);

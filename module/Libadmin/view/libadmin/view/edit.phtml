@@ -74,7 +74,7 @@ $formType = 'horizontal';
                 <?php if ($form->get('groups')): ?>
                     <p><?= $this->translate('header_active_networkgroups') ?></p>
                     <p><?= $this->translate('header_active_networkgroups_info') ?></p>
-                    <?= $this->formRow($form->get('groups')) ?>
+                    <?= $this->formBootstrapRow($form, 'groups') ?>
                 <?php else: ?>
                     <p><?= $this->translate('nogroups', 'Libadmin') ?></p>
                 <?php endif; ?>

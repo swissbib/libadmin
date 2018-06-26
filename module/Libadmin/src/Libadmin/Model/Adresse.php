@@ -93,7 +93,7 @@ class Adresse extends BaseModel
     /**
      * @var ?String
      */
-    public $name_organisation_rechnung;
+    public $name_organisation;
 
     /**
      * @return mixed
@@ -231,19 +231,19 @@ class Adresse extends BaseModel
     /**
      * @return mixed
      */
-    public function getName_organisation_rechnung()
+    public function getName_organisation()
     {
-        return $this->name_organisation_rechnung;
+        return $this->name_organisation;
     }
 
     /**
-     * @param mixed $name_organisation_rechnung
+     * @param mixed $name_organisation
      *
      * @return Adresse
      */
-    public function setName_organisation_rechnung($name_organisation_rechnung)
+    public function setName_organisation($name_organisation)
     {
-        $this->name_organisation_rechnung = $name_organisation_rechnung;
+        $this->name_organisation = $name_organisation;
         return $this;
     }
 
@@ -258,7 +258,7 @@ class Adresse extends BaseModel
         $this->setNummer($excelData["address_nummer"]);
         $this->setZusatz($excelData["address_zusatz"]);
         if (isset($excelData["address_name"])) {
-            $this->setName_organisation_rechnung($excelData["address_name"]);
+            $this->setName_organisation($excelData["address_name"]);
         }
 
     }
@@ -271,6 +271,6 @@ class Adresse extends BaseModel
         $this->setStrasse($excelData["rechnungsadresse_strasse"]);
         $this->setNummer($excelData["rechnungsadresse_nummer"]);
         $this->setZusatz($excelData["rechnungsadresse_zusatz"]);
-        $this->setName_organisation_rechnung($excelData["rechnungsadresse_name"]);
+        $this->setName_organisation($excelData["rechnungsadresse_name"]);
     }
 }

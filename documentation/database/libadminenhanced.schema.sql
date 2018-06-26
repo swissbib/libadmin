@@ -87,7 +87,7 @@ CREATE TABLE `adresse` (
   `ort` varchar(150) DEFAULT NULL,
   `country` varchar(10) DEFAULT NULL,
   `canton` varchar(10) DEFAULT NULL,
-  `name_organisation_rechnung` varchar(200) DEFAULT NULL,
+  `name_organisation` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1342 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

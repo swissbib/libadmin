@@ -92,7 +92,7 @@ class AdresseFieldset extends BaseFieldset implements InputFilterProviderInterfa
             ]
         );
 
-        $this->addText('name_organisation_rechnung', 'name_organisation_rechnung');
+        $this->addText('name_organisation', 'name_organisation');
 	}
 
 

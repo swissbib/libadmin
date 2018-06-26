@@ -122,20 +122,7 @@ $form->setAttribute('class', 'form-horizontal');
 
 			<div class="tab-pane" id="address">
 
-				<fieldset class="address">
-					<legend>Alte Adresse : will be replace by the Postadresse below</legend>
-					<div class="row-fluid">
-						<div class="span6">
-                            <?= $this->formBootstrapRow($institution, 'address') ?></div>
-						<div class="span6">
-
-							<?= $this->formBootstrapRow($institution, 'zip') ?>
-							<?= $this->formBootstrapRow($institution, 'city') ?>
-							<?= $this->formBootstrapRow($institution, 'country') ?>
-							<?= $this->formBootstrapRow($institution, 'canton') ?>
-						</div>
-					</div>
-				</fieldset>
+				
 
                 <fieldset class="postAdresse">
                     <legend><?= $this->translate('postAdresse') ?></legend>
@@ -299,7 +286,7 @@ $form->setAttribute('class', 'form-horizontal');
                     <div class="row-fluid">
                         <div class="span6">
                             <?php $rechnungsAdresseFieldset = $institution->get('rechnungsadresse') ?>
-                            <?= $this->formBootstrapRow($rechnungsAdresseFieldset,'name_organisation_rechnung') ?>
+                            <?= $this->formBootstrapRow($rechnungsAdresseFieldset,'name_organisation') ?>
 
                             <?= $this->formBootstrapRow($rechnungsAdresseFieldset,'strasse') ?>
                             <?= $this->formBootstrapRow($rechnungsAdresseFieldset,'nummer') ?>

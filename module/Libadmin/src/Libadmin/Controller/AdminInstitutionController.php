@@ -231,4 +231,24 @@ class AdminInstitutionController extends BaseController
     }
 
 
+    public function deleteAction()
+    {
+
+        return $this->redirectTo('home');
+
+    }
+
+    public function homeAction()
+    {
+
+
+        return $this->getAjaxView(
+            [
+                'listItems' => $this->adminInstitutionTable->getAll()
+            ]);
+    }
+
+
+
+
 }

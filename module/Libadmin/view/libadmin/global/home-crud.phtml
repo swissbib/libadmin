@@ -1,5 +1,5 @@
 <div class="topButtons">
-	<a href="<?= $this->url($route, array('action' => 'add')); ?>"
+	<a href="<?= $this->url($route, ['action' => 'add']); ?>"
 	   class="ajaxButton addButton btn btn-primary btn-medium" id="add-<?= strtolower($entityName) ?>">
 		<?= $this->translate('add_new_xxx') ?> <?= $entityName ?>
 	</a>
@@ -14,3 +14,13 @@
 <?php else: ?>
 	<p><?= $this->translate('home_select_record') ?></p>
 <?php endif ?>
+
+<?php
+/*
+ * todo: rendering the message here will show up successful deletes
+ * but unfortunately other (old cached) messages as well.
+ * We have to discuss how to solve this
+ */
+?>
+<?= $this->flashMessenger()->renderCurrent('success', ['alert', 'alert-success']) ?>
+<?= $this->flashMessenger()->renderCurrent('error', ['alert', 'alert-error']) ?>

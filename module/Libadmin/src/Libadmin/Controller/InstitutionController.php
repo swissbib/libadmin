@@ -209,11 +209,27 @@ class InstitutionController extends BaseController
                 #$this->afterDelete($idRecord);
                 // @todo message is shown to late, solve this problem and re-enable message
                 //	$this->flashMessenger()->addSuccessMessage('Record deleted');
+                //$this->flashMessenger()->addInfoMessage('Hurra, Loeschen war erfogreich!');
+                /** @var FlashMessenger $flashMessenger */
+                $flashMessenger = $this->flashMessenger();
+
+                $flashMessenger->clearMessages('success');
+                $flashMessenger->clearCurrentMessages('success');
+
+                $flashMessenger->clearMessages('error');
+                $flashMessenger->clearCurrentMessages('error');
+
+                //todo; GH - use a better php like method to construct concatenated string messages
+                //actually I don't have the time to look it up
+
+                $flashMessenger->addSuccessMessage('Institution ' . $institution->getName_de() . ' / Bibcode: ' .
+                  $institution->getBib_code() . ' erfolgreich geloescht!!');
+
+                return $this->redirectTo('home');
+
+
             }
 
-
-            return $this->redirect()->toRoute('institution', ['action' => 'index']);
-            //return $this->forward()->dispatch(InstitutionController::class,$params);
 
         }
 
@@ -226,6 +242,8 @@ class InstitutionController extends BaseController
 
     public function homeAction()
     {
+
+
         return $this->getAjaxView(
             [
                 'listItems' => $this->institutionTable->getAll()

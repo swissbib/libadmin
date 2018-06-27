@@ -234,9 +234,105 @@ class AdminInstitutionController extends BaseController
     public function deleteAction()
     {
 
-        return $this->redirectTo('home');
+        $idRecord = (int)$this->params()->fromRoute('id', 0);
+
+        if (!$idRecord) {
+            $this->flashMessenger()->addErrorMessage('No record defined for deletion. Something went wrong');
+            return $this->redirectTo('home');
+        }
+
+
+        /** @var Request $request */
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $isDeleteRequest = $request->getPost('del') !== null;
+
+        }
+
+        if ($isDeleteRequest) {
+            $idRecord = (int)$request->getPost('id');
+
+            /**
+             * @var AdminInstitution $admininstitution
+             */
+            $admininstitution = $this->adminInstitutionTable->getRecord($idRecord);
+            $this->beforeDelete($idRecord);
+            $this->adminInstitutionTable->delete($idRecord);
+            $this->afterDeleteAdminInstitution($admininstitution);
+            #$this->afterDelete($idRecord);
+            // @todo message is shown to late, solve this problem and re-enable message
+            //	$this->flashMessenger()->addSuccessMessage('Record deleted');
+            //$this->flashMessenger()->addInfoMessage('Hurra, Loeschen war erfogreich!');
+            /** @var FlashMessenger $flashMessenger */
+            $flashMessenger = $this->flashMessenger();
+
+            $flashMessenger->clearMessages('success');
+            $flashMessenger->clearCurrentMessages('success');
+
+            $flashMessenger->clearMessages('error');
+            $flashMessenger->clearCurrentMessages('error');
+
+            //todo; GH - use a better php like method to construct concatenated string messages
+            //actually I don't have the time to look it up
+
+            $flashMessenger->addSuccessMessage('AdminInstitution ' . $admininstitution->getName() . ' / IdCode: ' .
+                $admininstitution->getIdcode() . ' erfolgreich geloescht!!');
+
+            return $this->redirectTo('home');
+
+
+        }
+        return $this->getAjaxView([
+            'id' => $idRecord,
+            'route' => 'admininstitution',
+            'record' => $this->adminInstitutionTable->getRecord($idRecord)
+        ], 'libadmin/global/delete');
 
     }
+
+
+    protected function beforeDelete($idAdminInstitution)
+    {
+        $this->institutionAdminInstitutionRelationTable->deleteWithIdAdmin($idAdminInstitution);
+
+    }
+
+    /**
+     * Template method which is run after record delete
+     *
+     * @param    Integer $idRecord
+     */
+    protected function afterDeleteAdminInstitution(AdminInstitution $admInstitution)
+    {
+        //todo: is empty the correct PHP funtion to validate if there are defined values?
+        $kontakt = $admInstitution->getKontakt();
+        if (!empty($kontakt->getId()))
+            $this->adminInstitutionTable->deleteKontakt($kontakt->getId());
+
+        $kostenbeitrag = $admInstitution->getKostenbeitrag();
+        if (!empty($kostenbeitrag->getId())) {
+            $this->adminInstitutionTable->deleteKostenbeitrag($kostenbeitrag->getId());
+        }
+
+        $kontaktRechnung = $admInstitution->getKontakt_rechnung();
+        if (!empty($kontaktRechnung->getId())) {
+            $this->adminInstitutionTable->deleteKontakt($kontaktRechnung->getId());
+        }
+
+        $postadresse = $admInstitution->getPostadresse();
+        if (!empty($postadresse->getId())) {
+            $this->adminInstitutionTable->deleteAdresse($postadresse->getId());
+        }
+
+        $rechnungsadresse = $admInstitution->getRechnungsadresse();
+        if (!empty($rechnungsadresse->getId())) {
+            $this->adminInstitutionTable->deleteAdresse($rechnungsadresse->getId());
+        }
+
+
+    }
+
+
 
     public function homeAction()
     {

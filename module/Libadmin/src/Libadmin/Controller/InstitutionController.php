@@ -323,12 +323,12 @@ class InstitutionController extends BaseController
     /**
      * Before institution delete, remove all relations
      *
-     * @param    Integer $idView
+     * @param    Integer $idInstitution
      */
     protected function beforeDelete($idInstitution)
     {
         $this->institutionRelationTable->deleteInstitutionRelations($idInstitution);
-        $this->institutionAdminInstitutionRelationTable->delete($idInstitution);
+        $this->institutionAdminInstitutionRelationTable->deleteWithIdInstitution($idInstitution);
 
     }
 

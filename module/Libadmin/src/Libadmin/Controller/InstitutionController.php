@@ -202,28 +202,10 @@ class InstitutionController extends BaseController
                 /**
                  * @var Institution $institution
                  */
-                $institution = $this->institutionTable->getRecord($idRecord);
                 $this->beforeDelete($idRecord);
                 $this->institutionTable->delete($idRecord);
-                $this->afterDeleteInstitution($institution);
-                #$this->afterDelete($idRecord);
-                // @todo message is shown to late, solve this problem and re-enable message
-                //	$this->flashMessenger()->addSuccessMessage('Record deleted');
-                //$this->flashMessenger()->addInfoMessage('Hurra, Loeschen war erfogreich!');
-                /** @var FlashMessenger $flashMessenger */
-                $flashMessenger = $this->flashMessenger();
 
-                $flashMessenger->clearMessages('success');
-                $flashMessenger->clearCurrentMessages('success');
-
-                $flashMessenger->clearMessages('error');
-                $flashMessenger->clearCurrentMessages('error');
-
-                //todo; GH - use a better php like method to construct concatenated string messages
-                //actually I don't have the time to look it up
-
-                $flashMessenger->addSuccessMessage('Institution ' . $institution->getName_de() . ' / Bibcode: ' .
-                  $institution->getBib_code() . ' erfolgreich geloescht!!');
+                $this->flashMessenger()->addSuccessMessage('Record deleted');
 
                 return $this->redirectTo('home');
 
@@ -360,41 +342,6 @@ class InstitutionController extends BaseController
         );
 
         return $this->getAjaxView($data, 'libadmin/global/search');
-    }
-
-    /**
-     * Template method which is run after record delete
-     *
-     * @param    Integer $idRecord
-     */
-    protected function afterDeleteInstitution(Institution $institution)
-    {
-        //todo: is empty the correct PHP funtion to validate if there are defined values?
-        $kontakt = $institution->getKontakt();
-        if (!empty($kontakt->getId()))
-            $this->institutionTable->deleteKontakt($kontakt->getId());
-
-        $kostenbeitrag = $institution->getKostenbeitrag();
-        if (!empty($kostenbeitrag->getId())) {
-            $this->institutionTable->deleteKostenbeitrag($kostenbeitrag->getId());
-        }
-
-        $kontaktRechnung = $institution->getKontakt_rechnung();
-        if (!empty($kontaktRechnung->getId())) {
-            $this->institutionTable->deleteKontakt($kontaktRechnung->getId());
-        }
-
-        $postadresse = $institution->getPostadresse();
-        if (!empty($postadresse->getId())) {
-            $this->institutionTable->deleteAdresse($postadresse->getId());
-        }
-
-        $rechnungsadresse = $institution->getRechnungsadresse();
-        if (!empty($rechnungsadresse->getId())) {
-            $this->institutionTable->deleteAdresse($rechnungsadresse->getId());
-        }
-
-
     }
 
 

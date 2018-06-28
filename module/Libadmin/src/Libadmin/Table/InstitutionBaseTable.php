@@ -136,6 +136,44 @@ abstract class InstitutionBaseTable extends BaseTable
         return $idInstitution;
     }
 
+    /**
+     * Delete record
+     *
+     * @param    Integer        $idRecord
+     */
+    public function delete($idRecord)
+    {
+
+        $institution = $this->getRecord($idRecord);
+
+        parent::delete($idRecord);
+
+        $kontakt = $institution->getKontakt();
+        if (!is_null($kontakt->getId()))
+            $this->deleteKontakt($kontakt->getId());
+
+        $kostenbeitrag = $institution->getKostenbeitrag();
+        if (!is_null($kostenbeitrag->getId())) {
+            $this->deleteKostenbeitrag($kostenbeitrag->getId());
+        }
+
+        $kontaktRechnung = $institution->getKontakt_rechnung();
+        if (!is_null($kontaktRechnung->getId())) {
+            $this->deleteKontakt($kontaktRechnung->getId());
+        }
+
+        $postadresse = $institution->getPostadresse();
+        if (!is_null($postadresse->getId())) {
+            $this->deleteAdresse($postadresse->getId());
+        }
+
+        $rechnungsadresse = $institution->getRechnungsadresse();
+        if (!is_null($rechnungsadresse->getId())) {
+            $this->deleteAdresse($rechnungsadresse->getId());
+        }
+
+    }
+
 
 
     /**

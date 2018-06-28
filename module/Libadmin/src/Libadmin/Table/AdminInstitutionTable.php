@@ -33,6 +33,7 @@
 namespace Libadmin\Table;
 use Libadmin\Model\AdminInstitution;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\ResultSet\ResultSetInterface;
 
 
 /**
@@ -107,6 +108,13 @@ class AdminInstitutionTable extends InstitutionBaseTable
     public function saveAdminInstitutionOnly(AdminInstitution $adminInstitution) {
         $idInstitution = BaseTable::save($adminInstitution);
         return $idInstitution;
+    }
+
+    public function getAllAdminInstitutionsOptions()
+    {
+        $results = $this->getAll('name', 100);
+
+        return $this->toList($results);
     }
 
 }

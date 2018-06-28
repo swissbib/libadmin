@@ -33,6 +33,9 @@
 namespace Libadmin\Table;
 use Libadmin\Model\AdminInstitution;
 use Libadmin\Model\InstitutionAdminInstitutionRelation;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Sql;
 
 /**
  * InstitutionAdminInstitutionRelationTable
@@ -97,6 +100,18 @@ class InstitutionAdminInstitutionRelationTable extends BaseTable
     public function deleteWithIdAdmin($idAdminInstitution)
     {
         $this->tableGateway->delete(['id_admininstitution' => $idAdminInstitution]);
+    }
+
+    /**
+     * Get admin institution id
+     *
+     * @param   Integer        $idAdminInstitution
+     * @param   String         $order
+     * @return    null|ResultSetInterface
+     */
+    public function getAdminInstitutionID($idInstitution)
+    {
+        return '5';
     }
 
 

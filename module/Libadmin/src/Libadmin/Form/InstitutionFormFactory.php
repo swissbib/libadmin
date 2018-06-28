@@ -33,6 +33,7 @@
 namespace Libadmin\Form;
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
+use Libadmin\Table\AdminInstitutionTable;
 use Libadmin\Table\GroupTable;
 use Libadmin\Table\InstitutionTable;
 use Libadmin\Table\TablePluginManager;
@@ -79,7 +80,11 @@ class InstitutionFormFactory implements FactoryInterface
         $groupTable = $tablePluginManager->get(GroupTable::class);
         $allGroups = $groupTable->getAllGroupsOptions();
 
-        $form = new InstitutionForm($allViews, $allGroups);
+        /** @var AdminInstitutionTable $adminInstitutionTable */
+        $adminInstitutionTable = $tablePluginManager->get(AdminInstitutionTable::class);
+        $allAdminInstitutions = $adminInstitutionTable->getAllAdminInstitutionsOptions();
+
+        $form = new InstitutionForm($allViews, $allGroups, $allAdminInstitutions);
         $form->setHydrator(new ClassMethods(false));
         return $form;
     }

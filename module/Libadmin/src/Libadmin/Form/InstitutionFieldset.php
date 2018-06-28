@@ -3,6 +3,7 @@ namespace Libadmin\Form;
 
 use Zend\Form\Element;
 use Zend\Form\Fieldset;
+use Zend\Form\FormInterface;
 use Zend\Hydrator\ClassMethods as ClassMethodsHydrator;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Validator;
@@ -144,6 +145,12 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
                 'freiwilliger_beitrag' => 'freiwilliger_beitrag',
                 'recherchierte_bfs_zahlen' => 'recherchierte_bfs_zahlen',
             ]
+        );
+
+        $this->addSelect(
+            'admin_institution_id',
+            'admin_institution_id',
+            []
         );
 
         $this->add([
@@ -314,4 +321,28 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
             ],
         ];
 	}
+
+    /**
+     * Modify AdminInstitution Select
+     *
+     * @param    FormInterface|InstitutionForm    $form
+     * @return mixed|void
+     */
+    public function prepareElement(FormInterface $form)
+    {
+        parent::prepareElement($form);
+
+        /** @var Select $groupSelect */
+        $adminInstitutionSelect = $this->get('admin_institution_id');
+
+        /** @var Group $group */
+        $options = array();
+
+        $options[''] = '--- no_admin_institution ---';
+        foreach ($form->adminInstitutions as $adminInstitution) {
+            $options[$adminInstitution->getId()] = $adminInstitution->getListLabel();
+        }
+
+        $adminInstitutionSelect->setValueOptions($options);
+    }
 }

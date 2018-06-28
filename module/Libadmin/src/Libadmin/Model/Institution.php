@@ -93,6 +93,8 @@ class Institution extends InstitutionBase
     public $is_favorite; // This is not an actual record field
 	public $relations = [];
 
+	public $admin_institution_id;
+
 	/**
      * These are all the fields which are directly stored
      * in the institution table
@@ -106,6 +108,7 @@ class Institution extends InstitutionBase
 
 		unset($data['relations']);
 		unset($data['is_favorite']);
+        unset($data['admin_institution_id']);
 
 		return $data;
 	}
@@ -525,6 +528,24 @@ class Institution extends InstitutionBase
 	{
 		return $this->relations;
 	}
+
+    /**
+     * @return mixed
+     */
+    public function getAdmin_institution_id()
+    {
+        return $this->admin_institution_id;
+    }
+
+    /**
+     * @param mixed $admin_institution_id
+     *
+     * @return mixed
+     */
+    public function setAdmin_institution_id($admin_institution_id)
+    {
+        $this->admin_institution_id = $admin_institution_id;
+    }
 
 
 

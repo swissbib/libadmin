@@ -262,6 +262,9 @@ class InstitutionController extends BaseController
 
         $institution->setRelations($relations);
 
+        $adminInstitutionId = $this->institutionAdminInstitutionRelationTable->getAdminInstitutionID($idInstitution);
+        $institution->setAdmin_institution_id($adminInstitutionId);
+
         return $institution;
     }
 

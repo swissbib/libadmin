@@ -21,13 +21,15 @@ class InstitutionForm extends BaseForm
 
     public $groups = array();
 
+    public $adminInstitutions = array();
+
     /**
      * Initialize
      *
      * @param View[] $views
      * @param Group[] $groups
      */
-    public function __construct(array $views, array $groups)
+    public function __construct(array $views, array $groups, array $adminInstitutions)
     {
         parent::__construct('institution');
 
@@ -35,6 +37,7 @@ class InstitutionForm extends BaseForm
 
         $this->views = $views;
         $this->groups = $groups;
+        $this->adminInstitutions = $adminInstitutions;
     }
 
     public function init()

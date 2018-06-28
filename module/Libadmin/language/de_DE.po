@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Libadmin\n"
-"POT-Creation-Date: 2018-06-26 08:50+0200\n"
-"PO-Revision-Date: 2018-06-26 08:51+0200\n"
+"POT-Creation-Date: 2018-06-26 08:51+0200\n"
+"PO-Revision-Date: 2018-06-26 16:52+0200\n"
 "Last-Translator: Fabian Erni <ferni@snowflake.ch>\n"
 "Language-Team: Swissbib <admin@swissbib.ch>\n"
 "Language: de_DE\n"
@@ -67,22 +67,22 @@ msgid "costs_participation"
 msgstr "Kostenbeitrag"
 
 #: ../view/libadmin/admin-institution/edit.phtml:72
-#: ../view/libadmin/institution/edit.phtml:141
+#: ../view/libadmin/institution/edit.phtml:128
 msgid "postAdresse"
 msgstr "Postadresse"
 
 #: ../view/libadmin/admin-institution/edit.phtml:89
-#: ../view/libadmin/institution/edit.phtml:179
+#: ../view/libadmin/institution/edit.phtml:166
 msgid "contactPerson"
 msgstr "Kontakt Person"
 
 #: ../view/libadmin/admin-institution/edit.phtml:177
-#: ../view/libadmin/institution/edit.phtml:298
+#: ../view/libadmin/institution/edit.phtml:285
 msgid "rechnungsAdresse"
 msgstr "Rechnungsadresse"
 
 #: ../view/libadmin/admin-institution/edit.phtml:195
-#: ../view/libadmin/institution/edit.phtml:317
+#: ../view/libadmin/institution/edit.phtml:304
 msgid "contactPersonInvoice"
 msgstr ""
 
@@ -351,7 +351,7 @@ msgid "display"
 msgstr "Anzeige"
 
 #: ../view/libadmin/group/edit.phtml:65
-#: ../view/libadmin/institution/edit.phtml:195
+#: ../view/libadmin/institution/edit.phtml:182
 #: ../view/libadmin/view/home.phtml:6
 msgid "views"
 msgstr "Views"
@@ -381,7 +381,7 @@ msgid "group"
 msgstr "Gruppe"
 
 #: ../view/libadmin/group/home.phtml:6
-#: ../view/libadmin/institution/edit.phtml:198
+#: ../view/libadmin/institution/edit.phtml:185
 msgid "groups"
 msgstr "Gruppen"
 
@@ -401,11 +401,11 @@ msgstr "Gruppen & Views"
 msgid "title_library_names_official"
 msgstr "Bibliotheksnamen (offiziell)"
 
-#: ../view/libadmin/institution/edit.phtml:157
+#: ../view/libadmin/institution/edit.phtml:144
 msgid "contactdata"
 msgstr "Kontaktdaten"
 
-#: ../view/libadmin/institution/edit.phtml:201
+#: ../view/libadmin/institution/edit.phtml:188
 #: ../view/libadmin/view/edit.phtml:122
 msgid "is_favorite"
 msgstr "Ist Favorit"

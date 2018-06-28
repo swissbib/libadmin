@@ -148,6 +148,28 @@ class InstitutionTable extends InstitutionBaseTable
         return $this->tableGateway->selectWith($select);
     }
 
+    /**
+     * Get all institutions which are related to the given admin institution
+     *
+     * @param   Integer        $idAdminInstitution
+     * @param   String         $order
+     * @return    null|ResultSetInterface
+     */
+    public function getInstitutionsForAnAdminInstitution($idAdminInstitution)
+    {
+        $select = new Select($this->getTable());
+
+        $select->columns(array('*'))
+            ->join(array(
+                'mn' => 'mn_institution_admininstitution'),
+                'institution.id = mn.id_institution'
+            )
+            ->where(array(
+                'mn.id_admininstitution' => (int)$idAdminInstitution
+            ));
+
+        return $this->tableGateway->selectWith($select);
+    }
 
 
     /**

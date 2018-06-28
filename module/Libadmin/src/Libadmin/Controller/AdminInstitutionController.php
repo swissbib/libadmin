@@ -48,15 +48,21 @@ class AdminInstitutionController extends BaseController
      * @var InstitutionAdminInstitutionRelationTable
      */
     private $institutionAdminInstitutionRelationTable;
+    /**
+     * @var InstitutionTable
+     */
+    private $institutionTable;
 
-    public function __construct(AdminInstitutionForm $adminInstitutionForm,
-                                AdminInstitutionTable $adminInstitutionTable, InstitutionAdminInstitutionRelationTable $institutionAdminInstitutionRelationTable){
-
-
-
+    public function __construct(
+        AdminInstitutionForm $adminInstitutionForm,
+        AdminInstitutionTable $adminInstitutionTable,
+        InstitutionAdminInstitutionRelationTable $institutionAdminInstitutionRelationTable,
+        InstitutionTable $institutionTable
+    ) {
         $this->adminInstitutionForm = $adminInstitutionForm;
         $this->adminInstitutionTable = $adminInstitutionTable;
         $this->institutionAdminInstitutionRelationTable = $institutionAdminInstitutionRelationTable;
+        $this->institutionTable = $institutionTable;
     }
 
     /**
@@ -67,7 +73,7 @@ class AdminInstitutionController extends BaseController
     public function indexAction()
     {
         return [
-            'listItems' => $this->adminInstitutionTable->getAll()
+            'listItems' => $this->adminInstitutionTable->getAll('name', 100)
         ];
 
 
@@ -129,7 +135,8 @@ class AdminInstitutionController extends BaseController
         return $this->getAjaxView([
             'customform' => $form,
             'title' => 'admininstitution_edit',
-            'isNew' => false
+            'isNew' => false,
+            'institutions' => $this->institutionTable->getInstitutionsForAnAdminInstitution($idInstitution),
         ]);
     }
 

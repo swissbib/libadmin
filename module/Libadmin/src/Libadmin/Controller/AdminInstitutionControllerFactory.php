@@ -37,6 +37,7 @@ use Libadmin\Form\AdminInstitutionForm;
 use Libadmin\Table\AdminInstitutionTable;
 use Libadmin\Table\AdresseTable;
 use Libadmin\Table\InstitutionAdminInstitutionRelationTable;
+use Libadmin\Table\InstitutionTable;
 use Libadmin\Table\KontaktTable;
 use Libadmin\Table\KostenbeitragTable;
 use Libadmin\Table\TablePluginManager;
@@ -68,14 +69,17 @@ class AdminInstitutionControllerFactory implements FactoryInterface
         $tablePluginManager =  $container->get(TablePluginManager::class);
 
         $institutionForm = $formElementManager->get(AdminInstitutionForm::class);
-        $institutionTable = $tablePluginManager->get(AdminInstitutionTable::class);
+        $adminInstitutionTable = $tablePluginManager->get(AdminInstitutionTable::class);
+        $institutionTable = $tablePluginManager->get(InstitutionTable::class);
+
 
         $relationInstitutionAdminInstTable = $tablePluginManager->get(InstitutionAdminInstitutionRelationTable::class);
 
         return new AdminInstitutionController(
             $institutionForm,
-            $institutionTable,
-            $relationInstitutionAdminInstTable
+            $adminInstitutionTable,
+            $relationInstitutionAdminInstTable,
+            $institutionTable
         );
 
 

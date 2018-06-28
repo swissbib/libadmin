@@ -231,4 +231,62 @@ class AdminInstitutionController extends BaseController
     }
 
 
+    public function deleteAction()
+    {
+
+        $idRecord = (int)$this->params()->fromRoute('id', 0);
+
+        if (!$idRecord) {
+            $this->flashMessenger()->addErrorMessage('No record defined for deletion. Something went wrong');
+            return $this->redirectTo('home');
+        }
+
+
+        /** @var Request $request */
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $isDeleteRequest = $request->getPost('del') !== null;
+
+            if ($isDeleteRequest) {
+                $idRecord = (int)$request->getPost('id');
+
+                /**
+                 * @var AdminInstitution $admininstitution
+                 */
+                $this->beforeDelete($idRecord);
+                $this->adminInstitutionTable->delete($idRecord);
+                $this->flashMessenger()->addSuccessMessage('Record deleted');
+
+                return $this->redirectTo('home');
+            }
+        }
+        return $this->getAjaxView([
+            'id' => $idRecord,
+            'route' => 'admininstitution',
+            'record' => $this->adminInstitutionTable->getRecord($idRecord)
+        ], 'libadmin/global/delete');
+
+    }
+
+
+    protected function beforeDelete($idAdminInstitution)
+    {
+        $this->institutionAdminInstitutionRelationTable->deleteWithIdAdmin($idAdminInstitution);
+
+    }
+
+
+    public function homeAction()
+    {
+
+
+        return $this->getAjaxView(
+            [
+                'listItems' => $this->adminInstitutionTable->getAll()
+            ]);
+    }
+
+
+
+
 }

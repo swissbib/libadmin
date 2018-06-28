@@ -243,14 +243,11 @@ class GroupController extends BaseController
                 $this->beforeDelete($idRecord);
                 $this->groupTable->delete($idRecord);
                 $this->afterDelete($idRecord);
-                // @todo message is shown to late, solve this problem and re-enable message
-                //	$this->flashMessenger()->addSuccessMessage('Record deleted');
+                $this->flashMessenger()->addSuccessMessage('Record deleted');
             }
 
 
-            return $this->redirect()->toRoute('group', ['action' => 'index']);
-            //return $this->forward()->dispatch(InstitutionController::class,$params);
-
+            return $this->redirectTo('home');
         }
 
         return $this->getAjaxView(array(

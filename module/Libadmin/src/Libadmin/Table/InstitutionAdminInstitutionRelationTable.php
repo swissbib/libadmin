@@ -77,4 +77,29 @@ class InstitutionAdminInstitutionRelationTable extends BaseTable
 
 
 
+    /**
+     * Delete record
+     *
+     * @param    Integer        $idInstitution
+     */
+    public function deleteWithIdInstitution($idInstitution)
+    {
+        $this->tableGateway->delete(['id_institution' => $idInstitution]);
+    }
+
+
+
+    /**
+     * Delete record
+     *
+     * @param    Integer        $idAdminInstitution
+     */
+    public function deleteWithIdAdmin($idAdminInstitution)
+    {
+        $this->tableGateway->delete(['id_admininstitution' => $idAdminInstitution]);
+    }
+
+
+
+
 }

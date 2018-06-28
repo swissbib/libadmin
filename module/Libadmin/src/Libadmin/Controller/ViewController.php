@@ -224,6 +224,14 @@ class ViewController extends BaseController
         ]);
     }
 
+    public function homeAction()
+    {
+        return $this->getAjaxView(
+            [
+                'listItems' => $this->viewTable->getAll()
+            ]);
+    }
+
     public function deleteAction()
     {
         $idRecord = (int)$this->params()->fromRoute('id', 0);
@@ -244,13 +252,10 @@ class ViewController extends BaseController
                 $this->beforeDelete($idRecord);
                 $this->viewTable->delete($idRecord);
                 $this->afterDelete($idRecord);
-                // @todo message is shown to late, solve this problem and re-enable message
-                //	$this->flashMessenger()->addSuccessMessage('Record deleted');
+                $this->flashMessenger()->addSuccessMessage('Record deleted');
             }
 
-
-            return $this->redirect()->toRoute('view', ['action' => 'index']);
-            //return $this->forward()->dispatch(InstitutionController::class,$params);
+            return $this->redirectTo('home');
 
         }
 

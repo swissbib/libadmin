@@ -23,12 +23,12 @@ $saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');
 <div class="topButtons">
     <input type="submit" value="<?= $this->escapeHtml($saveButtonLabel) ?>"
            class="submitButton btn btn-primary btn-medium" id="submitbutton" name="submit">
-    <a href="<?= $this->url('institution', ['action' => 'home']); ?>"
+    <a href="<?= $this->url('admininstitution', ['action' => 'home']); ?>"
        class="ajaxButton closeButton btn btn-medium" id="closebutton">
         <?= $this->translate('action_close') ?>
     </a>
     <?php if (!$isNew): ?>
-        <a href="<?= $this->url('institution', ['action' => 'delete', 'id' => $admininstitution->get('id')->getValue()]); ?>"
+        <a href="<?= $this->url('admininstitution', ['action' => 'delete', 'id' => $admininstitution->get('id')->getValue()]); ?>"
            class="ajaxButton deleteButton btn btn-danger btn-medium" id="deletebutton">
             <?= $this->translate('action_delete') ?>
         </a>

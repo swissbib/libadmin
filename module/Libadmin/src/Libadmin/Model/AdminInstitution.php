@@ -126,7 +126,7 @@ class AdminInstitution extends InstitutionBase
      */
     public function getListLabel()
     {
-        return $this->getName();
+        return $this->getIdcode() . ': ' . $this->getName();
     }
 
     /**
@@ -174,7 +174,7 @@ class AdminInstitution extends InstitutionBase
             $this->setE_Rechnung($excelData["e_rechnung_ja_nein"]);
         }
         if (!empty($excelData["mwst_ja_nein"])) {
-            $this->setGrund_mwst_frei($excelData["mwst_ja_nein"]);
+            $this->setMwst($excelData["mwst_ja_nein"]);
         }
         $this->setGrund_mwst_frei($excelData["grund_mwst_befreiung"]); //habe ich hier keine MWST
         $this->setKorrespondenzsprache($excelData["korrespondenzsprache"]);

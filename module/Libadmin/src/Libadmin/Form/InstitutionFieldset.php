@@ -132,7 +132,17 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
         );
 
         $this->addCheckbox('e_rechnung', 'e_rechnung', 'ja', 'nein');
-        $this->addText('bemerkung_rechnung', 'bemerkung_rechnung');
+
+        $this->add([
+            'name' => 'bemerkung_rechnung',
+            'type' => 'textarea',
+            'options' => [
+                'label' => 'bemerkung_rechnung'
+            ],
+            'attributes' => [
+                'rows' => 3
+            ]
+        ]);
 
         $this->addText('kostenbeitrag_basiert_auf', 'kostenbeitrag_basiert_auf');
         $this->addSelect(

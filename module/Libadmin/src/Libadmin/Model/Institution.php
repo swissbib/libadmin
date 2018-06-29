@@ -851,17 +851,15 @@ class Institution extends InstitutionBase
         $this->setGrund_mwst_frei($excelData["grund_mwst_befreiung"]); //habe ich hier keine MWST
         $this->setKorrespondenzsprache($excelData["korrespondenzsprache"]);
 
-        empty($excelData["worldcat_ja_nein"]) ? $this->setWorldcat_ja_nein(0): $this->setWorldcat_ja_nein(1);
-        //$this->getWorldcat_ja_nein() === true ? $this->setWorldcatSyMmbol($excelData["worldcat_symbol"]) : $this->setWorldcat_symbol("");
-        //todo: Frage an Silvia
-        //worldcat_symbol ist gesetzt auch wenn worldcat_ja_nein leer ist - richtig?
-
+        if (!empty($excelData["worldcat_ja_nein"])) {
+            $this->setWorldcat_ja_nein($excelData["worldcat_ja_nein"]);
+        }
 
         if (!empty($excelData["e_rechnung_ja_nein"])) {
             $this->setE_Rechnung($excelData["e_rechnung_ja_nein"]);
         }
         if (!empty($excelData["mwst_ja_nein"])) {
-            $this->setGrund_mwst_frei($excelData["mwst_ja_nein"]);
+            $this->setMwst($excelData["mwst_ja_nein"]);
         }
 
         $this->setWorldcat_symbol($excelData["worldcat_symbol"]);

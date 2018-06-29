@@ -860,6 +860,8 @@ class Institution extends InstitutionBase
         }
         if (!empty($excelData["mwst_ja_nein"])) {
             $this->setMwst($excelData["mwst_ja_nein"]);
+        } else {
+            $this->setMwst('nein');
         }
 
         $this->setWorldcat_symbol($excelData["worldcat_symbol"]);

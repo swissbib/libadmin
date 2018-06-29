@@ -111,7 +111,27 @@ class InstitutionAdminInstitutionRelationTable extends BaseTable
      */
     public function getAdminInstitutionID($idInstitution)
     {
-        return '5';
+        /** @var Adapter $adapter */
+        $adapter = $this->tableGateway->getAdapter();
+
+        $sql    = new Sql($adapter);
+        $select = $sql->select();
+        $select->from($this->getTable());
+        $select->where(['id_institution' => (int)$idInstitution]);
+
+        $selectString = $sql->buildSqlString($select);
+        try {
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE)->toArray();
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+
+        if (sizeof($results)>0) {
+            return (int)$results[0]['id_admininstitution'];
+        } else {
+            return null;
+        }
+
     }
 
 

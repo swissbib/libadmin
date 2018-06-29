@@ -1,6 +1,7 @@
 <?php
 namespace Libadmin\Table;
 
+use Libadmin\Model\InstitutionAdminInstitutionRelation;
 use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Db\ResultSet\ResultSetInterface;
 use Zend\Db\Sql\Select;
@@ -31,17 +32,11 @@ class InstitutionTable extends InstitutionBaseTable
     protected $relationTable;
 
     /**
-     * @var KontaktTable
+     * @var InstitutionAdminInstitutionRelationTable
      */
-    private $kontaktTable;
-    /**
-     * @var AdresseTable
-     */
-    private $adresseTable;
-    /**
-     * @var KostenbeitragTable
-     */
-    private $kostenbeitragTable;
+    protected $institutionAdminInstitutionRelationTable;
+
+
 
     /**
      * @var    String[]    Fulltext search fields
@@ -101,22 +96,25 @@ class InstitutionTable extends InstitutionBaseTable
     /**
      * Initialize with base and relation table
      *
-     * @param TableGateway             $institutionTableGateway institutionTableGateway
-     * @param InstitutionRelationTable $relationTable           relationTable
-     * @param AdresseTable             $adresseTable            adresseTable
-     * @param KontaktTable             $kontaktTable            kontaktTable
-     * @param KostenbeitragTable       $kostenbeitragTable      kostenbeitragTable
+     * @param TableGateway                             $institutionTableGateway                  institutionTableGateway
+     * @param InstitutionRelationTable                 $relationTable                            relationTable
+     * @param AdresseTable                             $adresseTable                             adresseTable
+     * @param KontaktTable                             $kontaktTable                             kontaktTable
+     * @param KostenbeitragTable                       $kostenbeitragTable                       kostenbeitragTable
+     * @param InstitutionAdminInstitutionRelationTable $institutionAdminInstitutionRelationTable institutionAdminInstitutionRelationTable
      */
     public function __construct(
         TableGateway $institutionTableGateway,
         InstitutionRelationTable $relationTable,
         AdresseTable $adresseTable,
         KontaktTable $kontaktTable,
-        KostenbeitragTable $kostenbeitragTable
+        KostenbeitragTable $kostenbeitragTable,
+        InstitutionAdminInstitutionRelationTable $institutionAdminInstitutionRelationTable
     ) {
         parent::__construct($institutionTableGateway, $adresseTable, $kontaktTable, $kostenbeitragTable);
 
         $this->relationTable = $relationTable;
+        $this->institutionAdminInstitutionRelationTable = $institutionAdminInstitutionRelationTable;
     }
 
 
@@ -188,6 +186,22 @@ class InstitutionTable extends InstitutionBaseTable
 
         $relations = $institution->getRelations();
         $this->saveRelations($idInstitution, $relations);
+
+        $adminInstitutionId = $institution->getAdmin_institution_id();
+        $oldAdminInstitutionId = $this->institutionAdminInstitutionRelationTable->getAdminInstitutionID($institution->getId());
+
+        if ($adminInstitutionId != $oldAdminInstitutionId) {
+            $this->institutionAdminInstitutionRelationTable->deleteWithIdInstitution($idInstitution);
+            if (!empty($adminInstitutionId)) {
+                $relationAdmin = new InstitutionAdminInstitutionRelation();
+                $relationAdmin->setIdInstitution($idInstitution);
+                $relationAdmin->setIdAdmininstitution($adminInstitutionId);
+                $relationAdmin->setRelationType('admin');
+                $this->institutionAdminInstitutionRelationTable->insertRelation($relationAdmin);
+            }
+        }
+
+
 
         return $idInstitution;
     }

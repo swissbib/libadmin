@@ -27,15 +27,15 @@ abstract class InstitutionBaseTable extends BaseTable
     /**
      * @var KontaktTable
      */
-    private $kontaktTable;
+    protected $kontaktTable;
     /**
      * @var AdresseTable
      */
-    private $adresseTable;
+    protected $adresseTable;
     /**
      * @var KostenbeitragTable
      */
-    private $kostenbeitragTable;
+    protected $kostenbeitragTable;
 
 
 

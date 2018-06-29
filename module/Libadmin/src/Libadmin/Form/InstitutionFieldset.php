@@ -147,11 +147,17 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
             ]
         );
 
-        $this->addSelect(
-            'admin_institution_id',
-            'admin_institution_id',
-            []
-        );
+        $this->add(array(
+            'name' => 'admin_institution_id',
+            'label' => 'admin_institution_id',
+            'type' => 'Libadmin\Form\Element\NoValidationSelect',
+            'options' => array( //				'label' => 'Gruppe'
+                'label' => 'This label will be changed (by the app)',
+                'label_attributes' => [
+                    'class' => 'control-label',
+                ],
+            )
+        ));
 
         $this->add([
             'type' => 'Libadmin\Form\KontaktFieldset',

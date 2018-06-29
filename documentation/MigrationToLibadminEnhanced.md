@@ -26,17 +26,17 @@ Be careful :
 
 ## Create new Database
 
-This will update the structure of the db libadmintest with the new one and remove the content of the tables
+This will create the structure of the db remove the content of the tables
 
-```
-sudo mysql libadmintest < ./documentation/database/libadminenhanced.schema.sql
-```
+
+* edit `/documentation/database/libadminenhanced.schema.sql` to add the proper db-name after the `USE` statement
+* `sudo mysql < ./documentation/database/libadminenhanced.schema.sql`
 
 
 ## Import old Information from Libadmin
 
 ```
-sudo mysql libadmintest < ~/Documents/mycloud/swissbib/libadmin/libadmin-dump-20180626.sql
+sudo mysql db-name < ~/Documents/mycloud/swissbib/libadmin/libadmin-dump-20180626.sql
 ```
 
 
@@ -44,11 +44,9 @@ sudo mysql libadmintest < ~/Documents/mycloud/swissbib/libadmin/libadmin-dump-20
 
 In config/autoload/local.php
 
-To use the database libadminenhanced instead of libadmin
+To use the good database
 
 ## Import Information from Excel
-
-Does that overwrite some fields of the previous step ? It should only add new info !!!
 
 This will import in the db from config/autoload/local.php
 
@@ -57,12 +55,6 @@ cd libadmin
 php public/index.php loaddata institution ../documentation/database/data/libadmin.institutions.csv
 php public/index.php loaddata admininstitution ../documentation/database/data/admininstitution.csv
 ```
-
-
-
-## Remove unused columns ? 
-
-The address might have been updated in libadmin and not in the excel. Be careful with this step.
 
 ## In one step 
 ```

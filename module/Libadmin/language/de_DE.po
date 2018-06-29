@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Libadmin\n"
-"POT-Creation-Date: 2018-06-26 08:51+0200\n"
-"PO-Revision-Date: 2018-06-26 16:52+0200\n"
+"POT-Creation-Date: 2018-06-29 18:55+0200\n"
+"PO-Revision-Date: 2018-06-29 18:55+0200\n"
 "Last-Translator: Fabian Erni <ferni@snowflake.ch>\n"
 "Language-Team: Swissbib <admin@swissbib.ch>\n"
 "Language: de_DE\n"
@@ -10,79 +10,313 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-KeywordsList: translate;addText\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/Libadmin/Controller/ViewController.php:209
-msgid "saved_view"
-msgstr "View gespeichert"
+#: ../src/Libadmin/Form/AdminInstitutionFieldset.php:60
+msgid "idcode"
+msgstr ""
 
-#: ../src/Libadmin/Controller/ViewController.php:211
-msgid "form_invalid"
-msgstr "Die Eingegebenen Daten sind nicht korrekt!"
+#: ../src/Libadmin/Form/AdminInstitutionFieldset.php:62
+#: ../src/Libadmin/Form/KontaktField.php:42
+msgid "name"
+msgstr ""
 
-#: ../view/libadmin/admin-institution/edit.phtml:10
+#: ../src/Libadmin/Form/AdminInstitutionFieldset.php:63
+#: ../src/Libadmin/Form/InstitutionFieldset.php:244
+#: ../src/Libadmin/Form/KontaktField.php:53
+#: ../view/libadmin/global/gettext-labels.phtml:23
+msgid "email"
+msgstr "Email"
+
+#: ../src/Libadmin/Form/AdminInstitutionFieldset.php:75
+#: ../src/Libadmin/Form/InstitutionFieldset.php:73
+msgid "bfscode"
+msgstr ""
+
+#: ../src/Libadmin/Form/AdminInstitutionFieldset.php:76
+msgid "ipadresse"
+msgstr ""
+
+#: ../src/Libadmin/Form/AdminInstitutionFieldset.php:109
+msgid "bemerkung_rechnung"
+msgstr ""
+
+#: ../src/Libadmin/Form/AdresseFieldset.php:42
+msgid "strasse"
+msgstr ""
+
+#: ../src/Libadmin/Form/AdresseFieldset.php:43
+msgid "nummer"
+msgstr ""
+
+#: ../src/Libadmin/Form/AdresseFieldset.php:44
+msgid "zusatz"
+msgstr ""
+
+#: ../src/Libadmin/Form/AdresseFieldset.php:45
+msgid "plz"
+msgstr "PLZ"
+
+#: ../src/Libadmin/Form/AdresseFieldset.php:46
+msgid "ort"
+msgstr "Ort"
+
+#: ../src/Libadmin/Form/AdresseFieldset.php:96
+msgid "name_organisation"
+msgstr ""
+
+#: ../src/Libadmin/Form/GroupFieldset.php:34
+#: ../src/Libadmin/Form/ViewForm.php:41
+msgid "code"
+msgstr ""
+
+#: ../src/Libadmin/Form/GroupFieldset.php:36
+#: ../src/Libadmin/Form/InstitutionFieldset.php:39
+msgid "label_de"
+msgstr ""
+
+#: ../src/Libadmin/Form/GroupFieldset.php:37
+#: ../src/Libadmin/Form/InstitutionFieldset.php:40
+msgid "label_fr"
+msgstr ""
+
+#: ../src/Libadmin/Form/GroupFieldset.php:38
+#: ../src/Libadmin/Form/InstitutionFieldset.php:41
+msgid "label_it"
+msgstr ""
+
+#: ../src/Libadmin/Form/GroupFieldset.php:39
+#: ../src/Libadmin/Form/InstitutionFieldset.php:42
+msgid "label_en"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:35
+msgid "bib_code"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:36
+msgid "sys_code"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:44
+msgid "name_de"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:45
+msgid "name_fr"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:46
+msgid "name_it"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:47
+msgid "name_en"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:49
+msgid "url_de"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:50
+msgid "url_fr"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:51
+msgid "url_it"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:52
+msgid "url_en"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:54
+#: ../view/libadmin/global/gettext-labels.phtml:53
+msgid "twitter"
+msgstr "Twitter"
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:55
+msgid "url_web_de"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:56
+msgid "url_web_en"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:57
+msgid "url_web_it"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:58
+msgid "url_web_fr"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:59
+msgid "adresszusatz"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:60
+msgid "id_kontakt"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:76
+msgid "worldcat_symbol"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:78
+msgid "cbslibrarycode"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:101
+msgid "id_kostenbeitrag"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:120
+msgid "id_rechnungsadresse"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:121
+msgid "id_kontakt_rechnung"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:147
+msgid "kostenbeitrag_basiert_auf"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:243
+msgid "website"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:245
+msgid "phone"
+msgstr ""
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:246
+#: ../view/libadmin/global/gettext-labels.phtml:39
+msgid "skype"
+msgstr "Skype"
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:247
+#: ../view/libadmin/global/gettext-labels.phtml:24
+msgid "facebook"
+msgstr "Facebook"
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:248
+#: ../view/libadmin/global/gettext-labels.phtml:15
+msgid "coordinates"
+msgstr "Koordinaten"
+
+#: ../src/Libadmin/Form/InstitutionFieldset.php:249
+#: ../view/libadmin/global/gettext-labels.phtml:27
+msgid "isil"
+msgstr "ISIL"
+
+#: ../src/Libadmin/Form/KontaktField.php:43
+msgid "vorname"
+msgstr ""
+
+#: ../src/Libadmin/Form/KostenbeitragField.php:42
+msgid "j2018"
+msgstr ""
+
+#: ../src/Libadmin/Form/KostenbeitragField.php:43
+msgid "j2019"
+msgstr ""
+
+#: ../src/Libadmin/Form/KostenbeitragField.php:44
+msgid "j2020"
+msgstr ""
+
+#: ../src/Libadmin/Form/ViewForm.php:42
+msgid "label"
+msgstr ""
+
+#: ../view/libadmin/admin-institution/edit.phtml:12
+#: ../view/libadmin/admin-institution/edit.phtml:16
 #: ../view/libadmin/group/edit.phtml:18
 #: ../view/libadmin/institution/edit.phtml:17
 #: ../view/libadmin/view/edit.phtml:10
 msgid "action_create"
 msgstr "Anlegen"
 
-#: ../view/libadmin/admin-institution/edit.phtml:22
+#: ../view/libadmin/admin-institution/edit.phtml:28
 #: ../view/libadmin/group/edit.phtml:28
 #: ../view/libadmin/institution/edit.phtml:30
 #: ../view/libadmin/view/edit.phtml:24
 msgid "action_close"
 msgstr "Schliessen"
 
-#: ../view/libadmin/admin-institution/edit.phtml:27
+#: ../view/libadmin/admin-institution/edit.phtml:33
 #: ../view/libadmin/group/edit.phtml:32
 #: ../view/libadmin/institution/edit.phtml:35
 #: ../view/libadmin/view/edit.phtml:29
 msgid "action_delete"
 msgstr "Löschen"
 
-#: ../view/libadmin/admin-institution/edit.phtml:41
+#: ../view/libadmin/admin-institution/edit.phtml:47
 #: ../view/libadmin/group/edit.phtml:49
 #: ../view/libadmin/institution/edit.phtml:49
 #: ../view/libadmin/view/edit.phtml:44
 msgid "general"
 msgstr "Allgemein"
 
-#: ../view/libadmin/admin-institution/edit.phtml:51
+#: ../view/libadmin/admin-institution/edit.phtml:57
 #: ../view/libadmin/institution/edit.phtml:60
 msgid "address"
 msgstr "Kontakt"
 
-#: ../view/libadmin/admin-institution/edit.phtml:52
-#: ../view/libadmin/admin-institution/edit.phtml:107
+#: ../view/libadmin/admin-institution/edit.phtml:58
+#: ../view/libadmin/admin-institution/edit.phtml:113
 #: ../view/libadmin/institution/edit.phtml:62
 msgid "admin"
 msgstr "Admin"
 
-#: ../view/libadmin/admin-institution/edit.phtml:53
+#: ../view/libadmin/admin-institution/edit.phtml:59
 #: ../view/libadmin/institution/edit.phtml:63
 msgid "costs_participation"
 msgstr "Kostenbeitrag"
 
-#: ../view/libadmin/admin-institution/edit.phtml:72
+#: ../view/libadmin/admin-institution/edit.phtml:78
 #: ../view/libadmin/institution/edit.phtml:128
 msgid "postAdresse"
 msgstr "Postadresse"
 
-#: ../view/libadmin/admin-institution/edit.phtml:89
-#: ../view/libadmin/institution/edit.phtml:166
+#: ../view/libadmin/admin-institution/edit.phtml:95
+#: ../view/libadmin/institution/edit.phtml:167
 msgid "contactPerson"
 msgstr "Kontakt Person"
 
-#: ../view/libadmin/admin-institution/edit.phtml:177
-#: ../view/libadmin/institution/edit.phtml:285
+#: ../view/libadmin/admin-institution/edit.phtml:127
+msgid "institutions_affiliated_to_this_admin"
+msgstr ""
+
+#: ../view/libadmin/admin-institution/edit.phtml:134
+#: ../view/libadmin/institution/home.phtml:5
+#: ../view/libadmin/view/edit.phtml:120
+msgid "institution"
+msgstr "Institution"
+
+#: ../view/libadmin/admin-institution/edit.phtml:135
+msgid "bibcodes"
+msgstr ""
+
+#: ../view/libadmin/admin-institution/edit.phtml:149
+msgid "edit"
+msgstr ""
+
+#: ../view/libadmin/admin-institution/edit.phtml:156
+msgid "no_institutions_for_this_admin_institution"
+msgstr ""
+
+#: ../view/libadmin/admin-institution/edit.phtml:217
+#: ../view/libadmin/institution/edit.phtml:290
 msgid "rechnungsAdresse"
 msgstr "Rechnungsadresse"
 
-#: ../view/libadmin/admin-institution/edit.phtml:195
-#: ../view/libadmin/institution/edit.phtml:304
+#: ../view/libadmin/admin-institution/edit.phtml:235
+#: ../view/libadmin/institution/edit.phtml:309
 msgid "contactPersonInvoice"
 msgstr ""
 
@@ -119,6 +353,7 @@ msgid "action_save"
 msgstr "Speichern"
 
 #: ../view/libadmin/global/gettext-labels.phtml:10
+#: ../view/libadmin/global/gettext-labels.phtml:64
 msgid "app_title"
 msgstr "Bibliotheksverwaltung"
 
@@ -137,10 +372,6 @@ msgstr "Kanton"
 #: ../view/libadmin/global/gettext-labels.phtml:14
 msgid "city"
 msgstr "Ort"
-
-#: ../view/libadmin/global/gettext-labels.phtml:15
-msgid "coordinates"
-msgstr "Koordinaten"
 
 #: ../view/libadmin/global/gettext-labels.phtml:16
 msgid "country"
@@ -170,14 +401,6 @@ msgstr "Lichtenstein"
 msgid "display_links_for_control"
 msgstr "Anzeige der vorhandenen Verknüpfungen (zur Kontrolle)"
 
-#: ../view/libadmin/global/gettext-labels.phtml:23
-msgid "email"
-msgstr "Email"
-
-#: ../view/libadmin/global/gettext-labels.phtml:24
-msgid "facebook"
-msgstr "Facebook"
-
 #: ../view/libadmin/global/gettext-labels.phtml:25
 msgid "internal_notes"
 msgstr "Interne Notizen"
@@ -185,10 +408,6 @@ msgstr "Interne Notizen"
 #: ../view/libadmin/global/gettext-labels.phtml:26
 msgid "is_active"
 msgstr "Ist Aktiv"
-
-#: ../view/libadmin/global/gettext-labels.phtml:27
-msgid "isil"
-msgstr "ISIL"
 
 #: ../view/libadmin/global/gettext-labels.phtml:28
 msgid "language_english"
@@ -233,10 +452,6 @@ msgstr "Nein"
 #: ../view/libadmin/global/gettext-labels.phtml:38
 msgid "pagedescription_administration"
 msgstr "Administration von Benutzern und Log-Dateien"
-
-#: ../view/libadmin/global/gettext-labels.phtml:39
-msgid "skype"
-msgstr "Skype"
 
 #: ../view/libadmin/global/gettext-labels.phtml:40
 msgid "syscode"
@@ -286,10 +501,6 @@ msgstr "View erstellen"
 msgid "view_edit"
 msgstr "View bearbeiten"
 
-#: ../view/libadmin/global/gettext-labels.phtml:53
-msgid "twitter"
-msgstr "Twitter"
-
 #: ../view/libadmin/global/gettext-labels.phtml:54
 msgid "attention_relations"
 msgstr ""
@@ -317,7 +528,10 @@ msgid "action_groups_sort_for_view"
 msgstr "Gruppen für View sortieren"
 
 #: ../view/libadmin/global/gettext-labels.phtml:60
-msgid "views "
+#: ../view/libadmin/group/edit.phtml:65
+#: ../view/libadmin/institution/edit.phtml:183
+#: ../view/libadmin/view/home.phtml:6
+msgid "views"
 msgstr "Views"
 
 #: ../view/libadmin/global/gettext-labels.phtml:61
@@ -350,12 +564,6 @@ msgstr "Suchen"
 msgid "display"
 msgstr "Anzeige"
 
-#: ../view/libadmin/group/edit.phtml:65
-#: ../view/libadmin/institution/edit.phtml:182
-#: ../view/libadmin/view/home.phtml:6
-msgid "views"
-msgstr "Views"
-
 #: ../view/libadmin/group/edit.phtml:66
 #: ../view/libadmin/institution/home.phtml:6
 msgid "institutions"
@@ -381,7 +589,7 @@ msgid "group"
 msgstr "Gruppe"
 
 #: ../view/libadmin/group/home.phtml:6
-#: ../view/libadmin/institution/edit.phtml:185
+#: ../view/libadmin/institution/edit.phtml:186
 msgid "groups"
 msgstr "Gruppen"
 
@@ -401,19 +609,14 @@ msgstr "Gruppen & Views"
 msgid "title_library_names_official"
 msgstr "Bibliotheksnamen (offiziell)"
 
-#: ../view/libadmin/institution/edit.phtml:144
+#: ../view/libadmin/institution/edit.phtml:145
 msgid "contactdata"
 msgstr "Kontaktdaten"
 
-#: ../view/libadmin/institution/edit.phtml:188
+#: ../view/libadmin/institution/edit.phtml:189
 #: ../view/libadmin/view/edit.phtml:122
 msgid "is_favorite"
 msgstr "Ist Favorit"
-
-#: ../view/libadmin/institution/home.phtml:5
-#: ../view/libadmin/view/edit.phtml:120
-msgid "institution"
-msgstr "Institution"
 
 #: ../view/libadmin/view/edit.phtml:56
 msgid "action_groups_activate"
@@ -459,6 +662,15 @@ msgstr "Es bestehen noch keine Verbindungen"
 #: ../view/libadmin/view/home.phtml:5
 msgid "view"
 msgstr "View"
+
+#~ msgid "views "
+#~ msgstr "Views"
+
+#~ msgid "saved_view"
+#~ msgstr "View gespeichert"
+
+#~ msgid "form_invalid"
+#~ msgstr "Die Eingegebenen Daten sind nicht korrekt!"
 
 #~ msgid "extensions"
 #~ msgstr "Extensions"

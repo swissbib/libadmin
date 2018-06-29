@@ -18,8 +18,9 @@ translations by automatically collecting translatable labels from a module.
 
 Install on Ubuntu : ```sudo apt-get install poedit  ```
 
+You can then update the po file.
 
-## 3. How to create language files with Poedit
+## 3. How to edit language files with Poedit
 
 
 For Poedit to be able to find our templates, you have to add the pattern
@@ -44,12 +45,21 @@ for `.phtml` files to the configuration of Poedit's Parser:
 * Click the "New element" button in the "Paths" form,
 * Enter the path: ..
 
-### 4. All names of viewhelper methods that handle translations must be known
- 	to Poedit for parsing the templates and collecting your labels, therefor:
+### 4. All names of viewhelper methods that handle translations must be known to Poedit
+
+This in need in order to parse the templates and collecting your labels, therefore:
 
 * Change into the tab "Sources keywords"
 * Click the button "New item" of the keywords form
-* Enter item title: translate
+* Enter item title: 
+  * translate
+  * addText
+  * addSelect
+  * addCheckbox
+  
+See Screenshot : ![screenshot]
+     
+
 
 ### 5. The catalog of editable labels now can be updated by clicking the **Update** option from the main menu bar.
 	
@@ -60,4 +70,8 @@ To administer "generic" labels which are not discoverable by PoEdit because of t
 (e.g.: `<?= $this->translate(....)`) you can either add and edit those manually to the gettext catalog, or add
 them into a pseudo-template. This is a template, which is not actively used for displayed content of the module
 and only used as a means for transmitting labels. 
-The included pseudo-template can be found at: `\view\libadmin\global\gettext-labels.phtml`
+The included pseudo-template can be found at: [\module\Libadmin\view\libadmin\global\gettext-labels.phtml](https://github.com/swissbib/libadmin/blob/master/module/Libadmin/view/libadmin/global/gettext-labels.phtml)
+
+
+
+[screenshot]: poedit.png

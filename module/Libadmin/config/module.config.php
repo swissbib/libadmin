@@ -216,7 +216,7 @@ return [
      * Note: Each translation file that is loaded needs to have a text_domain added,
      *         If no text_domain is added, 'default' will be assumed.
      *         To use translations with namespaces the respective view-helper needs to pass
-     *         the "text_domain", e.g: $this->translate('example', 'Libadmin');
+     *         the "text_domain", e.g: $this->translate('example');
      */
 
     //im Application Modul abegen

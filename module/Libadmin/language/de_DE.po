@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Libadmin\n"
-"POT-Creation-Date: 2018-07-03 11:17+0200\n"
-"PO-Revision-Date: 2018-07-03 11:18+0200\n"
+"POT-Creation-Date: 2018-07-03 11:29+0200\n"
+"PO-Revision-Date: 2018-07-03 11:30+0200\n"
 "Last-Translator: Fabian Erni <ferni@snowflake.ch>\n"
 "Language-Team: Swissbib <admin@swissbib.ch>\n"
 "Language: de_DE\n"
@@ -16,7 +16,7 @@ msgstr ""
 
 #: ../src/Libadmin/Form/AdminInstitutionFieldset.php:60
 msgid "idcode"
-msgstr ""
+msgstr "Code"
 
 #: ../src/Libadmin/Form/AdminInstitutionFieldset.php:62
 #: ../src/Libadmin/Form/KontaktField.php:42
@@ -26,7 +26,7 @@ msgstr "Name"
 #: ../src/Libadmin/Form/AdminInstitutionFieldset.php:63
 #: ../src/Libadmin/Form/InstitutionFieldset.php:244
 #: ../src/Libadmin/Form/KontaktField.php:53
-#: ../view/libadmin/global/gettext-labels.phtml:29
+#: ../view/libadmin/global/gettext-labels.phtml:30
 msgid "email"
 msgstr "Email"
 
@@ -96,12 +96,12 @@ msgid "ort"
 msgstr "Ort"
 
 #: ../src/Libadmin/Form/AdresseFieldset.php:50
-#: ../view/libadmin/global/gettext-labels.phtml:21
+#: ../view/libadmin/global/gettext-labels.phtml:22
 msgid "country"
 msgstr "Land"
 
 #: ../src/Libadmin/Form/AdresseFieldset.php:63
-#: ../view/libadmin/global/gettext-labels.phtml:18
+#: ../view/libadmin/global/gettext-labels.phtml:19
 msgid "canton"
 msgstr "Kanton"
 
@@ -117,7 +117,7 @@ msgstr "Code"
 #: ../src/Libadmin/Form/GroupFieldset.php:35
 #: ../src/Libadmin/Form/InstitutionFieldset.php:37
 #: ../src/Libadmin/Form/ViewForm.php:44
-#: ../view/libadmin/global/gettext-labels.phtml:37
+#: ../view/libadmin/global/gettext-labels.phtml:38
 msgid "is_active"
 msgstr "Ist Aktiv"
 
@@ -182,7 +182,7 @@ msgid "url_en"
 msgstr "Englisch"
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:54
-#: ../view/libadmin/global/gettext-labels.phtml:73
+#: ../view/libadmin/global/gettext-labels.phtml:74
 msgid "twitter"
 msgstr "Twitter"
 
@@ -247,22 +247,22 @@ msgid "phone"
 msgstr "Telefon"
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:246
-#: ../view/libadmin/global/gettext-labels.phtml:58
+#: ../view/libadmin/global/gettext-labels.phtml:59
 msgid "skype"
 msgstr "Skype"
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:247
-#: ../view/libadmin/global/gettext-labels.phtml:30
+#: ../view/libadmin/global/gettext-labels.phtml:31
 msgid "facebook"
 msgstr "Facebook"
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:248
-#: ../view/libadmin/global/gettext-labels.phtml:20
+#: ../view/libadmin/global/gettext-labels.phtml:21
 msgid "coordinates"
 msgstr "Koordinaten"
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:249
-#: ../view/libadmin/global/gettext-labels.phtml:38
+#: ../view/libadmin/global/gettext-labels.phtml:39
 msgid "isil"
 msgstr "ISIL"
 
@@ -367,13 +367,13 @@ msgstr ""
 msgid "no_institutions_for_this_admin_institution"
 msgstr "Keine zugehörigen Institutionen vorhanden"
 
-#: ../view/libadmin/admin-institution/edit.phtml:217
-#: ../view/libadmin/institution/edit.phtml:290
+#: ../view/libadmin/admin-institution/edit.phtml:216
+#: ../view/libadmin/institution/edit.phtml:289
 msgid "rechnungsAdresse"
 msgstr "Rechnungsadresse"
 
-#: ../view/libadmin/admin-institution/edit.phtml:235
-#: ../view/libadmin/institution/edit.phtml:309
+#: ../view/libadmin/admin-institution/edit.phtml:234
+#: ../view/libadmin/institution/edit.phtml:308
 msgid "contactPersonInvoice"
 msgstr "Kontaktperson Rechnung"
 
@@ -410,260 +410,264 @@ msgid "action_save"
 msgstr "Speichern"
 
 #: ../view/libadmin/global/gettext-labels.phtml:10
+msgid "admininstitution_edit"
+msgstr "Administrative Institution bearbeiten"
+
+#: ../view/libadmin/global/gettext-labels.phtml:11
 msgid "anzahl_aufnahmen"
 msgstr "Anzahl Aufnahmen"
 
-#: ../view/libadmin/global/gettext-labels.phtml:11
-#: ../view/libadmin/global/gettext-labels.phtml:84
+#: ../view/libadmin/global/gettext-labels.phtml:12
+#: ../view/libadmin/global/gettext-labels.phtml:85
 msgid "app_title"
 msgstr "Bibliotheksverwaltung"
 
-#: ../view/libadmin/global/gettext-labels.phtml:12
+#: ../view/libadmin/global/gettext-labels.phtml:13
 msgid "assign_institutions_to_groups_and_views"
 msgstr "Institutionen zu Gruppen und Views zuweisen"
 
-#: ../view/libadmin/global/gettext-labels.phtml:13
+#: ../view/libadmin/global/gettext-labels.phtml:14
 msgid "bemerkung_kostenbeitrag"
 msgstr "Bemerkung Kostenbeitrag"
 
-#: ../view/libadmin/global/gettext-labels.phtml:14
+#: ../view/libadmin/global/gettext-labels.phtml:15
 msgid "bemerkung_rechnung"
 msgstr "Bemerkung Rechnung"
 
-#: ../view/libadmin/global/gettext-labels.phtml:15
+#: ../view/libadmin/global/gettext-labels.phtml:16
 msgid "bfk_regelung"
 msgstr "BFK-Regelung"
 
-#: ../view/libadmin/global/gettext-labels.phtml:16
+#: ../view/libadmin/global/gettext-labels.phtml:17
 msgid "bfs_zahlen"
 msgstr "BfS-Zahlen"
 
-#: ../view/libadmin/global/gettext-labels.phtml:17
+#: ../view/libadmin/global/gettext-labels.phtml:18
 msgid "bibcode"
 msgstr "Bib-Code"
 
-#: ../view/libadmin/global/gettext-labels.phtml:19
+#: ../view/libadmin/global/gettext-labels.phtml:20
 msgid "city"
 msgstr "Ort"
 
-#: ../view/libadmin/global/gettext-labels.phtml:22
+#: ../view/libadmin/global/gettext-labels.phtml:23
 msgid "country_ch"
 msgstr "Schweiz"
 
-#: ../view/libadmin/global/gettext-labels.phtml:23
+#: ../view/libadmin/global/gettext-labels.phtml:24
 msgid "country_de"
 msgstr "Deutschland"
 
-#: ../view/libadmin/global/gettext-labels.phtml:24
+#: ../view/libadmin/global/gettext-labels.phtml:25
 msgid "country_fr"
 msgstr "Frankreich"
 
-#: ../view/libadmin/global/gettext-labels.phtml:25
+#: ../view/libadmin/global/gettext-labels.phtml:26
 msgid "country_it"
 msgstr "Italien"
 
-#: ../view/libadmin/global/gettext-labels.phtml:26
+#: ../view/libadmin/global/gettext-labels.phtml:27
 msgid "country_li"
 msgstr "Liechtenstein"
 
-#: ../view/libadmin/global/gettext-labels.phtml:27
+#: ../view/libadmin/global/gettext-labels.phtml:28
 msgid "display_links_for_control"
 msgstr "Anzeige der vorhandenen Verknüpfungen (zur Kontrolle)"
 
-#: ../view/libadmin/global/gettext-labels.phtml:28
+#: ../view/libadmin/global/gettext-labels.phtml:29
 msgid "eigenes_gemeinwesen"
 msgstr "Eigenes Gemeinwesen"
 
-#: ../view/libadmin/global/gettext-labels.phtml:31
+#: ../view/libadmin/global/gettext-labels.phtml:32
 msgid "frau"
 msgstr "Frau"
 
-#: ../view/libadmin/global/gettext-labels.phtml:32
+#: ../view/libadmin/global/gettext-labels.phtml:33
 msgid "freiwilliger_beitrag"
 msgstr "Freiwilliger Beitrag"
 
-#: ../view/libadmin/global/gettext-labels.phtml:33
+#: ../view/libadmin/global/gettext-labels.phtml:34
 msgid "french"
 msgstr "Französisch"
 
-#: ../view/libadmin/global/gettext-labels.phtml:34
+#: ../view/libadmin/global/gettext-labels.phtml:35
 msgid "german"
 msgstr "Deutsch"
 
-#: ../view/libadmin/global/gettext-labels.phtml:35
+#: ../view/libadmin/global/gettext-labels.phtml:36
 msgid "herr"
 msgstr "Herr"
 
-#: ../view/libadmin/global/gettext-labels.phtml:36
+#: ../view/libadmin/global/gettext-labels.phtml:37
 msgid "internal_notes"
 msgstr "Interne Notizen"
 
-#: ../view/libadmin/global/gettext-labels.phtml:39
+#: ../view/libadmin/global/gettext-labels.phtml:40
 msgid "italian"
 msgstr "Italienisch"
 
-#: ../view/libadmin/global/gettext-labels.phtml:40
+#: ../view/libadmin/global/gettext-labels.phtml:41
 msgid "language_english"
 msgstr "Englisch"
 
-#: ../view/libadmin/global/gettext-labels.phtml:41
+#: ../view/libadmin/global/gettext-labels.phtml:42
 msgid "language_french"
 msgstr "Französisch"
 
-#: ../view/libadmin/global/gettext-labels.phtml:42
+#: ../view/libadmin/global/gettext-labels.phtml:43
 msgid "language_german"
 msgstr "Deutsch"
 
-#: ../view/libadmin/global/gettext-labels.phtml:43
+#: ../view/libadmin/global/gettext-labels.phtml:44
 msgid "language_italian"
 msgstr "Italienisch"
 
-#: ../view/libadmin/global/gettext-labels.phtml:44
+#: ../view/libadmin/global/gettext-labels.phtml:45
 msgid "navigation_admin"
 msgstr "Verwalten"
 
-#: ../view/libadmin/global/gettext-labels.phtml:45
+#: ../view/libadmin/global/gettext-labels.phtml:46
 msgid "navigation_groups"
 msgstr "Gruppen"
 
-#: ../view/libadmin/global/gettext-labels.phtml:46
+#: ../view/libadmin/global/gettext-labels.phtml:47
 msgid "navigation_home"
 msgstr "Start"
 
-#: ../view/libadmin/global/gettext-labels.phtml:47
+#: ../view/libadmin/global/gettext-labels.phtml:48
 msgid "navigation_institutions"
 msgstr "Institutionen"
 
-#: ../view/libadmin/global/gettext-labels.phtml:48
+#: ../view/libadmin/global/gettext-labels.phtml:49
 msgid "navigation_views"
 msgstr "Views"
 
-#: ../view/libadmin/global/gettext-labels.phtml:49
+#: ../view/libadmin/global/gettext-labels.phtml:50
 msgid "no"
 msgstr "Nein"
 
-#: ../view/libadmin/global/gettext-labels.phtml:50
+#: ../view/libadmin/global/gettext-labels.phtml:51
 msgid "--- no_admin_institution ---"
 msgstr "Keine"
 
-#: ../view/libadmin/global/gettext-labels.phtml:51
+#: ../view/libadmin/global/gettext-labels.phtml:52
 msgid "notes_public_de"
 msgstr "Öffentliche Notiz (de)"
 
-#: ../view/libadmin/global/gettext-labels.phtml:52
+#: ../view/libadmin/global/gettext-labels.phtml:53
 msgid "notes_public_fr"
 msgstr "Öffentliche Notiz (fr)"
 
-#: ../view/libadmin/global/gettext-labels.phtml:53
+#: ../view/libadmin/global/gettext-labels.phtml:54
 msgid "notes_public_it"
 msgstr "Öffentliche Notiz (it)"
 
-#: ../view/libadmin/global/gettext-labels.phtml:54
+#: ../view/libadmin/global/gettext-labels.phtml:55
 msgid "notes_public_en"
 msgstr "Öffentliche Notiz (en)"
 
-#: ../view/libadmin/global/gettext-labels.phtml:55
+#: ../view/libadmin/global/gettext-labels.phtml:56
 msgid "open"
 msgstr "Offen"
 
-#: ../view/libadmin/global/gettext-labels.phtml:56
+#: ../view/libadmin/global/gettext-labels.phtml:57
 msgid "pagedescription_administration"
 msgstr "Administration von Benutzern und Log-Dateien"
 
-#: ../view/libadmin/global/gettext-labels.phtml:57
+#: ../view/libadmin/global/gettext-labels.phtml:58
 msgid "recherchierte_bfs_zahlen"
 msgstr "Recherchierte BfS-Zahlen"
 
-#: ../view/libadmin/global/gettext-labels.phtml:59
+#: ../view/libadmin/global/gettext-labels.phtml:60
 msgid "summe_verbundbibliotheken"
 msgstr "Summe Verbundbibliotheken"
 
-#: ../view/libadmin/global/gettext-labels.phtml:60
+#: ../view/libadmin/global/gettext-labels.phtml:61
 msgid "syscode"
 msgstr "System-Code"
 
-#: ../view/libadmin/global/gettext-labels.phtml:61
+#: ../view/libadmin/global/gettext-labels.phtml:62
 msgid "telefon"
 msgstr "Telefon"
 
-#: ../view/libadmin/global/gettext-labels.phtml:62
+#: ../view/libadmin/global/gettext-labels.phtml:63
 msgid "webseite"
 msgstr "Webseite"
 
-#: ../view/libadmin/global/gettext-labels.phtml:63
+#: ../view/libadmin/global/gettext-labels.phtml:64
 msgid "zip"
 msgstr "PLZ"
 
-#: ../view/libadmin/global/gettext-labels.phtml:65
+#: ../view/libadmin/global/gettext-labels.phtml:66
 msgid "group_add"
 msgstr "Gruppe erstellen"
 
-#: ../view/libadmin/global/gettext-labels.phtml:66
+#: ../view/libadmin/global/gettext-labels.phtml:67
 msgid "notfound_record"
 msgstr "Datensatz wurde nicht gefunden"
 
-#: ../view/libadmin/global/gettext-labels.phtml:67
+#: ../view/libadmin/global/gettext-labels.phtml:68
 msgid "group_edit"
 msgstr "Gruppe bearbeiten"
 
-#: ../view/libadmin/global/gettext-labels.phtml:68
+#: ../view/libadmin/global/gettext-labels.phtml:69
 msgid "saved_institution"
 msgstr "Institution gespeichert"
 
-#: ../view/libadmin/global/gettext-labels.phtml:69
+#: ../view/libadmin/global/gettext-labels.phtml:70
 msgid "institution_add"
 msgstr "Institution erstellen"
 
-#: ../view/libadmin/global/gettext-labels.phtml:70
+#: ../view/libadmin/global/gettext-labels.phtml:71
 msgid "institution_edit"
 msgstr "Institution bearbeiten"
 
-#: ../view/libadmin/global/gettext-labels.phtml:71
+#: ../view/libadmin/global/gettext-labels.phtml:72
 msgid "view_add"
 msgstr "View erstellen"
 
-#: ../view/libadmin/global/gettext-labels.phtml:72
+#: ../view/libadmin/global/gettext-labels.phtml:73
 msgid "view_edit"
 msgstr "View bearbeiten"
 
-#: ../view/libadmin/global/gettext-labels.phtml:74
+#: ../view/libadmin/global/gettext-labels.phtml:75
 msgid "attention_relations"
 msgstr ""
 "ACHTUNG! Änderungen hier haben zur Folge, dass die Sortierung dieser "
 "Institution verloren geht!"
 
-#: ../view/libadmin/global/gettext-labels.phtml:75
+#: ../view/libadmin/global/gettext-labels.phtml:76
 msgid "sortInstitutions"
 msgstr "Institutionen sortieren (A-Z, deutsch)"
 
-#: ../view/libadmin/global/gettext-labels.phtml:76
+#: ../view/libadmin/global/gettext-labels.phtml:77
 msgid "no_institutions"
 msgstr "Keine Instution"
 
-#: ../view/libadmin/global/gettext-labels.phtml:77
+#: ../view/libadmin/global/gettext-labels.phtml:78
 msgid "maketopmostitem"
 msgstr "An oberste Position schieben"
 
-#: ../view/libadmin/global/gettext-labels.phtml:78
+#: ../view/libadmin/global/gettext-labels.phtml:79
 msgid "makebottommostitem"
 msgstr "An untersterste Position schieben"
 
-#: ../view/libadmin/global/gettext-labels.phtml:79
+#: ../view/libadmin/global/gettext-labels.phtml:80
 msgid "action_groups_sort_for_view"
 msgstr "Gruppen für View sortieren"
 
-#: ../view/libadmin/global/gettext-labels.phtml:80
+#: ../view/libadmin/global/gettext-labels.phtml:81
 #: ../view/libadmin/group/edit.phtml:65
 #: ../view/libadmin/institution/edit.phtml:183
 #: ../view/libadmin/view/home.phtml:6
 msgid "views"
 msgstr "Views"
 
-#: ../view/libadmin/global/gettext-labels.phtml:81
+#: ../view/libadmin/global/gettext-labels.phtml:82
 msgid "edit_view"
 msgstr "View Editieren"
 
-#: ../view/libadmin/global/gettext-labels.phtml:82
+#: ../view/libadmin/global/gettext-labels.phtml:83
 msgid "navigation_view"
 msgstr "View"
 

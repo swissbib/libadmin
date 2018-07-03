@@ -196,7 +196,7 @@ $saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');
                     <legend>Rechnung</legend>
 
                     <div class="row-fluid">
-                        <div class="span12"><?= $this->formBootstrapRow($admininstitution,'adresse_rechnung_gleich_post') ?></div>
+                        <div class="span12"><?= $this->formBootstrapRow($admininstitution,'e_rechnung') ?></div>
                     </div>
                     <div class="row-fluid">
                         <div class="span12"><?= $this->formBootstrapRow($admininstitution,'mwst') ?></div>
@@ -204,12 +204,11 @@ $saveButtonLabel = $this->translate($isNew ? 'action_create' : 'action_save');
                     <div class="row-fluid">
                         <div class="span12"><?= $this->formBootstrapRow($admininstitution,'grund_mwst_frei') ?></div>
                     </div>
-
-                    <div class="row-fluid">
-                        <div class="span12"><?= $this->formBootstrapRow($admininstitution,'e_rechnung') ?></div>
-                    </div>
                     <div class="row-fluid">
                         <div class="span12"><?= $this->formBootstrapRow($admininstitution,'bemerkung_rechnung') ?></div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12"><?= $this->formBootstrapRow($admininstitution,'adresse_rechnung_gleich_post') ?></div>
                     </div>
                 </fieldset>
 

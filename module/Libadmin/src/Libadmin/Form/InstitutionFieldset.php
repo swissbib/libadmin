@@ -162,7 +162,7 @@ class InstitutionFieldset extends BaseFieldset implements InputFilterProviderInt
             'label' => 'admin_institution_id',
             'type' => 'Libadmin\Form\Element\NoValidationSelect',
             'options' => array( //				'label' => 'Gruppe'
-                'label' => 'This label will be changed (by the app)',
+                'label' => 'admin_institution_id',
                 'label_attributes' => [
                     'class' => 'control-label',
                 ],

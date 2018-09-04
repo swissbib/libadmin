@@ -38,16 +38,6 @@ class Institution extends InstitutionBase
 
 	public $url_en;
 
-	public $address;
-
-	public $zip;
-
-	public $city;
-
-	public $country;
-
-	public $canton;
-
 	public $website;
 
 	public $phone;
@@ -71,8 +61,6 @@ class Institution extends InstitutionBase
     public $url_web_fr;
 
     public $url_web_it;
-
-    public $adresszusatz;
 
     public $notes_public_de;
 
@@ -139,20 +127,6 @@ class Institution extends InstitutionBase
 
 
 
-	public function setAddress($address)
-	{
-		$this->address = $address;
-	}
-
-
-
-	public function getAddress()
-	{
-		return $this->address;
-	}
-
-
-
 	public function setBib_code($bib_code)
 	{
 		$this->bib_code = $bib_code;
@@ -166,35 +140,6 @@ class Institution extends InstitutionBase
 	}
 
 
-
-	public function setCanton($canton)
-	{
-		$this->canton = $canton;
-	}
-
-
-
-	public function getCanton()
-	{
-		return $this->canton;
-	}
-
-
-
-	public function setCity($city)
-	{
-		$this->city = $city;
-	}
-
-
-
-	public function getCity()
-	{
-		return $this->city;
-	}
-
-
-
 	public function setCoordinates($coordinates)
 	{
 		$this->coordinates = $coordinates;
@@ -206,22 +151,6 @@ class Institution extends InstitutionBase
 	{
 		return $this->coordinates;
 	}
-
-
-
-	public function setCountry($country)
-	{
-		$this->country = $country;
-	}
-
-
-
-	public function getCountry()
-	{
-		return $this->country;
-	}
-
-
 
 
 	public function setFacebook($facebook)
@@ -502,21 +431,6 @@ class Institution extends InstitutionBase
 	}
 
 
-
-	public function setZip($zip)
-	{
-		$this->zip = $zip;
-	}
-
-
-
-	public function getZip()
-	{
-		return $this->zip;
-	}
-
-
-
 	public function setRelations($relations)
 	{
 		$this->relations = $relations;
@@ -665,24 +579,6 @@ class Institution extends InstitutionBase
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAdresszusatz()
-    {
-        return $this->adresszusatz;
-    }
-
-    /**
-     * @param mixed $adresszusatz
-     *
-     * @return Institution
-     */
-    public function setAdresszusatz($adresszusatz)
-    {
-        $this->adresszusatz = $adresszusatz;
-        return $this;
-    }
 
     /**
      * @return mixed

@@ -50,8 +50,8 @@ class AdresseFieldset extends BaseFieldset implements InputFilterProviderInterfa
             'country',
             'country',
             [
-                '' => '-',
                 'ch' => 'country_ch',
+                '' => '-',
                 'li' => 'country_li',
                 'de' => 'country_de',
                 'it' => 'country_it',

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Libadmin\n"
-"POT-Creation-Date: 2018-07-03 11:29+0200\n"
-"PO-Revision-Date: 2018-07-03 11:30+0200\n"
+"POT-Creation-Date: 2018-09-04 14:09+0200\n"
+"PO-Revision-Date: 2018-09-04 14:09+0200\n"
 "Last-Translator: Fabian Erni <ferni@snowflake.ch>\n"
 "Language-Team: Swissbib <admin@swissbib.ch>\n"
 "Language: de_DE\n"
@@ -182,7 +182,7 @@ msgid "url_en"
 msgstr "Englisch"
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:54
-#: ../view/libadmin/global/gettext-labels.phtml:74
+#: ../view/libadmin/global/gettext-labels.phtml:75
 msgid "twitter"
 msgstr "Twitter"
 
@@ -418,7 +418,7 @@ msgid "anzahl_aufnahmen"
 msgstr "Anzahl Aufnahmen"
 
 #: ../view/libadmin/global/gettext-labels.phtml:12
-#: ../view/libadmin/global/gettext-labels.phtml:85
+#: ../view/libadmin/global/gettext-labels.phtml:86
 msgid "app_title"
 msgstr "Bibliotheksverwaltung"
 
@@ -615,61 +615,69 @@ msgid "saved_institution"
 msgstr "Institution gespeichert"
 
 #: ../view/libadmin/global/gettext-labels.phtml:70
+msgid "saved_admin_institution"
+msgstr "Admin Institution gespeichert"
+
+#: ../view/libadmin/global/gettext-labels.phtml:71
 msgid "institution_add"
 msgstr "Institution erstellen"
 
-#: ../view/libadmin/global/gettext-labels.phtml:71
+#: ../view/libadmin/global/gettext-labels.phtml:72
 msgid "institution_edit"
 msgstr "Institution bearbeiten"
 
-#: ../view/libadmin/global/gettext-labels.phtml:72
+#: ../view/libadmin/global/gettext-labels.phtml:73
 msgid "view_add"
 msgstr "View erstellen"
 
-#: ../view/libadmin/global/gettext-labels.phtml:73
+#: ../view/libadmin/global/gettext-labels.phtml:74
 msgid "view_edit"
 msgstr "View bearbeiten"
 
-#: ../view/libadmin/global/gettext-labels.phtml:75
+#: ../view/libadmin/global/gettext-labels.phtml:76
 msgid "attention_relations"
 msgstr ""
 "ACHTUNG! Änderungen hier haben zur Folge, dass die Sortierung dieser "
 "Institution verloren geht!"
 
-#: ../view/libadmin/global/gettext-labels.phtml:76
+#: ../view/libadmin/global/gettext-labels.phtml:77
 msgid "sortInstitutions"
 msgstr "Institutionen sortieren (A-Z, deutsch)"
 
-#: ../view/libadmin/global/gettext-labels.phtml:77
+#: ../view/libadmin/global/gettext-labels.phtml:78
 msgid "no_institutions"
 msgstr "Keine Instution"
 
-#: ../view/libadmin/global/gettext-labels.phtml:78
+#: ../view/libadmin/global/gettext-labels.phtml:79
 msgid "maketopmostitem"
 msgstr "An oberste Position schieben"
 
-#: ../view/libadmin/global/gettext-labels.phtml:79
+#: ../view/libadmin/global/gettext-labels.phtml:80
 msgid "makebottommostitem"
 msgstr "An untersterste Position schieben"
 
-#: ../view/libadmin/global/gettext-labels.phtml:80
+#: ../view/libadmin/global/gettext-labels.phtml:81
 msgid "action_groups_sort_for_view"
 msgstr "Gruppen für View sortieren"
 
-#: ../view/libadmin/global/gettext-labels.phtml:81
+#: ../view/libadmin/global/gettext-labels.phtml:82
 #: ../view/libadmin/group/edit.phtml:65
 #: ../view/libadmin/institution/edit.phtml:183
 #: ../view/libadmin/view/home.phtml:6
 msgid "views"
 msgstr "Views"
 
-#: ../view/libadmin/global/gettext-labels.phtml:82
+#: ../view/libadmin/global/gettext-labels.phtml:83
 msgid "edit_view"
 msgstr "View Editieren"
 
-#: ../view/libadmin/global/gettext-labels.phtml:83
+#: ../view/libadmin/global/gettext-labels.phtml:84
 msgid "navigation_view"
 msgstr "View"
+
+#: ../view/libadmin/global/gettext-labels.phtml:87
+msgid "admin_institution_id"
+msgstr "Zugehörigkeit Admin Institution"
 
 #: ../view/libadmin/global/home-crud.phtml:4
 msgid "add_new_xxx"

@@ -1,11 +1,13 @@
 <?php
 namespace Libadmin\Export\System;
 
+use Interop\Container\ContainerInterface;
 use Libadmin\Model\Institution;
 use Libadmin\Table\InstitutionRelationTable;
 use Zend\View\Model\JsonModel;
 use Zend\Db\ResultSet\ResultSetInterface;
 use Libadmin\Model\Group;
+use Zend\I18n\Translator\Translator;
 
 /**
  * VuFind Export system
@@ -18,6 +20,20 @@ class GeoJson extends System
      * @var InstitutionRelationTable $institutionRelationTable InstitRelation Table
      */
     protected $institutionRelationTable;
+
+    /**
+     * Translator
+     *
+     * @var Translator $translator translator
+     */
+    protected $translator;
+
+    public function __construct(ContainerInterface $container)
+    {
+        parent::__construct($container);
+        $this->translator = $this->getServiceLocator()->get('translator');
+
+    }
 
     /**
      * @override
@@ -97,14 +113,14 @@ class GeoJson extends System
     protected function extractInstitutionData(Institution $institution, Group $group)
     {
         $data = [
-            'label-de' =>  $institution->getLabel_de(),
-            'network' => $group->getLabel_de(),
-            'documents from this library' => '<a href="https://www.swissbib.ch/Search/Results?lookfor=&type=AllFields&filter%5B%5D=institution%3A%22'. $institution->getBib_code() .'%22">link</a>',
+            $this->getTranslatedText('name') => $this->getTranslatedInstitutionLabel($institution),
+            $this->getTranslatedText('network') => $this->getTranslatedGroupLabel($group),
+            $this->getTranslatedText('documents from this library') => '<a href="https://www.swissbib.ch/Search/Results?lookfor=&type=AllFields&filter%5B%5D=institution%3A%22'. $institution->getBib_code() .'%22">' . $this->getTranslatedText('link') . '</a>',
             'marker-symbol' => 'library',
             'marker-color' => $this->getColor($group),
         ];
         if (!empty($institution->getWebsite())) {
-            $data['website'] = $institution->getWebsite();
+            $data[$this->getTranslatedText('website')] = '<a href="' . $institution->getWebsite(). '">' . $institution->getWebsite() . '</a>';
         }
         return $data;
     }
@@ -185,6 +201,47 @@ class GeoJson extends System
             break;
         default:
             return '808080';
+        }
+    }
+
+    protected function getTranslatedText($text) {
+        $lang = $this->getOption('lang');
+        switch ($lang) {
+        case 'de':
+            $locale='de_DE';
+            break;
+        case 'fr':
+            $locale='fr_CH';
+            break;
+        default:
+            $locale='de_DE';
+        }
+        return $this->translator->translate($text, 'default', $locale);
+    }
+
+    protected function getTranslatedInstitutionLabel(Institution $institution)
+    {
+        $lang = $this->getOption('lang');
+        switch ($lang) {
+        case 'de':
+            return $institution->getLabel_de();
+        case 'fr':
+            return $institution->getLabel_fr();
+        default:
+            return $institution->getLabel_de();
+        }
+    }
+
+    protected function getTranslatedGroupLabel(Group $group)
+    {
+        $lang = $this->getOption('lang');
+        switch ($lang) {
+            case 'de':
+                return $group->getLabel_de();
+            case 'fr':
+                return $group->getLabel_fr();
+            default:
+                return $group->getLabel_de();
         }
     }
 }

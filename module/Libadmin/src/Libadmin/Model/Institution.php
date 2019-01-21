@@ -152,6 +152,43 @@ class Institution extends InstitutionBase
 		return $this->coordinates;
 	}
 
+    /**
+     * returns the latitude as a float
+     * it is the first part of the coordinates, before the ','
+     * throws an exception if the coordinates are absent or if they are in a wrong format
+     *
+     * @return float
+     */
+    public function getLatitude()
+    {
+        $coordinates = explode(',', $this->coordinates);
+        if (sizeof($coordinates) != 2 ) {
+            throw new \Exception(
+                'impossible to extract the latitude from the coordinates ' .
+                $this->coordinates
+            );
+        }
+        return floatval(trim($coordinates[0]));
+    }
+
+    /**
+     * returns the longitude as a float
+     * it is the second part of the coordinates, after the ', '
+     * throws an exception if the coordinates are absent or if they are in a wrong format
+     *
+     * @return float
+     */
+    public function getLongitude()
+    {
+        $coordinates = explode(',', $this->coordinates);
+        if (sizeof($coordinates) != 2 ) {
+            throw new \Exception(
+                'impossible to extract the longitude from the coordinates ' .
+                $this->coordinates
+            );
+        }
+        return floatval(trim($coordinates[1]));
+    }
 
 	public function setFacebook($facebook)
 	{

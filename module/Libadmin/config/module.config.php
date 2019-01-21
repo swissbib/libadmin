@@ -10,6 +10,7 @@ use Libadmin\Controller\HomeControllerFactory;
 use Libadmin\Controller\InstitutionControllerFactory;
 use Libadmin\Controller\ViewControllerFactory;
 use Libadmin\Export\System\FormetaFactory;
+use Libadmin\Export\System\GeoJsonFactory;
 use Libadmin\Export\System\MapPortalFactory;
 use Libadmin\Export\System\VuFindFactory;
 use Libadmin\Form\AdminInstitutionFieldset;
@@ -194,6 +195,7 @@ return [
             'export_system_vufind' => VuFindFactory::class,
             'export_system_mapportal' => MapPortalFactory::class,
             'export_system_formeta' => FormetaFactory::class,
+            'export_system_geojson' => GeoJsonFactory::class,
             TablePluginManager::class => TablePluginManagerFactory::class
 
         ]

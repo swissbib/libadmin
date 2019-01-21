@@ -32,3 +32,7 @@ Simple examples
 Advanced example
 
 	/api/maps/libmap.json?options[canton]=zh,bl,bs,ag
+	
+## GeoJson
+
+    /api/geojson/green.json?options[lang]=de

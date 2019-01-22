@@ -193,11 +193,56 @@ class GeoJson extends System
     protected function getColor(Group $group)
     {
         switch ($group->getCode()) {
+        case 'ABN':
+            return '000000';
+            break;
+        case 'ALEX':
+            return '990000';
+            break;
+        case 'BISCH':
+            return '3399FF';
+            break;
+        case 'BGR':
+            return '000066';
+            break;
+        case 'CEO':
+            return 'FF0000';
+            break;
+        case 'HEMU':
+            return '66FFFF';
+            break;
+        case 'IDSBB':
+            return 'FF8000';
+            break;
+        case 'IDSLU':
+            return '66B2FF';
+            break;
+        case 'IDSSG':
+            return '006600';
+            break;
+        case 'KBTGV':
+            return '99FFF';
+            break;
+        case 'LIBIB':
+            return 'CCE5FF';
+            break;
+        case 'SNL':
+            return 'FF3333';
+            break;
         case 'NEBIS':
             return '0000FF';
             break;
-        case 'ABN':
-            return 'FF0000';
+        case 'VAUD':
+            return '99004C';
+            break;
+        case 'RERO':
+            return '66B2FF';
+            break;
+        case 'SBT':
+            return 'CCE5FF';
+            break;
+        case 'SGBN':
+            return '00FF00';
             break;
         default:
             return '808080';

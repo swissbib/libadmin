@@ -94,7 +94,7 @@ class GeoJson extends System
                         ]
                     ];
                 } catch(\Exception $e) {
-                    //institution
+                    //for example no coordinates
                 }
 
             }
@@ -112,16 +112,33 @@ class GeoJson extends System
      */
     protected function extractInstitutionData(Institution $institution, Group $group)
     {
-        $data = [
-            $this->getTranslatedText('name') => $this->getTranslatedInstitutionLabel($institution),
-            $this->getTranslatedText('network') => $this->getTranslatedGroupLabel($group),
-            $this->getTranslatedText('documents from this library') => '<a href="https://www.swissbib.ch/Search/Results?lookfor=&type=AllFields&filter%5B%5D=institution%3A%22'. $institution->getBib_code() .'%22">' . $this->getTranslatedText('link') . '</a>',
-            'marker-symbol' => 'library',
-            'marker-color' => $this->getColor($group),
-        ];
-        if (!empty($institution->getWebsite())) {
-            $data[$this->getTranslatedText('website')] = '<a href="' . $institution->getWebsite(). '">' . $institution->getWebsite() . '</a>';
-        }
+        $addressData = $this->extractAddressData($institution);
+
+        return array(
+            'bib_code' => $institution->getBib_code(),
+            'group_code' => $group->getCode(),
+            'group_label' => array(
+                'de' => $group->getLabel_de(),
+                'fr' => $group->getLabel_fr(),
+                'it' => $group->getLabel_it(),
+                'en' => $group->getLabel_en()
+            ),
+            'address' => $addressData,
+            'canton' => $this->extractCanton($institution),
+            'label' => array(
+                'de' => $institution->getLabel_de(),
+                'fr' => $institution->getLabel_fr(),
+                'it' => $institution->getLabel_it(),
+                'en' => $institution->getLabel_en()
+            ),
+            'website' => $institution->getWebsite(),
+            'url' => array(
+                'de' => $institution->getUrl_de(),
+                'fr' => $institution->getUrl_fr(),
+                'it' => $institution->getUrl_it(),
+                'en' => $institution->getUrl_en()
+            )
+        );
         return $data;
     }
 

@@ -64,6 +64,7 @@ class AdresseFieldset extends BaseFieldset implements InputFilterProviderInterfa
             'canton',
             [
                 ''   => '- Kein Kanton -',
+                'ol' => 'Online',
                 'ag' => 'Aargau',
                 'ai' => 'Appenzell Innerrhoden',
                 'ar' => 'Appenzell Ausserrhoden',

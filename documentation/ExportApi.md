@@ -35,4 +35,4 @@ Advanced example
 	
 ## GeoJson
 
-    /api/geojson/green.json?option[lang]=de
+    /api/geojson/green.json

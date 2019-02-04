@@ -7,7 +7,6 @@ use Libadmin\Table\InstitutionRelationTable;
 use Zend\View\Model\JsonModel;
 use Zend\Db\ResultSet\ResultSetInterface;
 use Libadmin\Model\Group;
-use Zend\I18n\Translator\Translator;
 
 /**
  * VuFind Export system
@@ -22,17 +21,13 @@ class GeoJson extends System
     protected $institutionRelationTable;
 
     /**
-     * Translator
+     * GeoJson constructor.
      *
-     * @var Translator $translator translator
+     * @param ContainerInterface $container container
      */
-    protected $translator;
-
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
-        $this->translator = $this->getServiceLocator()->get('translator');
-
     }
 
     /**
@@ -71,7 +66,7 @@ class GeoJson extends System
     /**
      * Get grouped institution data
      *
-     * @return Array
+     * @return array
      */
     protected function getJsonPayloadData()
     {
@@ -87,9 +82,14 @@ class GeoJson extends System
                 try {
                     $data[] = [
                         'type' => 'Feature',
-                        'properties' => $this->extractInstitutionData($institution, $group),
+                        'properties' => $this->extractInstitutionData(
+                            $institution, $group
+                        ),
                         'geometry' => [
-                            'coordinates' => [$institution->getLongitude(), $institution->getLatitude()],
+                            'coordinates' => [
+                                $institution->retrieveLongitude(),
+                                $institution->retrieveLatitude()
+                            ],
                             'type' => 'Point',
                         ]
                     ];
@@ -114,32 +114,32 @@ class GeoJson extends System
     {
         $addressData = $this->extractAddressData($institution);
 
-        return array(
+        return [
             'bib_code' => $institution->getBib_code(),
             'group_code' => $group->getCode(),
-            'group_label' => array(
+            'group_label' => [
                 'de' => $group->getLabel_de(),
                 'fr' => $group->getLabel_fr(),
                 'it' => $group->getLabel_it(),
                 'en' => $group->getLabel_en()
-            ),
+            ],
             'address' => $addressData,
+            //used to generate the library facet :
             'canton' => $this->extractCanton($institution),
-            'label' => array(
+            'label' => [
                 'de' => $institution->getLabel_de(),
                 'fr' => $institution->getLabel_fr(),
                 'it' => $institution->getLabel_it(),
                 'en' => $institution->getLabel_en()
-            ),
+            ],
             'website' => $institution->getWebsite(),
-            'url' => array(
+            'url' => [
                 'de' => $institution->getUrl_de(),
                 'fr' => $institution->getUrl_fr(),
                 'it' => $institution->getUrl_it(),
                 'en' => $institution->getUrl_en()
-            )
-        );
-        return $data;
+            ]
+        ];
     }
 
     /**
@@ -169,23 +169,13 @@ class GeoJson extends System
     }
 
     /**
-     * Extract required data from group
-     *
-     * @param    Group    $group
-     * @return   array
-     */
-    protected function extractGroupData(Group $group)
-    {
-        return ['group' => $group->getLabel_de()];
-    }
-
-    /**
      * Extract full address information from institution
      * With Canton and Country
      * If no address is available, return empty values
      *
-     * @param    Institution        $institution
-     * @return   array
+     * @param Institution $institution the institution
+     *
+     * @return string canton
      */
     protected function extractCanton(Institution $institution)
     {
@@ -197,113 +187,6 @@ class GeoJson extends System
             return $postAdresse->getCanton();
         } else {
             return "";
-        }
-    }
-
-    /**
-     * Return colors of the group (network)
-     *
-     * @param Group $group the group (i.e. network)
-     *
-     * @return string the color in RGB hex color
-     */
-    protected function getColor(Group $group)
-    {
-        switch ($group->getCode()) {
-        case 'ABN':
-            return '000000';
-            break;
-        case 'ALEX':
-            return '990000';
-            break;
-        case 'BISCH':
-            return '3399FF';
-            break;
-        case 'BGR':
-            return '000066';
-            break;
-        case 'CEO':
-            return 'FF0000';
-            break;
-        case 'HEMU':
-            return '66FFFF';
-            break;
-        case 'IDSBB':
-            return 'FF8000';
-            break;
-        case 'IDSLU':
-            return '66B2FF';
-            break;
-        case 'IDSSG':
-            return '006600';
-            break;
-        case 'KBTGV':
-            return '99FFF';
-            break;
-        case 'LIBIB':
-            return 'CCE5FF';
-            break;
-        case 'SNL':
-            return 'FF3333';
-            break;
-        case 'NEBIS':
-            return '0000FF';
-            break;
-        case 'VAUD':
-            return '99004C';
-            break;
-        case 'RERO':
-            return '66B2FF';
-            break;
-        case 'SBT':
-            return 'CCE5FF';
-            break;
-        case 'SGBN':
-            return '00FF00';
-            break;
-        default:
-            return '808080';
-        }
-    }
-
-    protected function getTranslatedText($text) {
-        $lang = $this->getOption('lang');
-        switch ($lang) {
-        case 'de':
-            $locale='de_DE';
-            break;
-        case 'fr':
-            $locale='fr_CH';
-            break;
-        default:
-            $locale='de_DE';
-        }
-        return $this->translator->translate($text, 'default', $locale);
-    }
-
-    protected function getTranslatedInstitutionLabel(Institution $institution)
-    {
-        $lang = $this->getOption('lang');
-        switch ($lang) {
-        case 'de':
-            return $institution->getLabel_de();
-        case 'fr':
-            return $institution->getLabel_fr();
-        default:
-            return $institution->getLabel_de();
-        }
-    }
-
-    protected function getTranslatedGroupLabel(Group $group)
-    {
-        $lang = $this->getOption('lang');
-        switch ($lang) {
-            case 'de':
-                return $group->getLabel_de();
-            case 'fr':
-                return $group->getLabel_fr();
-            default:
-                return $group->getLabel_de();
         }
     }
 }

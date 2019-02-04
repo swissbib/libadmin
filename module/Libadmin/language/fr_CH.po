@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Libadmin\n"
-"POT-Creation-Date: 2019-01-21 16:00+0100\n"
+"POT-Creation-Date: 2019-01-21 16:12+0100\n"
 "PO-Revision-Date: 2019-01-21 17:11+0100\n"
-"Last-Translator: Fabian Erni <ferni@snowflake.ch>\n"
+"Last-Translator: \n"
 "Language-Team: Swissbib <admin@swissbib.ch>\n"
-"Language: de_DE\n"
+"Language: fr_CH\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,217 +13,218 @@ msgstr ""
 "X-Poedit-KeywordsList: translate;addText;addSelect;addCheckbox;"
 "getTranslatedText\n"
 "X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../src/Libadmin/Export/System/GeoJson.php:116
 #: ../src/Libadmin/Form/AdminInstitutionFieldset.php:62
 #: ../src/Libadmin/Form/KontaktField.php:42
 msgid "name"
-msgstr "Name"
+msgstr "Nom"
 
 #: ../src/Libadmin/Export/System/GeoJson.php:117
 msgid "network"
-msgstr "Bibliotheksverbund"
+msgstr "Réseau de bibliothèques"
 
 #: ../src/Libadmin/Export/System/GeoJson.php:118
 msgid "documents from this library"
-msgstr "Dokumente"
+msgstr "Documents de cette bibliothèque"
 
 #: ../src/Libadmin/Export/System/GeoJson.php:118
 msgid "link"
-msgstr "Link"
+msgstr "Lien"
 
 #: ../src/Libadmin/Export/System/GeoJson.php:123
 #: ../src/Libadmin/Form/InstitutionFieldset.php:243
 msgid "website"
-msgstr "Webseite"
+msgstr "Site web"
 
 #: ../src/Libadmin/Form/AdminInstitutionFieldset.php:60
 msgid "idcode"
-msgstr "Code"
+msgstr ""
 
 #: ../src/Libadmin/Form/AdminInstitutionFieldset.php:63
 #: ../src/Libadmin/Form/InstitutionFieldset.php:244
 #: ../src/Libadmin/Form/KontaktField.php:53
 #: ../view/libadmin/global/gettext-labels.phtml:30
 msgid "email"
-msgstr "Email"
+msgstr ""
 
 #: ../src/Libadmin/Form/AdminInstitutionFieldset.php:65
 #: ../src/Libadmin/Form/InstitutionFieldset.php:63
 msgid "korrespondenzsprache"
-msgstr "Korrespondenzsprache"
+msgstr ""
 
 #: ../src/Libadmin/Form/AdminInstitutionFieldset.php:75
 #: ../src/Libadmin/Form/InstitutionFieldset.php:73
 msgid "bfscode"
-msgstr "BfS-Code"
+msgstr ""
 
 #: ../src/Libadmin/Form/AdminInstitutionFieldset.php:76
 msgid "ipadresse"
-msgstr "IP-Adresse"
+msgstr ""
 
 #: ../src/Libadmin/Form/AdminInstitutionFieldset.php:78
 #: ../src/Libadmin/Form/InstitutionFieldset.php:92
 msgid "zusage_beitrag"
-msgstr "Zusage Beitrag"
+msgstr ""
 
 #: ../src/Libadmin/Form/AdminInstitutionFieldset.php:97
 #: ../src/Libadmin/Form/InstitutionFieldset.php:119
 msgid "adresse_rechnung_gleich_post"
-msgstr "Rechnungsadresse entspricht Postadresse"
+msgstr ""
 
 #: ../src/Libadmin/Form/AdminInstitutionFieldset.php:98
 #: ../src/Libadmin/Form/InstitutionFieldset.php:122
 msgid "mwst"
-msgstr "MwSt-pflichtig"
+msgstr ""
 
 #: ../src/Libadmin/Form/AdminInstitutionFieldset.php:100
 #: ../src/Libadmin/Form/InstitutionFieldset.php:125
 msgid "grund_mwst_frei"
-msgstr "Grund MwSt-Befreiung"
+msgstr ""
 
 #: ../src/Libadmin/Form/AdminInstitutionFieldset.php:108
 #: ../src/Libadmin/Form/InstitutionFieldset.php:134
 msgid "e_rechnung"
-msgstr "E-Rechnung"
+msgstr ""
 
 #: ../src/Libadmin/Form/AdminInstitutionFieldset.php:122
 #: ../src/Libadmin/Form/InstitutionFieldset.php:147
 #: ../src/Libadmin/Form/InstitutionFieldset.php:149
 msgid "kostenbeitrag_basiert_auf"
-msgstr "Kostenbeitrag basiert auf"
+msgstr ""
 
 #: ../src/Libadmin/Form/AdresseFieldset.php:42
 msgid "strasse"
-msgstr "Strasse"
+msgstr ""
 
 #: ../src/Libadmin/Form/AdresseFieldset.php:43
 msgid "nummer"
-msgstr "Nummer"
+msgstr ""
 
 #: ../src/Libadmin/Form/AdresseFieldset.php:44
 msgid "zusatz"
-msgstr "Adresszusatz"
+msgstr ""
 
 #: ../src/Libadmin/Form/AdresseFieldset.php:45
 msgid "plz"
-msgstr "PLZ"
+msgstr ""
 
 #: ../src/Libadmin/Form/AdresseFieldset.php:46
 msgid "ort"
-msgstr "Ort"
+msgstr ""
 
 #: ../src/Libadmin/Form/AdresseFieldset.php:50
 #: ../view/libadmin/global/gettext-labels.phtml:22
 msgid "country"
-msgstr "Land"
+msgstr ""
 
 #: ../src/Libadmin/Form/AdresseFieldset.php:63
 #: ../view/libadmin/global/gettext-labels.phtml:19
 msgid "canton"
-msgstr "Kanton"
+msgstr ""
 
 #: ../src/Libadmin/Form/AdresseFieldset.php:96
 msgid "name_organisation"
-msgstr "Name"
+msgstr ""
 
 #: ../src/Libadmin/Form/GroupFieldset.php:34
 #: ../src/Libadmin/Form/ViewForm.php:41
 msgid "code"
-msgstr "Code"
+msgstr ""
 
 #: ../src/Libadmin/Form/GroupFieldset.php:35
 #: ../src/Libadmin/Form/InstitutionFieldset.php:37
 #: ../src/Libadmin/Form/ViewForm.php:44
 #: ../view/libadmin/global/gettext-labels.phtml:38
 msgid "is_active"
-msgstr "Ist Aktiv"
+msgstr ""
 
 #: ../src/Libadmin/Form/GroupFieldset.php:36
 #: ../src/Libadmin/Form/InstitutionFieldset.php:39
 msgid "label_de"
-msgstr "Deutsch"
+msgstr ""
 
 #: ../src/Libadmin/Form/GroupFieldset.php:37
 #: ../src/Libadmin/Form/InstitutionFieldset.php:40
 msgid "label_fr"
-msgstr "Französisch"
+msgstr ""
 
 #: ../src/Libadmin/Form/GroupFieldset.php:38
 #: ../src/Libadmin/Form/InstitutionFieldset.php:41
 msgid "label_it"
-msgstr "Italienisch"
+msgstr ""
 
 #: ../src/Libadmin/Form/GroupFieldset.php:39
 #: ../src/Libadmin/Form/InstitutionFieldset.php:42
 msgid "label_en"
-msgstr "Englisch"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:35
 msgid "bib_code"
-msgstr "Bib-Code"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:36
 msgid "sys_code"
-msgstr "System-Code"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:44
 msgid "name_de"
-msgstr "Deutsch"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:45
 msgid "name_fr"
-msgstr "Französisch"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:46
 msgid "name_it"
-msgstr "Italienisch"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:47
 msgid "name_en"
-msgstr "Englisch"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:49
 msgid "url_de"
-msgstr "Deutsch"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:50
 msgid "url_fr"
-msgstr "Französisch"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:51
 msgid "url_it"
-msgstr "Italienisch"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:52
 msgid "url_en"
-msgstr "Englisch"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:54
 #: ../view/libadmin/global/gettext-labels.phtml:75
 msgid "twitter"
-msgstr "Twitter"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:55
 msgid "url_web_de"
-msgstr "Webseite (de)"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:56
 msgid "url_web_en"
-msgstr "Webseite (en)"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:57
 msgid "url_web_it"
-msgstr "Webseite (it)"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:58
 msgid "url_web_fr"
-msgstr "Webseite (fr)"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:59
 msgid "adresszusatz"
-msgstr "Adresszusatz"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:60
 msgid "id_kontakt"
@@ -231,19 +232,19 @@ msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:76
 msgid "worldcat_symbol"
-msgstr "Worldcat Symbol"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:77
 msgid "worldcat_ja_nein"
-msgstr "Datentransfer zu Worldcat"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:78
 msgid "cbslibrarycode"
-msgstr "CBS Librarycode"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:81
 msgid "verrechnungbeitrag"
-msgstr "Verrechnung des Beitrags"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:101
 msgid "id_kostenbeitrag"
@@ -259,47 +260,47 @@ msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:245
 msgid "phone"
-msgstr "Telefon"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:246
 #: ../view/libadmin/global/gettext-labels.phtml:59
 msgid "skype"
-msgstr "Skype"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:247
 #: ../view/libadmin/global/gettext-labels.phtml:31
 msgid "facebook"
-msgstr "Facebook"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:248
 #: ../view/libadmin/global/gettext-labels.phtml:21
 msgid "coordinates"
-msgstr "Koordinaten"
+msgstr ""
 
 #: ../src/Libadmin/Form/InstitutionFieldset.php:249
 #: ../view/libadmin/global/gettext-labels.phtml:39
 msgid "isil"
-msgstr "ISIL"
+msgstr ""
 
 #: ../src/Libadmin/Form/KontaktField.php:43
 msgid "vorname"
-msgstr "Vorname"
+msgstr ""
 
 #: ../src/Libadmin/Form/KontaktField.php:45
 msgid "anrede"
-msgstr "Anrede"
+msgstr ""
 
 #: ../src/Libadmin/Form/KostenbeitragField.php:42
 msgid "j2018"
-msgstr "2018"
+msgstr ""
 
 #: ../src/Libadmin/Form/KostenbeitragField.php:43
 msgid "j2019"
-msgstr "2019"
+msgstr ""
 
 #: ../src/Libadmin/Form/KostenbeitragField.php:44
 msgid "j2020"
-msgstr "2020"
+msgstr ""
 
 #: ../src/Libadmin/Form/ViewForm.php:42
 msgid "label"
@@ -311,68 +312,68 @@ msgstr ""
 #: ../view/libadmin/institution/edit.phtml:17
 #: ../view/libadmin/view/edit.phtml:10
 msgid "action_create"
-msgstr "Anlegen"
+msgstr ""
 
 #: ../view/libadmin/admin-institution/edit.phtml:28
 #: ../view/libadmin/group/edit.phtml:28
 #: ../view/libadmin/institution/edit.phtml:30
 #: ../view/libadmin/view/edit.phtml:24
 msgid "action_close"
-msgstr "Schliessen"
+msgstr ""
 
 #: ../view/libadmin/admin-institution/edit.phtml:33
 #: ../view/libadmin/group/edit.phtml:32
 #: ../view/libadmin/institution/edit.phtml:35
 #: ../view/libadmin/view/edit.phtml:29
 msgid "action_delete"
-msgstr "Löschen"
+msgstr ""
 
 #: ../view/libadmin/admin-institution/edit.phtml:47
 #: ../view/libadmin/group/edit.phtml:49
 #: ../view/libadmin/institution/edit.phtml:49
 #: ../view/libadmin/view/edit.phtml:44
 msgid "general"
-msgstr "Allgemein"
+msgstr ""
 
 #: ../view/libadmin/admin-institution/edit.phtml:57
 #: ../view/libadmin/institution/edit.phtml:60
 msgid "address"
-msgstr "Kontakt"
+msgstr ""
 
 #: ../view/libadmin/admin-institution/edit.phtml:58
 #: ../view/libadmin/admin-institution/edit.phtml:113
 #: ../view/libadmin/institution/edit.phtml:62
 msgid "admin"
-msgstr "Admin"
+msgstr ""
 
 #: ../view/libadmin/admin-institution/edit.phtml:59
 #: ../view/libadmin/institution/edit.phtml:63
 msgid "costs_participation"
-msgstr "Kostenbeitrag"
+msgstr ""
 
 #: ../view/libadmin/admin-institution/edit.phtml:78
 #: ../view/libadmin/institution/edit.phtml:128
 msgid "postAdresse"
-msgstr "Postadresse"
+msgstr ""
 
 #: ../view/libadmin/admin-institution/edit.phtml:95
 #: ../view/libadmin/institution/edit.phtml:167
 msgid "contactPerson"
-msgstr "Kontakt Person"
+msgstr ""
 
 #: ../view/libadmin/admin-institution/edit.phtml:127
 msgid "institutions_affiliated_to_this_admin"
-msgstr "Zugehörige Institutionen"
+msgstr ""
 
 #: ../view/libadmin/admin-institution/edit.phtml:134
 #: ../view/libadmin/institution/home.phtml:5
 #: ../view/libadmin/view/edit.phtml:120
 msgid "institution"
-msgstr "Institution"
+msgstr ""
 
 #: ../view/libadmin/admin-institution/edit.phtml:135
 msgid "bibcodes"
-msgstr "Bib-Codes"
+msgstr ""
 
 #: ../view/libadmin/admin-institution/edit.phtml:149
 msgid "edit"
@@ -380,440 +381,437 @@ msgstr ""
 
 #: ../view/libadmin/admin-institution/edit.phtml:156
 msgid "no_institutions_for_this_admin_institution"
-msgstr "Keine zugehörigen Institutionen vorhanden"
+msgstr ""
 
 #: ../view/libadmin/admin-institution/edit.phtml:216
 #: ../view/libadmin/institution/edit.phtml:289
 msgid "rechnungsAdresse"
-msgstr "Rechnungsadresse"
+msgstr ""
 
 #: ../view/libadmin/admin-institution/edit.phtml:234
 #: ../view/libadmin/institution/edit.phtml:308
 msgid "contactPersonInvoice"
-msgstr "Kontaktperson Rechnung"
+msgstr ""
 
 #: ../view/libadmin/admin-institution/home.phtml:5
 msgid "admininstitution"
-msgstr "Administrative Institution"
+msgstr ""
 
 #: ../view/libadmin/admin-institution/home.phtml:6
 msgid "admininstitutions"
-msgstr "Administrative Institutionen"
+msgstr ""
 
 #: ../view/libadmin/admin/home.phtml:1
 msgid "administrationtitle"
-msgstr "Administration"
+msgstr ""
 
 #: ../view/libadmin/admin/home.phtml:2
 msgid "administrationsubtitle"
-msgstr "Administration der Institutionsdaten"
+msgstr ""
 
 #: ../view/libadmin/admin/navi.phtml:2
 msgid "user"
-msgstr "Benutzer"
+msgstr ""
 
 #: ../view/libadmin/admin/navi.phtml:3
 msgid "logfiles"
-msgstr "Log Dateien"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:8
 msgid "action_institutions_sort"
-msgstr "Institutionen sortieren"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:9
 msgid "action_save"
-msgstr "Speichern"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:10
 msgid "admininstitution_edit"
-msgstr "Administrative Institution bearbeiten"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:11
 msgid "anzahl_aufnahmen"
-msgstr "Anzahl Aufnahmen"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:12
 #: ../view/libadmin/global/gettext-labels.phtml:86
 msgid "app_title"
-msgstr "Bibliotheksverwaltung"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:13
 msgid "assign_institutions_to_groups_and_views"
-msgstr "Institutionen zu Gruppen und Views zuweisen"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:14
 msgid "bemerkung_kostenbeitrag"
-msgstr "Bemerkung Kostenbeitrag"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:15
 msgid "bemerkung_rechnung"
-msgstr "Bemerkung Rechnung"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:16
 msgid "bfk_regelung"
-msgstr "BFK-Regelung"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:17
 msgid "bfs_zahlen"
-msgstr "BfS-Zahlen"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:18
 msgid "bibcode"
-msgstr "Bib-Code"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:20
 msgid "city"
-msgstr "Ort"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:23
 msgid "country_ch"
-msgstr "Schweiz"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:24
 msgid "country_de"
-msgstr "Deutschland"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:25
 msgid "country_fr"
-msgstr "Frankreich"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:26
 msgid "country_it"
-msgstr "Italien"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:27
 msgid "country_li"
-msgstr "Liechtenstein"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:28
 msgid "display_links_for_control"
-msgstr "Anzeige der vorhandenen Verknüpfungen (zur Kontrolle)"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:29
 msgid "eigenes_gemeinwesen"
-msgstr "Eigenes Gemeinwesen"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:32
 msgid "frau"
-msgstr "Frau"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:33
 msgid "freiwilliger_beitrag"
-msgstr "Freiwilliger Beitrag"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:34
 msgid "french"
-msgstr "Französisch"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:35
 msgid "german"
-msgstr "Deutsch"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:36
 msgid "herr"
-msgstr "Herr"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:37
 msgid "internal_notes"
-msgstr "Interne Notizen"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:40
 msgid "italian"
-msgstr "Italienisch"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:41
 msgid "language_english"
-msgstr "Englisch"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:42
 msgid "language_french"
-msgstr "Französisch"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:43
 msgid "language_german"
-msgstr "Deutsch"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:44
 msgid "language_italian"
-msgstr "Italienisch"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:45
 msgid "navigation_admin"
-msgstr "Verwalten"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:46
 msgid "navigation_groups"
-msgstr "Gruppen"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:47
 msgid "navigation_home"
-msgstr "Start"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:48
 msgid "navigation_institutions"
-msgstr "Institutionen"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:49
 msgid "navigation_views"
-msgstr "Views"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:50
 msgid "no"
-msgstr "Nein"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:51
 msgid "--- no_admin_institution ---"
-msgstr "Keine"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:52
 msgid "notes_public_de"
-msgstr "Öffentliche Notiz (de)"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:53
 msgid "notes_public_fr"
-msgstr "Öffentliche Notiz (fr)"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:54
 msgid "notes_public_it"
-msgstr "Öffentliche Notiz (it)"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:55
 msgid "notes_public_en"
-msgstr "Öffentliche Notiz (en)"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:56
 msgid "open"
-msgstr "Offen"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:57
 msgid "pagedescription_administration"
-msgstr "Administration von Benutzern und Log-Dateien"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:58
 msgid "recherchierte_bfs_zahlen"
-msgstr "Recherchierte BfS-Zahlen"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:60
 msgid "summe_verbundbibliotheken"
-msgstr "Summe Verbundbibliotheken"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:61
 msgid "syscode"
-msgstr "System-Code"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:62
 msgid "telefon"
-msgstr "Telefon"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:63
 msgid "webseite"
-msgstr "Webseite"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:64
 msgid "zip"
-msgstr "PLZ"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:66
 msgid "group_add"
-msgstr "Gruppe erstellen"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:67
 msgid "notfound_record"
-msgstr "Datensatz wurde nicht gefunden"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:68
 msgid "group_edit"
-msgstr "Gruppe bearbeiten"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:69
 msgid "saved_institution"
-msgstr "Institution gespeichert"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:70
 msgid "saved_admin_institution"
-msgstr "Admin Institution gespeichert"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:71
 msgid "institution_add"
-msgstr "Institution erstellen"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:72
 msgid "institution_edit"
-msgstr "Institution bearbeiten"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:73
 msgid "view_add"
-msgstr "View erstellen"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:74
 msgid "view_edit"
-msgstr "View bearbeiten"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:76
 msgid "attention_relations"
 msgstr ""
-"ACHTUNG! Änderungen hier haben zur Folge, dass die Sortierung dieser "
-"Institution verloren geht!"
 
 #: ../view/libadmin/global/gettext-labels.phtml:77
 msgid "sortInstitutions"
-msgstr "Institutionen sortieren (A-Z, deutsch)"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:78
 msgid "no_institutions"
-msgstr "Keine Instution"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:79
 msgid "maketopmostitem"
-msgstr "An oberste Position schieben"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:80
 msgid "makebottommostitem"
-msgstr "An untersterste Position schieben"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:81
 msgid "action_groups_sort_for_view"
-msgstr "Gruppen für View sortieren"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:82
 #: ../view/libadmin/group/edit.phtml:65
 #: ../view/libadmin/institution/edit.phtml:183
 #: ../view/libadmin/view/home.phtml:6
 msgid "views"
-msgstr "Views"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:83
 msgid "edit_view"
-msgstr "View Editieren"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:84
 msgid "navigation_view"
-msgstr "View"
+msgstr ""
 
 #: ../view/libadmin/global/gettext-labels.phtml:87
 msgid "admin_institution_id"
-msgstr "Zugehörigkeit Admin Institution"
+msgstr ""
 
 #: ../view/libadmin/global/home-crud.phtml:4
 msgid "add_new_xxx"
-msgstr "Hinzufügen:"
+msgstr ""
 
 #: ../view/libadmin/global/home-crud.phtml:11
 msgid "home_no_records"
-msgstr "Es wurden noch keine %s erstellt"
+msgstr ""
 
 #: ../view/libadmin/global/home-crud.phtml:15
 msgid "home_select_record"
-msgstr "Wählen Sie links aus der Navigation einen Datensatz"
+msgstr ""
 
 #: ../view/libadmin/global/sidebar.phtml:4
 msgid "action_search "
-msgstr "Suchen"
+msgstr ""
 
 #: ../view/libadmin/group/edit.phtml:63
 #: ../view/libadmin/institution/edit.phtml:59
 #: ../view/libadmin/view/edit.phtml:55
 msgid "display"
-msgstr "Anzeige"
+msgstr ""
 
 #: ../view/libadmin/group/edit.phtml:66
 #: ../view/libadmin/institution/home.phtml:6
 msgid "institutions"
-msgstr "Institutionen"
+msgstr ""
 
 #: ../view/libadmin/group/edit.phtml:72
 #: ../view/libadmin/institution/edit.phtml:69
 msgid "displaynames"
-msgstr "Display Namen"
+msgstr ""
 
 #: ../view/libadmin/group/edit.phtml:92
 #: ../view/libadmin/institution/edit.phtml:113
 #: ../view/libadmin/view/edit.phtml:67
 msgid "notes"
-msgstr "Notizen"
+msgstr ""
 
 #: ../view/libadmin/group/edit.phtml:101
 msgid "noviews"
-msgstr "Noch keine Views vorhanden"
+msgstr ""
 
 #: ../view/libadmin/group/home.phtml:5
 msgid "group"
-msgstr "Gruppe"
+msgstr ""
 
 #: ../view/libadmin/group/home.phtml:6
 #: ../view/libadmin/institution/edit.phtml:186
 msgid "groups"
-msgstr "Gruppen"
+msgstr ""
 
 #: ../view/libadmin/home/index.phtml:3
 msgid "title_module"
-msgstr "Library Administration"
+msgstr ""
 
 #: ../view/libadmin/home/index.phtml:4
 msgid "subtitle_module"
-msgstr "Administration von Bibliotheken"
+msgstr ""
 
 #: ../view/libadmin/institution/edit.phtml:61
 msgid "groups_and_views"
-msgstr "Gruppen & Views"
+msgstr ""
 
 #: ../view/libadmin/institution/edit.phtml:81
 msgid "title_library_names_official"
-msgstr "Bibliotheksnamen (offiziell)"
+msgstr ""
 
 #: ../view/libadmin/institution/edit.phtml:145
 msgid "contactdata"
-msgstr "Kontaktdaten"
+msgstr ""
 
 #: ../view/libadmin/institution/edit.phtml:189
 #: ../view/libadmin/view/edit.phtml:122
 msgid "is_favorite"
-msgstr "Ist Favorit"
+msgstr ""
 
 #: ../view/libadmin/view/edit.phtml:56
 msgid "action_groups_activate"
-msgstr "Gruppen aktivieren"
+msgstr ""
 
 #: ../view/libadmin/view/edit.phtml:57
 msgid "action_groups_sort"
-msgstr "Gruppen sortieren"
+msgstr ""
 
 #: ../view/libadmin/view/edit.phtml:58
 msgid "linking"
-msgstr "Verknüpfung"
+msgstr ""
 
 #: ../view/libadmin/view/edit.phtml:75
 msgid "header_active_networkgroups"
-msgstr "Folgende Gruppen sind in diesem Netzwerk aktiv"
+msgstr ""
 
 #: ../view/libadmin/view/edit.phtml:76
 msgid "header_active_networkgroups_info"
 msgstr ""
-"(Zuerst speichern, damit die Gruppen in den anderen Tabs vorhanden sind)"
 
 #: ../view/libadmin/view/edit.phtml:79
 msgid "nogroups"
-msgstr "Es wurden noch keine Gruppen erfasst"
+msgstr ""
 
 #: ../view/libadmin/view/edit.phtml:103
 msgid "no_data_available"
-msgstr "Es wurden noch keine Daten erfasst"
+msgstr ""
 
 #: ../view/libadmin/view/edit.phtml:121
 msgid "bibsyscodes"
-msgstr "Bib-/Sys-Codes"
+msgstr ""
 
 #: ../view/libadmin/view/edit.phtml:136
 msgid "yes"
-msgstr "Ja"
+msgstr ""
 
 #: ../view/libadmin/view/edit.phtml:144
 msgid "no_relations"
-msgstr "Es bestehen noch keine Verbindungen"
+msgstr ""
 
 #: ../view/libadmin/view/home.phtml:5
 msgid "view"
-msgstr "View"
+msgstr ""
 
 #~ msgid "views "
 #~ msgstr "Views"

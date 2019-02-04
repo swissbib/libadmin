@@ -23,7 +23,7 @@ Example: export_system_vufind
 
 The service is located under the **/api** URL and has the following format:
 
-	/api/{SYSTEM}/{VIEW].{FORMAT}[?options[a]=1&options[b]=2]
+	/api/{SYSTEM}/{VIEW].{FORMAT}[?option[a]=1&option[b]=2]
 
 Simple examples
 
@@ -31,4 +31,8 @@ Simple examples
 	/api/vufind/orange.xml
 Advanced example
 
-	/api/maps/libmap.json?options[canton]=zh,bl,bs,ag
+	/api/maps/libmap.json?option[canton]=zh,bl,bs,ag
+	
+## GeoJson
+
+    /api/geojson/green.json

@@ -163,7 +163,8 @@ class GeoJson extends System
     {
         $idView = $this->getView()->getId();
         $idGroup = $group->getId();
-        $favoriteOnly = $this->getOption('all') == true ? true : false;
+        //$favoriteOnly = $this->getOption('all') == true ? true : false;
+        $favoriteOnly = true;
 
         return $this->institutionTable->getAllGroupViewInstitutions($idView, $idGroup, true, $favoriteOnly);
     }

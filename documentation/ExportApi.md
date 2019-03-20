@@ -35,4 +35,12 @@ Advanced example
 	
 ## GeoJson
 
+This is an export in the geojson format
+
     /api/geojson/green.json
+    
+## For search index
+
+This is the export we use to enrich the search index with library specific information (for example the canton)
+
+    /api/searchindex/green.json
